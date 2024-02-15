@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.App {
+  text-align: center;
+}
+
+.centeredDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* 100% of the viewport height */
+  background: linear-gradient(to right, #fae3ca, #a36a7f); /* Replace with your desired gradient colors */
+}
+
+ .custom-carousel {
+    height: 50px;
+    width: 100%;
+  }
+  .has-height-300 {
+    height: 700px;
+    overflow: auto; /* Add this if you want a scrollbar for overflow content */
+  }
+
+  /* Add these styles to your existing CSS or create a new CSS file */
+.custom-tile {
+  height: 500px;
+}
+
+@media (max-width: 767px) {
+  /* For screens less than 767px wide, set the width to 100% */
+  .custom-tile {
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  /* For screens 768px wide and above, set the width to 50% */
+  .custom-tile {
+    width: 50%;
+  }
+}
+
+/* .App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} */
