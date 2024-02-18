@@ -74,10 +74,15 @@ function Dashboard() {
             <p className="title">Side column</p>
             <p className="subtitle">With some content</p>
             <div className="content">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
-            </div>
-          </article>
+           <figure class="image is-4by3">
+            <img src="https://bulma.io/images/placeholders/640x480.png"/>
+          </figure>
+           </div>
+        </article>
+     
         </div>
+
+        
         <div className="tile is-parent is-8">
 
 
@@ -156,6 +161,18 @@ function Dashboard() {
       <ul className="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
     </div>
 
+
+
+    <div class="tile is-parent" style={{ height: '55%' }}>
+      <article class="tile is-child notification is-danger">
+        <p class="title">Wide tile</p>
+        <p class="subtitle">Aligned with the right tile</p>
+        <div class="content">
+           Content 
+        </div>
+      </article>
+    </div>
+  
 
 
 
