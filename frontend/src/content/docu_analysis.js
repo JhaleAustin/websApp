@@ -18,7 +18,7 @@ function Docu_Analysis(handleMaterialChange) {
     const fetchMaterials = async () => {
       try {
         const response = await axios.get(`http://localhost:3001/api/v1/Documentation`);
-        console.log(response.data);
+        console.log("Data" . response.data);
         setMaterials(response.data.Documentations);
         setLoading(false);
       } catch (error) {
@@ -68,7 +68,7 @@ const getCategories = (timeframe) => {
 useEffect(() => {
   // Filter data where plantType is 'mulch'
   const mulchMaterials = materials.filter(material => material.plantType === 'With Mulch');
-
+  console.log(mulchMaterials)
   // Extract heights and update state variables
   const heightsWithoutMulch = materials.map(material => material.height);
   const heightsWithMulch = mulchMaterials.map(material => material.height);
@@ -79,6 +79,9 @@ useEffect(() => {
  
 
 }, [materials]);
+
+
+
 
 
 const [state, setState] = useState({
