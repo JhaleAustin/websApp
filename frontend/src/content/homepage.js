@@ -2,13 +2,12 @@ import React, { useState, useEffect } from 'react'; // Import useState from Reac
 
 import { Carousel } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
- 
 import 'uikit/dist/css/uikit.min.css';
 import 'uikit/dist/js/uikit.min.js';
 import 'uikit/dist/js/uikit-icons.min.js';
 import UIkit from 'uikit';
 import 'bulma/css/bulma.min.css';
-function Dashboard() {
+function Homepage() {
 
 
   const [activeSlide, setActiveSlide] = useState(0);
@@ -67,6 +66,7 @@ function Dashboard() {
           />
         </Carousel.Item>
       </Carousel>
+
 
       <div className="tile is-ancestor" style={{ height: '500px' }}>
         <div className="tile is-parent">
@@ -154,8 +154,8 @@ function Dashboard() {
           
         </ul>
 
-        <a className="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
-        <a className="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
+        <a className="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous="true" uk-slider-item="previous"></a>
+        <a className="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next={true} uk-slider-item="next"></a>
       </div>
 
       <ul className="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
@@ -184,4 +184,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default Homepage;

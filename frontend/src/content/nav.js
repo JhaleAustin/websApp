@@ -1,16 +1,16 @@
 // Nav.js
-import React from 'react';  
+import React, { Fragment, useState, useEffect } from 'react'  
 import '../bootstrap/dist/css/bootstrap.min.css';
 import '../bootstrap/dist/js/bootstrap.bundle.min.js'; 
 import '../App.css';  
-import Regression from './regression.js';
- import Dashboard from './dashboard.js'; 
+import Regression from './analysis.js';
+ import Dashboard from './homepage.js'; 
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 function Nav() {
   return (
+    <Fragment>
 
-    <Router>
-   
+      
     <div>
        <nav class="bg-gray-800">
   <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -20,12 +20,12 @@ function Nav() {
           <span class="absolute -inset-0.5"></span>
           <span class="sr-only">Open main menu</span>
          
-          <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
           </svg>
          
-          <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </div>
@@ -35,18 +35,28 @@ function Nav() {
         </div>
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
-          {/* <Link to="/dashboard" className="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"> */}
-          <Link to="/dashboard" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
-           
-            Dashboard
+
+          <Link to="/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" >
+                        <span   className="ml-3">  Homepage</span>      
           </Link>
-          <Link to="/regression" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+
+  {/**/} 
+          <Link to="/process" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+            Process
+          </Link>
+
+        <Link to="/documentation" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+            Documentation
+          </Link>
+
+          <Link to="/analysis" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
             Analysis
-          </Link>
-           <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Team</a>
-            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Projects</a>
-            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Calendar</a>
-          </div>
+          </Link> 
+
+          <Link to="/adminPage" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+            Admin
+          </Link> 
+            </div>
         </div>
       </div>
       
@@ -65,15 +75,7 @@ function Nav() {
   </div>
 </nav>
     </div>
-
-        <Routes>
-        <Route path="/dashboard" element={<Dashboard />} />
-       
-        <Route path="/regression" element={<Regression />} />
-        {/* Add more routes as needed */}
-        </Routes>
-    </Router>
-
+    </Fragment>
   );
 }
 

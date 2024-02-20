@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Chart from "react-apexcharts";
 import "../App.css";
 
-function Regression() {
+function Analysis() {
     const [regressionState, setRegressionState] = useState(null);
 
   const getCategories = (timeframe) => {
@@ -165,4 +165,4 @@ function Regression() {
   );
 }
 
-export default Regression;
+export default Analysis;

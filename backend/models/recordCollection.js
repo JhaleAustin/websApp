@@ -10,18 +10,8 @@ const recordSchema = new mongoose.Schema({
     leaves: {
         type: Array,
         },
-    images: [
-        {
-            public_id: {
-                type: String,
-                required: true
-            },
-            url: {
-                type: String,
-                required: true
-            },
-        }
-    ]
+    
+     
     
 })
 

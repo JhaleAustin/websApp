@@ -5,5 +5,5 @@ const upload = require('../utils/multer')
 const {  getRecordCollection } = require('../controllers/recordController');
 
 // const { isAuthenticatedUser, authorizeRoles } = require('../middlewares/auth')
-router.get('/getRecord', getRecordCollection)
+router.get('/getRe', getRecordCollection)
 module.exports = router;
