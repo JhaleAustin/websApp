@@ -138,7 +138,7 @@ function Analysis() {
 
 
 
-<div class="container text-center">
+<div class="container2">
  
 
     <form method="post">

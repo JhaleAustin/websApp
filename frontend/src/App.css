@@ -241,3 +241,12 @@
   align-items: center;
 }
 
+.container2 {
+  background-color: #ffffff; 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px; /* Add top margin to create space */
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
