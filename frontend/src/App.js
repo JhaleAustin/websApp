@@ -8,10 +8,11 @@ import Analysis from './content/analysis';
 import Homepage from './content/homepage';
 import Documentation from './content/documetation';
 import Process from './content/process';
-import AdminPage from './Admin/adminPage';
+import DocumentationList from './Admin/Docu';
+import NewDocumentation from './Components/Admin/NewDocu2';
 
 function App() {
-  const isNavVisible = ['/adminPage'].every(path => !window.location.pathname.startsWith(path));
+  const isNavVisible = ['/documentationList'].every(path => !window.location.pathname.startsWith(path));
 
   return (
     <Router>
@@ -30,7 +31,9 @@ function App() {
 
         {/* AdminPage route */}
         <Routes>
-          <Route path="/adminPage" element={<AdminPage />} />
+        <Route path="/admin/documentation" element={<NewDocumentation />} />
+         
+          <Route path="/documentationList" element={<DocumentationList />} />
         </Routes>
       </div>
     </Router>

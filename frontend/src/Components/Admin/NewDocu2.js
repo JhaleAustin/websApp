@@ -3,6 +3,7 @@ import axios from 'axios'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import Sidebar from '../../Admin/Sidebar'
 const NewDocu = () => {
   const [users, setUsers] = useState([]);
   const [plantType, setType] = useState();
@@ -110,7 +111,14 @@ const NewDocu = () => {
 
  
   return (
-    <Fragment> <form className="row g-3" encType='multipart/form-data'>
+    <Fragment> 
+       <div className="col-12 col-md-2"style={{  marginBottom: "2px" }}>
+            <div style={{  height: '100vh', overflow: 'scroll initial' }}>
+                <Sidebar />
+                </div>
+            </div>
+
+      <form className="row g-3" encType='multipart/form-data'>
             <div className="col-12">
               <label htmlFor="createdAt" className="form-label">Date :</label>
               <input
