@@ -4,6 +4,7 @@ import '../bootstrap/dist/css/bootstrap.min.css';
 import '../bootstrap/dist/js/bootstrap.bundle.min.js'; 
 import '../App.css';  
 import Regression from './analysis.js';
+ 
  import Dashboard from './homepage.js'; 
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 function Nav() {
@@ -51,6 +52,9 @@ function Nav() {
 
           <Link to="/analysis" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
             Analysis
+          </Link> 
+          <Link to="/login" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+            Login
           </Link> 
 
        
