@@ -1,7 +1,6 @@
 
 import React, { Fragment, useState } from "react";
 
-import Chart from "react-apexcharts";
 import "../App.css";
 function Analysis_1() {
   return (
