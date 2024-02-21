@@ -1,6 +1,9 @@
 import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Nav from './content/nav';
+
+import Login from "./Components/User/Login";
+
 import Analysis from './content/analysis';
 import Homepage from './content/homepage';
 import Documentation from './content/documetation';
@@ -18,6 +21,7 @@ function App() {
 
         {/* Main content routes */}
         <Routes>
+          <Route path="/login" element={<Login />} exact="true" />
           <Route path="/" element={<Homepage />} />
           <Route path="/process" element={<Process />} />
           <Route path="/documentation" element={<Documentation />} />
