@@ -3,8 +3,6 @@ import React, { Fragment, useState, useEffect } from 'react'
 import '../bootstrap/dist/css/bootstrap.min.css';
 import '../bootstrap/dist/js/bootstrap.bundle.min.js'; 
 import '../App.css';  
-import Regression from './analysis.js';
- import Dashboard from './homepage.js'; 
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 function Nav() {
   return (
@@ -36,24 +34,14 @@ function Nav() {
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
 
-          <Link to="/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" >
-                        <span   className="ml-3">  Homepage</span>      
-          </Link>
-
+        
   {/**/} 
-          <Link to="/process" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
-            Process
-          </Link>
+        
 
-        <Link to="/documentation" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
-            Documentation
-          </Link>
-
-          <Link to="/analysis" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
-            Analysis
+      
+          <Link to="/adminPage" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+            Admin
           </Link> 
-
-       
             </div>
         </div>
       </div>

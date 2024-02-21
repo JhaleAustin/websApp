@@ -1,11 +1,8 @@
-
-import React, { Fragment, useState } from "react";
-
+import React, { Fragment, useState, useEffect } from "react";
 import Chart from "react-apexcharts";
-import "../App.css";
+import regression from "regression";
 
 function Analysis() {
-    const [regressionState, setRegressionState] = useState(null);
 
   const getCategories = (timeframe) => {
     const numIntervals = 7;
@@ -20,11 +17,10 @@ function Analysis() {
         return [];
     }
   };
-
   const [state, setState] = useState({
     selectedTimeframe: "week",
     options: {
-      colors: ["#E91E63", "#FF9800"],
+      colors: ["#E91E63", "#FF9800", "#2196F3"],
       chart: {
         id: "basic-bar",
         events: {
@@ -37,125 +33,175 @@ function Analysis() {
       xaxis: {
         categories: getCategories("week"),
       },
+      yaxis: {
+        min: 0,
+        tickAmount: 6,
+      },
     },
     series: [
       {
         name: "Plant Without Mulch",
-        data: Array.from({ length: 7 }, (_, index) => 10),
+        data: [],
       },
       {
         name: "Plant With Mulch",
-        data: Array.from({ length: 7 }, (_, index) => 10),
+        data: [],
+      },
+      {
+        name: "Regression Line - Without Mulch",
+        type: "line",
+        data: [],
+      },
+      {
+        name: "Regression Line - With Mulch",
+        type: "line",
+        data: [],
       },
     ],
   });
 
-  const handleTimeframeChange = (timeframe) => {
-    setState((prev) => ({
-      ...prev,
-      selectedTimeframe: timeframe,
-      options: {
-        ...prev.options,
-        xaxis: {
-          categories: getCategories(timeframe),
-        },
-      },
-      series: [
-        { name: "Plant Without Mulch", data: calculatePlantHeight(1.5, 0.5, timeframe).withoutMulch },
-        { name: "Plant With Mulch", data: calculatePlantHeight(1.5, 0.5, timeframe).withMulch },
-      ],
-    }));
-  };
-
-  const calculatePlantHeight = (growthRate, mulchFactor, timeframe) => {
-    const numIntervals = 7;
-    const currentDate = new Date();
-    const daysInTimeframe = getDaysInTimeframe(timeframe, currentDate);
-
-    const withoutMulchData = Array.from({ length: daysInTimeframe }, (_, index) => {
-      
-        const day = index + 1;
-      const futureDate = new Date(currentDate);
-      futureDate.setDate(currentDate.getDate() + day);
-      return (growthRate * day) + inputValues.plant1Height;
-    });
-
-    const withMulchData = Array.from({ length: daysInTimeframe }, (_, index) => {
-      const day = index + 1;
-      const futureDate = new Date(currentDate);
-      futureDate.setDate(currentDate.getDate() + day);
-      return (growthRate * day) + mulchFactor +  inputValues.plant2Height;
-    });
-
-    return {
-      withoutMulch: withoutMulchData,
-      withMulch: withMulchData,
-    };
-  };
-
-  const getDaysInTimeframe = (timeframe, currentDate) => {
-    switch (timeframe) {
-      case "week":
-        return 7;
-      case "month":
-       return 31; 
-      case "year":
-         return 365;
-      default:
-        return 0;
-    }
-  };
-
   const [inputValues, setInputValues] = useState({
-    plant1Height: 0,
-    plant2Height: 0,
+    height: 0,
   });
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setInputValues((prev) => ({
-      ...prev,
-      [name]: parseFloat(value),
+  const [inputs, setInputs] = useState([]);
+
+  const [plantHeightWithoutMulch, setPlantHeightWithoutMulch] = useState([]);
+  const [plantHeightWithMulch, setPlantHeightWithMulch] = useState([]);
+
+  useEffect(() => {
+    // Calculate regression line data
+    const regressionDataWithoutMulch = regression.linear(
+      plantHeightWithoutMulch.map((value, index) => [index, parseFloat(value)])
+    );
+    const regressionDataWithMulch = regression.linear(
+      plantHeightWithMulch.map((value, index) => [index, parseFloat(value)])
+    );
+
+    // Update the state with regression line data
+    setState((prevState) => ({
+      ...prevState,
+      series: [
+        {
+          ...prevState.series[0],
+          data: plantHeightWithoutMulch.map((value) => parseFloat(value)),
+        },
+        {
+          ...prevState.series[1],
+          data: plantHeightWithMulch.map((value) => parseFloat(value)),
+        },
+        {
+          ...prevState.series[2],
+          data: regressionDataWithoutMulch.points.map((point) => point[1]),
+        },
+        {
+          ...prevState.series[3],
+          data: regressionDataWithMulch.points.map((point) => point[1]),
+        },
+      ],
     }));
+  }, [plantHeightWithoutMulch, plantHeightWithMulch]);
+
+  const handleInputChange = (key, value) => {
+    setInputValues((prevValues) => ({
+      ...prevValues,
+      [key]: value,
+    }));
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    // Add logic to update plantHeightWithoutMulch and plantHeightWithMulch based on form values
+    // For example, push the height value to the respective arrays
+    setPlantHeightWithoutMulch([...plantHeightWithoutMulch, inputValues.height]);
+    // Reset input values
+    setInputValues({
+      height: 0,
+    });
+  };
+
+  const removeInput = (index) => {
+    const newInputs = [...inputs];
+    newInputs.splice(index, 1);
+    setInputs(newInputs);
+  };
+
+  const addInput = () => {
+    setInputs([...inputs, { length: '', width: '' }]);
   };
 
   return (
-
     <Fragment>
-  
-     
-  <div className="register-photo">
-    <div className="form-container">
+      <div className="register-photo">
+        <div className="form-container">
+          <div className="image-holder">
+            <h1>Plant Growth Chart</h1>
+            <div className="chart-container">
+              <Chart options={state.options} series={state.series} type="area" width="1000px" />
+            </div>
+          </div>
 
+          <div className="container2">
+            <form onSubmit={handleFormSubmit}>
+              <h2 className="text-center">
+                <strong>Independent Variable</strong>
+              </h2>
+              <div className="form-group">
+                <input
+                  className="form-control"
+                  type="number"
+                  name="height"
+                  placeholder="Height"
+                  value={inputValues.height}
+                  onChange={(e) => handleInputChange('height', e.target.value)}
+                />
+              </div>
 
-    <div className="image-holder">
-  <h1>Plant Growth Chart</h1> <div className="chart-container">
-   
-    <Chart options={state.options} series={state.series} type="area" width="1000px" />
-  </div>
-</div>
+              <div className="scroll-container">
+                <button type="button" onClick={addInput}>
+                  Add Leaves
+                </button>
+                {inputs.map((value, index) => (
+                  <div key={index} className="form-row">
+                    <div className="form-group">
+                      <input
+                        className="form-control"
+                        type="number"
+                        name="length"
+                        placeholder="Length"
+                        value={value.length}
+                        onChange={(e) => handleInputChange(index, 'length', e.target.value)}
+                      />
+                    </div>
 
+                    <div className="form-group">
+                      <input
+                        className="form-control"
+                        type="number"
+                        name="width"
+                        placeholder="Width"
+                        value={value.width}
+                        onChange={(e) => handleInputChange(index, 'width', e.target.value)}
+                      />
+                    </div>
 
+                    <button type="button" onClick={() => removeInput(index)}>
+                      x
+                    </button>
+                  </div>
+                ))}
+              </div>
 
-
-<div class="container2">
- 
-
-    <form method="post">
-                <h2 class="text-center"><strong>Create</strong> an account.</h2>
-                <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Email"/></div>
-                <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Password"/></div>
-                <div class="form-group"><input class="form-control" type="password" name="password-repeat" placeholder="Password (repeat)"/></div>
-                <div class="form-group">
-                    <div class="form-check"><label class="form-check-label"><input class="form-check-input" type="checkbox"/>I agree to the license terms.</label></div>
-                </div>
-                <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Sign Up</button></div><a href="#" class="already">You already have an account? Login here.</a>
-                </form>
- </div> </div>
-
-</div>
-   
-      </Fragment>
+              <div className="form-group">
+                <button className="btn btn-primary btn-block" type="submit">
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </Fragment>
   );
 }
 

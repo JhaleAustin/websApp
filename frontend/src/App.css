@@ -160,13 +160,12 @@
   max-width:auto;
   width:80%;
   margin:0 auto;
-  box-shadow:1px 1px 5px rgba(0,0,0,0.1);
 }
 
 .register-photo form {
   display:table-cell;
-  width:400px;
-  background-color:#ffffff;
+  width:460px;
+  background-color:#fffdfd;
   padding:40px 60px;
   color:#505e6c;
 }
@@ -186,6 +185,7 @@
 .register-photo form .form-control {
   background:#f7f9fc;
   border:none;
+  margin-bottom: 25px;
   border-bottom:1px solid #dfe7f1;
   border-radius:0;
   box-shadow:none;
@@ -249,4 +249,35 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+
+button {
+  background-color: #349e3a; /* Initial background color */
+  color: #000; /* Initial text color */
+  border: 2px solid #000; /* Black border */
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition effect for background and text color */
+ }
+
+button:hover {
+  background-color: #2d8031; /* Green color on hover */
+}
+
+/* Animation on hover */
+@keyframes buttonAnimation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+button:hover {
+  animation: buttonAnimation 0.5s ease; /* Apply the animation on hover */
 }

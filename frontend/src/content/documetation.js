@@ -8,7 +8,6 @@ import 'bulma/css/bulma.min.css';
 import Documentation_1 from "./documentation_1";
 
 import Documentation_2 from "./documentation_2";
-import AllMaterials from "./AllMaterials";
 
 import Docu_Analysis from "./docu_analysis";
 function Documentation() {

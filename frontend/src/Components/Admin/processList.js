@@ -11,7 +11,7 @@ import { getToken } from '../../utils/helpers';
 import { FaRegMehBlank } from 'react-icons/fa';
 // ... (your existing imports)
 
-const DocList = () => {
+const ProcessList = () => {
     const [materials, setMaterials] = useState([]);
     const [error, setError] = useState('');
     const [deleteError, setDeleteError] = useState('');
@@ -227,7 +227,7 @@ const DocList = () => {
             
             <div className="col-12 col-md-10" style={{  paddingLeft: "70px", marginBottom: "70px" }}>
                 <Fragment>
-                        <h1 className="my-5">LIST OF ALL Documentation</h1>
+                        <h1 className="my-5">LIST OF ALL Process Page Content</h1>
                         {loading ? (
                             <Loader />
                         ) : (
@@ -252,4 +252,4 @@ const DocList = () => {
     );
 };
 
-export default DocList;
+export default ProcessList;
