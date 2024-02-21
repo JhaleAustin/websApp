@@ -1,0 +1,32 @@
+.header__content__logo
+{
+    text-decoration: none;
+}
+
+.header__content__logo:hover
+{
+    color: black;
+    text-decoration: none;
+}
+
+#profile, #cart, #myOrders, #dashboard
+{
+    color: white;
+}
+
+#profile:hover, #cart:hover, #myOrders:hover, #dashboard:hover
+{
+    color: black;
+}
+
+#regis
+{
+    background-color: none;
+    color: white;
+}
+
+#foot
+{
+    background-color: black;
+    color: white;
+}

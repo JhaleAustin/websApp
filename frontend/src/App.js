@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Nav from './content/nav';
+import Header from './Components/Layout/Header';
 
 import Login from "./Components/User/Login";
 
@@ -17,7 +17,7 @@ function App() {
     <Router>
       <div className="App">
         {/* Conditionally render Nav component based on route information */}
-        {isNavVisible && <Nav />}
+        {isNavVisible && <Header />}
 
         {/* Main content routes */}
         <Routes>

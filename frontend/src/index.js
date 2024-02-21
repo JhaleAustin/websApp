@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import './Design/adminCss.css';
 import './Design/Login.css';
+import './Design/Header.css';
+import './Design/Header.scss';
+
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 const root = ReactDOM.createRoot(document.getElementById('root'));
