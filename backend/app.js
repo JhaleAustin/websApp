@@ -6,6 +6,7 @@ const cors = require('cors')
 const documentation = require('./routes/documentation')
 const record = require('./routes/record')
 const home = require('./routes/home')
+const user = require('./routes/auth')
 
 app.use(cors({
     origin: "http://localhost:3000",
@@ -17,5 +18,6 @@ app.use(cookie());
 
 app.use('/api/v1', documentation);
 app.use('/api/v1', home);
+app.use('/api/v1', user);
 
 module.exports = app
