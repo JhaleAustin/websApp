@@ -46,39 +46,39 @@ function Documentation_1(handleMaterialChange) {
           <><div class="container text-center">
             <div class="row">
               <div class="col-sm-12">
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                {material.plantType}</h2>
-              </div> 
+                <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                  {material.plantType}</h2>
+              </div>
             </div>
             <div class="row">
               <div class="col-sm">
 
-fdfdf
-                
-              </div>
                
-            </div>
-
-</div><><button className="uk-button" onClick={() => openModal(material)}>
-            <div
-              key={material.id}
-              className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8"
-              style={{ maxHeight: '800px', maxWidth: '1000px', overflowY: 'auto', border: '1px solid #e5e5e5', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)' }}
-            >
+ <button className="uk-button" onClick={() => openModal(material)}>
+              <div
+                key={material.id}
+                className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8"
+                style={{ maxHeight: '800px', maxWidth: '1000px', overflowY: 'auto', border: '1px solid #e5e5e5', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)' }}
+              >
 
 
-              <div className="">
-                {material.images.map((img, index) => (
-                  <img
-                    key={index}
-                    src={img.url}
-                    alt=""
-                    className="rounded-lg bg-gray-100"
-                    style={{ width: '1000px', height: '500px' }} />
-                ))}
+                <div className="">
+                  {material.images.map((img, index) => (
+                    <img
+                      key={index}
+                      src={img.url}
+                      alt=""
+                      className="rounded-lg bg-gray-100"
+                      style={{ width: '1000px', height: '500px' }} />
+                  ))}
+                </div>
               </div>
+            </button>
+              </div>
+
             </div>
-          </button></></>
+
+          </div></> 
          
         ))}
       </div>

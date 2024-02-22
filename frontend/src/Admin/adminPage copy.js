@@ -12,6 +12,7 @@ import 'uikit/dist/js/uikit.min.js';
 import 'uikit/dist/js/uikit-icons.min.js';
 import UIkit from 'uikit';
 
+import Sidebar from './Sidebar'
 const openModal = () => {
  const modal = UIkit.modal("#modal-center");
   if (modal) {
@@ -25,6 +26,9 @@ const AdminPage = () => {
   return (
     <Fragment>
        <Nav/>
+       <div className="col-12 col-md-2">
+                    <Sidebar />
+                </div>
     <div className="tile is-ancestor">
       <div className="tile is-parent">
         <article className="tile is-child box">

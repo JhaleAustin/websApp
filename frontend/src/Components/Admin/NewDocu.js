@@ -1,13 +1,14 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import MetaData from '../Layout/MetaData'
-import Sidebar from './SideBar'
+import MetaData from '../Layout/MetaData' 
 import { getToken } from '../../utils/helpers';
 import axios from 'axios'
+
+import Sidebar from '../../Admin/Sidebar'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const NewDocu = () => {
+const NewDocumentation = () => {
 
     const [plantType, setPlantType] = useState('');
     const [height, setHeight] = useState(0);
@@ -118,7 +119,11 @@ const NewDocu = () => {
         <Fragment>
             <MetaData title={'New Product'} />
             <div className="row">
-                
+            <div className="col-12 col-md-2"style={{  marginBottom: "2px" }}>
+            <div style={{  height: '100vh', overflow: 'scroll initial' }}>
+                <Sidebar />
+                </div>
+            </div>
                 <div className="col-12 col-md-10">
                     <Fragment>
                         <div className="wrapper my-5">
@@ -225,4 +230,4 @@ const NewDocu = () => {
         </Fragment>
     )
 }
-export default NewDocu
+export default NewDocumentation
