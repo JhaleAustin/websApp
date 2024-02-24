@@ -9,7 +9,7 @@ const Toast = (message, type) => {
         <div>
           <p>{message}</p>
         </div>,{
-            position: toast.POSITION.BOTTOM_CENTER
+            position: toast.POSITION.BOTTOM_RIGHT
         }
       );
     case "error":
@@ -17,7 +17,7 @@ const Toast = (message, type) => {
         <div>
           <p>{message}</p>
         </div>, {
-            position: toast.POSITION.BOTTOM_CENTER
+            position: toast.POSITION.BOTTOM_RIGHT
         }
       );
     case "warning":
@@ -25,7 +25,7 @@ const Toast = (message, type) => {
         <div>
           <p>{message}</p>
         </div>, {
-            position: toast.POSITION.BOTTOM_CENTER
+            position: toast.POSITION.BOTTOM_RIGHT
         }
       );
     default:

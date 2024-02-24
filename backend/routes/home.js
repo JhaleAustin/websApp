@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const { getSingleTopic, newTopic } = require('../controllers/homeController');
+const { getTopics, newType, newTopic } = require('../controllers/homeController');
 
-router.get('/topic/:id', getSingleTopic);
+router.get('/topics', getTopics);
 // router.post('/home/topic/new', isAuthenticatedUser, authorizeRoles('admin'), newTopic)
-router.post('/home/topic/new', newTopic)
+router.post('/home/type/new', newType)
+router.post('/home/topic/:id', newTopic)
 
 module.exports = router;

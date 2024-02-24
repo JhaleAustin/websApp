@@ -122,7 +122,7 @@ const NewDocumentation = () => {
 
         <div className="col-12 col-md-2"style={{  marginBottom: "2px" }}>
         <div style={{  height: '100vh', overflow: 'scroll initial' }}>
-            <Sidebar />
+            {/* <Sidebar /> */}
             </div>
         </div>
             <div className="np col-12 col-md-8">

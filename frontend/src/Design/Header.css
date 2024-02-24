@@ -5,7 +5,7 @@
 
 .header__content__logo:hover
 {
-    color: black;
+    color: #164006;
     text-decoration: none;
 }
 
@@ -16,17 +16,11 @@
 
 #profile:hover, #cart:hover, #myOrders:hover, #dashboard:hover
 {
-    color: black;
+    color: #164006;
 }
 
-#regis
+.header__content__logo
 {
-    background-color: none;
-    color: white;
-}
-
-#foot
-{
-    background-color: black;
-    color: white;
+    height: 100px;
+    width: 100px;
 }

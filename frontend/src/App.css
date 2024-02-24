@@ -43,48 +43,6 @@
   }
 }
 
-/* .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
-
-
-
-
 /*DOCUMENTATION */
 
 .centered-container {
@@ -258,7 +216,7 @@ button {
   border: 2px solid #000; /* Black border */
   padding: 10px 20px;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition effect for background and text color */
+  /* transition: background-color 0.3s ease, color 0.3s ease; Smooth transition effect for background and text color */
  }
 
 button:hover {
@@ -266,7 +224,7 @@ button:hover {
 }
 
 /* Animation on hover */
-@keyframes buttonAnimation {
+/* @keyframes buttonAnimation {
   0% {
     transform: scale(1);
   }
@@ -276,11 +234,11 @@ button:hover {
   100% {
     transform: scale(1);
   }
-}
+} */
 
-button:hover {
-  animation: buttonAnimation 0.5s ease; /* Apply the animation on hover */
-}
+/* button:hover {
+  animation: buttonAnimation 0.5s ease; /* Apply the animation on hover 
+} */
 
 
 

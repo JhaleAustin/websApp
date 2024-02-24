@@ -72,7 +72,7 @@ const clientID = "526985758798-b5jsd5g1grsqi5k3g49vka6r1dmu29b2.apps.googleuserc
                         <div className="l-col-10 col-lg-5">
                             <div class="bg-img">
                                 <div class="l-content">
-                                    <header>LOGIN FORM</header>
+                                    <img class="logo" src="images/logo.png"></img>
                                     <form onSubmit={submitHandler}>
                                         <div class="field">
                                             <span class="fa fa-envelope"></span>
@@ -89,9 +89,6 @@ const clientID = "526985758798-b5jsd5g1grsqi5k3g49vka6r1dmu29b2.apps.googleuserc
                                                     id="password_field"
                                                     value={password}
                                                     onChange={(e) => setPassword(e.target.value)}/>
-                                        </div>
-                                        <div class="pass">
-                                            <a href="/password/forgot">FORGOT PASSWORD?</a>
                                         </div>
                                         <div className="field">
                                             <button id="login_button" type="submit">LOGIN</button>

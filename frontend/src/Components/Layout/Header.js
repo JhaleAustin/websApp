@@ -36,7 +36,8 @@ function Header() {
     <header className="header">
       <div className="header__content">
         <Link to="/" className="header__content__logo">
-          MULCHCRAFT
+          <img class="hlogo" src="images/logo.png"></img>
+
         </Link>
         
         <nav className="header__content__nav">
@@ -48,7 +49,7 @@ function Header() {
             <li>
             <div className="col-12 col-md-3 mt-4 mt-md-0 text-center">
               <Link to="/" style={{ textDecoration: 'none' }} >
-                <span id="profile" className="ml-3"><i class="fa-solid fa-user"></i>ABOUT</span>       
+                <span id="profile" className="ml-3">ABOUT</span>       
               </Link>
             </div>
             </li>
@@ -80,7 +81,7 @@ function Header() {
             <li>
             {user && user.role === 'admin' && (
               <div className="col-12 col-md-3 mt-4 mt-md-0 text-center">
-                <Link to="/" style={{ textDecoration: 'none' }} >
+                <Link to="/admin/documentation" style={{ textDecoration: 'none' }} >
                   <span id="dashboard" className="ml-3">DASHBOARD</span>
                 </Link>
               </div>
@@ -88,7 +89,7 @@ function Header() {
             </li>
           </ul>
           ) : ([])}
-
+          </nav>
           <div className="header__content__buttons">
             
             {user ? ( // Show login button if not authenticated
@@ -103,7 +104,6 @@ function Header() {
               
               )}
           </div>
-        </nav>
       </div>
     </header>
     </Fragment>

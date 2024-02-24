@@ -12,7 +12,7 @@ const Footer = () => {
     <div className="container">
       <div className="row align-items-center">
         <div className="col-md-6">
-          <p className="mb-0">&copy; 2023 PhotocardShop</p>
+          <p className="mb-0">&copy; 2024 MulchCraft</p>
         </div>
         {user && (
           <div className="col-md-6 d-flex justify-content-end">

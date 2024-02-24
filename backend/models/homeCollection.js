@@ -1,13 +1,9 @@
 const mongoose = require('mongoose')
 
-const docuSchema = new mongoose.Schema({
-    topic: {
+const homeSchema = new mongoose.Schema({
+    types: {
         type: String,
        },
-    
-    description: {
-        type: String,
-           },
 })
 
-module.exports = mongoose.model('homeCollection', docuSchema);
+module.exports = mongoose.model('homeCollection', homeSchema);
