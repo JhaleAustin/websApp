@@ -2,7 +2,7 @@
 import React, { Fragment, useState } from "react";
 
 import Chart from "react-apexcharts";
-import "../App.css";
+import "../../App.css";
 import { ArrowPathIcon, CloudArrowUpIcon, FingerPrintIcon, LockClosedIcon } from '@heroicons/react/24/outline'
 
 function Documentation_2() {

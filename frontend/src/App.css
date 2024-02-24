@@ -281,3 +281,64 @@ button:hover {
 button:hover {
   animation: buttonAnimation 0.5s ease; /* Apply the animation on hover */
 }
+
+
+
+
+
+.center-both {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding:15%;
+  justify-content: center;
+  height: 100%;
+}
+
+.center-video {
+  margin: 60px;
+ }
+
+
+
+ .jumbotron {
+  background-color: #3d7c58;
+  color: #fff;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+.card {
+  margin-bottom: 20px;
+}
+.gallery img {
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+}
+.info-section {
+  margin-top: 40px;
+}
+.fact-list {
+  background-color: #e9ecef; /* Light background color */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-height: 300px; /* Set a maximum height for scrolling */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+.fact-item {
+  list-style-type: none;
+  margin-bottom: 10px;
+}
+.fact-icon {
+  color: #28a745; /* Green color for the checkmark icon */
+  margin-right: 10px;
+}
+
+.info-section {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 40px;
+  border-radius: 10px;
+  margin-top: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}

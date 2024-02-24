@@ -3,7 +3,7 @@ import React, { Fragment, useState } from "react";
 
 import Chart from "react-apexcharts";
 
-import "../App.css";
+import "../../App.css";
 
 function Process_1() {
 

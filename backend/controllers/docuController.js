@@ -181,26 +181,25 @@ exports.newDocumentation = async (req, res, next) => {
 		}
 	}
 	
-	let leavesLinks = [];
+	// let leavesLinks = [];
 	
-	for (let i = 0; i < leaves.length; i++) {
-		let leaf = leaves[i];
-		try {
-			leavesLinks.push({
-				length: leaf.length,
-				width: leaf.width
-			});
-		} catch (error) {
-			console.log(error);
-		}
-	}
+	// for (let i = 0; i < leaves.length; i++) {
+	// 	let leaf = leaves[i];
+	// 	try {
+	// 		leavesLinks.push({
+	// 			length: leaf.length,
+	// 			width: leaf.width
+	// 		});
+	// 	} catch (error) {
+	// 		console.log(error);
+	// 	}
+	// }
 	
 	// Also, make sure that the variable names inside the try blocks match the correct names.
 	
 	req.body.images = imagesLinks;
 	req.body.video = videoLinks;
-	req.body.leaves = leavesLinks;
-	 
+	//   
 	const documentation = await Documentation.create(req.body);
 	if (!documentation)
 		return res.status(400).json({

@@ -1,9 +1,12 @@
-import React, { Fragment, useEffect, useState } from 'react'  
+import React, { Fragment, useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import MetaData from '../../Layout/MetaData' 
+import { getToken } from '../../../utils/helpers';
 import axios from 'axios'
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 import Sidebar from '../../Admin/Sidebar'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';  
 const NewDocu = () => {
   const [users, setUsers] = useState([]);
   const [plantType, setType] = useState();
@@ -111,13 +114,18 @@ const NewDocu = () => {
 
  
   return (
-    <Fragment> 
-       <div className="col-12 col-md-2"style={{  marginBottom: "2px" }}>
-            <div style={{  height: '100vh', overflow: 'scroll initial' }}>
-                <Sidebar />
-                </div>
-            </div>
+    <Fragment>
+    <MetaData title={'NEW MATERIAL'} />
+    <div className="row">
 
+    <div className="col-12 col-md-2"style={{  marginBottom: "2px" }}>
+    <div style={{  height: '100vh', overflow: 'scroll initial' }}>
+        <Sidebar />
+        </div>
+    </div>
+        <div className="np col-12 col-md-8">
+            <div className="np wrapper my-5" style={{ width: '100%', paddingLeft: '10%', marginLeft: '10%' }}>
+                <Fragment>
       <form className="row g-3" encType='multipart/form-data'>
             <div className="col-12">
               <label htmlFor="createdAt" className="form-label">Date :</label>
@@ -158,82 +166,89 @@ const NewDocu = () => {
             {/* <div style={{ maxHeight: '150px',width:'100',overflowY: 'auto' }}> {/* Adjust the maxHeight as needed */}
      
 
-        <div className="col-md-6">
-          <button type="button" onClick={addInput}>
-            Add Leaves
+            <div className="row">
+  <div className="col-md-6">
+    <button type="button" onClick={addInput}>
+      Add Leaves
+    </button>
+    <div className="scroll-container">
+      {inputs.map((value, index) => (
+        <div key={index} className="form-row">
+          <div className="col">
+            <label htmlFor={`inputLeavesLength${index}`} className="form-label">
+              Length:
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id={`inputLeavesLength${index}`}
+              value={value.length}
+              onChange={(e) => handleInputChange(index, 'length', e.target.value)}
+            />
+          </div>
+          <div className="col">
+            <label htmlFor={`inputLeavesWidth${index}`} className="form-label">
+              Width:
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id={`inputLeavesWidth${index}`}
+              value={value.width}
+              onChange={(e) => handleInputChange(index, 'width', e.target.value)}
+            />
+          </div>
+          <button type="button" onClick={() => removeInput(index)}>
+            x
           </button>
-          {inputs.map((value, index) => (
-            <div key={index} className="form-row">
-              <div className="col">
-                <label htmlFor={`inputLeavesLength${index}`} className="form-label">
-                  Length:
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id={`inputLeavesLength${index}`}
-                  value={value.length}
-                  onChange={(e) => handleInputChange(index, 'length', e.target.value)}
-                />
-              </div>
-              <div className="col">
-                <label htmlFor={`inputLeavesWidth${index}`} className="form-label">
-                  Width:
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id={`inputLeavesWidth${index}`}
-                  value={value.width}
-                  onChange={(e) => handleInputChange(index, 'width', e.target.value)}
-                />
-              </div>
-
-              <button type="button" onClick={() => removeInput(index)}>
-                x
-              </button>
-            </div>
-          ))}
         </div>
+      ))}
+    </div>
+  </div>
 
-              
-
-              <div className='form-group'>
-                                    <label>Images</label>
-
-                                    <div className='custom-file'>
-                                        <input
-                                            type='file'
-                                            name='images'
-                                            className='custom-file-input'
-                                            id='customFile'
-                                            onChange={onChange}
-                                            multiple
-                                        />
-                                        <label className='custom-file-label' htmlFor='customFile'>
-                                            Choose Images
-                                        </label>
-                                    </div>
-
-                                    <div className="gallery">
-                  {images.map((file, index) => (
-                    <div key={index} className="gallery-item">
-                      <img src={file} alt={file} />
-                      <button type="button" onClick={() => removeFile(index)}>Remove</button>
-                    </div>
-                  ))}
-                </div>
-                                </div>
-
-
-
-
-            <div className="col-12">
+  <div className="col-md-6">
+    <div className="form-group">
+      <label>Images</label>
+      <div className="custom-file">
+        <input
+          type="file"
+          name="images"
+          className="custom-file-input"
+          id="customFile"
+          onChange={onChange}
+          multiple
+        />
+        <label className="custom-file-label" htmlFor="customFile">
+          Choose Images
+        </label>
+      </div>
+      <div className="gallery">
+        {images.map((file, index) => (
+          <div key={index} className="gallery-item">
+            <img src={file} alt={file} />
+            <button type="button" onClick={() => removeFile(index)}>
+              Remove
+            </button>
+          </div>
+        ))}
+      </div>
+    </div> <div className="col-12">
               <button type="button" className="btn btn-primary" onClick={submit}>Submit</button>
             </div>
-          </form> 
+  </div>
+</div>
 
-    </Fragment>
+
+
+
+
+           
+          </form> 
+          </Fragment>
+                    </div>
+                </div>
+            </div>
+        </Fragment>
     )
 }
 

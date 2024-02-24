@@ -4,6 +4,7 @@ const cookie = require('cookie-parser')
 const cors = require('cors')
 
 const documentation = require('./routes/documentation')
+const process = require('./routes/process')
 const record = require('./routes/record')
 const home = require('./routes/home')
 const user = require('./routes/auth')
@@ -17,6 +18,7 @@ app.use(express.urlencoded({limit: "50mb", extended: true }));
 app.use(cookie());
 
 app.use('/api/v1', documentation);
+app.use('/api/v1', process);
 app.use('/api/v1', home);
 app.use('/api/v1', user);
 

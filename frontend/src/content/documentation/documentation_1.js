@@ -4,7 +4,7 @@ import 'uikit/dist/css/uikit.min.css';
 import 'uikit/dist/js/uikit.min.js';
 import 'uikit/dist/js/uikit-icons.min.js';
 import Chart from "react-apexcharts";
-import "../App.css";
+import "../../App.css";
 import UIkit from 'uikit';
 
 function Documentation_1(handleMaterialChange) {

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const docuSchema = new mongoose.Schema({
+const processSchema = new mongoose.Schema({
     title: {
         type: String,
        },
@@ -33,4 +33,4 @@ const docuSchema = new mongoose.Schema({
     ],         
 })
 
-module.exports = mongoose.model('docuCollection', docuSchema);
+module.exports = mongoose.model('processCollection', processSchema);

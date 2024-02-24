@@ -2,7 +2,7 @@
 import React, { Fragment, useState } from "react";
 
 import Chart from "react-apexcharts";
-import "../App.css";
+import "../../App.css";
 
 import 'bulma/css/bulma.min.css';
 import Documentation_1 from "./documentation_1";

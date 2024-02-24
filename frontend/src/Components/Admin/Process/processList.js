@@ -5,15 +5,15 @@ import axios from 'axios'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import Sidebar from './Sidebar'
-import MetaData from '../Components/Layout/MetaData'
+import Sidebar from '../Sidebar'
+import MetaData from '../../Layout/MetaData'
 // import Sidebar from './SideBar'
-import { getToken } from '../utils/helpers';
-import Loader from '../Components/Layout/Loader'
+import { getToken } from '../../../utils/helpers';
+import Loader from '../../Layout/Loader'
 import { FaRegMehBlank } from 'react-icons/fa';
 // ... (your existing imports)
 
-const MaterialsList = () => {
+const ProcessList = () => {
     const [materials, setMaterials] = useState([]);
     const [error, setError] = useState('');
     const [deleteError, setDeleteError] = useState('');
@@ -42,10 +42,10 @@ const MaterialsList = () => {
             //     }
             // };
 
-            const { data } = await axios.get(`http://localhost:3001/api/v1/Documentations`);
+            const { data } = await axios.get(`http://localhost:3001/api/v1/Processs`);
 
             console.log(data);
-            setMaterials(data.Documentations);
+            setMaterials(data.Processs);
             setLoading(false);
         } catch (error) {
             setError(error.response.data.message);
@@ -72,7 +72,7 @@ const MaterialsList = () => {
             // toast.success('MATERIAL DELETED SUCCESSFULLY', {
             //     position: toast.POSITION.BOTTOM_RIGHT
             // });
-            navigate('/adminPage');
+            navigate('/processList');
             setIsDeleted(false);
             setDeleteError('');
         }
@@ -98,7 +98,7 @@ const MaterialsList = () => {
                     'Authorization': `Bearer ${getToken()}`
                 }
             };
-            const { data } = await axios.delete(`http://localhost:3001/api/v1/admin/Documentation/${id}`);
+            const { data } = await axios.delete(`http://localhost:3001/api/v1/admin/Process/${id}`);
 
             setIsDeleted(data.success);
             setLoading(false);
@@ -202,7 +202,7 @@ const MaterialsList = () => {
 
             // Send a request to delete multiple materials
             const deleteRequests = selectedMaterials.map(async (id) => {
-              return axios.delete(`${process.env.REACT_APP_API}/api/v1/admin/Documentation/${id}`);
+              return axios.delete(`${process.env.REACT_APP_API}/api/v1/admin/Process/${id}`);
             });
 
             // Wait for all delete requests to complete
@@ -253,4 +253,4 @@ const MaterialsList = () => {
     );
 };
 
-export default MaterialsList;
+export default ProcessList;

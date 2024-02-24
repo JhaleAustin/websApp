@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import MetaData from '../Layout/MetaData' 
-import { getToken } from '../../utils/helpers';
+import MetaData from '../../Layout/MetaData' 
+import { getToken } from '../../../utils/helpers';
 import axios from 'axios'
 
 import Sidebar from '../../Admin/Sidebar'
@@ -117,17 +117,18 @@ const NewDocumentation = () => {
 
     return (
         <Fragment>
-            <MetaData title={'New Product'} />
-            <div className="row">
-            <div className="col-12 col-md-2"style={{  marginBottom: "2px" }}>
-            <div style={{  height: '100vh', overflow: 'scroll initial' }}>
-                <Sidebar />
-                </div>
+        <MetaData title={'NEW MATERIAL'} />
+        <div className="row">
+
+        <div className="col-12 col-md-2"style={{  marginBottom: "2px" }}>
+        <div style={{  height: '100vh', overflow: 'scroll initial' }}>
+            <Sidebar />
             </div>
-                <div className="col-12 col-md-10">
+        </div>
+            <div className="np col-12 col-md-8">
+                <div className="np wrapper my-5" style={{ width: '100%', paddingLeft: '10%', marginLeft: '10%' }}>
                     <Fragment>
-                        <div className="wrapper my-5">
-                            <form className="shadow-lg" onSubmit={submitHandler} encType='multipart/form-data'>
+                               <form className="shadow-lg" onSubmit={submitHandler} encType='multipart/form-data'>
                                 <h1 className="mb-4">New Product</h1>
 
                                 <div className="form-group">
@@ -222,11 +223,10 @@ const NewDocumentation = () => {
                                 </button>
 
                             </form>
-                        </div>
-                    </Fragment>
+                            </Fragment>
+                    </div>
                 </div>
             </div>
-
         </Fragment>
     )
 }

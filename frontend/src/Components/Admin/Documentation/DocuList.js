@@ -5,9 +5,9 @@ import axios from 'axios'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
  
-import MetaData from '../Layout/MetaData'
-import Loader from '../Layout/Loader' 
-import { getToken } from '../../utils/helpers';
+import MetaData from '../../Layout/MetaData'
+import Loader from '../../Layout/Loader' 
+import { getToken } from '../../../utils/helpers';
 import { FaRegMehBlank } from 'react-icons/fa';
 // ... (your existing imports)
 
@@ -71,7 +71,7 @@ const DocList = () => {
             // toast.success('MATERIAL DELETED SUCCESSFULLY', {
             //     position: toast.POSITION.BOTTOM_RIGHT
             // });
-            navigate('/adminPage');
+            navigate('/documentationList');
             setIsDeleted(false);
             setDeleteError('');
         }

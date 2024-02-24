@@ -1,7 +1,7 @@
 
 import React, { Fragment, useState } from "react";
 
-import "../App.css";
+import "../../App.css";
 function Analysis_1() {
   return (
     <Fragment>

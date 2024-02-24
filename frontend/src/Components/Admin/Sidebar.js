@@ -24,27 +24,27 @@ const Sidebar = () => {
   };
 
   return (
-     <CDBSidebar backgroundColor="rgb(0 0 0)" textColor="#fff" >
+     <CDBSidebar backgroundColor="#abc32f" textColor="#fff" >
         {/* <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
         </CDBSidebarHeader> */}
         <CDBSidebarContent className="sidebar-content">
-          <CDBSidebarMenu style={{ backgroundColor: "black", color: "white" }}>
+          <CDBSidebarMenu style={{ backgroundColor: "#abc32f", color: "white" }}>
             <NavLink exact to="/admin/dashboard" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="cube" >DASHBOARD</CDBSidebarMenuItem>
             </NavLink>
             
             <NavLink activeClassName="activeClicked">
             <CDBSidebarMenuItem onClick={togglePhotosDropdown} icon="image">
-              PHOTOS
+              PROCESS
             </CDBSidebarMenuItem>
             {isPhotosDropdownOpen && (
               <div style={{ paddingLeft: '20px', marginTop: '10px' }}>
 
-                <NavLink exact to="/admin/photos" activeClassName="activeClicked">
-                  <CDBSidebarMenuItem icon="list-alt">PHOTOS LIST</CDBSidebarMenuItem>
+                <NavLink exact to="/processList" activeClassName="activeClicked">
+                  <CDBSidebarMenuItem icon="list-alt">PROCESS LIST</CDBSidebarMenuItem>
                 </NavLink>
 
-                <NavLink link to="/admin/photo" activeClassName="activeClicked">
+                <NavLink link to="/admin/process" activeClassName="activeClicked">
                   <CDBSidebarMenuItem icon="plus">CREATE</CDBSidebarMenuItem>
                 </NavLink>
 
@@ -54,7 +54,7 @@ const Sidebar = () => {
 
           <NavLink activeClassName="activeClicked">
             <CDBSidebarMenuItem onClick={toggleMaterialsDropdown} icon="toolbox">
-              MATERIALS
+              DOCUMENATOIN
             </CDBSidebarMenuItem>
             {isMaterialsDropdownOpen && (
               <div style={{ paddingLeft: '20px', marginTop: '10px' }}>
@@ -71,25 +71,7 @@ const Sidebar = () => {
             )}
           </NavLink>
         
-            {/* <NavLink exact to="/admin/materials" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="toolbox">MATERIALS</CDBSidebarMenuItem>
-            </NavLink> */}
-            
-            <NavLink exact to="/admin/orders" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="shopping-cart">ORDERS</CDBSidebarMenuItem>
-            </NavLink>
-
-            <NavLink exact to="/admin/users" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="user">USERS</CDBSidebarMenuItem>
-            </NavLink>
-
-            <NavLink exact to="/admin/reviews" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="star">REVIEWS</CDBSidebarMenuItem>
-            </NavLink>
-
-            {/* <CDBSidebarFooter style={{ textAlign: 'center' }}>
-            <div>© 2023 Photocard Shop</div>
-          </CDBSidebarFooter> */}
+          
           </CDBSidebarMenu>
         </CDBSidebarContent> 
       </CDBSidebar>

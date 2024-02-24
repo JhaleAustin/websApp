@@ -5,7 +5,7 @@ import regression from "regression";
 import React, { Fragment, useState,useEffect } from "react";
 import axios from 'axios';
  
-import "../App.css";
+import "../../App.css";
 
 function Docu_Analysis(handleMaterialChange) {
   const [materials, setMaterials] = useState([]);
