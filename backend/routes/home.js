@@ -7,5 +7,5 @@ router.get('/topics', getTopics);
 // router.post('/home/topic/new', isAuthenticatedUser, authorizeRoles('admin'), newTopic)
 router.post('/home/type/new', newType)
 router.post('/home/topic/:id', newTopic)
-router.get('/home', getAllHome);
+router.get('/', getAllHome);
 module.exports = router;

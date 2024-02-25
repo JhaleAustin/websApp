@@ -68,44 +68,31 @@ function Homepage() {
   }, []);
   return (
     <div>
-
-
-
- 
-
-
-
-
-
-
-
-
-
       <div class="jumbotron text-center">
-        <h1 class="display-4">About Peanuts</h1>
-        <p class="lead">Discover interesting facts and information about peanuts!</p>
+        <h1 class="display-4">PEANUT SHELL</h1>
       </div>
 
       <div class="container">
-      <div class="container">
-  <div class="row">
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Types of Peanuts</h5>
-          <p class="card-text">Learn about different types of peanuts and their characteristics.</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Peanut Cultivation</h5>
-          <p class="card-text">Explore the process of growing and cultivating peanuts in fields.</p>
-        </div>
-      </div>
-    </div>
-  </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Types of Peanuts</h5>
+                  <p class="card-text">Learn about different types of peanuts and their characteristics.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Peanut Cultivation</h5>
+                  <p class="card-text">Explore the process of growing and cultivating peanuts in fields.</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
   <div class="row">
     <div class="col-md-6">

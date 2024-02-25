@@ -104,22 +104,17 @@ exports.newTopic = async (req, res, next) => {
 
 exports.getAllHome = async (req, res, next) => {
     try {
-        const topics = await homeCollection.find()
-            .populate('benefi') // Populate the 'benefits' field
-            .populate('mulching') // Populate the 'mulching' field
-            .populate('peanutshell') // Populate the 'peanutshell' field
-            .populate('peanutshellmulching'); // Populate the 'peanutshellmulching' field
-
-        if (!topics || topics.length === 0) {
-            return res.status(404).json({
-                success: false,
-                message: 'NO TOPIC FOUND'
-            });
-        }
+        const benefits = await benefitsCollection.find();
+        const mulching = await mulchingCollection.find();
+        const peanutshell = await peanutshellCollection.find();
+        const peanutshellmulching = await peanutshellmulchingCollection.find();
 
         res.status(200).json({
             success: true,
-            topics
+            benefits,
+            mulching,
+            peanutshell,
+            peanutshellmulching
         });
     } catch (error) {
         res.status(500).json({
