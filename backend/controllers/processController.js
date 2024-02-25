@@ -3,36 +3,8 @@ const Process = require('../models/processCollection')
 const APIFeatures = require('../utils/apiFeatures')
 const cloudinary = require('cloudinary')
  
-
-// exports.getDocuCollection = async (req, res, next) => {
-// 	 record.find({}).then(function(Docu){
-// 		res.json(Docu)
-
-// 	 }).catch(function(err){
-// 		res.json(err)
-// 	 })
-// }
-
-
 exports.getProcess = async (req, res, next) => {
-	  const Processs = await Process.find({});
-	
- if (!Processs) {
-		return res.status(404).json({
-			success: false,
-			message: 'No Processs'
-		})
-	}
-	res.status(200).json({
-		success: true,
-		Processs,
-		 })
-}
 
-
-
-exports.getProcesss = async (req, res, next) => {
-	// const Processs = await Process.find({});
 	const resPerPage = 4;
 	const ProcesssCount = await Process.countDocuments();
 	const apiFeatures = new APIFeatures(Process.find(), req.query).search().filter()
@@ -84,84 +56,50 @@ exports.deleteProcess = async (req, res, next) => {
 	})
 }
 
-
-
 exports.newProcess = async (req, res, next) => {
-	if (!req.body.images) {
-        return res.status(400).json({ message: 'Images array is missing in the request body' });
+    const { title, content } = req.body;
+    const { file } = req; // Assuming the video file is attached to the request
+
+	console.log(file);
+
+    try {
+        const result = await cloudinary.uploader.upload_large(`${file.path}`, {
+            folder: 'Process',
+            resource_type: 'Video',
+        });
+
+        const videoLink = {
+            public_id: result.public_id,
+            url: result.secure_url,
+        };
+
+		console.log('Video Link:', result);
+
+        // Create new process with the single videoLink
+        const newProcess = new Process({
+            title,
+            content,
+            videos: videoLink,
+        });
+
+        // Save the process to the database
+        const savedProcess = await newProcess.save();
+
+        // Return success response
+        res.status(201).json({
+            success: true,
+            process: savedProcess,
+        });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({
+            success: false,
+            message: 'INTERNAL SERVER ERROR',
+        });
     }
-	let images = Array.isArray(req.body.images) ? req.body.images : [req.body.images];
-    
-	let videos = []
-	if (typeof req.body.images === 'string') {
-		images.push(req.body.images)
-	} else {
-		images = req.body.images
-	}
- 
+};
 
-	let imagesLinks = [];
 
-	for (let i = 0; i < images.length; i++) {
-		let imageDataUri = images[i]
-		// console.log(imageDataUri)
-		try {
-			const result = await cloudinary.v2.uploader.upload(`${imageDataUri}`, {
-				folder: 'Process',
-				width: 150,
-				crop: "scale",
-			});
-
-			imagesLinks.push({
-				public_id: result.public_id,
-				url: result.secure_url
-			})
-
-		} catch (error) {
-			console.log(error)
-		}
-
-	}
-
-	let videoLinks = [];
-
-	for (let i = 0; i < videos.length; i++) {
-		let videoLink = videos[i];
-		try {
-			const result = await cloudinary.v2.uploader.upload(`${videoLink}`, {
-				folder: 'Process',
-				width: 150,
-				crop: "scale",
-			});
-	
-			videoLinks.push({
-				public_id: result.public_id,
-				url: result.secure_url,
-			});
-	
-		} catch (error) {
-			console.log(error);
-		}
-	}
-	
-
-	
-	// Also, make sure that the variable names inside the try blocks match the correct names.
-	
-	req.body.images = imagesLinks;
-	req.body.video = videoLinks;
-	 
-	const Process1 = await Process.create(req.body);
-	if (!Process1)
-		return res.status(400).json({
-			success: false,
-			message: 'Process not created'
-		})
-	res.status(201).json({
-		success: true,
-		Process1
-	})
-}
 
 exports.updateProcess = async (req, res, next) => {
 	let Process = await Process.findById(req.params.id);

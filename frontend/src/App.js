@@ -79,7 +79,7 @@ import HomepageList from './Components/Admin/Homepage/homepageList';
 import NewHomepage from './Components/Admin/Homepage/NewHomepage';
 import UpdateHomepage from './Components/Admin/Homepage/UpdateHome';
 import ProcessList from './Components/Admin/Process/processList';
-import NewPorcess from './Components/Admin/Process/NewProcess1';
+import NewProcess from './Components/Admin/Process/NewProcess1';
 import UpdatePorcess from './Components/Admin/Process/UpdateProcess';
 import DocumentationList from './Components/Admin/Documentation/Docu';
 import NewDocumentation from './Components/Admin/Documentation/NewDocu2';
@@ -109,10 +109,10 @@ function App() {
           <Routes>
             <Route path="/admin/documentation" element={<NewDocumentation />} />
             <Route path="/admin/documentationList" element={<DocumentationList />} />
-            <Route path="/admin/process" element={<NewPorcess />} />
+            <Route path="/admin/process" element={<NewProcess />} />
             <Route path="/admin/processList" element={<ProcessList />} />
             <Route path="/admin/homepage" element={<NewHomepage />} />
-            <Route path="/adminhomepageList" element={<HomepageList />} />
+            <Route path="/admin/homepageList" element={<HomepageList />} />
             <Route path="/admin/updatehome" element={<UpdateHomepage />} />
             <Route path="/admin/updateprocess" element={<UpdatePorcess />} />
             <Route path="/admin/updatedocumentation" element={<UpdateDocumention />} />

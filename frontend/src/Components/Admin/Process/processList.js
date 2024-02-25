@@ -10,30 +10,28 @@ import MetaData from '../../Layout/MetaData'
 // import Sidebar from './SideBar'
 import { getToken } from '../../../utils/helpers';
 import Loader from '../../Layout/Loader'
-import { FaRegMehBlank } from 'react-icons/fa';
-// ... (your existing imports)
 
 const ProcessList = () => {
-    const [materials, setMaterials] = useState([]);
+    const [process, setProcess] = useState([]);
     const [error, setError] = useState('');
     const [deleteError, setDeleteError] = useState('');
     const [loading, setLoading] = useState(true);
     const [isDeleted, setIsDeleted] = useState(false);
-    const [selectedMaterials, setSelectedMaterials] = useState([]);
+    const [selectedProcess, setSelectedProcess] = useState([]);
 
     let navigate = useNavigate();
 
-    const toggleMaterialSelection = (id) => {
-        const isSelected = selectedMaterials.includes(id);
+    const toggleProcessselection = (id) => {
+        const isSelected = selectedProcess.includes(id);
         if (isSelected) {
-            setSelectedMaterials(selectedMaterials.filter((selectedId) => selectedId !== id));
+            setSelectedProcess(selectedProcess.filter((selectedId) => selectedId !== id));
         } else {
-            setSelectedMaterials([...selectedMaterials, id]);
+            setSelectedProcess([...selectedProcess, id]);
         }
     };
 
    
-    const getAdminMaterials = async () => {
+    const getAdminProcess = async () => {
          try {
             // const config = {
             //     headers: {
@@ -42,10 +40,10 @@ const ProcessList = () => {
             //     }
             // };
 
-            const { data } = await axios.get(`http://localhost:3001/api/v1/Processs`);
+            const { data } = await axios.get(`http://localhost:3001/api/v1/process`);
 
             console.log(data);
-            setMaterials(data.Processs);
+            setProcess(data.processes);
             setLoading(false);
         } catch (error) {
             setError(error.response.data.message);
@@ -54,43 +52,43 @@ const ProcessList = () => {
 
 
     useEffect(() => {
-        getAdminMaterials();
+        getAdminProcess();
 
-        // if (error) {
-        //     toast.error(error, {
-        //         position: toast.POSITION.BOTTOM_RIGHT
-        //     });
-        // }
+        if (error) {
+            toast.error(error, {
+                position: toast.POSITION.BOTTOM_RIGHT
+            });
+        }
 
-        // if (deleteError) {
-        //     toast.error(deleteError, {
-        //         position: toast.POSITION.BOTTOM_RIGHT
-        //     });
-        // }
+        if (deleteError) {
+            toast.error(deleteError, {
+                position: toast.POSITION.BOTTOM_RIGHT
+            });
+        }
 
         if (isDeleted) {
-            // toast.success('MATERIAL DELETED SUCCESSFULLY', {
-            //     position: toast.POSITION.BOTTOM_RIGHT
-            // });
-            navigate('/processList');
+            toast.success('STEP DELETED SUCCESSFULLY', {
+                position: toast.POSITION.BOTTOM_RIGHT
+            });
+            navigate('/admin/processList');
             setIsDeleted(false);
             setDeleteError('');
         }
     }, [error, deleteError, isDeleted]);
 
 
-    const toggleAllMaterialsSelection = () => {
-        if (selectedMaterials.length === materials.length) {
-            // If all materials are selected, unselect all
-            setSelectedMaterials([]);
+    const toggleAllProcessSelection = () => {
+        if (selectedProcess.length === process.length) {
+            // If all processes are selected, unselect all
+            setSelectedProcess([]);
         } else {
-            // Otherwise, select all materials
-            setSelectedMaterials(materials.map((material) => material._id));
+            // Otherwise, select all processes
+            setSelectedProcess(process.map((processes) => processes._id));
         }
     };
 
     
-    const deleteMaterial = async (id) => {
+    const deleteProcess= async (id) => {
         try {
             const config = {
                 headers: {
@@ -98,7 +96,7 @@ const ProcessList = () => {
                     'Authorization': `Bearer ${getToken()}`
                 }
             };
-            const { data } = await axios.delete(`http://localhost:3001/api/v1/admin/Process/${id}`);
+            const { data } = await axios.delete(`http://localhost:3001/api/v1/admin/process/${id}`);
 
             setIsDeleted(data.success);
             setLoading(false);
@@ -107,45 +105,40 @@ const ProcessList = () => {
         }
     };
 
-    const materialsList = () => {
+    const processList = () => {
         const data = {
             columns: [
                 {
                     label: (      <input
                         type="checkbox"
-                        checked={selectedMaterials.length === materials.length}
-                        onChange={toggleAllMaterialsSelection}
+                        checked={selectedProcess.length === process.length}
+                        onChange={toggleAllProcessSelection}
                     />
                     ),
                               label: (      <input
                                         type="checkbox"
-                                        checked={selectedMaterials.length === materials.length}
-                                        onChange={toggleAllMaterialsSelection}
+                                        checked={selectedProcess.length === process.length}
+                                        onChange={toggleAllProcessSelection}
                                     />
                                 ),
                                     field: 'select',
                                     sort: 'asc',
                                 },
                                 {
-                                    label: 'Material ID',
-                                    field: 'id',
+                                    label: 'Title',
+                                    field: 'title',
                                     sort: 'asc'
                                 },
                                 {
-                                    label: 'Images',
-                                    field: 'images',
+                                    label: 'Content',
+                                    field: 'content',
                                     sort: 'asc'
                                 },
                                 {
-                                    label: 'Material Name',
-                                    field: 'plantType',
+                                    label: 'Videos',
+                                    field: 'videos',
                                     sort: 'asc',
                                 },
-                                // {
-                                //     label: 'Stock',
-                                //     field: 'stock',
-                                //     sort: 'asc'
-                                // },
                                 {
                                     label: 'Actions',
                                     field: 'actions',
@@ -154,26 +147,25 @@ const ProcessList = () => {
                             rows: []
                         };
                 
-                        materials.forEach(material => {
+                        process.forEach(processes => {
                             data.rows.push({
                                 select: (
                                     <input
                                         type="checkbox"
-                                        checked={selectedMaterials.includes(material._id)}
-                                        onChange={() => toggleMaterialSelection(material._id)}
+                                        checked={selectedProcess.includes(processes._id)}
+                                        onChange={() => toggleProcessselection(processes._id)}
                                     />
                                 ),
-                                id: material._id,
-                                images: material.images.map((image, index) => (
-                                    <img key={index} src={image.url} alt={`Image ${index}`} style={{ width: '50px', height: '50px' }} />
-                                )),
-                                name: material.name,
-                                stock: material.stock,
+                                title: processes.title,
+                                content: processes.content,
+                                // images: material.images.map((image, index) => (
+                                //     <img key={index} src={image.url} alt={`Image ${index}`} style={{ width: '50px', height: '50px' }} />
+                                // )),
                                 actions: <Fragment>
-                                        <Link to={`/admin/updateprocess/${material._id}`} className="btn btn-primary py-1 px-2">
+                                        <Link to={`/admin/updateprocess/${processes._id}`} className="btn btn-primary py-1 px-2">
                                             <i className="fa fa-pen"></i>
                                         </Link>
-                                        <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => deleteMaterialHandler(material._id)}>
+                                        <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => deleteProcessHandler(processes._id)}>
                                             <i className="fa fa-trash"></i>
                                         </button>
                                     </Fragment>
@@ -185,24 +177,24 @@ const ProcessList = () => {
                     };
                 
 
-    const deleteMaterialHandler = (id) => {
-        deleteMaterial(id);
+    const deleteProcessHandler = (id) => {
+        deleteProcess(id);
     };
 
 
 
-    const deleteMaterialHandler2 = async () => {
+    const deleteProcessHandler2 = async () => {
         try {
-            const config = {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': `Bearer ${getToken()}`
-                }
-            };
+            // const config = {
+            //     headers: {
+            //         'Content-Type': 'multipart/form-data',
+            //         'Authorization': `Bearer ${getToken()}`
+            //     }
+            // };
 
-            // Send a request to delete multiple materials
-            const deleteRequests = selectedMaterials.map(async (id) => {
-              return axios.delete(`${process.env.REACT_APP_API}/api/v1/admin/Process/${id}`);
+            // Send a request to delete multiple processes
+            const deleteRequests = selectedProcess.map(async (id) => {
+              return axios.delete(`${process.env.REACT_APP_API}/api/v1/admin/process/${id}`);
             });
 
             // Wait for all delete requests to complete
@@ -221,14 +213,14 @@ const ProcessList = () => {
     return (
 
         <Fragment>
-        <MetaData title={'All Materials'} />
+        <MetaData title={'All Processes'} />
         <div className="row">
             <div className="col-12 col-md-2">
                     <Sidebar />
                 </div>
             <div className="col-12 col-md-10" style={{  paddingLeft: "70px", marginBottom: "70px" }}>
                 <Fragment>
-                        <h1 className="my-5">LIST OF ALL MATERIALS</h1>
+                        <h1 className="my-5">DATA COLLECTION AND OBSERVATION PROCESS</h1>
                         {loading ? (
                             <Loader />
                         ) : (
@@ -236,13 +228,13 @@ const ProcessList = () => {
                             <div>
                                 <button
                                     className="btn btn-danger py-1 px-2 mb-2"
-                                    onClick={deleteMaterialHandler2}
-                                    disabled={selectedMaterials.length === 0}
+                                    onClick={deleteProcessHandler2}
+                                    disabled={selectedProcess.length === 0}
                                 >
                                     Delete Selected
                                 </button>
                             </div>
-                            <MDBDataTable data={materialsList()} className="px-3" bordered striped hover />
+                            <MDBDataTable data={processList()} className="px-3" bordered striped hover />
                     
                         </div>
                     )}

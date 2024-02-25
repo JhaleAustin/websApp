@@ -12,9 +12,9 @@ const user = require('./routes/auth')
 app.use(cors({
     origin: "http://localhost:3000",
     credentials: true}))
-app.use(express.json({limit:'50mb'}));
+app.use(express.json({limit:'1gb'}));
 
-app.use(express.urlencoded({limit: "50mb", extended: true }));
+app.use(express.urlencoded({limit: "1gb", extended: true }));
 app.use(cookie());
 
 app.use('/api/v1', documentation);

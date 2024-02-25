@@ -3,34 +3,23 @@ const mongoose = require('mongoose')
 const processSchema = new mongoose.Schema({
     title: {
         type: String,
+        required: true
        },
     content: {
         type: String,
+        required: true
        },
-    images: [
-        {
-            public_id: {
-                type: String,
-                required: true
-            },
-            url: {
-                type: String,
-                required: true
-            },
+   
+    videos: {
+        public_id: {
+          type: String,
+          required: true
+        },
+        url: {
+          type: String,
+          required: true
         }
-    ], 
-    videos: [
-        {
-            public_id: {
-                type: String,
-                required: true
-            },
-            url: {
-                type: String,
-                required: true
-            },
-        }
-    ],         
+      } 
 })
 
 module.exports = mongoose.model('processCollection', processSchema);

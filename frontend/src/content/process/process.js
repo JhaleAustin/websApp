@@ -1,11 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
 import axios from 'axios';
-import Chart from "react-apexcharts";
-
-import Process_1 from "./process_1";
-
-import Process_2 from "./process_2";
-import "../../App.css";
 
 function Process() {
 
@@ -17,7 +11,7 @@ function Process() {
   useEffect(() => {
     const fetchMaterials = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/api/v1/Processs`);
+        const response = await axios.get(`http://localhost:3001/api/v1/process`);
         console.log(response.data);
         setProcesss(response.data.Processs);
         setLoading(false);
@@ -36,16 +30,13 @@ function Process() {
      return (
        <Fragment>
 
- <Process_1/>
-        <Process_2/>
-
   <div class="container mt-4">
 
   <div class="row mt-4">
     <div class="col-md-12 text-center">
       <h3>Additional Title at the Bottom</h3>
       <div class="center-video">
-        <iframe width="1200" height="600" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+        <iframe width="1200" height="600" src="https://www.youtube.com/embed/4hXNXb6o7y8" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
   </div>
