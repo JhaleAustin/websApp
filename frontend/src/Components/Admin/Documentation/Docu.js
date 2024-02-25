@@ -72,7 +72,7 @@ const MaterialsList = () => {
             // toast.success('MATERIAL DELETED SUCCESSFULLY', {
             //     position: toast.POSITION.BOTTOM_RIGHT
             // });
-            navigate('/adminPage');
+            navigate('/documentationList');
             setIsDeleted(false);
             setDeleteError('');
         }
@@ -170,7 +170,7 @@ const MaterialsList = () => {
                                 name: material.name,
                                 stock: material.stock,
                                 actions: <Fragment>
-                                        <Link to={`/admin/material/${material._id}`} className="btn btn-primary py-1 px-2">
+                                        <Link to={`/admin/updatedocumentation/${material._id}`} className="btn btn-primary py-1 px-2">
                                             <i className="fa fa-pen"></i>
                                         </Link>
                                         <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => deleteMaterialHandler(material._id)}>

@@ -4,14 +4,14 @@ import MetaData from '../../Layout/MetaData'
 import { getToken } from '../../../utils/helpers';
 import axios from 'axios'
 
-import Sidebar from '../../Admin/Sidebar'
+import Sidebar from '../Sidebar'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';  
-const NewProcess1 = () => {
+const NewHomepage = () => {
   const [users, setUsers] = useState([]);
-  const [title, setTitle] = useState();
+  const [topic, setTopic] = useState();
   const [height, setHeight] = useState();
-  const [Content, setContent] = useState('');
+  const [description, setDescription] = useState('');
   const [files, setImages] = useState([]);
   const [inputs, setInputs] = useState([]); 
   const [error, setError] = useState('')
@@ -23,9 +23,8 @@ const NewProcess1 = () => {
   const submit = () => {
     // Assuming you want to submit all values including dynamic inputs
     const formData = {
-      title,
-      Content,
-      images: images,
+      topic,
+      description,
     };
 
     
@@ -123,58 +122,87 @@ const NewProcess1 = () => {
     </div>
         <div className="np col-12 col-md-8">
             <div className="np wrapper my-5" style={{ width: '100%', paddingLeft: '10%', marginLeft: '10%' }}>
-                <Fragment> <form className="row g-3 form1" encType='multipart/form-data'>
+                <Fragment> 
+
+                <form className="row g-3 form1" encType="multipart/form-data">
+ 
+
+                <div className="radio-container">
+        <div className="radio-option">
+          <label htmlFor="benefits" className="form-label">
+            Benefits:
+          </label>
+          <input
+            type="radio"
+            id="benefits"
+            name="radioGroup"
+            value="1"
+            className="radio-button"
+          />
+        </div>
+
+        <div className="radio-option">
+          <label htmlFor="mulching" className="form-label">
+            Mulching:
+          </label>
+          <input
+            type="radio"
+            id="mulching"
+            name="radioGroup"
+            value="2"
+            className="radio-button"
+          />
+        </div>
+
+        <div className="radio-option">
+          <label htmlFor="peanut" className="form-label">
+            Peanut:
+          </label>
+          <input
+            type="radio"
+            id="peanut"
+            name="radioGroup"
+            value="3"
+            className="radio-button"
+          />
+        </div>
+
+        <div className="radio-option">
+          <label htmlFor="peanutMulch" className="form-label">
+            Peanut with Mulch:
+          </label>
+          <input
+            type="radio"
+            id="peanutMulch"
+            name="radioGroup"
+            value="4"
+            className="radio-button"
+          />
+        </div>
+      </div>
+
+
             <div className="col-12">
-              <label htmlFor="Content" className="form-label">Title :</label>
+              <label htmlFor="Content" className="form-label">Topic :</label>
               <input
                 type="text"
                 className="form-control"
-                id="title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                id="topic"
+                value={topic}
+                onChange={(e) => setTopic(e.target.value)}
               />
             </div>
 
             <div className="col-12">
-              <label htmlFor="Content" className="form-label">Content :</label>
+              <label htmlFor="Content" className="form-label">Description :</label>
               <textarea
                 type="text"
                 className="form-control"
-                id="content"
-                value={Content}
-                onChange={(e) => setContent(e.target.value)}
+                id="description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
               ></textarea>
             </div>
-
-              <div className='form-group'>
-                                    <label>Images</label>
-
-                                    <div className='custom-file'>
-                                        <input
-                                            type='file'
-                                            name='images'
-                                            className='custom-file-input'
-                                            id='customFile'
-                                            onChange={onChange}
-                                            multiple
-                                        />
-                                        <label className='custom-file-label' htmlFor='customFile'>
-                                            Choose Images
-                                        </label>
-                                    </div>
-
-                                    <div className="gallery">
-                  {images.map((file, index) => (
-                    <div key={index} className="gallery-item">
-                      <img src={file} alt={file} />
-                      <button type="button" onClick={() => removeFile(index)}>Remove</button>
-                    </div>
-                  ))}
-                </div>
-                                </div>
-
-
-
 
             <div className="col-12">
               <button type="button" className="btn btn-primary" onClick={submit}>Submit</button>
@@ -188,4 +216,4 @@ const NewProcess1 = () => {
     )
 }
 
-export default NewProcess1
+export default NewHomepage

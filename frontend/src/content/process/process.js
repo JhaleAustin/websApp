@@ -1,6 +1,5 @@
-
-import React, { Fragment, useState } from "react";
-
+import React, { Fragment, useState, useEffect } from "react";
+import axios from 'axios';
 import Chart from "react-apexcharts";
 
 import Process_1 from "./process_1";
@@ -10,7 +9,28 @@ import "../../App.css";
 
 function Process() {
 
- 
+  const [process, setProcesss] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [selectedMaterial, setSelectedMaterial] = useState(null);
+
+  useEffect(() => {
+    const fetchMaterials = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3001/api/v1/Processs`);
+        console.log(response.data);
+        setProcesss(response.data.Processs);
+        setLoading(false);
+      } catch (error) {
+        console.error('ERROR FETCHING MATERIALS:', error);
+        setError('ERROR FETCHING MATERIALS. PLEASE TRY AGAIN.');
+        setLoading(false);
+      }
+    };
+
+    fetchMaterials();
+  }, []);
+
    
     
      return (
@@ -29,44 +49,51 @@ function Process() {
       </div>
     </div>
   </div>
-  <div class="row">  
 
 
-    <div class="col-md-6 center-both">
-      <h2>Your Content Goes Here</h2>
-      <p>This is where your text content will be.</p>
+
+  {process.map((processs, index) => (
+  <>   
+    <div class="row">  
+      <div class={`col-md-6 ${index % 2 === 0 ? 'center-both' : ''}`}>
+        <h2>{processs.title}</h2>
+        <p>This is where your text content will be.</p>
+      </div>
+      <div class="col-md-6">
+           
+      {processs.images.map((img, index) => (
+                    <img
+                      key={index}
+                      src={img.url}
+                      alt=""
+                      class="img-fluid"
+                        
+                      style={{ width: '1000px', height: '500px' }} />
+                  ))}  </div>
     </div>
- 
-    <div class="col-md-6">
-      <img src="https://wonderfulengineering.com/wp-content/uploads/2014/10/image-wallpaper-15.jpg" alt="Your Image" class="img-fluid"/>
-    </div>
-  </div>
 
+    <div class="row">  
+      <div class="col-md-6">
 
-  <div class="row">  
-    <div class="col-md-6">
-      <img src="https://wonderfulengineering.com/wp-content/uploads/2014/10/image-wallpaper-15.jpg" alt="Your Image" class="img-fluid"/>
-    </div>
     
-     <div class="col-md-6 center-both">
-      <h2>Your Content Goes Here</h2>
-      <p>This is where your text content will be.</p>
-    </div>
- 
-   
-  </div>
+      {processs.images.map((img, index) => (
+                    <img
+                      key={index}
+                      src={img.url}
+                      alt=""
+                      class="img-fluid"
+                        
+                      style={{ width: '1000px', height: '500px' }} />
+                  ))}
 
-
-  <div class="row">  
-    <div class="col-md-6 center-both">
-      <h2>Your Content Goes Here</h2>
-      <p>This is where your text content will be.</p>
+          </div>
+      <div class={`col-md-6 ${index % 2 !== 0 ? 'center-both' : ''}`}>
+      <h2>{processs.title}</h2>
+        <p>This is where your text content will be.</p>
+      </div>
     </div>
- 
-    <div class="col-md-6">
-      <img src="https://wonderfulengineering.com/wp-content/uploads/2014/10/image-wallpaper-15.jpg" alt="Your Image" class="img-fluid"/>
-    </div>
-  </div>
+  </>           
+))}
 </div>
        </Fragment>
       )

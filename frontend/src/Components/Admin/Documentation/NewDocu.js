@@ -128,7 +128,7 @@ const NewDocumentation = () => {
             <div className="np col-12 col-md-8">
                 <div className="np wrapper my-5" style={{ width: '100%', paddingLeft: '10%', marginLeft: '10%' }}>
                     <Fragment>
-                               <form className="shadow-lg" onSubmit={submitHandler} encType='multipart/form-data'>
+                               <form className="shadow-lg form1" onSubmit={submitHandler} encType='multipart/form-data'>
                                 <h1 className="mb-4">New Product</h1>
 
                                 <div className="form-group">

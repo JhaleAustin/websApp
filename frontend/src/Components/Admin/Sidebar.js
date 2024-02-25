@@ -12,6 +12,7 @@ import { NavLink } from 'react-router-dom';
 const Sidebar = () => {
   const [isPhotosDropdownOpen, setIsPhotosDropdownOpen] = useState(false);
   const [isMaterialsDropdownOpen, setIsMaterialsDropdownOpen] = useState(false);
+  const [isHomeDropdownOpen, setIsHomeDropdownOpen] = useState(false);
 
   const togglePhotosDropdown = () => {
     setIsPhotosDropdownOpen(!isPhotosDropdownOpen);
@@ -20,6 +21,12 @@ const Sidebar = () => {
 
   const toggleMaterialsDropdown = () => {
     setIsMaterialsDropdownOpen(!isMaterialsDropdownOpen);
+    setIsPhotosDropdownOpen(false);
+  };
+
+
+  const toggleHomeDropdown = () => {
+    setIsHomeDropdownOpen(!isHomeDropdownOpen);
     setIsPhotosDropdownOpen(false);
   };
 
@@ -40,7 +47,7 @@ const Sidebar = () => {
             {isPhotosDropdownOpen && (
               <div style={{ paddingLeft: '20px', marginTop: '10px' }}>
 
-                <NavLink exact to="/processList" activeClassName="activeClicked">
+                <NavLink exact to="/admin/processList" activeClassName="activeClicked">
                   <CDBSidebarMenuItem icon="list-alt">PROCESS LIST</CDBSidebarMenuItem>
                 </NavLink>
 
@@ -59,11 +66,32 @@ const Sidebar = () => {
             {isMaterialsDropdownOpen && (
               <div style={{ paddingLeft: '20px', marginTop: '10px' }}>
 
-                <NavLink exact to="/documentationList" activeClassName="activeClicked">
+                <NavLink exact to="/admin/documentationList" activeClassName="activeClicked">
                   <CDBSidebarMenuItem icon="list-alt">DOCUMENTATION LIST</CDBSidebarMenuItem>
                 </NavLink>
 
                 <NavLink exact to="/admin/documentation" activeClassName="activeClicked">
+                  <CDBSidebarMenuItem icon="plus">CREATE</CDBSidebarMenuItem>
+                </NavLink>
+
+              </div>
+            )}
+          </NavLink>
+
+
+
+          <NavLink activeClassName="activeClicked">
+            <CDBSidebarMenuItem onClick={toggleHomeDropdown} icon="toolbox">
+              HOME
+            </CDBSidebarMenuItem>
+            {isHomeDropdownOpen && (
+              <div style={{ paddingLeft: '20px', marginTop: '10px' }}>
+
+                <NavLink exact to="/admin/homepageList" activeClassName="activeClicked">
+                  <CDBSidebarMenuItem icon="list-alt">HOME LIST</CDBSidebarMenuItem>
+                </NavLink>
+
+                <NavLink exact to="/admin/homepage" activeClassName="activeClicked">
                   <CDBSidebarMenuItem icon="plus">CREATE</CDBSidebarMenuItem>
                 </NavLink>
 

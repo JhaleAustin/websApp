@@ -110,7 +110,7 @@ const NewDocu = () => {
 
  
   return (
-    <Fragment> <form className="row g-3" encType='multipart/form-data'>
+    <Fragment> <form className="row g-3 form1" encType='multipart/form-data'>
             <div className="col-12">
               <label htmlFor="createdAt" className="form-label">Date :</label>
               <input

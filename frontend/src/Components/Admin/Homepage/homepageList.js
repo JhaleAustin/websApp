@@ -13,7 +13,7 @@ import Loader from '../../Layout/Loader'
 import { FaRegMehBlank } from 'react-icons/fa';
 // ... (your existing imports)
 
-const ProcessList = () => {
+const HomepageList = () => {
     const [materials, setMaterials] = useState([]);
     const [error, setError] = useState('');
     const [deleteError, setDeleteError] = useState('');
@@ -170,7 +170,7 @@ const ProcessList = () => {
                                 name: material.name,
                                 stock: material.stock,
                                 actions: <Fragment>
-                                        <Link to={`/admin/updateprocess/${material._id}`} className="btn btn-primary py-1 px-2">
+                                        <Link to={`/admin/updatehome/${material._id}`} className="btn btn-primary py-1 px-2">
                                             <i className="fa fa-pen"></i>
                                         </Link>
                                         <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => deleteMaterialHandler(material._id)}>
@@ -228,7 +228,7 @@ const ProcessList = () => {
                 </div>
             <div className="col-12 col-md-10" style={{  paddingLeft: "70px", marginBottom: "70px" }}>
                 <Fragment>
-                        <h1 className="my-5">LIST OF ALL MATERIALS</h1>
+                        <h1 className="my-5">LIST OF ALL HOMEPAGE</h1>
                         {loading ? (
                             <Loader />
                         ) : (
@@ -253,4 +253,4 @@ const ProcessList = () => {
     );
 };
 
-export default ProcessList;
+export default HomepageList;

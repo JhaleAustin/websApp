@@ -300,3 +300,35 @@ button:hover {
   margin-top: 40px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+
+
+/**Homepage Design**/
+.form1 {
+  width: 800px; /* Set the width to 500 pixels */
+  background: linear-gradient(to bottom right, #4CAF50, #2E7D32);
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  color: white;
+}
+.radio-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.radio-option {
+  flex: 1;
+}
+
+.radio-button {
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  transition: border-radius 0.3s, box-shadow 0.3s;
+}
+
+.radio-button:hover {
+  border-radius: 8px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+}

@@ -126,7 +126,7 @@ const NewDocu = () => {
         <div className="np col-12 col-md-8">
             <div className="np wrapper my-5" style={{ width: '100%', paddingLeft: '10%', marginLeft: '10%' }}>
                 <Fragment>
-      <form className="row g-3" encType='multipart/form-data'>
+      <form className="row g-3 form1" encType='multipart/form-data'>
             <div className="col-12">
               <label htmlFor="createdAt" className="form-label">Date :</label>
               <input
