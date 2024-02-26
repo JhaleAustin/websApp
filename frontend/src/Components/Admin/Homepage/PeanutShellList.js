@@ -116,9 +116,9 @@ const PeanutShellList = () => {
                                 onChange={toggleAllPeanutShellsSelection}
                             />
                             <button
-                                className="btn btn-danger py-1 px-2 ml-2"
+                                className="button-delete-selected btn btn-danger py-1 px-2 ml-2"
                                 onClick={deletePeanutShellHandler2}
-                                disabled={selectedPeanutShells.length === 0}
+                                disabled={selectedPeanutShells.length === 0 }
                             >
                                 DELETE SELECTED
                             </button>
@@ -156,14 +156,23 @@ const PeanutShellList = () => {
                         />
                     </div>
                         ),
-                id: peanutshell._id,
-                description: peanutshell.description,
+                id: (
+                        <div className="d-flex align-items-right">
+                        {peanutshell._id}
+                        </div>
+                    ),
+                description: 
+                    (
+                        <div className="d-flex align-items-right">
+                        {peanutshell.description}
+                        </div>
+                    ),
                 actions: (
-                    <div className="text-center">
-                        <Link to={`/home/peanutshell/${peanutshell._id}`} className="etable-btn btn-primary py-1 px-2">
+                    <div className="d-flex">
+                        <Link to={`/home/peanutshell/${peanutshell._id}`} className="etable btn btn-primary py-1 px-2">
                             <i className="fa fa-pen"></i>
                         </Link>
-                        <button className="dtable-btn btn-danger py-1 px-2 ml-2" onClick={() => deletePeanutShellHandler(peanutshell._id)}>
+                        <button className="dtable btn btn-danger py-1 px-2 ml-2" onClick={() => deletePeanutShellHandler(peanutshell._id)}>
                             <i className="fa fa-trash"></i>
                         </button>
                     </div>
@@ -222,7 +231,7 @@ const PeanutShellList = () => {
                             <Loader />
                         ) : (
                         <div>
-                            <MDBDataTable data={peanutshellsList()} className="table-px-3" bordered striped hover responsive/>
+                            <MDBDataTable data={peanutshellsList()} className="table-px-3" bordered striped hover responsive noBottomColumns/>
                         </div>
                     )}
                 </Fragment>

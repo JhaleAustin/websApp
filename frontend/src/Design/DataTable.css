@@ -17,19 +17,30 @@
     justify-content: left;
 }
 
-.d-flex button
+.button-delete-selected
 {
-    background-color: #E4ED22;
-    border: none;
-    color: black;
+    background-color: #abc32f !important;
+    border: none !important;
+    color: #164006  !important;
 }
 
-.dtable-btn
+.button-delete-selected:disabled
 {
-    color: brown;
+    background-color: #164006 !important;
+    border: none !important;
+    color: #abc32f  !important;
 }
 
-.etable-btn
+.dtable
 {
-    color: brown;
+    background-color: #164006 !important;
+    color: #abc32f !important;
+    border: none !important;
+}
+
+.etable
+{
+    background-color: #abc32f !important;
+    color: #164006 !important;
+    border: none !important;
 }

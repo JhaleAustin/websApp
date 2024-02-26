@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Footer from './Components/Layout/Footer';
 import Login from "./Components/User/Login";
 import Analysis from './content/analysis/analysis';
 import Header from './Components/Layout/Header';  // Add this line
@@ -31,7 +30,6 @@ function App() {
         <div className="App">
           {/* Conditionally render Header based on route information */}
           {isNavVisible && <Header />}
-          {isNavVisible && <Footer />}
           {/* Main content routes */}
           <Routes>
             <Route path="/login" element={<Login />} exact="true" />

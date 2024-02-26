@@ -36,6 +36,9 @@ const Sidebar = () => {
         </CDBSidebarHeader> */}
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu style={{ backgroundColor: "#abc32f", color: "white" }}>
+            <NavLink to="/" className="header__content__logo">
+              <img class="hlogo" src="images/logo.png"></img>
+           </NavLink>
             <NavLink exact to="/admin/dashboard" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="cube" >DASHBOARD</CDBSidebarMenuItem>
             </NavLink>
@@ -86,7 +89,6 @@ const Sidebar = () => {
             </CDBSidebarMenuItem>
             {isHomeDropdownOpen && (
               <div style={{ paddingLeft: '20px', marginTop: '10px' }}>
-
                 <NavLink exact to="/admin/homepageList" activeClassName="activeClicked">
                   <CDBSidebarMenuItem icon="list-alt">TYPES</CDBSidebarMenuItem>
                 </NavLink>
