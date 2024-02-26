@@ -5,6 +5,8 @@ import './Design/adminCss.css';
 import './Design/Login.css';
 import './Design/Header.css';
 import './Design/Header.scss';
+import './Design/Home.css';
+import './Design/DataTable.css';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';

@@ -8,7 +8,6 @@ import axios from 'axios';
 import {authenticate} from '../../utils/helpers'
 import { getUser } from '../../utils/helpers';
 
-import Modal from 'react-modal' // Replace with your modal library
 
 const clientID = "526985758798-b5jsd5g1grsqi5k3g49vka6r1dmu29b2.apps.googleusercontent.com";
 

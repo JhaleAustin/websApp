@@ -61,7 +61,7 @@ const Sidebar = () => {
 
           <NavLink activeClassName="activeClicked">
             <CDBSidebarMenuItem onClick={toggleMaterialsDropdown} icon="toolbox">
-              DOCUMENATOIN
+              DOCUMENTATION
             </CDBSidebarMenuItem>
             {isMaterialsDropdownOpen && (
               <div style={{ paddingLeft: '20px', marginTop: '10px' }}>
@@ -82,17 +82,20 @@ const Sidebar = () => {
 
           <NavLink activeClassName="activeClicked">
             <CDBSidebarMenuItem onClick={toggleHomeDropdown} icon="toolbox">
-              HOME
+              HOMEPAGE
             </CDBSidebarMenuItem>
             {isHomeDropdownOpen && (
               <div style={{ paddingLeft: '20px', marginTop: '10px' }}>
 
                 <NavLink exact to="/admin/homepageList" activeClassName="activeClicked">
-                  <CDBSidebarMenuItem icon="list-alt">HOME LIST</CDBSidebarMenuItem>
+                  <CDBSidebarMenuItem icon="list-alt">TYPES</CDBSidebarMenuItem>
+                </NavLink>
+                <NavLink exact to="/admin/peanutshell" activeClassName="activeClicked">
+                  <CDBSidebarMenuItem icon="list-alt">PEANUT SHELLS</CDBSidebarMenuItem>
                 </NavLink>
 
                 <NavLink exact to="/admin/homepage" activeClassName="activeClicked">
-                  <CDBSidebarMenuItem icon="plus">CREATE</CDBSidebarMenuItem>
+                  <CDBSidebarMenuItem icon="plus">CREATE TOPIC</CDBSidebarMenuItem>
                 </NavLink>
 
               </div>

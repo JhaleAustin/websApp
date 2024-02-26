@@ -1,0 +1,35 @@
+.table-title-my-5
+{
+    font-size: 30px;
+    font-style: italic;
+    letter-spacing: 5px;
+}
+.table-container
+{
+    max-width: auto;
+    margin: 0 auto;
+    padding: 50px 100px 0 100px;
+    
+}
+
+.table-px-3
+{
+    justify-content: left;
+}
+
+.d-flex button
+{
+    background-color: #E4ED22;
+    border: none;
+    color: black;
+}
+
+.dtable-btn
+{
+    color: brown;
+}
+
+.etable-btn
+{
+    color: brown;
+}

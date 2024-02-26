@@ -134,58 +134,6 @@
   }
 }
 
-.register-photo form h2 {
-  font-size:24px;
-  line-height:1.5;
-  margin-bottom:30px;
-}
-
-.register-photo form .form-control {
-  background:#f7f9fc;
-  border:none;
-  margin-bottom: 25px;
-  border-bottom:1px solid #dfe7f1;
-  border-radius:0;
-  box-shadow:none;
-  outline:none;
-  color:inherit;
-  text-indent:6px;
-  height:40px;
-}
-
-.register-photo form .form-check {
-  font-size:13px;
-  line-height:20px;
-}
-
-.register-photo form .btn-primary {
-  background:#f4476b;
-  border:none;
-  border-radius:4px;
-  padding:11px;
-  box-shadow:none;
-  margin-top:35px;
-  text-shadow:none;
-  outline:none !important;
-}
-
-.register-photo form .btn-primary:hover, .register-photo form .btn-primary:active {
-  background:#eb3b60;
-}
-
-.register-photo form .btn-primary:active {
-  transform:translateY(1px);
-}
-
-.register-photo form .already {
-  display:block;
-  text-align:center;
-  font-size:12px;
-  color:#6f7a85;
-  opacity:0.9;
-  text-decoration:none;
-}
-
 .image-holder {
   display: flex;
   justify-content: center;
@@ -222,27 +170,6 @@ button {
 button:hover {
   background-color: #2d8031; /* Green color on hover */
 }
-
-/* Animation on hover */
-/* @keyframes buttonAnimation {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
-} */
-
-/* button:hover {
-  animation: buttonAnimation 0.5s ease; /* Apply the animation on hover 
-} */
-
-
-
-
 
 .center-both {
   display: flex;
@@ -413,11 +340,6 @@ button:hover {
   padding: 20px; /* Optional: Add padding for better readability */
 }
 
-
-
-
-
-
 /* YourStyles.css */
 
 .service-area {
@@ -425,9 +347,6 @@ button:hover {
   padding-bottom: 90px;
  
   }
-
- 
-
 
 .single-service {
   border-radius: 10px;

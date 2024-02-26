@@ -1,0 +1,8 @@
+.radio-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .radio-item {
+    margin-right: 10px; /* Add margin for spacing between radio buttons and labels */
+  }
