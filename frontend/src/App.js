@@ -11,7 +11,7 @@ import Process from './content/process/process';
 import HomepageList from './Components/Admin/Homepage/homepageList';
 import PeanutShellList from './Components/Admin/Homepage/PeanutShellList'
 import NewHomepage from './Components/Admin/Homepage/NewHomepage';
-import UpdateHomepage from './Components/Admin/Homepage/UpdateHome';
+import UpdateTopic from './Components/Admin/Homepage/UpdateTopic';
 
 import ProcessList from './Components/Admin/Process/processList';
 import NewProcess from './Components/Admin/Process/NewProcess1';
@@ -49,7 +49,7 @@ function App() {
             <Route path="/admin/homepage" element={<NewHomepage />} />
             <Route path="/admin/homepageList" element={<HomepageList />} />
             <Route path="/admin/peanutshell" element={<PeanutShellList />} />
-            <Route path="/admin/updatehome" element={<UpdateHomepage />} />
+            <Route path="/admin/updatetopic/:id" element={<UpdateTopic />} />
 
             <Route path="/admin/updateprocess" element={<UpdatePorcess />} />
             <Route path="/admin/updatedocumentation" element={<UpdateDocumention />} />
