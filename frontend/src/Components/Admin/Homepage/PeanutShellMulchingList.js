@@ -10,17 +10,17 @@ import MetaData from '../../Layout/MetaData'
 import { getToken } from '../../../utils/helpers';
 import Loader from '../../Layout/Loader'
 
-const MulchingList = () => {
-    const [mulching, setMulching] = useState([]);
+const PeanutShellMulchingList = () => {
+    const [peanutshellmulching, setPeanutShellMulching] = useState([]);
     const [error, setError] = useState('');
     const [deleteError, setDeleteError] = useState('');
     const [loading, setLoading] = useState(true);
     const [isDeleted, setIsDeleted] = useState(false);
-    const [selectedMulching, setSelectedMulching] = useState([]);
+    const [selectedPeanutShellMulching, setSelectedPeanutShellMulching] = useState([]);
 
     let navigate = useNavigate();
 
-    const getAdminMulching = async () => {
+    const getAdminPeanutShellMulching = async () => {
         try {
            // const config = {
            //     headers: {
@@ -31,7 +31,7 @@ const MulchingList = () => {
 
            const { data } = await axios.get(`http://localhost:3001/api/v1/`);
 
-           setMulching(data.mulching);
+           setPeanutShellMulching(data.peanutshell);
 
            console.log(data.peanutshell);
 
@@ -42,7 +42,7 @@ const MulchingList = () => {
    };
 
    useEffect(() => {
-        getAdminMulching();
+        getAdminPeanutShellMulching();
 
         if (error) {
             toast.error(error, {
@@ -62,7 +62,7 @@ const MulchingList = () => {
                 position: toast.POSITION.BOTTOM_RIGHT
             });
 
-            navigate('/admin/mulching');
+            navigate('/admin/peanutshell');
 
             setIsDeleted(false);
             setDeleteError('');
@@ -77,7 +77,7 @@ const MulchingList = () => {
             //         'Authorization': `Bearer ${getToken()}`
             //     }
             // };
-            const { data } = await axios.delete(`http://localhost:3001/api/v1/home/mulching/${id}`);
+            const { data } = await axios.delete(`http://localhost:3001/api/v1/home/peanutshell/${id}`);
             
             setIsDeleted(data.success);
             setLoading(false);
@@ -87,24 +87,24 @@ const MulchingList = () => {
         }
     };
 
-    const toggleMulchingSelection = (id) => {
-        const isSelected = selectedMulching.includes(id);
+    const togglePeanutShellMulchingSelection = (id) => {
+        const isSelected = selectedPeanutShellMulching.includes(id);
         if (isSelected) {
-            setSelectedMulching(selectedMulching.filter((selectedId) => selectedId !== id));
+            setSelectedPeanutShellMulching(selectedPeanutShellMulching.filter((selectedId) => selectedId !== id));
         } else {
-            setSelectedMulching([...selectedMulching, id]);
+            setSelectedPeanutShellMulching([...selectedPeanutShellMulching, id]);
         }
     };
 
-    const toggleAllMulchingSelection = () => {
-        if (selectedMulching.length === mulching.length) {
-            setSelectedMulching([]);
+    const toggleAllPeanutShellMulchingSelection = () => {
+        if (selectedPeanutShellMulching.length === peanutshellmulching.length) {
+            setSelectedPeanutShellMulching([]);
         } else {
-            setSelectedMulching(mulching.map((mulchings) => mulchings._id));
+            setSelectedPeanutShellMulching(peanutshellmulching.map((peanutshellmulchings) => peanutshellmulchings._id));
         }
     };
 
-    const mulchingList = () => {
+    const peanutshellmulchingList = () => {
         const data = {
             columns: [
                 {
@@ -112,13 +112,13 @@ const MulchingList = () => {
                         <div className="d-flex align-items-center ptable">
                             <input
                                 type="checkbox"
-                                checked={selectedMulching.length === mulching.length}
-                                onChange={toggleAllMulchingSelection}
+                                checked={selectedPeanutShellMulching.length === peanutshellmulching.length}
+                                onChange={toggleAllPeanutShellMulchingSelection}
                             />
                             <button
                                 className="button-delete-selected btn btn-danger py-1 px-2 ml-2"
                                 onClick={deletePeanutShellHandler2}
-                                disabled={selectedMulching.length === 0 }
+                                disabled={selectedPeanutShellMulching.length === 0 }
                             >
                                 DELETE SELECTED
                             </button>
@@ -128,7 +128,7 @@ const MulchingList = () => {
                     sort: 'asc',
                 },
                 {
-                    label: 'MULCHING ID',
+                    label: 'PEANUT SHELL ID',
                     field: 'id',
                     sort: 'asc'
                 },
@@ -145,14 +145,14 @@ const MulchingList = () => {
              rows: []
         };
                 
-        mulching.forEach(peanutshell => {
+        peanutshellmulching.forEach(peanutshell => {
             data.rows.push({
                 select: (
                     <div className="d-flex align-items-right">
                         <input
                             type="checkbox"
-                            checked={selectedMulching.includes(peanutshell._id)}
-                            onChange={() => toggleMulchingSelection(peanutshell._id)}
+                            checked={selectedPeanutShellMulching.includes(peanutshell._id)}
+                            onChange={() => togglePeanutShellMulchingSelection(peanutshell._id)}
                         />
                     </div>
                         ),
@@ -198,8 +198,8 @@ const MulchingList = () => {
             //     }
             // };
 
-            const deleteRequests = selectedMulching.map(async (id) => {
-              return axios.delete(`${process.env.REACT_APP_API}/api/v1/home/mulching/${id}`);
+            const deleteRequests = selectedPeanutShellMulching.map(async (id) => {
+              return axios.delete(`${process.env.REACT_APP_API}/api/v1//home/peanutshell/${id}`);
             });
 
             const responses = await Promise.all(deleteRequests);
@@ -226,12 +226,12 @@ const MulchingList = () => {
             <div className="col-12 col-md-10">
                 <div className="table-container">
                 <Fragment>
-                        <h1 className="table-title-my-5">MULCHING INFORMATION</h1>
+                        <h1 className="table-title-my-5">PEANUT SHELLS INFORMATION</h1>
                         {loading ? (
                             <Loader />
                         ) : (
                         <div>
-                            <MDBDataTable data={mulchingList()} className="table-px-3" bordered striped hover responsive noBottomColumns/>
+                            <MDBDataTable data={peanutshellmulchingList()} className="table-px-3" bordered striped hover responsive noBottomColumns/>
                         </div>
                     )}
                 </Fragment>
@@ -242,4 +242,4 @@ const MulchingList = () => {
     );
 };
 
-export default MulchingList;
+export default PeanutShellMulchingList;

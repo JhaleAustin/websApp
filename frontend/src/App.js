@@ -9,9 +9,13 @@ import Documentation from './content/documentation/documetation';
 import Process from './content/process/process';
 
 import HomepageList from './Components/Admin/Homepage/homepageList';
-import PeanutShellList from './Components/Admin/Homepage/PeanutShellList'
 import NewHomepage from './Components/Admin/Homepage/NewHomepage';
+
+import PeanutShellList from './Components/Admin/Homepage/PeanutShellList'
 import UpdatePeanutShell from './Components/Admin/Homepage/UpdatePeanutShell';
+
+import MulchingList from './Components/Admin/Homepage/MulchingList'
+// import UpdatePeanutShell from './Components/Admin/Homepage/UpdatePeanutShell';
 
 import ProcessList from './Components/Admin/Process/processList';
 import NewProcess from './Components/Admin/Process/NewProcess1';
@@ -51,6 +55,9 @@ function App() {
             
             <Route path="/admin/peanutshell" element={<PeanutShellList />} />
             <Route path="/admin/updatepeanutshell/:id" element={<UpdatePeanutShell />} />
+
+            <Route path="/admin/mulching" element={<MulchingList />} />
+            {/* <Route path="/admin/updatepeanutshell/:id" element={<UpdatePeanutShell />} /> */}
 
             <Route path="/admin/updateprocess" element={<UpdatePorcess />} />
             <Route path="/admin/updatedocumentation" element={<UpdateDocumention />} />

@@ -88,7 +88,7 @@ exports.newTopic = async (req, res, next) => {
 
 		else
 		{
-			return res.status(404).json({ success: false, error: 'TYPE NOT FOUND' });
+			return res.status(404).json({ success: false, error: 'TOPIC NOT FOUND' });
 		}
 
     } catch (error) {
@@ -108,7 +108,7 @@ exports.updatePeanutShell = async (req, res, next) => {
         let peanutshell = await peanutshellCollection.findById(req.params.id);
 
         if (!peanutshell) {
-            return res.status(404).json({ success: false, error: 'TYPE NOT FOUND' });
+            return res.status(404).json({ success: false, error: 'TOPIC NOT FOUND' });
         }
 
         peanutshell.topic = topic;
@@ -129,13 +129,123 @@ exports.updatePeanutShell = async (req, res, next) => {
         });
     } catch (error) {
         // Handle any potential errors here
-        console.error('Error updating peanut shell:', error);
+        console.error('ERROR UPDATING PEANUT SHELL INFORMATION: ', error);
         res.status(500).json({
             success: false,
             message: 'INTERNAL SERVER ERROR'
         });
     }
 };
+
+exports.updateMulching = async (req, res, next) => {
+    const { topic, description } = req.body;
+
+    try {
+        let mulching = await mulchingCollection.findById(req.params.id);
+
+        if (!mulching) {
+            return res.status(404).json({ success: false, error: 'TOPIC NOT FOUND' });
+        }
+
+        mulching.topic = topic;
+        mulching.description = description;
+
+        mulching = await mulching.save();
+
+        if (!mulching) {
+            return res.status(400).json({
+                success: false,
+                message: 'FAILED TO UPDATE MULCHING INFORMATION'
+            });
+        }
+
+        res.status(201).json({
+            success: true,
+            mulching
+        });
+    } catch (error) {
+        // Handle any potential errors here
+        console.error('ERROR UPDATING MULCHING INFORMATION: ', error);
+        res.status(500).json({
+            success: false,
+            message: 'INTERNAL SERVER ERROR'
+        });
+    }
+};
+
+exports.updateBenefits = async (req, res, next) => {
+    const { topic, description } = req.body;
+
+    try {
+        let benefit = await benefitsCollection.findById(req.params.id);
+
+        if (!benefit) {
+            return res.status(404).json({ success: false, error: 'TOPIC NOT FOUND' });
+        }
+
+        benefit.topic = topic;
+        benefit.description = description;
+
+        benefit = await benefit.save();
+
+        if (!benefit) {
+            return res.status(400).json({
+                success: false,
+                message: 'FAILED TO UPDATE PEANUT SHELL MULCHING INFORMATION'
+            });
+        }
+
+        res.status(201).json({
+            success: true,
+            peanutshellmulching
+        });
+    } catch (error) {
+        // Handle any potential errors here
+        console.error('ERROR UPDATING PEANUT SHELL MULCHING INFORMATION: ', error);
+        res.status(500).json({
+            success: false,
+            message: 'INTERNAL SERVER ERROR'
+        });
+    }   
+};
+
+exports.updatePeanutShellMulching = async (req, res, next) => {
+    const { topic, description } = req.body;
+
+    try {
+        let peanutshellmulching = await peanutshellmulchingCollection.findById(req.params.id);
+
+        if (!peanutshellmulching) {
+            return res.status(404).json({ success: false, error: 'TYPE NOT FOUND' });
+        }
+
+        peanutshellmulching.topic = topic;
+        peanutshellmulching.description = description;
+
+        peanutshellmulching = await peanutshellmulching.save();
+
+        if (!peanutshellmulching) {
+            return res.status(400).json({
+                success: false,
+                message: 'FAILED TO UPDATE PEANUT SHELL MULCHING INFORMATION'
+            });
+        }
+
+        res.status(201).json({
+            success: true,
+            peanutshellmulching
+        });
+    } catch (error) {
+        // Handle any potential errors here
+        console.error('ERROR UPDATING PEANUT SHELL MULCHING INFORMATION: ', error);
+        res.status(500).json({
+            success: false,
+            message: 'INTERNAL SERVER ERROR'
+        });
+    }
+};
+
+
 
 
 // exports.updatePeanutShell = async (req, res, next) => {
@@ -199,6 +309,48 @@ exports.getSinglePeanutShell = async (req, res, next) => {
 	res.status(200).json({
 		success: true,
 		peanutshell
+	})
+}
+
+exports.getSinglePeanutShellMulching = async (req, res, next) => {
+	const peanutshellmulching = await peanutshellmulchingCollection.findById(req.params.id);
+	if (!peanutshellmulching) {
+		return res.status(404).json({
+			success: false,
+			message: 'NO PEANUT SHELL MULCHING INFORMATION FOUND'
+		})
+	}
+	res.status(200).json({
+		success: true,
+		peanutshellmulching
+	})
+}
+
+exports.getSingleMulching = async (req, res, next) => {
+	const mulching = await mulchingCollection.findById(req.params.id);
+	if (!mulching) {
+		return res.status(404).json({
+			success: false,
+			message: 'NO MULCHING INFORMATION FOUND'
+		})
+	}
+	res.status(200).json({
+		success: true,
+		mulching
+	})
+}
+
+exports.getSingleBenefit = async (req, res, next) => {
+	const benefit = await benefitsCollection.findById(req.params.id);
+	if (!benefit) {
+		return res.status(404).json({
+			success: false,
+			message: 'NO BENEFIT INFORMATION FOUND'
+		})
+	}
+	res.status(200).json({
+		success: true,
+		benefit
 	})
 }
 

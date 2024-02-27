@@ -117,7 +117,7 @@ const NewHomepage = () => {
       <div className="np col-12 col-md-8">
         <div className="np wrapper my-5 home-form" style={{ width: '100%', paddingLeft: '10%', marginLeft: '10%' }}>
           <Fragment> 
-            <form className="row g-3 form1" encType="multipart/form-data" style={{ backgroundColor: '#abc32f' }}>
+            <form className="row g-3 form2" encType="multipart/form-data" style={{ backgroundColor: '#abc32f' }}>
               <div className="col-12">
                 {loading ? (
                   <p>Loading materials...</p>
@@ -139,6 +139,26 @@ const NewHomepage = () => {
                     ))}
                   </div>
                 )}
+                <div  class="row">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="topic"
+                      placeholder="TOPIC"
+                      value = {topicDisplayValue()}
+                      onChange={(e) => setTopic(e.target.value)}
+                      readOnly 
+                    />
+
+                    <textarea
+                      type="text"
+                      className="form-control"
+                      id="description"
+                      placeholder="INPUT INFORMATIONS"
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
+                    ></textarea>
+                </div>
               </div>
 
               {/* <div className="col-12">
@@ -151,29 +171,6 @@ const NewHomepage = () => {
                   onChange={(e) => setTopic(e.target.value)}
                 />
               </div> */}
-
-              <div className="col-12">
-                <label htmlFor="Content" className="form-label">Topic :</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="topic"
-                  value = {topicDisplayValue()}
-                  onChange={(e) => setTopic(e.target.value)}
-                  readOnly 
-                />
-              </div>
-
-              <div className="col-12">
-                <label htmlFor="Content" className="form-label">Description :</label>
-                <textarea
-                  type="text"
-                  className="form-control"
-                  id="description"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                ></textarea>
-              </div>
 
               <div className="col-12">
                 <button type="button" className="btn btn-primary" onClick={submit}>Submit</button>

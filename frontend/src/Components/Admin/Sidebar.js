@@ -53,6 +53,7 @@ const Sidebar = () => {
                 <NavLink exact to="/admin/processList" activeClassName="activeClicked">
                   <CDBSidebarMenuItem icon="list-alt">PROCESS LIST</CDBSidebarMenuItem>
                 </NavLink>
+                
 
                 <NavLink link to="/admin/process" activeClassName="activeClicked">
                   <CDBSidebarMenuItem icon="plus">CREATE</CDBSidebarMenuItem>
@@ -95,7 +96,9 @@ const Sidebar = () => {
                 <NavLink exact to="/admin/peanutshell" activeClassName="activeClicked">
                   <CDBSidebarMenuItem icon="list-alt">PEANUT SHELLS</CDBSidebarMenuItem>
                 </NavLink>
-
+                <NavLink exact to="/admin/mulching" activeClassName="activeClicked">
+                  <CDBSidebarMenuItem icon="list-alt">MULCHING</CDBSidebarMenuItem>
+                </NavLink>
                 <NavLink exact to="/admin/homepage" activeClassName="activeClicked">
                   <CDBSidebarMenuItem icon="plus">CREATE TOPIC</CDBSidebarMenuItem>
                 </NavLink>

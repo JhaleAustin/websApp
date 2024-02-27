@@ -1,27 +1,103 @@
-.radio-container 
-{
-  display: flex;
-  justify-content: center;
-}
-  
-.radio-item 
-{
-  margin-right: 10px; /* Add margin for spacing between radio buttons and labels */
-}
-
 .home-form form
 {
-  width: 500px;
-  height: 500px;
+  width: 600PX;
+  height: auto;
   margin: 0 auto;
 }
 
-.form1
+.form2
 {
   background-color: #abc32f !important;
 }
-/* 
-form
+
+.home-form button
 {
-  background-color: #abc32f !important;
-} */
+  background-color: #abc32f;
+  color: #164006;
+  border: none;
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+.home-form button:hover
+{
+  background-color: #164006;
+  color: #abc32f;
+  border: none;
+}
+
+.home-form button:active
+{
+  background-color: #164006 !important;
+  color: #abc32f !important;
+  border: none !important;
+}
+
+.form2 {
+  display: flex;
+  flex-direction: column;
+}
+
+.form2 .col-12 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.form2 {
+  width: 800px; /* Set the width to 500 pixels */
+  background: linear-gradient(to bottom right, #abc32f, #164006);
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  color: white;
+}
+
+.radio-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: start;
+}
+
+.radio-option {
+  flex: 1;
+
+}
+
+.radio-button {
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  transition: border-radius 0.3s, box-shadow 0.3s;
+}
+
+.radio-button:hover {
+  border-radius: 8px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.radio-item {
+  display: flex;
+  align-items: center;
+  letter-spacing: 1px;
+}
+
+.radio-item input {
+  margin-right: 5px;
+  
+}
+
+#topic,
+#description {
+  width: 100%;
+  margin-left: 30px;
+}
+
+#topic {
+  width: auto;
+}
+
+#description {
+  margin-top: 10px;
+  height: auto;
+}
