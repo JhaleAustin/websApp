@@ -1,8 +1,27 @@
-.radio-container {
-    display: flex;
-    justify-content: center;
-  }
+.radio-container 
+{
+  display: flex;
+  justify-content: center;
+}
   
-  .radio-item {
-    margin-right: 10px; /* Add margin for spacing between radio buttons and labels */
-  }
+.radio-item 
+{
+  margin-right: 10px; /* Add margin for spacing between radio buttons and labels */
+}
+
+.home-form form
+{
+  width: 500px;
+  height: 500px;
+  margin: 0 auto;
+}
+
+.form1
+{
+  background-color: #abc32f !important;
+}
+/* 
+form
+{
+  background-color: #abc32f !important;
+} */

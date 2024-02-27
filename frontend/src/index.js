@@ -7,14 +7,19 @@ import './Design/Header.css';
 import './Design/Header.scss';
 import './Design/Home.css';
 import './Design/DataTable.css';
+import './Design/Topic.css';
+import { ToastContainer } from 'react-toastify';
+
 
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+// import reportWebVitals from './reportWebVitals';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <App />
+    <ToastContainer />
   </React.StrictMode>
 );
 
-reportWebVitals();
+// reportWebVitals();

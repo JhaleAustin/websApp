@@ -169,7 +169,7 @@ const PeanutShellList = () => {
                     ),
                 actions: (
                     <div className="d-flex">
-                        <Link to={`/admin/updatetopic/${peanutshell._id}`} className="etable btn btn-primary py-1 px-2">
+                        <Link to={`/admin/updatepeanutshell/${peanutshell._id}`} className="etable btn btn-primary py-1 px-2">
                             <i className="fa fa-pen"></i>
                         </Link>
                         <button className="dtable btn btn-danger py-1 px-2 ml-2" onClick={() => deletePeanutShellHandler(peanutshell._id)}>

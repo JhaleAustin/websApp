@@ -76,9 +76,33 @@ const NewHomepage = () => {
       chooseTopic();
     }, []);
 
+    const topicDisplayValue = () => {
+      switch (selectedTopic?.types) {
+        case 'PS':
+          return 'Peanut Shell';
+        case 'M':
+          return 'Mulching';
+        case 'PSM':
+          return 'Peanut Shell Mulching';
+        case 'B':
+          return 'Benefits';
+        default:
+          return error; // Default value if none of the conditions are met
+      }
+    };
+
   const handleTopicChange = (hometypes) => {
     setSelectedTopic(hometypes);
+    // // setTopic(topicDisplayValue());
+    // setSelectedTopic(hometypes, () => {
+    //   console.log("Selected Topic:", selectedTopic);
+    //   setTopic(topicDisplayValue());
+    // });
   };
+
+  useEffect(() => {
+    setTopic(topicDisplayValue());
+  }, [selectedTopic]);
 
   return (
     <Fragment>
@@ -91,9 +115,9 @@ const NewHomepage = () => {
       </div>
         
       <div className="np col-12 col-md-8">
-        <div className="np wrapper my-5" style={{ width: '100%', paddingLeft: '10%', marginLeft: '10%' }}>
+        <div className="np wrapper my-5 home-form" style={{ width: '100%', paddingLeft: '10%', marginLeft: '10%' }}>
           <Fragment> 
-            <form className="row g-3 form1" encType="multipart/form-data">
+            <form className="row g-3 form1" encType="multipart/form-data" style={{ backgroundColor: '#abc32f' }}>
               <div className="col-12">
                 {loading ? (
                   <p>Loading materials...</p>
@@ -134,13 +158,7 @@ const NewHomepage = () => {
                   type="text"
                   className="form-control"
                   id="topic"
-                  value={
-                    selectedTopic.types === 'PS' ? 'Peanut Shell' :
-                    selectedTopic.types === 'M' ? 'Mulching' :
-                    selectedTopic.types === 'PSM' ? 'Peanut Shell Mulching' :
-                    selectedTopic.types === 'B' ? 'Benefits' :
-                    topic
-                  }
+                  value = {topicDisplayValue()}
                   onChange={(e) => setTopic(e.target.value)}
                   readOnly 
                 />

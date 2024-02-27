@@ -101,86 +101,69 @@ exports.newTopic = async (req, res, next) => {
 
 }
 
-exports.updateTopic = async (req, res, next) => {
+exports.updatePeanutShell = async (req, res, next) => {
+    const { topic, description } = req.body;
 
-	try {
-        const typeTopic = await homeCollection.findById(req.params.id);
+    try {
+        let peanutshell = await peanutshellCollection.findById(req.params.id);
 
-        if (!typeTopic) {
+        if (!peanutshell) {
             return res.status(404).json({ success: false, error: 'TYPE NOT FOUND' });
-		}
+        }
 
-		if (typeTopic.types == "PS")
-		{
-			const peanutshell = await peanutshellCollection.findByIdAndUpdate({
-                types: req.params.id,
-                topic: req.body.topic,
-				description: req.body.description,
+        peanutshell.topic = topic;
+        peanutshell.description = description;
+
+        peanutshell = await peanutshell.save();
+
+        if (!peanutshell) {
+            return res.status(400).json({
+                success: false,
+                message: 'FAILED TO UPDATE PEANUT SHELL INFORMATION'
             });
+        }
 
-			return res.status(201).json({
-                success: true,
-                peanutshell
-            });
-		}
-
-		else if (typeTopic.types == "M")
-		{
-			const mulching = await mulchingCollection.findByIdAndUpdate({
-                types: req.params.id,
-                topic: req.body.topic,
-				description: req.body.description,
-            });
-
-			return res.status(201).json({
-                success: true,
-                mulching
-            });
-		}
-
-		else if (typeTopic.types == "PSM")
-		{
-			const peanutshellmulching = await peanutshellmulchingCollection.findByIdAndUpdate({
-                types: req.params.id,
-				topic: req.body.topic,
-				description: req.body.description,
-            });
-
-			return res.status(201).json({
-                success: true,
-                peanutshellmulching
-            });
-		}
-
-		else if (typeTopic.types == "B")
-		{
-			const benefits = await benefitsCollection.findByIdAndUpdate({
-                types: req.params.id,
-				topic: req.body.topic,
-				description: req.body.description,
-            });
-
-			return res.status(201).json({
-                success: true,
-                benefits
-            });
-		}
-
-		else
-		{
-			return res.status(404).json({ success: false, error: 'TYPE NOT FOUND' });
-		}
-
+        res.status(201).json({
+            success: true,
+            peanutshell
+        });
     } catch (error) {
-        res.status(400).json({
+        // Handle any potential errors here
+        console.error('Error updating peanut shell:', error);
+        res.status(500).json({
             success: false,
-            message: 'FAILED TO CREATE TOPIC',
-            error: error.message
+            message: 'INTERNAL SERVER ERROR'
         });
     }
+};
 
-}
 
+// exports.updatePeanutShell = async (req, res, next) => {
+
+//     const { topic, description } = req.body;
+
+// 	let peanutshell = await peanutshellCollection.findById(req.params.id);
+
+//         if (!peanutshell) {
+//             return res.status(404).json({ success: false, error: 'TYPE NOT FOUND' });
+// 		}
+
+	
+// 		peanutshell = await peanutshellCollection.findByIdAndUpdate(peanutshell.id, peanutshell.types, req.body);
+
+//         if (!peanutshell) {
+//             return res.status(400).json({
+//                 success: false,
+//                 message: 'FAILED TO UPDATE PEANUT SHELL INFORMATION'
+//             })
+//         }
+//         res.status(201).json({
+//             success: true,
+//             peanutshell
+//         })
+    
+
+// }
 
 exports.getAllHome = async (req, res, next) => {
     try {
@@ -205,6 +188,19 @@ exports.getAllHome = async (req, res, next) => {
     }
 };
 
+exports.getSinglePeanutShell = async (req, res, next) => {
+	const peanutshell = await peanutshellCollection.findById(req.params.id);
+	if (!peanutshell) {
+		return res.status(404).json({
+			success: false,
+			message: 'NO PEANUT SHELLS INFORMATION FOUND'
+		})
+	}
+	res.status(200).json({
+		success: true,
+		peanutshell
+	})
+}
 
 exports.getTopics = async (req, res, next) => {
 	const hometypes = await homeCollection.find();
