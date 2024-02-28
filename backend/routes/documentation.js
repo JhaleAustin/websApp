@@ -17,7 +17,7 @@ router.post('/Documentation/new',upload.array('images', 10), newDocumentation)
 
 router.get('/Documentations', getDocumentations)
 
-router.get('/Documentation', getDocumentation)
+//  router.get('/Documentation', getDocumentation)
 
 router.get('/Documentation/:id', getSingleDocumentation);
 
