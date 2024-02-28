@@ -277,14 +277,14 @@ exports.updatePeanutShellMulching = async (req, res, next) => {
 
 exports.getAllHome = async (req, res, next) => {
     try {
-        const benefits = await benefitsCollection.find();
+        const benefit = await benefitsCollection.find();
         const mulching = await mulchingCollection.find();
         const peanutshell = await peanutshellCollection.find();
         const peanutshellmulching = await peanutshellmulchingCollection.find();
 
         res.status(200).json({
             success: true,
-            benefits,
+            benefit,
             mulching,
             peanutshell,
             peanutshellmulching

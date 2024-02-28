@@ -199,7 +199,7 @@ const PeanutShellList = () => {
             // };
 
             const deleteRequests = selectedPeanutShells.map(async (id) => {
-              return axios.delete(`${process.env.REACT_APP_API}/api/v1//home/peanutshell/${id}`);
+              return axios.delete(`${process.env.REACT_APP_API}/api/v1/home/peanutshell/${id}`);
             });
 
             const responses = await Promise.all(deleteRequests);

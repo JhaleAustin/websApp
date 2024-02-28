@@ -99,6 +99,12 @@ const Sidebar = () => {
                 <NavLink exact to="/admin/mulching" activeClassName="activeClicked">
                   <CDBSidebarMenuItem icon="list-alt">MULCHING</CDBSidebarMenuItem>
                 </NavLink>
+                <NavLink exact to="/admin/peanutshellmulching" activeClassName="activeClicked">
+                  <CDBSidebarMenuItem icon="list-alt">PEANUT SHELLS MULCHING</CDBSidebarMenuItem>
+                </NavLink>
+                <NavLink exact to="/admin/benefit" activeClassName="activeClicked">
+                  <CDBSidebarMenuItem icon="list-alt">BENEFITS</CDBSidebarMenuItem>
+                </NavLink>
                 <NavLink exact to="/admin/homepage" activeClassName="activeClicked">
                   <CDBSidebarMenuItem icon="plus">CREATE TOPIC</CDBSidebarMenuItem>
                 </NavLink>

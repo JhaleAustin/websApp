@@ -10,17 +10,17 @@ import MetaData from '../../Layout/MetaData'
 import { getToken } from '../../../utils/helpers';
 import Loader from '../../Layout/Loader'
 
-const PeanutShellMulchingList = () => {
-    const [peanutshellmulching, setPeanutShellMulching] = useState([]);
+const TypesList = () => {
+    const [hometypes, setHomeTypes] = useState([]);
     const [error, setError] = useState('');
     const [deleteError, setDeleteError] = useState('');
     const [loading, setLoading] = useState(true);
     const [isDeleted, setIsDeleted] = useState(false);
-    const [selectedPeanutShellMulching, setSelectedPeanutShellMulching] = useState([]);
+    const [selectedHomeTypes, setSelectedHomeTypes] = useState([]);
 
     let navigate = useNavigate();
 
-    const getAdminPeanutShellMulching = async () => {
+    const getAdminHomeTypes = async () => {
         try {
            // const config = {
            //     headers: {
@@ -29,9 +29,9 @@ const PeanutShellMulchingList = () => {
            //     }
            // };
 
-           const { data } = await axios.get(`http://localhost:3001/api/v1/`);
+           const { data } = await axios.get(`http://localhost:3001/api/v1/topics`);
 
-           setPeanutShellMulching(data.peanutshellmulching);
+           setHomeTypes(data.hometypes);
 
            setLoading(false);
        } catch (error) {
@@ -40,7 +40,7 @@ const PeanutShellMulchingList = () => {
    };
 
    useEffect(() => {
-        getAdminPeanutShellMulching();
+        getAdminHomeTypes();
 
         if (error) {
             toast.error(error, {
@@ -67,66 +67,11 @@ const PeanutShellMulchingList = () => {
         }
     }, [error, deleteError, isDeleted]);
 
-    const deletePeanutShellMulching = async (id) => {
-        try {
-            // const config = {
-            //     headers: {
-            //         'Content-Type': 'multipart/form-data',
-            //         'Authorization': `Bearer ${getToken()}`
-            //     }
-            // };
-            const { data } = await axios.delete(`http://localhost:3001/api/v1/home/peanutshellmulching/${id}`);
-            
-            setIsDeleted(data.success);
-            setLoading(false);
-
-        } catch (error) {
-            setDeleteError(error.response.data.message);
-        }
-    };
-
-    const togglePeanutShellMulchingSelection = (id) => {
-        const isSelected = selectedPeanutShellMulching.includes(id);
-        if (isSelected) {
-            setSelectedPeanutShellMulching(selectedPeanutShellMulching.filter((selectedId) => selectedId !== id));
-        } else {
-            setSelectedPeanutShellMulching([...selectedPeanutShellMulching, id]);
-        }
-    };
-
-    const toggleAllPeanutShellMulchingSelection = () => {
-        if (selectedPeanutShellMulching.length === peanutshellmulching.length) {
-            setSelectedPeanutShellMulching([]);
-        } else {
-            setSelectedPeanutShellMulching(peanutshellmulching.map((peanutshellmulching) => peanutshellmulching._id));
-        }
-    };
-
-    const peanutshellmulchingList = () => {
+    const hometypeList = () => {
         const data = {
             columns: [
                 {
-                    label: (
-                        <div className="d-flex align-items-center ptable">
-                            <input
-                                type="checkbox"
-                                checked={selectedPeanutShellMulching.length === peanutshellmulching.length}
-                                onChange={toggleAllPeanutShellMulchingSelection}
-                            />
-                            <button
-                                className="button-delete-selected btn btn-danger py-1 px-2 ml-2"
-                                onClick={deletePeanutShellMulchingHandler2}
-                                disabled={selectedPeanutShellMulching.length === 0 }
-                            >
-                                DELETE SELECTED
-                            </button>
-                        </div>
-                        ),
-                    field: 'select',
-                    sort: 'asc',
-                },
-                {
-                    label: 'PEANUT SHELLS MULCHING ID',
+                    label: 'TYPES ID',
                     field: 'id',
                     sort: 'asc'
                 },
@@ -143,34 +88,25 @@ const PeanutShellMulchingList = () => {
              rows: []
         };
                 
-        peanutshellmulching.forEach(peanutshellmulchings => {
+        hometypes.forEach(hometype => {
             data.rows.push({
-                select: (
-                    <div className="d-flex align-items-right">
-                        <input
-                            type="checkbox"
-                            checked={selectedPeanutShellMulching.includes(peanutshellmulchings._id)}
-                            onChange={() => togglePeanutShellMulchingSelection(peanutshellmulchings._id)}
-                        />
-                    </div>
-                        ),
                 id: (
                         <div className="d-flex align-items-right">
-                        {peanutshellmulchings._id}
+                        {hometype._id}
                         </div>
                     ),
                 description: 
                     (
                         <div className="d-flex align-items-right">
-                        {peanutshellmulchings.description}
+                        {hometype.description}
                         </div>
                     ),
                 actions: (
                     <div className="d-flex">
-                        <Link to={`/admin/updatepeanutshell/${peanutshellmulchings._id}`} className="etable btn btn-primary py-1 px-2">
+                        <Link to={`/admin/updatepeanutshell/${hometype._id}`} className="etable btn btn-primary py-1 px-2">
                             <i className="fa fa-pen"></i>
                         </Link>
-                        <button className="dtable btn btn-danger py-1 px-2 ml-2" onClick={() => deletePeanutShellMulchingHandler(peanutshellmulchings._id)}>
+                        <button className="dtable btn btn-danger py-1 px-2 ml-2" onClick={() => deletePeanutShellMulchingHandler(hometype._id)}>
                             <i className="fa fa-trash"></i>
                         </button>
                     </div>
@@ -240,4 +176,4 @@ const PeanutShellMulchingList = () => {
     );
 };
 
-export default PeanutShellMulchingList;
+export default TypesList;

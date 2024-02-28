@@ -33,8 +33,6 @@ const MulchingList = () => {
 
            setMulching(data.mulching);
 
-           console.log(data.peanutshell);
-
            setLoading(false);
        } catch (error) {
            setError(error.response.data.message);
@@ -69,7 +67,7 @@ const MulchingList = () => {
         }
     }, [error, deleteError, isDeleted]);
 
-    const deletePeanutShell = async (id) => {
+    const deleteBenefit = async (id) => {
         try {
             // const config = {
             //     headers: {
@@ -117,7 +115,7 @@ const MulchingList = () => {
                             />
                             <button
                                 className="button-delete-selected btn btn-danger py-1 px-2 ml-2"
-                                onClick={deletePeanutShellHandler2}
+                                onClick={deleteBenefitHandler2}
                                 disabled={selectedMulching.length === 0 }
                             >
                                 DELETE SELECTED
@@ -145,34 +143,34 @@ const MulchingList = () => {
              rows: []
         };
                 
-        mulching.forEach(peanutshell => {
+        mulching.forEach(benefits => {
             data.rows.push({
                 select: (
                     <div className="d-flex align-items-right">
                         <input
                             type="checkbox"
-                            checked={selectedMulching.includes(peanutshell._id)}
-                            onChange={() => toggleMulchingSelection(peanutshell._id)}
+                            checked={selectedMulching.includes(benefits._id)}
+                            onChange={() => toggleMulchingSelection(benefits._id)}
                         />
                     </div>
                         ),
                 id: (
                         <div className="d-flex align-items-right">
-                        {peanutshell._id}
+                        {benefits._id}
                         </div>
                     ),
                 description: 
                     (
                         <div className="d-flex align-items-right">
-                        {peanutshell.description}
+                        {benefits.description}
                         </div>
                     ),
                 actions: (
                     <div className="d-flex">
-                        <Link to={`/admin/updatepeanutshell/${peanutshell._id}`} className="etable btn btn-primary py-1 px-2">
+                        <Link to={`/admin/updatepeanutshell/${benefits._id}`} className="etable btn btn-primary py-1 px-2">
                             <i className="fa fa-pen"></i>
                         </Link>
-                        <button className="dtable btn btn-danger py-1 px-2 ml-2" onClick={() => deletePeanutShellHandler(peanutshell._id)}>
+                        <button className="dtable btn btn-danger py-1 px-2 ml-2" onClick={() => deleteBenefitHandler(benefits._id)}>
                             <i className="fa fa-trash"></i>
                         </button>
                     </div>
@@ -185,11 +183,11 @@ const MulchingList = () => {
         };
                 
 
-    const deletePeanutShellHandler = (id) => {
-        deletePeanutShell(id);
+    const deleteBenefitHandler = (id) => {
+        deleteBenefit(id);
     };
 
-    const deletePeanutShellHandler2 = async () => {
+    const deleteBenefitHandler2 = async () => {
         try {
             // const config = {
             //     headers: {
@@ -216,7 +214,7 @@ const MulchingList = () => {
     return (
 
         <Fragment>
-        <MetaData title={'PEANUT SHELLS'} />
+        <MetaData title={'MULCHING'} />
         <div className="row">
             <div className="col-12 col-md-2"style={{  marginBottom: "2px" }}>
                 <div style={{  height: '100vh', overflow: 'scroll initial' }}>
