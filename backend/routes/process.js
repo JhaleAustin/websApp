@@ -8,7 +8,17 @@ const { newProcess, getProcesss,getProcess, getSingleProcess,
 
 // const { isAuthenticatedUser, authorizeRoles } = require('../middlewares/auth')
 
-router.post('/process/new', upload.single('videos'), newProcess)
+// router.post('/process/new', upload.single('videos'), newProcess)
+
+
+
+// Assuming you are using multer for file uploads
+const multer = require('multer');
+const upload1 = multer({ dest: 'uploads/' });
+
+router.post('/process/new', newProcess);
+
+
 
 router.get('/process', getProcess)
 

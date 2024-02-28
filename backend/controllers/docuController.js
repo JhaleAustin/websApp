@@ -56,8 +56,8 @@ exports.getDocumentations = async (req, res, next) => {
 }
 
 exports.getSingleDocumentation = async (req, res, next) => {
-	const Documentation = await Documentation.findById(req.params.id);
-	if (!Documentation) {
+	const getDocumentation = await Documentation.findById(req.params.id);
+	if (!getDocumentation) {
 		return res.status(404).json({
 			success: false,
 			message: 'Documentation not found'
@@ -65,7 +65,7 @@ exports.getSingleDocumentation = async (req, res, next) => {
 	}
 	res.status(200).json({
 		success: true,
-		Documentation
+		getDocumentation
 	})
 }
 
@@ -171,6 +171,7 @@ exports.newDocumentation = async (req, res, next) => {
 				crop: "scale",
 			});
 	
+			consoles.log("dsdsdsd : " , result);
 			videoLinks.push({
 				public_id: result.public_id,
 				url: result.secure_url,
@@ -213,9 +214,9 @@ exports.newDocumentation = async (req, res, next) => {
 }
 
 exports.updateDocumentation = async (req, res, next) => {
-	let Documentation = await Documentation.findById(req.params.id);
+	let updateDocumentation = await Documentation.findById(req.params.id);
 	// console.log(req.body)
-	if (!Documentation) {
+	if (!updateDocumentation) {
 		return res.status(404).json({
 			success: false,
 			message: 'Documentation not found'
@@ -230,9 +231,9 @@ exports.updateDocumentation = async (req, res, next) => {
 	}
 	if (images !== undefined) {
 		// Deleting images associated with the Documentation
-		for (let i = 0; i < Documentation.images.length; i++) {
+		for (let i = 0; i < updateDocumentation.images.length; i++) {
 			try {
-				let imageDataUri = Documentation.images[i]
+				let imageDataUri = updateDocumentation.images[i]
 			const result = await cloudinary.v2.uploader.destroy(`${imageDataUri.public_id}`)
 			} catch (error) {
 				console.log(error)
@@ -261,12 +262,12 @@ exports.updateDocumentation = async (req, res, next) => {
 
 	
 	req.body.images = imagesLinks
-	Documentation = await Documentation.findByIdAndUpdate(req.params.id, req.body, {
+	updateDocumentation = await updateDocumentation.findByIdAndUpdate(req.params.id, req.body, {
 		new: true,
 		runValidators: true,
 		useFindandModify: false
 	})
-	if (!Documentation)
+	if (!updateDocumentation)
 		return res.status(400).json({
 			success: false,
 			message: 'Documentation not updated'
