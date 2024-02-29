@@ -42,8 +42,7 @@ const ProcessList = () => {
 
             const { data } = await axios.get(`http://localhost:3001/api/v1/process`);
 
-            console.log(data);
-            setProcess(data.processes);
+              setProcess(data.Processs);
             setLoading(false);
         } catch (error) {
             setError(error.response.data.message);
@@ -134,11 +133,7 @@ const ProcessList = () => {
                                     field: 'content',
                                     sort: 'asc'
                                 },
-                                {
-                                    label: 'Videos',
-                                    field: 'videos',
-                                    sort: 'asc',
-                                },
+                              
                                 {
                                     label: 'Actions',
                                     field: 'actions',
@@ -157,11 +152,7 @@ const ProcessList = () => {
                                     />
                                 ),
                                 title: processes.title,
-                                content: processes.content,
-                                // images: material.images.map((image, index) => (
-                                //     <img key={index} src={image.url} alt={`Image ${index}`} style={{ width: '50px', height: '50px' }} />
-                                // )),
-                                actions: <Fragment>
+                                content: processes.content, actions: <Fragment>
                                         <Link to={`/admin/updateprocess/${processes._id}`} className="btn btn-primary py-1 px-2">
                                             <i className="fa fa-pen"></i>
                                         </Link>

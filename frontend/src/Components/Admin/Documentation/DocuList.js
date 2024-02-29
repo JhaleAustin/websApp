@@ -4,92 +4,70 @@ import { MDBDataTable } from 'mdbreact'
 import axios from 'axios'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
- 
-import MetaData from '../../Layout/MetaData'
-import Loader from '../../Layout/Loader' 
-import { getToken } from '../../../utils/helpers';
-import { FaRegMehBlank } from 'react-icons/fa';
-// ... (your existing imports)
 
-const DocList = () => {
-    const [materials, setMaterials] = useState([]);
+import Sidebar from '../Sidebar'
+import MetaData from '../../Layout/MetaData'
+import { getToken } from '../../../utils/helpers';
+import Loader from '../../Layout/Loader'
+
+const DocumentationsList = () => {
+    const [documentation, setDocumentation] = useState([]);
     const [error, setError] = useState('');
     const [deleteError, setDeleteError] = useState('');
     const [loading, setLoading] = useState(true);
     const [isDeleted, setIsDeleted] = useState(false);
-    const [selectedMaterials, setSelectedMaterials] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage, setItemsPerPage] = useState(5); // Change this value according to your preference
-    
+    const [selecteddocumentation, setSelecteddocumentation] = useState([]);
+
     let navigate = useNavigate();
 
-    const toggleMaterialSelection = (id) => {
-        const isSelected = selectedMaterials.includes(id);
-        if (isSelected) {
-            setSelectedMaterials(selectedMaterials.filter((selectedId) => selectedId !== id));
-        } else {
-            setSelectedMaterials([...selectedMaterials, id]);
-        }
-    };
-
-   
-    const getAdminMaterials = async () => {
+    const getAdmindocumentation = async () => {
         try {
-            // const config = {
-            //     headers: {
-            //         'Content-Type': 'multipart/form-data',
-            //         'Authorization': `Bearer ${getToken()}`
-            //     }
-            // };
+           // const config = {
+           //     headers: {
+           //         'Content-Type': 'multipart/form-data',
+           //         'Authorization': `Bearer ${getToken()}`
+           //     }
+           // };
 
-            const { data } = await axios.get(`http://localhost:3001/api/v1/Documentations`);
+           const { data } = await axios.get(`http://localhost:3001/api/v1/Documentations`);
 
-            console.log(data);
-            setMaterials(data.Documentations);
-            setLoading(false);
-        } catch (error) {
-            setError(error.response.data.message);
+           setDocumentation(data.Documentations);
+ 
+           setLoading(false);
+       } catch (error) {
+           setError(error.response.data.message);
+       }
+   };
+
+   useEffect(() => {
+        getAdmindocumentation();
+
+        if (error) {
+            toast.error(error, {
+                position: toast.POSITION.BOTTOM_RIGHT
+            });
         }
-    };
 
-    useEffect(() => {
-        getAdminMaterials();
-
-        // if (error) {
-        //     toast.error(error, {
-        //         position: toast.POSITION.BOTTOM_RIGHT
-        //     });
-        // }
-
-        // if (deleteError) {
-        //     toast.error(deleteError, {
-        //         position: toast.POSITION.BOTTOM_RIGHT
-        //     });
-        // }
+        if (deleteError) {
+            toast.error(deleteError, {
+                position: toast.POSITION.BOTTOM_RIGHT
+            });
+        }
 
         if (isDeleted) {
-            // toast.success('MATERIAL DELETED SUCCESSFULLY', {
-            //     position: toast.POSITION.BOTTOM_RIGHT
-            // });
-            navigate('/documentationList');
+
+            toast.success('DESCRIPTION DELETED SUCCESSFULLY', {
+                position: toast.POSITION.BOTTOM_RIGHT
+            });
+
+            navigate('/admin/documentationList');
+
             setIsDeleted(false);
             setDeleteError('');
         }
     }, [error, deleteError, isDeleted]);
 
-
-    const toggleAllMaterialsSelection = () => {
-        if (selectedMaterials.length === materials.length) {
-            // If all materials are selected, unselect all
-            setSelectedMaterials([]);
-        } else {
-            // Otherwise, select all materials
-            setSelectedMaterials(materials.map((material) => material._id));
-        }
-    };
-
-    
-    const deleteMaterial = async (id) => {
+    const deleteDocumentations = async (id) => {
         try {
             // const config = {
             //     headers: {
@@ -98,101 +76,178 @@ const DocList = () => {
             //     }
             // };
             const { data } = await axios.delete(`http://localhost:3001/api/v1/admin/Documentation/${id}`);
-
+            
             setIsDeleted(data.success);
             setLoading(false);
+
         } catch (error) {
             setDeleteError(error.response.data.message);
         }
     };
 
+    const toggledocumentationSelection = (id) => {
+        const isSelected = selecteddocumentation.includes(id);
+        if (isSelected) {
+            setSelecteddocumentation(selecteddocumentation.filter((selectedId) => selectedId !== id));
+        } else {
+            setSelecteddocumentation([...selecteddocumentation, id]);
+        }
+    };
 
-    
-    const materialsList = () => {
+    const toggleAlldocumentationSelection = () => {
+        if (selecteddocumentation.length === documentation.length) {
+            setSelecteddocumentation([]);
+        } else {
+            setSelecteddocumentation(documentation.map((documentation) => documentation._id));
+        }
+    };
+
+    const documentationList = () => {
         const data = {
             columns: [
                 {
-                    label: (      <input
-                        type="checkbox"
-                        checked={selectedMaterials.length === materials.length}
-                        onChange={toggleAllMaterialsSelection}
-                    />
-                ),
+                    label: (
+                        <div className="d-flex align-items-center ptable">
+                            <input
+                                type="checkbox"
+                                checked={selecteddocumentation.length === documentation.length}
+                                onChange={toggleAlldocumentationSelection}
+                            />
+                            <button
+                                className="button-delete-selected btn btn-danger py-1 px-2 ml-2"
+                                onClick={deleteDocumentationsHandler2}
+                                disabled={selecteddocumentation.length === 0 }
+                            >
+                                DELETE SELECTED
+                            </button>
+                        </div>
+                        ),
                     field: 'select',
                     sort: 'asc',
                 },
                 {
-                    label: 'Material ID',
+                    label: 'DOCUMENTATION ID',
                     field: 'id',
                     sort: 'asc'
                 },
                 {
-                    label: 'Images',
-                    field: 'images',
+                     label: 'PLANTYPE',
+                    field: 'plantType',
                     sort: 'asc'
                 },
                 {
-                    label: 'Material Name',
-                    field: 'plantType',
-                    sort: 'asc',
-                },
-                // {
-                //     label: 'Stock',
-                //     field: 'stock',
-                //     sort: 'asc'
-                // },
+                    label: 'HEIGHT',
+                   field: 'height',
+                   sort: 'asc'
+               },
+               
+               {
+                label: 'LEAVES',
+                field: 'leaves',
+                sort: 'asc'
+            },
+            {
+                label: 'IMAGES',
+                field: 'images',
+                sort: 'asc'
+            },
+
                 {
-                    label: 'Actions',
+                    label: 'ACTIONS',
                     field: 'actions',
                 },
             ],
-            rows: []
+             rows: []
         };
-
-        materials.forEach(material => {
+                
+        documentation.forEach(Documentations => {
             data.rows.push({
                 select: (
-                    <input
-                        type="checkbox"
-                        checked={selectedMaterials.includes(material._id)}
-                        onChange={() => toggleMaterialSelection(material._id)}
-                    />
+                    <div className="d-flex align-items-right">
+                        <input
+                            type="checkbox"
+                            checked={selecteddocumentation.includes(Documentations._id)}
+                            onChange={() => toggledocumentationSelection(Documentations._id)}
+                        />
+                    </div>
+                        ),
+                id: (
+                        <div className="d-flex align-items-right">
+                        {Documentations._id}
+                        </div>
+                    ),
+                    plantType: 
+                    (
+                        <div className="d-flex align-items-right">
+                        {Documentations.plantType}
+                        </div>
+                    ),
+
+                    
+                height: 
+                (
+                    <div className="d-flex align-items-right">
+                    {Documentations.height}
+                    </div>
                 ),
-                id: material._id,
-                images: material.images.map((image, index) => (
+
+                leaves:
+                (
+
+                <>
+                <div className="leaves-container">
+                <div className="leaves-row">
+                    <div className="length-header">Length</div>
+                    <div className="width-header">Width</div>
+                </div>
+                {Documentations.leaves.map((leaves, index) => (
+                    <div className="d-flex align-items-right leaves-row" key={index}>
+                        <div className="length-column">{leaves.length}</div>
+                        <div className="width-column">{leaves.width}</div>
+                    </div>
+                ))}
+                </div>
+       
+                </>
+
+
+                ),
+                
+                // Documentations.leaves.map((leaves, index) => (
+                //     <div className="d-flex align-items-right" key={index}>
+                //         <div className="width-column">{leaves.width}</div>
+                //         <div className="length-column">{leaves.length}</div>
+                //     </div>
+                // )),
+                
+                        
+                images: Documentations.images.map((image, index) => (
                     <img key={index} src={image.url} alt={`Image ${index}`} style={{ width: '50px', height: '50px' }} />
                 )),
-                name: material.name,
-                stock: material.stock,
-                actions: <Fragment>
-                        <Link to={`/admin/material/${material._id}`} className="btn btn-primary py-1 px-2">
+
+                actions: (
+                    <div className="d-flex">
+                        <Link to={`/admin/updatedocumentation/${Documentations._id}`} className="etable btn btn-primary py-1 px-2">
                             <i className="fa fa-pen"></i>
                         </Link>
-                        <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => deleteMaterialHandler(material._id)}>
+                        <button className="dtable btn btn-danger py-1 px-2 ml-2" onClick={() => deleteDocumentationsHandler(Documentations._id)}>
                             <i className="fa fa-trash"></i>
                         </button>
-                    </Fragment>
+                    </div>
+                        )
+                                
+                    });
+                });
                 
-            });
-        });
+            return data;
+        };
+                
 
-        return data;
+    const deleteDocumentationsHandler = (id) => {
+        deleteDocumentations(id);
     };
 
-    const deleteMaterialHandler = (id) => {
-        deleteMaterial(id);
-    };
-
-    // const deleteMaterialHandler = () => {
-    //     // Use the first selected material for deletion
-    //     const id = selectedMaterials[0];
-    //     if (id) {
-    //         deleteMaterial(id);
-    //     }
-    // };
-
-
-    const deleteMaterialHandler2 = async () => {
+    const deleteDocumentationsHandler2 = async () => {
         try {
             // const config = {
             //     headers: {
@@ -201,15 +256,12 @@ const DocList = () => {
             //     }
             // };
 
-            // Send a request to delete multiple materials
-            const deleteRequests = selectedMaterials.map(async (id) => {
-                return axios.delete(`${process.env.REACT_APP_API}/api/v1/admin/Documentation/${id}`);
+            const deleteRequests = selecteddocumentation.map(async (id) => {
+              return axios.delete(`${process.env.REACT_APP_API}/api/v1/admin/Documentation/${id}`);
             });
 
-            // Wait for all delete requests to complete
             const responses = await Promise.all(deleteRequests);
 
-            // Check if all requests were successful
             const allSuccess = responses.every((response) => response.data.success);
 
             setIsDeleted(allSuccess);
@@ -222,34 +274,30 @@ const DocList = () => {
     return (
 
         <Fragment>
-        <MetaData title={'All Materials'} />
+        <MetaData title={'PEANUT SHELLS'} />
         <div className="row">
-            
-            <div className="col-12 col-md-10" style={{  paddingLeft: "70px", marginBottom: "70px" }}>
+            <div className="col-12 col-md-2"style={{  marginBottom: "2px" }}>
+                <div style={{  height: '100vh', overflow: 'scroll initial' }}>
+                    <Sidebar />
+                </div>
+            </div>
+            <div className="col-12 col-md-10">
+                <div className="table-container">
                 <Fragment>
-                        <h1 className="my-5">LIST OF ALL Documentation</h1>
+                        <h1 className="table-title-my-5">DOCUMENTATION INFORMATION</h1>
                         {loading ? (
                             <Loader />
                         ) : (
-                            <div>
-                            <div>
-                                {/* <button
-                                    className="btn btn-danger py-1 px-2 mb-2"
-                                    onClick={deleteMaterialHandler2}
-                                    disabled={selectedMaterials.length === 0}
-                                >
-                                    Delete Selected
-                                </button> */}
-                            </div>
-                            <MDBDataTable data={materialsList()} className="px-3" bordered striped hover />
-                    
+                        <div>
+                            <MDBDataTable data={documentationList()} className="table-px-3" bordered striped hover responsive noBottomColumns/>
                         </div>
                     )}
-                    </Fragment>
+                </Fragment>
                 </div>
             </div>
+        </div>
     </Fragment>
     );
 };
 
-export default DocList;
+export default DocumentationsList;
