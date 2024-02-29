@@ -7,9 +7,9 @@ import Sidebar from '../Sidebar'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
 
-const UpdatePeanutShell = () => {
+const UpdatePeanutShellMulching = () => {
   const [users, setUsers] = useState([]);
-  const [peanutshell, setPeanutShells] = useState({});
+  const [peanutshellmulching, setPeanutShellMulching] = useState({});
   const [types, setTypes] = useState();
   const [topic, setTopic] = useState();
   const [description, setDescription] = useState('');
@@ -33,10 +33,10 @@ const UpdatePeanutShell = () => {
 
   const getTopicDetails =  async (id) => {
     try {
-       const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/home/show/peanutshell/${id}`)
-       setPeanutShells(data.peanutshell)
+       const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/home/show/peanutshellmulching/${id}`)
+       setPeanutShellMulching(data.peanutshellmulching)
       //  console.log(id)
-       console.log(data.peanutshell)
+       console.log(data.peanutshellmulching)
        setLoading(false)
        
     } catch (error) {
@@ -46,11 +46,11 @@ const UpdatePeanutShell = () => {
 }
 
     useEffect(() => {
-      if (Object.keys(peanutshell).length === 0) {
+      if (Object.keys(peanutshellmulching).length === 0) {
           getTopicDetails(id);
       } else {
-          setTopic(peanutshell.topic);
-          setDescription(peanutshell.description);
+          setTopic(peanutshellmulching.topic);
+          setDescription(peanutshellmulching.description);
       }
 
       if (error) {
@@ -62,14 +62,13 @@ const UpdatePeanutShell = () => {
            
         }
         if (isUpdated) {
-            navigate('/admin/peanutshell');
+            navigate('/admin/peanutshellmulching');
             successMsg('PEANUT SHELL DESCRIPTION IS UPDATED SUCCESSFULLY');
            
         }
 
-  }, [error, isUpdated, updateError, peanutshell, id]);
+  }, [error, isUpdated, updateError, peanutshellmulching, id]);
 
-  
     const submitHandler = async (e) => {
       e.preventDefault();
   
@@ -79,7 +78,7 @@ const UpdatePeanutShell = () => {
               description,
           };
   
-          const { data } = await axios.put(`http://localhost:3001/api/v1/home/peanutshell/${peanutshell._id}`, updatedData);
+          const { data } = await axios.put(`http://localhost:3001/api/v1/home/peanutshellmulching/${peanutshellmulching._id}`, updatedData);
   
           if (data.success) {
               setIsUpdated(true);
@@ -103,6 +102,7 @@ const UpdatePeanutShell = () => {
         <div className="np wrapper my-5 home-form" style={{ width: '100%', paddingLeft: '10%', marginLeft: '10%' }}>
           <Fragment> 
             <form className="row g-3 form3" encType="multipart/form-data">
+
               <div className="col-12">
                 <label htmlFor="Content" className="form-label1">TOPIC:</label>
                 <input
@@ -140,4 +140,4 @@ const UpdatePeanutShell = () => {
 }
 
 
-export default UpdatePeanutShell
+export default UpdatePeanutShellMulching

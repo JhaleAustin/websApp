@@ -7,7 +7,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import Sidebar from '../Sidebar'
 import MetaData from '../../Layout/MetaData'
-// import Sidebar from './SideBar'
 import { getToken } from '../../../utils/helpers';
 import Loader from '../../Layout/Loader'
 
@@ -20,16 +19,6 @@ const ProcessList = () => {
     const [selectedProcess, setSelectedProcess] = useState([]);
 
     let navigate = useNavigate();
-
-    const toggleProcessselection = (id) => {
-        const isSelected = selectedProcess.includes(id);
-        if (isSelected) {
-            setSelectedProcess(selectedProcess.filter((selectedId) => selectedId !== id));
-        } else {
-            setSelectedProcess([...selectedProcess, id]);
-        }
-    };
-
    
     const getAdminProcess = async () => {
          try {
@@ -40,11 +29,12 @@ const ProcessList = () => {
             //     }
             // };
 
-            const { data } = await axios.get(`http://localhost:3001/api/v1/process`);
+            const { data } = await axios.get(`http://localhost:3001/api/v1/admin/process`);
 
-            console.log(data);
-            setProcess(data.processes);
+            console.log(data.process);
+            setProcess(data.process);
             setLoading(false);
+
         } catch (error) {
             setError(error.response.data.message);
         }
@@ -70,12 +60,28 @@ const ProcessList = () => {
             toast.success('STEP DELETED SUCCESSFULLY', {
                 position: toast.POSITION.BOTTOM_RIGHT
             });
-            navigate('/admin/processList');
+            navigate('/admin/process');
             setIsDeleted(false);
             setDeleteError('');
         }
     }, [error, deleteError, isDeleted]);
 
+    const deleteProcess= async (id) => {
+        try {
+            // const config = {
+            //     headers: {
+            //         'Content-Type': 'multipart/form-data',
+            //         'Authorization': `Bearer ${getToken()}`
+            //     }
+            // };
+            const { data } = await axios.delete(`http://localhost:3001/api/v1/admin/process/${id}`);
+
+            setIsDeleted(data.success);
+            setLoading(false);
+        } catch (error) {
+            setDeleteError(error.response.data.message);
+        }
+    };
 
     const toggleAllProcessSelection = () => {
         if (selectedProcess.length === process.length) {
@@ -88,22 +94,7 @@ const ProcessList = () => {
     };
 
     
-    const deleteProcess= async (id) => {
-        try {
-            const config = {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': `Bearer ${getToken()}`
-                }
-            };
-            const { data } = await axios.delete(`http://localhost:3001/api/v1/admin/process/${id}`);
-
-            setIsDeleted(data.success);
-            setLoading(false);
-        } catch (error) {
-            setDeleteError(error.response.data.message);
-        }
-    };
+  
 
     const processList = () => {
         const data = {

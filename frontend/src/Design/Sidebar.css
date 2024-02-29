@@ -1,0 +1,13 @@
+.sidebar 
+{
+    position: sticky;
+    height: 100vh;
+    overflow: scroll;
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.2); /* Add shadow if needed */
+    z-index: 2; /* Set a z-index value to ensure it's in front of other elements */
+}
+
+.sideB
+{
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.2);
+}

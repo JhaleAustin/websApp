@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { MDBDataTable } from 'mdbreact'
+import { MDBDataTableV5 } from 'mdbreact'
 import axios from 'axios'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -167,7 +167,7 @@ const PeanutShellMulchingList = () => {
                     ),
                 actions: (
                     <div className="d-flex">
-                        <Link to={`/admin/updatepeanutshell/${peanutshellmulchings._id}`} className="etable btn btn-primary py-1 px-2">
+                        <Link to={`/admin/updatepeanutshellmulching/${peanutshellmulchings._id}`} className="etable btn btn-primary py-1 px-2">
                             <i className="fa fa-pen"></i>
                         </Link>
                         <button className="dtable btn btn-danger py-1 px-2 ml-2" onClick={() => deletePeanutShellMulchingHandler(peanutshellmulchings._id)}>
@@ -215,21 +215,37 @@ const PeanutShellMulchingList = () => {
 
         <Fragment>
         <MetaData title={'PEANUT SHELLS MULCHING'} />
-        <div className="row">
-            <div className="col-12 col-md-2"style={{  marginBottom: "2px" }}>
-                <div style={{  height: '100vh', overflow: 'scroll initial' }}>
+        <div className="row dlist">
+            <div className="col-12 col-md-2">    
                     <Sidebar />
-                </div>
             </div>
             <div className="col-12 col-md-10">
                 <div className="table-container">
                 <Fragment>
-                        <h1 className="table-title-my-5">PEANUT SHELLS INFORMATION</h1>
                         {loading ? (
                             <Loader />
                         ) : (
-                        <div>
-                            <MDBDataTable data={peanutshellmulchingList()} className="table-px-3" bordered striped hover responsive noBottomColumns/>
+                        <div class="dataTab">
+                            <div class="dataHead">
+                                <h1 className="table-title-my-5">PEANUT SHELLS MULCHING INFORMATION</h1>
+                                <Link to={`/admin/homepage`} className="ptable btn btn-primary py-1 px-2">
+                                    <i className="fa fa-plus"></i>
+                                </Link>
+                            </div>
+                            <MDBDataTableV5 data={peanutshellmulchingList()} className="table-px-3" 
+                             bordered 
+                             striped 
+                             hover 
+                             responsive 
+                             noBottomColumns 
+                             searching={false} 
+                             noRecordsPerPageLabel={true} 
+                             fullPagination  
+                             entriesOptions={[5, 10]} 
+                             entries={5} 
+                             pagesAmount={4}
+                             sortable={false}
+                             />
                         </div>
                     )}
                 </Fragment>

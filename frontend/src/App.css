@@ -5,10 +5,11 @@
 
 .App {
   text-align: center;
+  background-color: #abc32f !important;
 }
 
 .centeredDiv {
-  display: flex;
+  display: flex; 
   align-items: center;
   justify-content: center;
   height: 100vh; /* 100% of the viewport height */
@@ -382,4 +383,3 @@ h2 {
   font-weight: bold;
 }
 
-/* Add other styles as needed */

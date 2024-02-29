@@ -3,7 +3,7 @@ const router = express.Router();
 const upload = require('../utils/multer')
 
 const { newProcess, getProcesss,getProcess, getSingleProcess,
-     updateProcess, deleteProcess }
+     updateProcess, deleteProcess, getAllProcess }
       = require('../controllers/processController');
 
 // const { isAuthenticatedUser, authorizeRoles } = require('../middlewares/auth')
@@ -26,6 +26,8 @@ router.get('/process/:id', getSingleProcess);
 
 // router.route('/admin/Process/:id', isAuthenticatedUser,).put(upload.array('images', 10),
 //  updateProcess).delete(deleteProcess);
+
+router.get('/admin/process', getAllProcess)
 
 router.route('/admin/process/:id').put(upload.array('images', 10),
  updateProcess).delete(deleteProcess);

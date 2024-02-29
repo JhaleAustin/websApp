@@ -2,52 +2,53 @@ import React, { useState } from 'react';
 import {
   CDBSidebar,
   CDBSidebarContent,
-  CDBSidebarFooter,
-  CDBSidebarHeader,
   CDBSidebarMenu,
   CDBSidebarMenuItem,
 } from 'cdbreact';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 const Sidebar = () => {
-  const [isPhotosDropdownOpen, setIsPhotosDropdownOpen] = useState(false);
-  const [isMaterialsDropdownOpen, setIsMaterialsDropdownOpen] = useState(false);
+  const [isProcessDropdownOpen, setIsProcessDropdownOpen] = useState(false);
+  const [isDocumentationDropdownOpen, setIsDocumentationDropdownOpen] = useState(false);
   const [isHomeDropdownOpen, setIsHomeDropdownOpen] = useState(false);
 
-  const togglePhotosDropdown = () => {
-    setIsPhotosDropdownOpen(!isPhotosDropdownOpen);
-    setIsMaterialsDropdownOpen(false);
+  const toggleProcessDropdown = () => {
+    setIsProcessDropdownOpen(!isProcessDropdownOpen);
+    setIsDocumentationDropdownOpen(false);
   };
 
-  const toggleMaterialsDropdown = () => {
-    setIsMaterialsDropdownOpen(!isMaterialsDropdownOpen);
-    setIsPhotosDropdownOpen(false);
+  const toggleDocumentationDropdown = () => {
+    setIsDocumentationDropdownOpen(!isDocumentationDropdownOpen);
+    setIsProcessDropdownOpen(false);
   };
 
 
   const toggleHomeDropdown = () => {
     setIsHomeDropdownOpen(!isHomeDropdownOpen);
-    setIsPhotosDropdownOpen(false);
+    setIsProcessDropdownOpen(false);
   };
 
   return (
-     <CDBSidebar backgroundColor="#abc32f" textColor="#fff" >
+     <CDBSidebar backgroundColor="#abc32f" textColor="black" 
+      style={{ boxShadow: "5px 0px 15px rgba(0, 0, 0, 0.2)",
+                boxShadowColor: "#164006" ,
+                // height: "100vh", 
+                overflow: "scroll initial",
+                position: "fixed"
+                }}>
         {/* <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
         </CDBSidebarHeader> */}
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu style={{ backgroundColor: "#abc32f", color: "white" }}>
-            <NavLink to="/" className="header__content__logo">
-              <img class="hlogo" src="images/logo.png"></img>
-           </NavLink>
-            <NavLink exact to="/admin/dashboard" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="cube" >DASHBOARD</CDBSidebarMenuItem>
-            </NavLink>
+            <Link to="/" className="sidebar__content__logo">
+              <img class="slogo" src="/images/logo.png"></img>
+            </Link>
             
             <NavLink activeClassName="activeClicked">
-            <CDBSidebarMenuItem onClick={togglePhotosDropdown} icon="image">
+            <CDBSidebarMenuItem onClick={toggleProcessDropdown} icon="fa-solid fa-seedling">
               PROCESS
             </CDBSidebarMenuItem>
-            {isPhotosDropdownOpen && (
+            {isProcessDropdownOpen && (
               <div style={{ paddingLeft: '20px', marginTop: '10px' }}>
 
                 <NavLink exact to="/admin/processList" activeClassName="activeClicked">
@@ -64,18 +65,14 @@ const Sidebar = () => {
           </NavLink>
 
           <NavLink activeClassName="activeClicked">
-            <CDBSidebarMenuItem onClick={toggleMaterialsDropdown} icon="toolbox">
+            <CDBSidebarMenuItem onClick={toggleDocumentationDropdown} icon="fa-solid fa-cloud">
               DOCUMENTATION
             </CDBSidebarMenuItem>
-            {isMaterialsDropdownOpen && (
+            {isDocumentationDropdownOpen && (
               <div style={{ paddingLeft: '20px', marginTop: '10px' }}>
 
                 <NavLink exact to="/admin/documentationList" activeClassName="activeClicked">
-                  <CDBSidebarMenuItem icon="list-alt">DOCUMENTATION LIST</CDBSidebarMenuItem>
-                </NavLink>
-
-                <NavLink exact to="/admin/documentation" activeClassName="activeClicked">
-                  <CDBSidebarMenuItem icon="plus">CREATE</CDBSidebarMenuItem>
+                  <CDBSidebarMenuItem icon="fa-solid fa-table">DOCUMENTATION</CDBSidebarMenuItem>
                 </NavLink>
 
               </div>
@@ -83,32 +80,24 @@ const Sidebar = () => {
           </NavLink>
 
 
-
           <NavLink activeClassName="activeClicked">
-            <CDBSidebarMenuItem onClick={toggleHomeDropdown} icon="toolbox">
-              HOMEPAGE
+            <CDBSidebarMenuItem onClick={toggleHomeDropdown} icon="fa-solid fa-info">
+              INFORMATIONS
             </CDBSidebarMenuItem>
             {isHomeDropdownOpen && (
               <div style={{ paddingLeft: '20px', marginTop: '10px' }}>
-                <NavLink exact to="/admin/homepageList" activeClassName="activeClicked">
-                  <CDBSidebarMenuItem icon="list-alt">TYPES</CDBSidebarMenuItem>
-                </NavLink>
                 <NavLink exact to="/admin/peanutshell" activeClassName="activeClicked">
-                  <CDBSidebarMenuItem icon="list-alt">PEANUT SHELLS</CDBSidebarMenuItem>
+                  <CDBSidebarMenuItem icon="fa-solid fa-table">PEANUT SHELLS</CDBSidebarMenuItem>
                 </NavLink>
                 <NavLink exact to="/admin/mulching" activeClassName="activeClicked">
-                  <CDBSidebarMenuItem icon="list-alt">MULCHING</CDBSidebarMenuItem>
+                  <CDBSidebarMenuItem icon="fa-solid fa-table">MULCHING</CDBSidebarMenuItem>
                 </NavLink>
                 <NavLink exact to="/admin/peanutshellmulching" activeClassName="activeClicked">
-                  <CDBSidebarMenuItem icon="list-alt">PEANUT SHELLS MULCHING</CDBSidebarMenuItem>
+                  <CDBSidebarMenuItem icon="fa-solid fa-table">PEANUT SHELLS MULCHING</CDBSidebarMenuItem>
                 </NavLink>
                 <NavLink exact to="/admin/benefit" activeClassName="activeClicked">
-                  <CDBSidebarMenuItem icon="list-alt">BENEFITS</CDBSidebarMenuItem>
+                  <CDBSidebarMenuItem icon="fa-solid fa-table">BENEFITS</CDBSidebarMenuItem>
                 </NavLink>
-                <NavLink exact to="/admin/homepage" activeClassName="activeClicked">
-                  <CDBSidebarMenuItem icon="plus">CREATE TOPIC</CDBSidebarMenuItem>
-                </NavLink>
-
               </div>
             )}
           </NavLink>

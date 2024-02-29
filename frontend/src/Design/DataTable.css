@@ -1,20 +1,26 @@
 .table-title-my-5
 {
     font-size: 30px;
-    font-style: italic;
     letter-spacing: 5px;
+    background-color: #164006;
+    color: #abc32f;
+    padding: 10px;
+    padding-bottom: 0;
 }
+
 .table-container
 {
     max-width: auto;
     margin: 0 auto;
     padding: 50px 100px 0 100px;
-    
 }
 
 .table-px-3
 {
     justify-content: left;
+    background-color: #164006;
+    color: white;
+    padding: 10px;
 }
 
 .button-delete-selected
@@ -43,4 +49,55 @@
     background-color: #abc32f !important;
     color: #164006 !important;
     border: none !important;
+}
+
+.dataTab
+{
+    margin-top: 20px;
+    text-align: center;
+    border: 5px solid #164006;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+}
+
+.dlist
+{
+    /* background-color: #abc32f; */
+    background: linear-gradient(to right, #abc32f, #164006);
+    margin: 0;
+    min-height: 100vh;
+}
+
+.dataHead
+{
+    display: flex; 
+    flex-direction: row;
+    justify-content: center; 
+    align-items: center;
+    width: auto;
+    position: relative;
+    background-color: #164006; 
+}
+
+.dataHead .ptable
+{
+    background-color: #abc32f; 
+    width: auto;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    margin-top: 5px;
+    margin-right: 10px;
+    color: #164006;
+    border: 2px solid #abc32f; 
+}
+
+.dataHead .ptable:hover
+{
+    background-color: #164006;
+    border: 2px solid #abc32f; 
+    color: #abc32f;
+    
+
 }

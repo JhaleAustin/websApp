@@ -50,7 +50,30 @@ const NewHomepage = () => {
              console.log(data);
              setSuccess(data.success);
 
-             navigate('/admin/homepageList');
+             if (selectedTopic.types == "PS")
+             {
+              navigate('/admin/peanutshell');
+             }
+
+             else  if (selectedTopic.types == "M")
+             {
+              navigate('/admin/mulching');
+             }
+
+             else  if (selectedTopic.types == "PSM")
+             {
+              navigate('/admin/peanutshellmulching');
+             }
+
+             else  if (selectedTopic.types == "B")
+             {
+              navigate('/admin/benefit');
+             }
+
+             else
+             {
+              navigate('/admin/homepage');
+             }
 
         } catch (error) {
             setError(error.response.data.message)
@@ -142,7 +165,7 @@ const NewHomepage = () => {
                 <div  class="row">
                     <input
                       type="text"
-                      className="form-control"
+                      className="form-control topic"
                       id="topic"
                       placeholder="TOPIC"
                       value = {topicDisplayValue()}
@@ -157,6 +180,7 @@ const NewHomepage = () => {
                       placeholder="INPUT INFORMATIONS"
                       value={description}
                       onChange={(e) => setDescription(e.target.value)}
+                      style={{ height: '300px' }} 
                     ></textarea>
                 </div>
               </div>
@@ -173,7 +197,7 @@ const NewHomepage = () => {
               </div> */}
 
               <div className="col-12">
-                <button type="button" className="btn btn-primary" onClick={submit}>Submit</button>
+                <button type="button" className="btn btn-primary" onClick={submit}>SUBMIT</button>
               </div>
             </form> 
           </Fragment>

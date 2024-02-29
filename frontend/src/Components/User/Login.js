@@ -34,7 +34,7 @@ const clientID = "526985758798-b5jsd5g1grsqi5k3g49vka6r1dmu29b2.apps.googleuserc
     
             // If the request is successful, proceed with authentication
             const data = response.data;
-            authenticate(data, () => navigate("/"));
+            authenticate(data, () => navigate("/admin/peanutshell"));
         } catch (error) {
             console.log('Server response:', error.response);
     

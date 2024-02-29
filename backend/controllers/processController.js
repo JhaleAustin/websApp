@@ -1,4 +1,5 @@
  
+const processCollection = require('../models/processCollection');
 const Process = require('../models/processCollection')
 const APIFeatures = require('../utils/apiFeatures')
 const cloudinary = require('cloudinary')
@@ -27,6 +28,23 @@ exports.getProcess = async (req, res, next) => {
 	})
 }
 
+exports.getAllProcess = async (req, res, next) => {
+    try {
+        const process = await processCollection.find();
+
+        res.status(200).json({
+            success: true,
+            process
+        });
+    } catch (error) {
+        res.status(500).json({
+   
+			success: false,
+            message: 'ERROR FETCHING PROCESS',
+            error: error.message
+        });
+    }
+};
 exports.getSingleProcess = async (req, res, next) => {
 	const getProcess = await Process.findById(req.params.id);
 	if (!getProcess) {
@@ -42,18 +60,17 @@ exports.getSingleProcess = async (req, res, next) => {
 }
 
 exports.deleteProcess = async (req, res, next) => {
-	const Process1 = await Process.findByIdAndDelete(req.params.id);
-	if (!Process1) {
-		return res.status(404).json({
-			success: false,
-			message: 'Process not found'
-		})
-	}
+	
+	const process = await processCollection.findByIdAndDelete(req.params.id);
+	
+	if (!process) {
+        return res.status(404).json({ message: `NO PROCESS FOUND IN THIS ID` })
 
-	res.status(200).json({
-		success: true,
-		message: 'Process deleted'
-	})
+    }
+
+    res.status(200).json({
+        success: true
+    })
 }
 
 // exports.newProcess = async (req, res, next) => {

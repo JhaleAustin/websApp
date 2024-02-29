@@ -8,20 +8,21 @@ import Homepage from './content/homepage';
 import Documentation from './content/documentation/documetation';
 import Process from './content/process/process';
 
-import TypesList from './Components/Admin/Homepage/TypesList';
 import NewHomepage from './Components/Admin/Homepage/NewHomepage';
 
 import PeanutShellList from './Components/Admin/Homepage/PeanutShellList'
 import UpdatePeanutShell from './Components/Admin/Homepage/UpdatePeanutShell';
 
 import MulchingList from './Components/Admin/Homepage/MulchingList'
-// import UpdatePeanutShell from './Components/Admin/Homepage/UpdatePeanutShell';
+import UpdateMulching from './Components/Admin/Homepage/UpdateMulching';
 
 import BenefitList from './Components/Admin/Homepage/BenefitList'
+import UpdateBenefit from './Components/Admin/Homepage/UpdateBenefit';
 
 import PeanutShellMulchingList from './Components/Admin/Homepage/PeanutShellMulchingList'
+import UpdatePeanutShellMulching from './Components/Admin/Homepage/UpdatePeanutShellMulching';
 
-import ProcessList from './Components/Admin/Process/processList';
+import ProcessList from './Components/Admin/Process/ProcessList';
 import NewProcess from './Components/Admin/Process/NewProcess1';
 import UpdatePorcess from './Components/Admin/Process/UpdateProcess';
 import DocumentationList from './Components/Admin/Documentation/Docu';
@@ -29,16 +30,11 @@ import NewDocumentation from './Components/Admin/Documentation/NewDocu2';
 import UpdateDocumention from './Components/Admin/Documentation/UpdateDocu';
 
 function App() {
-  const currentPath = window.location.pathname;
-  const isNavVisible = !currentPath.startsWith('/admin');
 
   return (
     <div>
       <Router>
         <div className="App">
-          {/* Conditionally render Header based on route information */}
-          {isNavVisible && <Header />}
-          {/* Main content routes */}
           <Routes>
             <Route path="/login" element={<Login />} exact="true" />
             <Route path="/" element={<Homepage />} />
@@ -55,17 +51,18 @@ function App() {
             <Route path="/admin/processList" element={<ProcessList />} />
 
             <Route path="/admin/homepage" element={<NewHomepage />} />
-            <Route path="/admin/homepageList" element={<HomepageList />} />
-            
+
             <Route path="/admin/peanutshell" element={<PeanutShellList />} />
             <Route path="/admin/updatepeanutshell/:id" element={<UpdatePeanutShell />} />
 
             <Route path="/admin/mulching" element={<MulchingList />} />
-            {/* <Route path="/admin/updatepeanutshell/:id" element={<UpdatePeanutShell />} /> */}
+            <Route path="/admin/updatemulching/:id" element={<UpdateMulching />} />
 
             <Route path="/admin/peanutshellmulching" element={<PeanutShellMulchingList />} />
+            <Route path="/admin/updatepeanutshellmulching/:id" element={<UpdatePeanutShellMulching />} />
 
             <Route path="/admin/benefit" element={<BenefitList />} />
+            <Route path="/admin/updatebenefit/:id" element={<UpdateBenefit/>} />
 
             <Route path="/admin/updateprocess" element={<UpdatePorcess />} />
             <Route path="/admin/updatedocumentation" element={<UpdateDocumention />} />

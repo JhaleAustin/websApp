@@ -7,9 +7,9 @@ import Sidebar from '../Sidebar'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
 
-const UpdatePeanutShell = () => {
+const UpdateBenefit = () => {
   const [users, setUsers] = useState([]);
-  const [peanutshell, setPeanutShells] = useState({});
+  const [benefit, setBenefits] = useState({});
   const [types, setTypes] = useState();
   const [topic, setTopic] = useState();
   const [description, setDescription] = useState('');
@@ -33,10 +33,10 @@ const UpdatePeanutShell = () => {
 
   const getTopicDetails =  async (id) => {
     try {
-       const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/home/show/peanutshell/${id}`)
-       setPeanutShells(data.peanutshell)
+       const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/home/show/benefit/${id}`)
+       setBenefits(data.benefit)
       //  console.log(id)
-       console.log(data.peanutshell)
+       console.log(data.benefit)
        setLoading(false)
        
     } catch (error) {
@@ -44,13 +44,12 @@ const UpdatePeanutShell = () => {
         
     }
 }
-
     useEffect(() => {
-      if (Object.keys(peanutshell).length === 0) {
+      if (Object.keys(benefit).length === 0) {
           getTopicDetails(id);
       } else {
-          setTopic(peanutshell.topic);
-          setDescription(peanutshell.description);
+          setTopic(benefit.topic);
+          setDescription(benefit.description);
       }
 
       if (error) {
@@ -62,14 +61,13 @@ const UpdatePeanutShell = () => {
            
         }
         if (isUpdated) {
-            navigate('/admin/peanutshell');
+            navigate('/admin/benefit');
             successMsg('PEANUT SHELL DESCRIPTION IS UPDATED SUCCESSFULLY');
            
         }
 
-  }, [error, isUpdated, updateError, peanutshell, id]);
+  }, [error, isUpdated, updateError, benefit, id]);
 
-  
     const submitHandler = async (e) => {
       e.preventDefault();
   
@@ -79,7 +77,7 @@ const UpdatePeanutShell = () => {
               description,
           };
   
-          const { data } = await axios.put(`http://localhost:3001/api/v1/home/peanutshell/${peanutshell._id}`, updatedData);
+          const { data } = await axios.put(`http://localhost:3001/api/v1/home/benefit/${benefit._id}`, updatedData);
   
           if (data.success) {
               setIsUpdated(true);
@@ -93,7 +91,7 @@ const UpdatePeanutShell = () => {
 
   return (
     <Fragment>
-    <MetaData title={'UPDATE TOPIC'} />
+    <MetaData title={'UPLOAD TOPIC'} />
     <div className="row dlist">
       <div className="col-12 col-md-2">    
         <Sidebar />
@@ -140,4 +138,4 @@ const UpdatePeanutShell = () => {
 }
 
 
-export default UpdatePeanutShell
+export default UpdateBenefit

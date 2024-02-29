@@ -44,7 +44,6 @@ function Header() {
             {/* <div className="col-12 col-md-3 mt-4 mt-md-0 text-center">
               <Search />
             </div> */}
-        {user ? (
           <ul>
             <li>
             <div className="col-12 col-md-3 mt-4 mt-md-0 text-center">
@@ -78,6 +77,7 @@ function Header() {
               </div>
               
             </li>
+           
             <li>
             {user && user.role === 'admin' && (
               <div className="col-12 col-md-3 mt-4 mt-md-0 text-center">
@@ -88,7 +88,7 @@ function Header() {
               )}
             </li>
           </ul>
-          ) : ([])}
+          
           </nav>
           <div className="header__content__buttons">
             
