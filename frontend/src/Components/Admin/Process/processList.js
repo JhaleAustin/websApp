@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { MDBDataTable } from 'mdbreact'
+import { MDBDataTableV5 } from 'mdbreact'
 import axios from 'axios'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -33,6 +33,7 @@ const ProcessList = () => {
 
             console.log(data.process);
             setProcess(data.process);
+              setProcess(data.Processs);
             setLoading(false);
 
         } catch (error) {
@@ -83,13 +84,22 @@ const ProcessList = () => {
         }
     };
 
+    const toggleProcessselection = (id) => {
+        const isSelected = selectedProcess.includes(id);
+        if (isSelected) {
+            setSelectedProcess(selectedProcess.filter((selectedId) => selectedId !== id));
+        } else {
+            setSelectedProcess([...selectedProcess, id]);
+        }
+    };
+
     const toggleAllProcessSelection = () => {
         if (selectedProcess.length === process.length) {
             // If all processes are selected, unselect all
             setSelectedProcess([]);
         } else {
             // Otherwise, select all processes
-            setSelectedProcess(process.map((processes) => processes._id));
+            setSelectedProcess(process.map((process) => process._id));
         }
     };
 
@@ -100,43 +110,47 @@ const ProcessList = () => {
         const data = {
             columns: [
                 {
-                    label: (      <input
-                        type="checkbox"
-                        checked={selectedProcess.length === process.length}
-                        onChange={toggleAllProcessSelection}
-                    />
-                    ),
-                              label: (      <input
-                                        type="checkbox"
-                                        checked={selectedProcess.length === process.length}
-                                        onChange={toggleAllProcessSelection}
-                                    />
-                                ),
-                                    field: 'select',
-                                    sort: 'asc',
-                                },
-                                {
-                                    label: 'Title',
-                                    field: 'title',
-                                    sort: 'asc'
-                                },
-                                {
-                                    label: 'Content',
-                                    field: 'content',
-                                    sort: 'asc'
-                                },
-                                {
-                                    label: 'Videos',
-                                    field: 'videos',
-                                    sort: 'asc',
-                                },
-                                {
-                                    label: 'Actions',
-                                    field: 'actions',
-                                },
-                            ],
-                            rows: []
-                        };
+                    label: (
+                        <div className="d-flex align-items-center ptable">
+                            <input
+                                type="checkbox"
+                                checked={selectedProcess.length === process.length}
+                                onChange={toggleAllProcessSelection}
+                            />
+                            <button
+                                className="button-delete-selected btn btn-danger py-1 px-2 ml-2"
+                                onClick={deleteProcessHandler2}
+                                disabled={selectedProcess.length === 0 }
+                            >
+                                DELETE SELECTED
+                            </button>
+                        </div>
+                        ),
+                    field: 'select',
+                    sort: 'asc',
+                },
+                {
+                    label: 'ID',
+                    field: 'id',
+                    sort: 'asc'
+                },
+                {
+                     label: 'TITLE',
+                    field: 'title',
+                    sort: 'asc'
+                },
+                {
+                    label: 'CONTENT',
+                   field: 'content',
+                   sort: 'asc'
+               },
+                {
+                    label: 'ACTIONS',
+                    field: 'actions',
+                },
+            ],
+             rows: []
+        };
                 
                         process.forEach(processes => {
                             data.rows.push({
@@ -148,11 +162,7 @@ const ProcessList = () => {
                                     />
                                 ),
                                 title: processes.title,
-                                content: processes.content,
-                                // images: material.images.map((image, index) => (
-                                //     <img key={index} src={image.url} alt={`Image ${index}`} style={{ width: '50px', height: '50px' }} />
-                                // )),
-                                actions: <Fragment>
+                                content: processes.content, actions: <Fragment>
                                         <Link to={`/admin/updateprocess/${processes._id}`} className="btn btn-primary py-1 px-2">
                                             <i className="fa fa-pen"></i>
                                         </Link>
@@ -204,34 +214,44 @@ const ProcessList = () => {
     return (
 
         <Fragment>
-        <MetaData title={'All Processes'} />
-        <div className="row">
-            <div className="col-12 col-md-2">
+        <MetaData title={'PROCESS'} />
+        <div className="row dlist">
+            <div className="col-12 col-md-2">    
                     <Sidebar />
-                </div>
-            <div className="col-12 col-md-10" style={{  paddingLeft: "70px", marginBottom: "70px" }}>
+            </div>
+            <div className="col-12 col-md-10">
+                <div className="table-container">
                 <Fragment>
-                        <h1 className="my-5">DATA COLLECTION AND OBSERVATION PROCESS</h1>
                         {loading ? (
                             <Loader />
                         ) : (
-                            <div>
-                            <div>
-                                <button
-                                    className="btn btn-danger py-1 px-2 mb-2"
-                                    onClick={deleteProcessHandler2}
-                                    disabled={selectedProcess.length === 0}
-                                >
-                                    Delete Selected
-                                </button>
+                        <div class="dataTab">
+                            <div class="dataHead">
+                                <h1 className="table-title-my-5">DATA COLLECTION AND OBSERVATION STEPS</h1>
+                                <Link to={`/admin/new/process`} className="ptable btn btn-primary py-1 px-2">
+                                    <i className="fa fa-plus"></i>
+                                </Link>
                             </div>
-                            <MDBDataTable data={processList()} className="px-3" bordered striped hover />
-                    
+                            <MDBDataTableV5 data={processList()} className="table-px-3" 
+                                bordered 
+                                striped 
+                                hover 
+                                responsive 
+                                noBottomColumns 
+                                searching={false} 
+                                noRecordsPerPageLabel={true} 
+                                fullPagination  
+                                entriesOptions={[5, 10]} 
+                                entries={5} 
+                                pagesAmount={4}
+                                sortable={false}
+                                />
                         </div>
                     )}
-                    </Fragment>
+                </Fragment>
                 </div>
             </div>
+        </div>
     </Fragment>
     );
 };

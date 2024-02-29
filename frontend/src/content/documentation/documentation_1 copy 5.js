@@ -41,20 +41,9 @@ function Documentation_1(handleMaterialChange) {
   return (
     <Fragment>
       <div className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
-       
-      
-
-       
         {materials.map((material) => (
 
-          <><div class="container text-center"    
-          style={{
-            padding: 20,
-            background: 'linear-gradient(to right, #baf700, #006400, #00ff00)',
-            border: '1px solid #ccc', // Border style and color
-            boxShadow: '0 20px 20px rgba(0, 0, 0, 0.5)', // Box shadow with 10px distance
-            borderRadius: '10px', // Border radius
-          }}>
+          <><div class="container text-center">
             <div class="row">
               <div class="col-sm-12">
                 <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
@@ -69,7 +58,11 @@ function Documentation_1(handleMaterialChange) {
 
 
                 <button className="uk-button button2" onClick={() => openModal(material)}>
-                
+                  {/* <div
+                key={material.id}
+                className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8"
+                style={{ maxHeight: '800px', maxWidth: '1000px', overflowY: 'auto', border: '1px solid #e5e5e5', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)' }}
+              > */}
 
 
                   <div  >
@@ -82,7 +75,8 @@ function Documentation_1(handleMaterialChange) {
                         style={{ width: '300px', height: '300px' }} />
                     ))}
                   </div>
-                   </button>
+                  {/* </div> */}
+                </button>
               </div>
 
             </div>
@@ -92,44 +86,30 @@ function Documentation_1(handleMaterialChange) {
         ))}
       </div>
 
-      <div id="modal-center" className="uk-flex-top" uk-modal="true" >
-  <div className="uk-modal-dialog uk-modal-body uk-margin-auto-vertical" style={{ height: '600px'}}>
-    <button className="uk-modal-close-default" type="button" uk-close></button>
-    {selectedMaterial && (
-      <div className="scroll-container uk-text-center">
-         <p>
-          {/* Display details from selectedMaterial */}
-          Height: {selectedMaterial.height}
-        </p>
-        <p style={{ fontSize: '16px', background: 'linear-gradient(90deg, rgba(0,255,0,0.5), rgba(255,255,0,0.5))', color: '#000000', padding: '8px' }}>
-  {/* Display details from selectedMaterial */}
-  Leaves
-</p>
-<table className="uk-table uk-table-hover uk-table-divider" style={{ backgroundColor: 'lightgreen', borderColor: 'lightyellowgreen' }}>
-  {/* Header row */}
-  <thead>
-    <tr>
-      <th>Length</th>
-      <th>Width</th>
-    </tr>
-  </thead>
-  {/* Mapping logic for leaves with alternating colors */}
-  <tbody>
-    {selectedMaterial.leaves.map((leaf, index) => (
-      <tr key={index} style={{ backgroundColor: index % 2 === 0 ? '#f2f2f2' : '#ffffff' }}>
-        <td>{leaf.length}</td>
-        <td>{leaf.width}</td>
-      </tr>
-    ))}
-  </tbody>
-</table>
- 
-        {/* ... other details */}
+      <div id="modal-center" className="uk-flex-top" uk-modal="true">
+        <div className="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+          <button className="uk-modal-close-default" type="button" uk-close></button>
+          {selectedMaterial && (
+            <div className="scroll-container">
+              <p>
+                {/* Display details from selectedMaterial */}
+                Height: {selectedMaterial.height}
+                Leaves:
+                <table className="uk-table uk-table-hover uk-table-divider">
+                  {/* Mapping logic for leaves */}
+                  {selectedMaterial.leaves.map((leaf, index) => (
+                    <tr key={index}>
+                      <td>{leaf.length}</td>
+                      <td>{leaf.width}</td>
+                    </tr>
+                  ))}
+                </table>
+              </p>
+              {/* ... other details */}
+            </div>
+          )}
+        </div>
       </div>
-    )}
-  </div>
-</div>
-
     </Fragment>
   );
 }

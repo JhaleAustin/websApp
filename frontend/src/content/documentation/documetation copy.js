@@ -14,20 +14,13 @@ function Documentation() {
 
   return (
   <Fragment>
-     <div   style={{ background: 'linear-gradient(to right, #b8aa19, #006400), rgba(0, 0, 0, 1)' }}
-    >
     <Documentation_2/>
     <div className="scroll-container">
       <Documentation_1 />
     </div>
-    <div className=" py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-         
     <Docu_Analysis/>
-    </div> </div>  
-
- 
-    </div>
+    
+    
   </Fragment>
   );
 }

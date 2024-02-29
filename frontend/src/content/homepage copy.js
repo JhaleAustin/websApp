@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react'; // Import useState from React
+import React, { useState, useEffect } from 'react'; // Import useState from React
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'uikit/dist/css/uikit.min.css';
@@ -24,44 +24,24 @@ function Homepage() {
     slidesToScroll: 1,
   };
   const [all, setAll] = useState([]); 
-  
-  const [Benefits, setBenefits] = useState([]); 
-  
-  const [PeanutShell, setPeanutShell] =useState([]);
-  const [Mulching, setMulching] = useState([]);
-  const [peanutshellmulching, setpeanutshellmulching] = useState([]); 
   const [selectedMaterial, setSelectedMaterial] = useState(null);
 
   useEffect(() => {
     const fetchAll = async () => {
         try {
-            const response = await axios.get(`http://localhost:3001/api/v1/`);
-            //console.log("Data" , response.data.benefits);
-            const benefits = response.data.benefits;
-
-            const mulching = response.data.mulching;
-            const peanuts = response.data.peanutshell;
-            const Peanutshellmulching = response.data.peanutshellmulching;
-            setBenefits(benefits);
-            setMulching(mulching);
-            setPeanutShell(peanuts);
-            setpeanutshellmulching(Peanutshellmulching);
-            console.log(":",PeanutShell[0].topic);
-            // benefits,
-            // mulching,
-            // peanutshell,
-            // peanutshellmulching
+            const response = await axios.get(`http://localhost:3001/api/v1/home`);
+            const topics = response.data.topics;
     
-            // if (!topics || topics.length === 0) {
-            //     console.log('NO TOPICS FOUND');
-            //     setAll([]);
-            //     setLoading(false);
-            //     return;
-            // }
+            if (!topics || topics.length === 0) {
+                console.log('NO TOPICS FOUND');
+                setAll([]);
+                setLoading(false);
+                return;
+            }
     
-            // console.log('Topics with Populated Fields:', topics);
-            // setAll(topics);
-            // setLoading(false);
+            console.log('Topics with Populated Fields:', topics);
+            setAll(topics);
+            setLoading(false);
         } catch (error) {
             console.error('ERROR FETCHING TOPICS:', error);
             setError('ERROR FETCHING TOPICS. PLEASE TRY AGAIN.');
@@ -75,8 +55,8 @@ function Homepage() {
     const fetchMaterials = async () => {
       try {
         const response = await axios.get(`${process.env.REACT_APP_API}/api/v1/logout`);
-        // setMaterials(response.data.allmaterials[0].topic);
-        // setLoading(false);
+        setMaterials(response.data.allmaterials);
+        setLoading(false);
       } catch (error) {
         console.error('ERROR FETCHING MATERIALS:', error);
         setError('ERROR FETCHING MATERIALS. PLEASE TRY AGAIN.');
@@ -87,85 +67,10 @@ function Homepage() {
     fetchMaterials();
   }, []);
   return (
-
-<Fragment >
-  <div     style={{ background: 'linear-gradient(to right, #f0cdaa, #816d50), rgba(0, 0, 0, 1)' }}
- >
-
-
-<div class="hero_area"    style={{ background: 'linear-gradient(to right, #9caa58, #f0cdaa), rgba(0, 0, 0, 1)' }}
- >
-   
-    <section class="slider_section "  >
-      <div class="container ">
-        <div class="row">
-          <div class="col-md-6 ">
-            <div class="detail-box">
-              {/* <h1>
-              {PeanutShell[0].topic}
-              </h1>
-             <p>
-               {PeanutShell[0].description} </p>
-             */}
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="img-box" style={{margin:100}}>
-              <img src="https://th.bing.com/th/id/R.5d8287b39f5cafc8c4937fb20a56b0c9?rik=GSCnF4ov8ZbqIw&riu=http%3a%2f%2fclipart-library.com%2fimages_k%2ftransparent-peanut%2ftransparent-peanut-18.png&ehk=NSq5wcJJRVdLEsDGeHkNE0K9dZYaDmrcy8sofBS30vY%3d&risl=&pid=ImgRaw&r=0" alt=""/>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <section class="feature_section">
-    <div class="container">
-      <div class="feature_container" >
-        <div class="box">
-         
-          {/* <h5 class="name">
-          {PeanutShell[1].topic}
-             
-          </h5>
-          <p>
-               {PeanutShell[1].description}
-              </p> */}
-        </div>
-        <div class="box active">
-          
-          <h5 class="name">
-            Improve
-          </h5>
-          <p>
-                when looking at its layout. The point of using Lorem Ipsum is
-                that it has a more-or-less normal
-              </p>
-        </div>
-        <div class="box">
-         
-          <h5 class="name">
-            Maintain
-          </h5>
-          <p>
-                when looking at its layout. The point of using Lorem Ipsum is
-                that it has a more-or-less normal
-              </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-
-  <div>
+    <div>
       <div class="jumbotron text-center">
-      <h1 class="display-4" style={{ fontFamily: 'Madimi One', position: 'relative' }}>
-  <span style={{ borderBottom: '5px solid #006400', position: 'relative', display: 'inline-block', padding: '0 10px' }}>
-    PEANUT SHELL
-  </span>
-</h1>
- </div>
+        <h1 class="display-4">PEANUT SHELL</h1>
+      </div>
 
       <div class="container">
         <div class="container">
@@ -217,8 +122,8 @@ function Homepage() {
         </div>
       </div>
 
-      <div class="container" >
-     <div class="row fact-list mt-3 justify-content-center" style={{ background: 'rgba(0, 0, 0, 0.5)' }}>
+      <div class="container">
+        <div class="row fact-list mt-3 justify-content-center">
           <div class="col-md-8">
   <ul class="list-unstyled">
     
@@ -302,9 +207,7 @@ function Homepage() {
 
  
 
-    <div class="jumbotron2 text-center"
-     style={{ background: 'linear-gradient(to right, #b8aa19, #006400), rgba(0, 0, 0, 0.5)' }}>
-   
+    <div class="jumbotron2 text-center">
         <h1 class="display-4">Benefitst Peanuts</h1>
         <p class="lead">Discover interesting facts and information about peanuts!</p>
       
@@ -413,12 +316,18 @@ function Homepage() {
       </div>
     </section>
 
-    </div>
+
+
+
+        </div>
 
       
+      
 
-    </div>
-</Fragment>
+
+
+
+    
   );
 }
 

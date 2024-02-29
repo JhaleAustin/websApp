@@ -9,7 +9,9 @@ import './Design/Home.css';
 import './Design/DataTable.css';
 import './Design/Topic.css';
 import { ToastContainer } from 'react-toastify';
-
+import './css/style.css'; // Import your custom styles
+import './css/responsive.css';
+import './css/bootstrap.css'; 
 
 import App from './App';
 // import reportWebVitals from './reportWebVitals';

@@ -18,7 +18,7 @@ function Docu_Analysis(handleMaterialChange) {
   useEffect(() => {
     const fetchMaterials = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/api/v1/Documentation`);
+        const response = await axios.get(`http://localhost:3001/api/v1/Documentations`);
         console.log("Data" , response.data.Documentations);
         setMaterials(response.data.Documentations);
         setLoading(false);
@@ -310,24 +310,37 @@ setPlantHeightWithoutMulch(resultAnalysisWithoutMulch);
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Plant Growth Chart</h1>
+    // <div className="App">
+    //   <header className="App-header">
+    //     <h1>Plant Growth Chart</h1>
     
-    <div className="centeredDiv">
-          <div className="row">
-            <div className="col-8">
+    // <div className="centeredDiv">
+    //       <div className="row">
+    //         <div className="col-8">
           
 
-              <Chart options={state.options} series={state.series} type="area" width="850" />
-            </div>
-          </div>
-        </div>
-      </header>
+    //           <Chart options={state.options} series={state.series} type="area" width="850" />
+    //         </div>
+    //       </div>
+    //     </div>
+    //   </header>
 
 
 
+    // </div>
+
+
+
+<div className="register-photo2" >
+<div className="form-container">
+  <div className="image-holder">
+    <h1>Plant Growth Chart</h1>
+    <div className="chart-container">
+      <Chart options={state.options} series={state.series} type="area" width="1000px" />
     </div>
+  </div> 
+</div>
+</div>
   );
 }
 
