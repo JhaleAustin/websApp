@@ -89,8 +89,8 @@ function Homepage() {
   return (
 
 <Fragment >
-  <div     style={{ background: 'linear-gradient(to right, #f0cdaa, #816d50), rgba(0, 0, 0, 1)' }}
- >
+  <div     style={{ background: 'linear-gradient(to right, #9caa58, #f0cdaa), rgba(0, 0, 0, 1)' }}
+  >
 
 
 <div class="hero_area"    style={{ background: 'linear-gradient(to right, #9caa58, #f0cdaa), rgba(0, 0, 0, 1)' }}
@@ -302,8 +302,7 @@ function Homepage() {
 
  
 
-    <div class="jumbotron2 text-center"
-     style={{ background: 'linear-gradient(to right, #b8aa19, #006400), rgba(0, 0, 0, 0.5)' }}>
+    <div class="jumbotron2 text-center" >
    
         <h1 class="display-4">Benefitst Peanuts</h1>
         <p class="lead">Discover interesting facts and information about peanuts!</p>

@@ -24,9 +24,14 @@ import UpdatePeanutShellMulching from './Components/Admin/Homepage/UpdatePeanutS
 
 import ProcessList from './Components/Admin/Process/ProcessList';
 import NewProcess from './Components/Admin/Process/NewProcess1';
+<<<<<<< HEAD
 import UpdateProcess from './Components/Admin/Process/UpdateProcess';
 
 import DocumentationList from './Components/Admin/Documentation/Docu';
+=======
+import UpdatePorcess from './Components/Admin/Process/UpdateProcess';
+import DocumentationList from './Components/Admin/Documentation/DocuList';
+>>>>>>> 049f48efbd6d373a5d3977580f689e9c61c8179a
 import NewDocumentation from './Components/Admin/Documentation/NewDocu2';
 import UpdateDocumention from './Components/Admin/Documentation/UpdateDocu';
 
@@ -68,7 +73,12 @@ function App() {
             <Route path="/admin/updatebenefit/:id" element={<UpdateBenefit/>} />
 
 
+<<<<<<< HEAD
             <Route path="/admin/updatedocumentation" element={<UpdateDocumention />} />
+=======
+            <Route path="/admin/updateprocess" element={<UpdatePorcess />} />
+            <Route path="/admin/updatedocumentation/:id" element={<UpdateDocumention />} />
+>>>>>>> 049f48efbd6d373a5d3977580f689e9c61c8179a
           </Routes>
         </div>
       </Router>
