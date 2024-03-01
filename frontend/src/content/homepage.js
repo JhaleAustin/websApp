@@ -13,7 +13,7 @@ import 'slick-carousel/slick/slick-theme.css';
 
 
 function Homepage() {
-  const [materials, setMaterials] = useState([]);
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const settings = {
@@ -23,78 +23,50 @@ function Homepage() {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-  const [all, setAll] = useState([]);
 
-  const [Benefits, setBenefits] = useState([]);
-
-  const [PeanutShell, setPeanutShell] = useState([]);
-  const [Mulching, setMulching] = useState([]);
-  const [peanutshellmulching, setpeanutshellmulching] = useState([]);
-  const [selectedMaterial, setSelectedMaterial] = useState(null);
-
+  const [benefit, setBenefits] = useState([]);
+  const [peanutshell, setPeanutShell] = useState([]);
+  const [mulching, setMulching] = useState([]);
+  const [peanutshellmulching, setPeanutShellMulching] = useState([]);
+  
   useEffect(() => {
-    const fetchAll = async () => {
+
+    const getAllHome = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/api/v1/`);
-        //console.log("Data" , response.data.benefits);
-        const benefits = response.data.benefits;
 
-        const mulching = response.data.mulching;
-        const peanuts = response.data.peanutshell;
-        const Peanutshellmulching = response.data.peanutshellmulching;
-        setBenefits(benefits);
-        setMulching(mulching);
-        setPeanutShell(peanuts);
-        setpeanutshellmulching(Peanutshellmulching);
-        console.log(":", PeanutShell[0].topic);
-        // benefits,
-        // mulching,
-        // peanutshell,
-        // peanutshellmulching
+          const response = await axios.get(`${process.env.REACT_APP_API}/api/v1/`);
 
-        // if (!topics || topics.length === 0) {
-        //     console.log('NO TOPICS FOUND');
-        //     setAll([]);
-        //     setLoading(false);
-        //     return;
-        // }
+          setBenefits(response.data.benefit);
+          setMulching(response.data.mulching);
+          setPeanutShell(response.data.peanutshell);
+          setPeanutShellMulching(response.data.peanutshellmulching);
 
-        // console.log('Topics with Populated Fields:', topics);
-        // setAll(topics);
-        // setLoading(false);
-      } catch (error) {
-        console.error('ERROR FETCHING TOPICS:', error);
-        setError('ERROR FETCHING TOPICS. PLEASE TRY AGAIN.');
-        setLoading(false);
-      }
-    };
+          // console.log(response.data.peanutshell)
+          // console.log(response.data.benefit)
+          // console.log(response.data.mulching)
+          // console.log(response.data.peanutshellmulching)
 
+          setLoading(false);
 
-    fetchAll();
+        } catch (error) {
+          console.error('ERROR FETCHING TOPICS:', error);
+          setError('ERROR FETCHING TOPICS. PLEASE TRY AGAIN.');
+            
+        }
+        
+      };
 
-    const fetchMaterials = async () => {
-      try {
-        const response = await axios.get(`${process.env.REACT_APP_API}/api/v1/logout`);
-        // setMaterials(response.data.allmaterials[0].topic);
-        // setLoading(false);
-      } catch (error) {
-        console.error('ERROR FETCHING MATERIALS:', error);
-        setError('ERROR FETCHING MATERIALS. PLEASE TRY AGAIN.');
-        setLoading(false);
-      }
-    };
+      getAllHome();
 
-    fetchMaterials();
-  }, []);
+    }, [benefit,mulching,peanutshell,peanutshellmulching]);
+
   return (
 
     <Fragment >
-      <div style={{ background: 'linear-gradient(to right, #9caa58, #f0cdaa), rgba(0, 0, 0, 1)' }}
-      >
+      <div style={{ background: 'linear-gradient(to right, #9caa58, #f0cdaa), rgba(0, 0, 0, 1)' }}>
 
 
-        <div class="hero_area" style={{ background: 'linear-gradient(to right, #9caa58, #f0cdaa), rgba(0, 0, 0, 1)' }}
-        >
+        <div class="hero_area" style={{ background: 'linear-gradient(to right, #9caa58, #f0cdaa), rgba(0, 0, 0, 1)' }}>
 
           <section class="slider_section "  >
             <div class="container ">
@@ -102,10 +74,11 @@ function Homepage() {
                 <div class="col-md-6 ">
                   <div class="detail-box">
                     <h1>
-              {PeanutShell[0].topic}
-              </h1>
-             <p>
-               {PeanutShell[0].description} </p>
+                      {peanutshell[0].topic}
+                    </h1>
+                    <p>
+                      {peanutshell[0].description} 
+                    </p>
             
                   </div>
                 </div>
@@ -125,27 +98,27 @@ function Homepage() {
               <div class="box">
 
                 <h1>
-              {PeanutShell[1].topic}
+              {peanutshell[1].topic}
               </h1>
              <p>
-               {PeanutShell[1].description} </p>
+               {peanutshell[1].description} </p>
             
               </div>
               <div class="box active">
                 <h1>
-              {PeanutShell[2].topic}
+              {peanutshell[2].topic}
               </h1>
              <p>
-               {PeanutShell[2].description} </p>
+               {peanutshell[2].description} </p>
             
               </div>
               <div class="box">
 
                 <h1>
-              {PeanutShell[3].topic}
+              {peanutshell[3].topic}
               </h1>
              <p>
-               {PeanutShell[3].description} </p>
+               {peanutshell[3].description} </p>
             
               </div>
             </div>
@@ -169,8 +142,8 @@ function Homepage() {
                 <div class="col-md-6">
                   <div class="card">
                     <div class="card-body">
-                      <h5 class="card-title">{Mulching[0].topic}</h5>
-                  <p class="card-text">{Mulching[0].description}</p>
+                      <h5 class="card-title">{mulching[0].topic}</h5>
+                  <p class="card-text">{mulching[0].description}</p>
                     </div>
                   </div>
                 </div>
@@ -178,8 +151,8 @@ function Homepage() {
                 <div class="col-md-6">
                   <div class="card">
                     <div class="card-body">
-                      <h5 class="card-title">{Mulching[0].topic}</h5>
-                  <p class="card-text">{Mulching[0].description}</p>
+                      <h5 class="card-title">{mulching[0].topic}</h5>
+                  <p class="card-text">{mulching[0].description}</p>
                     </div>
                   </div>
                 </div>
@@ -189,16 +162,16 @@ function Homepage() {
                 <div class="col-md-6">
                   <div class="card">
                     <div class="card-body">
-                      <h5 class="card-title">{Mulching[0].topic}</h5>
-                  <p class="card-text">{Mulching[0].description}</p>
+                      <h5 class="card-title">{mulching[0].topic}</h5>
+                  <p class="card-text">{mulching[0].description}</p>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="card">
                     <div class="card-body">
-                      <h5 class="card-title">{Mulching[0].topic}</h5>
-                  <p class="card-text">{Mulching[0].description}</p>
+                      <h5 class="card-title">{mulching[0].topic}</h5>
+                  <p class="card-text">{mulching[0].description}</p>
                     </div>
                   </div>
                 </div>
@@ -265,8 +238,8 @@ function Homepage() {
           </div>
 
           <div class="jumbotron2 text-center" >
-            <h1 class="display-4">{Benefits[0].topic}</h1>
-        <p class="lead">{Benefits[0].description}</p>
+            <h1 class="display-4">{benefit[0].topic}</h1>
+        <p class="lead">{benefit[0].description}</p>
       
 
             <section className="feature-bottom-area pt-100 pb-100">
@@ -277,9 +250,9 @@ function Homepage() {
                       <h1>01</h1>
                     </div>
                     <div className="desc">
-                      <h2 className="text-uppercase">{Benefits[0].topic}</h2>
+                      <h2 className="text-uppercase">{benefit[0].topic}</h2>
               <p>
-              {Benefits[0].description}    </p>
+              {benefit[0].description}    </p>
                     </div>
                   </div>
                   <div className="col-lg-4 col-md-12 single-feat2 d-flex justify-content-between align-items-top">
@@ -287,9 +260,9 @@ function Homepage() {
                       <h1>02</h1>
                     </div>
                     <div className="desc">
-                      <h2 className="text-uppercase">{Benefits[0].topic}</h2>
+                      <h2 className="text-uppercase">{benefit[0].topic}</h2>
               <p>
-              {Benefits[0].description}    </p>
+              {benefit[0].description}    </p>
                     </div>
                   </div>
                   <div className="col-lg-4 col-md-12 single-feat2 d-flex justify-content-between align-items-top">
@@ -297,9 +270,9 @@ function Homepage() {
                       <h1>03</h1>
                     </div>
                     <div className="desc">
-                      <h2 className="text-uppercase">{Benefits[0].topic}</h2>
+                      <h2 className="text-uppercase">{benefit[0].topic}</h2>
               <p>
-              {Benefits[0].description}    </p>
+              {benefit[0].description}    </p>
                     </div>
                   </div>
                 </div>
@@ -316,9 +289,9 @@ function Homepage() {
                   <div className="single-service">
                     <img className="d-block mx-auto img-fluid" src="https://th.bing.com/th/id/OIP.iAhcp6m_91O-ClK79h8EQQHaFj?w=238&h=180&c=7&r=0&o=5&dpr=1.2&pid=1.7" alt="" />
                     <div className="desc">
-                      <h2 className="text-uppercase font-bold">{Benefits[0].topic}</h2>
+                      <h2 className="text-uppercase font-bold">{benefit[0].topic}</h2>
                 <p>
-                {Benefits[0].description} </p>
+                {benefit[0].description} </p>
                       <a className="text-uppercase view-details" href="#" style={{ backgroundColor: 'white', height: '30px', display: 'inline-block', padding: '5px 10px', margin: '10px 0' }}>View Details</a>
                     </div>
                   </div>
@@ -327,9 +300,9 @@ function Homepage() {
                 <div className="col-md-4">
                   <div className="single-service">
                     <div className="desc">
-                      <h2 className="text-uppercase font-bold">{Benefits[0].topic}</h2>
+                      <h2 className="text-uppercase font-bold">{benefit[0].topic}</h2>
                 <p>
-                {Benefits[0].description} </p>
+                {benefit[0].description} </p>
                       <a className="text-uppercase view-details" href="#" style={{ backgroundColor: 'white', height: '30px', display: 'inline-block', padding: '5px 10px', margin: '10px 0' }}>View Details</a>
                     </div>
                     <img className="d-block mx-auto img-fluid" src="https://th.bing.com/th/id/OIP.iAhcp6m_91O-ClK79h8EQQHaFj?w=238&h=180&c=7&r=0&o=5&dpr=1.2&pid=1.7" alt="" />
@@ -340,9 +313,9 @@ function Homepage() {
                   <div className="single-service">
                     <img className="d-block mx-auto img-fluid" src="https://th.bing.com/th/id/OIP.iAhcp6m_91O-ClK79h8EQQHaFj?w=238&h=180&c=7&r=0&o=5&dpr=1.2&pid=1.7" alt="" />
                     <div className="desc">
-                      <h2 className="text-uppercase font-bold">{Benefits[0].topic}</h2>
+                      <h2 className="text-uppercase font-bold">{benefit[0].topic}</h2>
                 <p>
-                {Benefits[0].description} </p>
+                {benefit[0].description} </p>
                       <a className="text-uppercase view-details" href="#" style={{ backgroundColor: 'white', height: '30px', display: 'inline-block', padding: '5px 10px', margin: '10px 0' }}>View Details</a>
                     </div>
                   </div>

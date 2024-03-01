@@ -3,29 +3,29 @@ const processCollection = require('../models/processCollection');
 const APIFeatures = require('../utils/apiFeatures')
 const cloudinary = require('cloudinary')
  
-exports.getProcess = async (req, res, next) => {
+// exports.getProcess = async (req, res, next) => {
 
-	const resPerPage = 4;
-	const ProcesssCount = await Process.countDocuments();
-	const apiFeatures = new APIFeatures(Process.find(), req.query).search().filter()
-	apiFeatures.pagination(resPerPage);
-	const Processs = await apiFeatures.query;
-	const filteredProcesssCount = Processs.length
-	if (!Processs) {
-		return res.status(404).json({
-			success: false,
-			message: 'No Processs'
-		})
-	}
-	res.status(200).json({
-		success: true,
-		count: Processs.length,
-		ProcesssCount,
-		Processs,
-		resPerPage,
-		filteredProcesssCount,
-	})
-}
+// 	const resPerPage = 4;
+// 	const ProcesssCount = await processCollection.countDocuments();
+// 	const apiFeatures = new APIFeatures(Process.find(), req.query).search().filter()
+// 	apiFeatures.pagination(resPerPage);
+// 	const Processs = await apiFeatures.query;
+// 	const filteredProcesssCount = Processs.length
+// 	if (!Processs) {
+// 		return res.status(404).json({
+// 			success: false,
+// 			message: 'No Processs'
+// 		})
+// 	}
+// 	res.status(200).json({
+// 		success: true,
+// 		count: Processs.length,
+// 		ProcesssCount,
+// 		Processs,
+// 		resPerPage,
+// 		filteredProcesssCount,
+// 	})
+// }
 
 exports.getAllProcess = async (req, res, next) => {
     try {

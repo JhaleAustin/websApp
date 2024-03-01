@@ -10,7 +10,7 @@ const { newProcess, getProcesss,getProcess, getSingleProcess,
 
 router.post('/process/new', newProcess);
 
-router.get('/process', getProcess)
+// router.get('/process', getProcess)
 
 router.get('/process/show/:id', getSingleProcess);
 
