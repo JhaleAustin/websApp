@@ -50,7 +50,7 @@ function Documentation_1(handleMaterialChange) {
           <><div class="container text-center"    
           style={{
             padding: 20,
-            background: 'linear-gradient(to right, #baf700, #006400, #00ff00)',
+            background: 'linear-gradient(to right, #b8ab9c, #c19c89, #a7836c)',
             border: '1px solid #ccc', // Border style and color
             boxShadow: '0 20px 20px rgba(0, 0, 0, 0.5)', // Box shadow with 10px distance
             borderRadius: '10px', // Border radius
