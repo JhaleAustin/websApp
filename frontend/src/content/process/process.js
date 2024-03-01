@@ -5,26 +5,26 @@ import Header from '../../Components/Layout/Header';  // Add this line
 
 function Process() {
 
-  const [process, setProcesss] = useState([]);
+  const [processes, setProcesss] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [selectedMaterial, setSelectedMaterial] = useState(null);
 
   useEffect(() => {
-    const fetchMaterials = async () => {
+    const getProcess = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/api/v1/process`);
+        const response = await axios.get(`http://localhost:3001/api/v1//admin/process`);
         console.log(response.data);
-        setProcesss(response.data.Processs);
+        setProcesss(response.data.process);
         setLoading(false);
+
       } catch (error) {
-        console.error('ERROR FETCHING MATERIALS:', error);
-        setError('ERROR FETCHING MATERIALS. PLEASE TRY AGAIN.');
+        console.error('ERROR FETCHING PROCESS:', error);
+        setError('ERROR FETCHING PROCESS. PLEASE TRY AGAIN.');
         setLoading(false);
       }
     };
 
-    fetchMaterials();
+    getProcess();
   }, []);
 
 
@@ -33,165 +33,90 @@ function Process() {
     <Fragment>
       <Header />
    
-      <div class="container mt-4"  style={{ background: 'linear-gradient(to right, #9caa58, #f0cdaa), rgba(0, 0, 0, 1)' }}
- >
-
-        <div class="row mt-4">
+      <div class="container"  style={{ background: 'linear-gradient(to right, #9caa58, #f0cdaa), rgba(0, 0, 0, 1)' }}>
+        <div class="row">
           <div class="col-md-12 text-center">
-
             <div class="center-video">
               <iframe width="1200" height="600" src="https://www.youtube.com/embed/wXTmnv9Povg" frameborder="0" allowfullscreen></iframe>
             </div>
-
-            <div class="row" style={{ margin: 20 }}>
-              <div class="col-md-6 d-flex align-items-center justify-content-center">
-                <div className="relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
-
-                {process.length > 1 && (
-
-<div className="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
-
-
-
-  <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-    {process[0].title}
-  </h2>
-  <p className="mt-6 text-lg leading-8 text-gray-300">
-    {process[0].content}</p>
-
-</div>
-)}
-
-
-
-                </div>
-              </div>
-
-
-
-              <div class="col-md-6">
-                <iframe width="95%" height="350" style={{ marginTop: 50 }} src="https://www.youtube.com/embed/cxmA6k6d4h4" frameborder="0" allowfullscreen></iframe>
-              </div>
-            </div>
-
-
-
-
-
-
-
-
-            <div class="row" style={{ margin: 20 }}>
-              <div class="col-md-6">
-                <iframe width="95%" height="350" style={{ marginTop: 50, marginLeft: 37 }} src="https://www.youtube.com/embed/rvy65Z6v77g" frameborder="0" allowfullscreen></iframe>
-              </div>
-              <div class="col-md-6 d-flex align-items-center justify-content-center">
-                <div className="relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
-
-                  {process.length > 1 && (
-
-                    <div className="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
-
-
-
-                      <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                        {process[0].title}
-                      </h2>
-                      <p className="mt-6 text-lg leading-8 text-gray-300">
-                        {process[0].content}</p>
-
-                    </div>
-                  )}
-
-
-                </div>
-              </div>
-            </div>
-      
-
-
-
-  <div class="row" style={{ margin: 20 }}>
-              <div class="col-md-6 d-flex align-items-center justify-content-center">
-                <div className="relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
-
-                {process.length > 1 && (
-
-<div className="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
-
-
-
-  <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-    {process[0].title}
-  </h2>
-  <p className="mt-6 text-lg leading-8 text-gray-300">
-    {process[0].content}</p>
-
-</div>
-)}
-
-
-
-                </div>
-              </div>
-
-
-
-              <div class="col-md-6">
-                <iframe width="95%" height="350" style={{ marginTop: 50 }} src="https://www.youtube.com/embed/QuWQ-ihdlU8" frameborder="0" allowfullscreen></iframe>
-              </div>
-            </div>
-
-
-
-
-
-
-
-
-            <div class="row" style={{ margin: 20 }}>
-              <div class="col-md-6">
-                <iframe width="95%" height="350" style={{ marginTop: 50, marginLeft: 37 }} src="https://www.youtube.com/embed/LuWgFLx4ySk" frameborder="0" allowfullscreen></iframe>
-              </div>
-              <div class="col-md-6 d-flex align-items-center justify-content-center">
-                <div className="relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
-
-                  {process.length > 1 && (
-
-                    <div className="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
-
-
-
-                      <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                        {process[0].title}
-                      </h2>
-                      <p className="mt-6 text-lg leading-8 text-gray-300">
-                        {process[0].content}</p>
-
-                    </div>
-                  )}
-
-
-                </div>
-              </div>
-            </div>
-      
-
-
           </div>
         </div>
-      </div>
+          
+          <div class="row" style={{ margin: 20 }}>
+            <div class="col-md-6 d-flex align-items-center justify-content-center">
+              <div className="relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
+                <div className="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
+                  <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                    {processes[0] && processes[0].title}
+                  </h2>
+                  <p className="mt-6 text-lg leading-8 text-gray-300">
+                    {processes[0] && processes[0].content}
+                  </p>      
+                </div>
+              </div>
+            </div>    
+            
+            <div class="col-md-6">
+                <iframe width="95%" height="350" style={{ marginTop: 50 }} src="https://www.youtube.com/embed/cxmA6k6d4h4" frameborder="0" allowfullscreen></iframe>
+            </div>
+          </div>
 
+          <div class="row" style={{ margin: 20 }}>
+            <div class="col-md-6 d-flex align-items-center justify-content-center">
+              <div className="relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
+                <div className="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
+                  <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                    {processes[1] && processes[1].title}
+                  </h2>
+                  <p className="mt-6 text-lg leading-8 text-gray-300">
+                    {processes[1] && processes[1].content}
+                  </p>                  </div>
+                </div>
+              </div>
+            <div class="col-md-6">
+              <iframe width="95%" height="350" style={{ marginTop: 50, marginLeft: 37 }} src="https://www.youtube.com/embed/rvy65Z6v77g" frameborder="0" allowfullscreen></iframe>
+            </div>
+          </div>  
+  
+          <div class="row" style={{ margin: 20 }}>
+            <div class="col-md-6">
+                <iframe width="95%" height="350" style={{ marginTop: 50 }} src="https://www.youtube.com/embed/QuWQ-ihdlU8" frameborder="0" allowfullscreen></iframe>
+             </div>
 
+            <div class="col-md-6 d-flex align-items-center justify-content-center">
+              <div className="relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
+                <div className="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
+                  <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                    {processes[2] && processes[2].title}
+                  </h2>
+                  <p className="mt-6 text-lg leading-8 text-gray-300">
+                    {processes[2] && processes[2].content}</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
-
-
-
-
-
-
+          <div class="row" style={{ margin: 20 }}>
+            <div class="col-md-6">
+              <iframe width="95%" height="350" style={{ marginTop: 50, marginLeft: 37 }} src="https://www.youtube.com/embed/LuWgFLx4ySk" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="col-md-6 d-flex align-items-center justify-content-center">
+              <div className="relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
+                <div className="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
+                  <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                    {processes[3] && processes[3].title}
+                  </h2>
+                  <p className="mt-6 text-lg leading-8 text-gray-300">
+                    {processes[3] && processes[3].content}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
     </Fragment>
   )
+  
 
 
 }

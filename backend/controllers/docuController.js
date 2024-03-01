@@ -1,18 +1,91 @@
  
-const Documentation = require('../models/docuCollection')
+const Documentation = require('../models/docu/docuCollection')
+const Plant = require('../models/docu/planttypesCollection')
 const APIFeatures = require('../utils/apiFeatures')
 const cloudinary = require('cloudinary')
  
+exports.newPlantTypes = async (req, res, next) => {
 
-// exports.getDocuCollection = async (req, res, next) => {
-// 	 record.find({}).then(function(Docu){
-// 		res.json(Docu)
+	const plantTypes = await Plant.create(req.body);
+	if (!plantTypes)
+		return res.status(400).json({
+			success: false,
+			message: 'FAILED TO CREATE PLANT TYOES'
+		})
+	res.status(201).json({
+		success: true,
+		plantTypes
+	})
+}
 
-// 	 }).catch(function(err){
-// 		res.json(err)
-// 	 })
-// }
+exports.newDocumentation = async (req, res, next) => {
 
+	const plantTypes = await Plant.findById(req.params.id);
+
+	if (!req.body.images) {
+        return res.status(400).json({ message: 'IMAGES ARRAY IS MISSING IN THE REQUEST BODY' });
+    } 
+	let images = Array.isArray(req.body.images) ? req.body.images : [req.body.images];
+    
+	if (typeof req.body.images === 'string') {
+		images.push(req.body.images)
+	} else {
+		images = req.body.images
+	}
+  
+	let leaves = []
+	if (typeof req.body.leaves === 'string') {
+		leaves.push(req.body.leaves)
+	} else {
+		leaves = req.body.leaves
+	}
+
+	let imagesLinks = [];
+	for (let i = 0; i < images.length; i++) {
+		let imageDataUri = images[i]
+
+		try {
+			const result = await cloudinary.v2.uploader.upload(`${imageDataUri}`, {
+				folder: 'Documentations',
+				width: 150,
+				crop: "scale",
+			});
+
+			imagesLinks.push({
+				public_id: result.public_id,
+				url: result.secure_url
+			})
+
+		} catch (error) {
+			console.log(error)
+		}
+
+	}
+
+	req.body.images = imagesLinks;
+	
+	const documentation = await Documentation.create({
+
+		plantTypes: req.params.id,
+		collecttionDate: req.body.collecttionDate,
+		height: req.body.height,
+		leaves: {
+					length: req.body.length,
+					width: req.body.width,
+				},
+		images: [imagesLinks]
+	});
+
+	if (!documentation)
+		return res.status(400).json({
+			success: false,
+			message: 'FAILED TO ADD DATA'
+		})
+	res.status(201).json({
+		success: true,
+		documentation
+	})
+}
 
 exports.getDocumentation = async (req, res, next) => {
 	  const Documentations = await Documentation.find({});
@@ -110,108 +183,108 @@ exports.deleteDocumentation = async (req, res, next) => {
 
 
 
-exports.newDocumentation = async (req, res, next) => {
-	if (!req.body.images) {
-        return res.status(400).json({ message: 'Images array is missing in the request body' });
-    }
-	let images = Array.isArray(req.body.images) ? req.body.images : [req.body.images];
+// exports.newDocumentation = async (req, res, next) => {
+// 	if (!req.body.images) {
+//         return res.status(400).json({ message: 'Images array is missing in the request body' });
+//     }
+// 	let images = Array.isArray(req.body.images) ? req.body.images : [req.body.images];
     
-	let videos = []
-	if (typeof req.body.images === 'string') {
-		images.push(req.body.images)
-	} else {
-		images = req.body.images
-	}
+// 	let videos = []
+// 	if (typeof req.body.images === 'string') {
+// 		images.push(req.body.images)
+// 	} else {
+// 		images = req.body.images
+// 	}
 
 	    
-	let leaves = []
-	if (typeof req.body.leaves === 'string') {
-		leaves.push(req.body.leaves)
-	} else {
-		leaves = req.body.leaves
-	}
+// 	let leaves = []
+// 	if (typeof req.body.leaves === 'string') {
+// 		leaves.push(req.body.leaves)
+// 	} else {
+// 		leaves = req.body.leaves
+// 	}
 
-	// if (typeof req.body.videos === 'string') {
-	// 	images.push(req.body.videos)
-	// } else {
-	// 	videos = req.body.videos
-	// }
+// 	// if (typeof req.body.videos === 'string') {
+// 	// 	images.push(req.body.videos)
+// 	// } else {
+// 	// 	videos = req.body.videos
+// 	// }
 
-	let imagesLinks = [];
+// 	let imagesLinks = [];
 
-	for (let i = 0; i < images.length; i++) {
-		let imageDataUri = images[i]
-		// console.log(imageDataUri)
-		try {
-			const result = await cloudinary.v2.uploader.upload(`${imageDataUri}`, {
-				folder: 'Documentations',
-				width: 150,
-				crop: "scale",
-			});
+// 	for (let i = 0; i < images.length; i++) {
+// 		let imageDataUri = images[i]
+// 		// console.log(imageDataUri)
+// 		try {
+// 			const result = await cloudinary.v2.uploader.upload(`${imageDataUri}`, {
+// 				folder: 'Documentations',
+// 				width: 150,
+// 				crop: "scale",
+// 			});
 
-			imagesLinks.push({
-				public_id: result.public_id,
-				url: result.secure_url
-			})
+// 			imagesLinks.push({
+// 				public_id: result.public_id,
+// 				url: result.secure_url
+// 			})
 
-		} catch (error) {
-			console.log(error)
-		}
+// 		} catch (error) {
+// 			console.log(error)
+// 		}
 
-	}
+// 	}
 
-	let videoLinks = [];
+// 	let videoLinks = [];
 
-	for (let i = 0; i < videos.length; i++) {
-		let videoLink = videos[i];
-		try {
-			const result = await cloudinary.v2.uploader.upload(`${videoLink}`, {
-				folder: 'Documentations',
-				width: 150,
-				crop: "scale",
-			});
+// 	for (let i = 0; i < videos.length; i++) {
+// 		let videoLink = videos[i];
+// 		try {
+// 			const result = await cloudinary.v2.uploader.upload(`${videoLink}`, {
+// 				folder: 'Documentations',
+// 				width: 150,
+// 				crop: "scale",
+// 			});
 	
-			consoles.log("dsdsdsd : " , result);
-			videoLinks.push({
-				public_id: result.public_id,
-				url: result.secure_url,
-			});
+// 			consoles.log("dsdsdsd : " , result);
+// 			videoLinks.push({
+// 				public_id: result.public_id,
+// 				url: result.secure_url,
+// 			});
 	
-		} catch (error) {
-			console.log(error);
-		}
-	}
+// 		} catch (error) {
+// 			console.log(error);
+// 		}
+// 	}
 	
-	// let leavesLinks = [];
+// 	// let leavesLinks = [];
 	
-	// for (let i = 0; i < leaves.length; i++) {
-	// 	let leaf = leaves[i];
-	// 	try {
-	// 		leavesLinks.push({
-	// 			length: leaf.length,
-	// 			width: leaf.width
-	// 		});
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 	}
-	// }
+// 	// for (let i = 0; i < leaves.length; i++) {
+// 	// 	let leaf = leaves[i];
+// 	// 	try {
+// 	// 		leavesLinks.push({
+// 	// 			length: leaf.length,
+// 	// 			width: leaf.width
+// 	// 		});
+// 	// 	} catch (error) {
+// 	// 		console.log(error);
+// 	// 	}
+// 	// }
 	
-	// Also, make sure that the variable names inside the try blocks match the correct names.
+// 	// Also, make sure that the variable names inside the try blocks match the correct names.
 	
-	req.body.images = imagesLinks;
-	req.body.video = videoLinks;
-	//   
-	const documentation = await Documentation.create(req.body);
-	if (!documentation)
-		return res.status(400).json({
-			success: false,
-			message: 'Documentation not created'
-		})
-	res.status(201).json({
-		success: true,
-		documentation
-	})
-}
+// 	req.body.images = imagesLinks;
+// 	req.body.video = videoLinks;
+// 	//   
+// 	const documentation = await Documentation.create(req.body);
+// 	if (!documentation)
+// 		return res.status(400).json({
+// 			success: false,
+// 			message: 'Documentation not created'
+// 		})
+// 	res.status(201).json({
+// 		success: true,
+// 		documentation
+// 	})
+// }
 
 exports.updateDocumentation = async (req, res, next) => {
 	let updateDocumentation = await Documentation.findById(req.params.id);

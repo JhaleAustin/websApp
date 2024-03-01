@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const upload = require('../utils/multer')
 
-const { newDocumentation, getDocumentations,getDocumentation, getSingleDocumentation,
+const { newPlantTypes, newDocumentation, getDocumentations,getDocumentation, getSingleDocumentation,
      updateDocumentation, deleteDocumentation }
       = require('../controllers/docuController');
 
@@ -11,8 +11,11 @@ const { newDocumentation, getDocumentations,getDocumentation, getSingleDocumenta
 // router.post('/Documentation/new', isAuthenticatedUser,
 //  upload.array('images', 10), newDocumentation)
 
+router.post('/planttypes/new', newPlantTypes)
 
-router.post('/Documentation/new',upload.array('images', 10), newDocumentation)
+// router.post('/withmulch/new/:id',upload.array('images', 10), newDocumentation)
+
+router.post('/documentation/new/:id',upload.array('images', 10), newDocumentation)
 
 
 router.get('/Documentations', getDocumentations)

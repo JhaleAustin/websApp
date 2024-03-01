@@ -1,24 +1,34 @@
 const mongoose = require('mongoose')
 
 const docuSchema = new mongoose.Schema({
-    plantType: {
-        type: String,
-       },
-    
+    plantTypes: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'planttypesCollection',
+        required: true
+    }, 
+
+    collectionDate: {
+        type: Date,
+        required: true
+    },
+
     height: {
         type: Number,
-           },
-    leaves: [
+        required: true
+    },
+
+    leaves: 
         {
             length: {
-                type: Number
-              
+                type: Number,
+                required: true
             },
             width: {
-                type: Number
-                
+                type: Number,
+                required: true
             },
-        }],
+        },
+
     images: [
         {
             public_id: {
@@ -31,23 +41,6 @@ const docuSchema = new mongoose.Schema({
             },
         }
     ], 
-    videos: [
-        {
-            public_id: {
-                type: String,
-                required: true
-            },
-            url: {
-                type: String,
-                required: true
-            },
-        }
-    ],
-    createdAt: {
-        type: Date, 
-    }    
-    
-     
 })
 
 module.exports = mongoose.model('docuCollection', docuSchema);
