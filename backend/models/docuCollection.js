@@ -43,7 +43,7 @@ const docuSchema = new mongoose.Schema({
             },
         }
     ],
-    createdAt: {
+    setDate: {
         type: Date, 
     }    
     

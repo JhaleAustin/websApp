@@ -111,6 +111,9 @@ exports.deleteDocumentation = async (req, res, next) => {
 
 
 exports.newDocumentation = async (req, res, next) => {
+
+
+	console.log(req.body.setDate)
 	if (!req.body.images) {
         return res.status(400).json({ message: 'Images array is missing in the request body' });
     }
