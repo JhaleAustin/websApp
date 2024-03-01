@@ -183,11 +183,14 @@ exports.deleteDocumentation = async (req, res, next) => {
 
 
 
-// exports.newDocumentation = async (req, res, next) => {
-// 	if (!req.body.images) {
-//         return res.status(400).json({ message: 'Images array is missing in the request body' });
-//     }
-// 	let images = Array.isArray(req.body.images) ? req.body.images : [req.body.images];
+exports.newDocumentation = async (req, res, next) => {
+
+
+	console.log(req.body.setDate)
+	if (!req.body.images) {
+        return res.status(400).json({ message: 'Images array is missing in the request body' });
+    }
+	let images = Array.isArray(req.body.images) ? req.body.images : [req.body.images];
     
 // 	let videos = []
 // 	if (typeof req.body.images === 'string') {

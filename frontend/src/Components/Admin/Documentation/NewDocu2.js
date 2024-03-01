@@ -11,7 +11,7 @@ const NewDocu = () => {
   const [users, setUsers] = useState([]);
   const [plantType, setType] = useState();
   const [height, setHeight] = useState();
-  const [createdAt, setCreatedAt] = useState('');
+  const [setDate, set_Date] = useState('');
   const [files, setImages] = useState([]);
   const [inputs, setInputs] = useState([]); 
   const [error, setError] = useState('')
@@ -21,16 +21,19 @@ const NewDocu = () => {
  
 
   const submit = () => {
+
+    console.log(setDate);
     // Assuming you want to submit all values including dynamic inputs
     const formData = {
       plantType,
       height,
-      createdAt,
+      setDate,
       leaves: inputs,
       images: images,
     };
 
     
+
     newProduct(formData)
  
   };
@@ -132,9 +135,9 @@ const NewDocu = () => {
               <input
                 type="date"
                 className="form-control"
-                id="createdAt"
-                value={createdAt}
-                onChange={(e) => setCreatedAt(e.target.value)}
+                id="setDate"
+                value={setDate}
+                onChange={(e) => set_Date(e.target.value)}
               />
             </div>
 
