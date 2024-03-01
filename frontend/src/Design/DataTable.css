@@ -28,6 +28,7 @@
     background-color: #abc32f !important;
     border: none !important;
     color: #164006  !important;
+    box-shadow: none !important;
 }
 
 .button-delete-selected:disabled
@@ -37,11 +38,20 @@
     color: #abc32f  !important;
 }
 
+.button-delete-selected:active
+{
+    background-color: #164006 !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: #abc32f  !important;
+}
+
 .dtable
 {
     background-color: #164006 !important;
     color: #abc32f !important;
     border: none !important;
+    box-shadow: none !important;
 }
 
 .etable
@@ -49,11 +59,21 @@
     background-color: #abc32f !important;
     color: #164006 !important;
     border: none !important;
+    box-shadow: none !important;
 }
 
 .dataTab
 {
     margin-top: 20px;
+    text-align: center;
+    border: 5px solid #164006;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+}
+
+.dataTabP
+{
+    margin-bottom: 50px;
     text-align: center;
     border: 5px solid #164006;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.7);
@@ -91,6 +111,7 @@
     margin-right: 10px;
     color: #164006;
     border: 2px solid #abc32f; 
+    box-shadow: none !important;
 }
 
 .dataHead .ptable:hover
@@ -98,6 +119,14 @@
     background-color: #164006;
     border: 2px solid #abc32f; 
     color: #abc32f;
+}
+
+.dataHead .ptable:active
+{
+    background-color: #164006 !important;
+    border: 2px solid #abc32f !important; 
+    color: #abc32f !important;
+    box-shadow: none !important;
     
 
 }

@@ -52,21 +52,25 @@ const NewHomepage = () => {
 
              if (selectedTopic.types == "PS")
              {
+              toast.success('PEANUT SHELLS INFORMATION IS CREATED SUCCESSFULLY');
               navigate('/admin/peanutshell');
              }
 
              else  if (selectedTopic.types == "M")
              {
+              toast.success('MMULCHING INFORMATION IS CREATED SUCCESSFULLY');
               navigate('/admin/mulching');
              }
 
              else  if (selectedTopic.types == "PSM")
              {
+              toast.success('PEANUT SHELL MULCHING INFORMATION IS CREATED SUCCESSFULLY');
               navigate('/admin/peanutshellmulching');
              }
 
              else  if (selectedTopic.types == "B")
              {
+              toast.success('BENEFITS INFORMATION IS CREATED SUCCESSFULLY');
               navigate('/admin/benefit');
              }
 
@@ -77,6 +81,7 @@ const NewHomepage = () => {
 
         } catch (error) {
             setError(error.response.data.message)
+            toast.error('FAILED TO CREATE INFORMATION');
 
         }
     }
@@ -130,11 +135,9 @@ const NewHomepage = () => {
   return (
     <Fragment>
     <MetaData title={'UPLOAD TOPIC'} />
-    <div className="row">
-      <div className="col-12 col-md-2"style={{  marginBottom: "2px" }}>
-        <div style={{  height: '100vh', overflow: 'scroll initial' }}>
-          <Sidebar />
-        </div>
+    <div className="row dlist">
+      <div className="col-12 col-md-2">    
+        <Sidebar />
       </div>
         
       <div className="np col-12 col-md-8">
@@ -197,7 +200,7 @@ const NewHomepage = () => {
               </div> */}
 
               <div className="col-12">
-                <button type="button" className="btn btn-primary" onClick={submit}>SUBMIT</button>
+                <button type="button" className="hHome btn btn-primary" onClick={submit}>SUBMIT</button>
               </div>
             </form> 
           </Fragment>

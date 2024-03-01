@@ -44,25 +44,11 @@ const Sidebar = () => {
               <img class="slogo" src="/images/logo.png"></img>
             </Link>
             
-            <NavLink activeClassName="activeClicked">
-            <CDBSidebarMenuItem onClick={toggleProcessDropdown} icon="fa-solid fa-seedling">
-              PROCESS
-            </CDBSidebarMenuItem>
-            {isProcessDropdownOpen && (
-              <div style={{ paddingLeft: '20px', marginTop: '10px' }}>
-
-                <NavLink exact to="/admin/processList" activeClassName="activeClicked">
-                  <CDBSidebarMenuItem icon="list-alt">PROCESS LIST</CDBSidebarMenuItem>
-                </NavLink>
-                
-
-                <NavLink link to="/admin/process" activeClassName="activeClicked">
-                  <CDBSidebarMenuItem icon="plus">CREATE</CDBSidebarMenuItem>
-                </NavLink>
-
-              </div>
-            )}
-          </NavLink>
+            <NavLink exact to="/admin/process" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="fa-solid fa-seedling">
+                PROCESS
+              </CDBSidebarMenuItem>
+            </NavLink>
 
           <NavLink activeClassName="activeClicked">
             <CDBSidebarMenuItem onClick={toggleDocumentationDropdown} icon="fa-solid fa-cloud">

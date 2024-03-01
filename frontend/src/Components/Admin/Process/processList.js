@@ -11,7 +11,7 @@ import { getToken } from '../../../utils/helpers';
 import Loader from '../../Layout/Loader'
 
 const ProcessList = () => {
-    const [process, setProcess] = useState([]);
+    const [processes, setProcess] = useState([]);
     const [error, setError] = useState('');
     const [deleteError, setDeleteError] = useState('');
     const [loading, setLoading] = useState(true);
@@ -33,7 +33,6 @@ const ProcessList = () => {
 
             console.log(data.process);
             setProcess(data.process);
-              setProcess(data.Processs);
             setLoading(false);
 
         } catch (error) {
@@ -46,21 +45,15 @@ const ProcessList = () => {
         getAdminProcess();
 
         if (error) {
-            toast.error(error, {
-                position: toast.POSITION.BOTTOM_RIGHT
-            });
+            toast.error('FAILED TO DELETE STEP');
         }
 
         if (deleteError) {
-            toast.error(deleteError, {
-                position: toast.POSITION.BOTTOM_RIGHT
-            });
+            toast.error('FAILED TO DELETE STEP');
         }
 
         if (isDeleted) {
-            toast.success('STEP DELETED SUCCESSFULLY', {
-                position: toast.POSITION.BOTTOM_RIGHT
-            });
+            toast.success('STEP IS DELETED SUCCESSFULLY');
             navigate('/admin/process');
             setIsDeleted(false);
             setDeleteError('');
@@ -94,12 +87,12 @@ const ProcessList = () => {
     };
 
     const toggleAllProcessSelection = () => {
-        if (selectedProcess.length === process.length) {
+        if (selectedProcess.length === processes.length) {
             // If all processes are selected, unselect all
             setSelectedProcess([]);
         } else {
             // Otherwise, select all processes
-            setSelectedProcess(process.map((process) => process._id));
+            setSelectedProcess(processes.map((processes) => processes._id));
         }
     };
 
@@ -114,7 +107,7 @@ const ProcessList = () => {
                         <div className="d-flex align-items-center ptable">
                             <input
                                 type="checkbox"
-                                checked={selectedProcess.length === process.length}
+                                checked={selectedProcess.length === processes.length}
                                 onChange={toggleAllProcessSelection}
                             />
                             <button
@@ -152,25 +145,41 @@ const ProcessList = () => {
              rows: []
         };
                 
-                        process.forEach(processes => {
+                        processes.forEach(process => {
                             data.rows.push({
                                 select: (
-                                    <input
-                                        type="checkbox"
-                                        checked={selectedProcess.includes(processes._id)}
-                                        onChange={() => toggleProcessselection(processes._id)}
-                                    />
+                                    <div className="d-flex align-items-right">
+                                        <input
+                                            type="checkbox"
+                                            checked={selectedProcess.includes(process._id)}
+                                            onChange={() => toggleProcessselection(process._id)}
+                                        />
+                                    </div>
                                 ),
-                                title: processes.title,
-                                content: processes.content, actions: <Fragment>
-                                        <Link to={`/admin/updateprocess/${processes._id}`} className="btn btn-primary py-1 px-2">
+                                id: (
+                                    <div className="d-flex align-items-right">
+                                        {process._id}
+                                    </div>
+                                ),
+                                title: (
+                                    <div className="d-flex align-items-right">
+                                        {process.title}
+                                    </div>
+                                ),
+                                content: (
+                                    <div className="d-flex align-items-right">
+                                        {process.content}
+                                    </div>
+                                ),
+                                actions: 
+                                    <div className="d-flex">
+                                        <Link to={`/admin/updateprocess/${process._id}`} className="etable btn btn-primary py-1 px-2">
                                             <i className="fa fa-pen"></i>
                                         </Link>
-                                        <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => deleteProcessHandler(processes._id)}>
+                                        <button className="dtable btn btn-danger py-1 px-2 ml-2" onClick={() => deleteProcessHandler(process._id)}>
                                             <i className="fa fa-trash"></i>
                                         </button>
-                                    </Fragment>
-                                
+                                    </div>
                             });
                         });
                 
@@ -225,7 +234,7 @@ const ProcessList = () => {
                         {loading ? (
                             <Loader />
                         ) : (
-                        <div class="dataTab">
+                        <div class="dataTabP">
                             <div class="dataHead">
                                 <h1 className="table-title-my-5">DATA COLLECTION AND OBSERVATION STEPS</h1>
                                 <Link to={`/admin/new/process`} className="ptable btn btn-primary py-1 px-2">

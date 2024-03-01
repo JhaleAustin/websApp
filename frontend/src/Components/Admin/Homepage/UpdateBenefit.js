@@ -19,17 +19,8 @@ const UpdateBenefit = () => {
   const [updateError, setUpdateError] = useState('')
   const [isUpdated, setIsUpdated] = useState(false)
 
-  const [selectedTopic, setSelectedTopic] = useState('');
-
   let { id } = useParams();
   let navigate = useNavigate()
-
-    const errMsg = (message = '') => toast.error(message, {
-        position: toast.POSITION.BOTTOM_RIGHT
-    });
-    const successMsg = (message = '') => toast.success(message, {
-        position: toast.POSITION.BOTTOM_RIGHT
-    });
 
   const getTopicDetails =  async (id) => {
     try {
@@ -52,17 +43,17 @@ const UpdateBenefit = () => {
           setDescription(benefit.description);
       }
 
-      if (error) {
-            errMsg(error)
+        if (error) {
+        toast.error('FAILED TO UPDATE PEANUT SHELL DESCRIPTION');
             
         }
         if (updateError) {
-            errMsg(updateError);
+          toast.error('FAILED TO UPDATE PEANUT SHELL DESCRIPTION');
            
         }
         if (isUpdated) {
+            toast.success('PEANUT SHELL DESCRIPTION IS UPDATED SUCCESSFULLY');
             navigate('/admin/benefit');
-            successMsg('PEANUT SHELL DESCRIPTION IS UPDATED SUCCESSFULLY');
            
         }
 

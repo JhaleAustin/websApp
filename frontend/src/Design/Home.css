@@ -14,23 +14,29 @@
 {
   background-color: #abc32f;
   color: #164006;
-  border: none;
+  border: 2px solid #164006;
   margin-left: auto;
   margin-right: 20px;
+  box-shadow: none !important;
+}
+
+.home-form .hHome
+{
+  margin-right: 10px;
 }
 
 .home-form button:hover
 {
   background-color: #164006;
   color: #abc32f;
-  border: none;
+  border: 2px solid  #abc32f !important;
 }
 
 .home-form button:active
 {
   background-color: #164006 !important;
   color: #abc32f !important;
-  border: none !important;
+  border: 2px solid  #abc32f !important;
 }
 
 .home-form label
@@ -102,13 +108,32 @@
 #description {
   width: 100%;
   margin-left: 30px;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+#title,
+#content {
+  width: 100%;
+  margin-left: 30px;
+  box-shadow: none !important;
+  border: 3px solid  #abc32f !important;
 }
 
 #topic {
   width: auto;
 }
 
+#title {
+  width: auto;
+}
+
 #description {
+  margin-top: 10px;
+  height: auto;
+}
+
+#content {
   margin-top: 10px;
   height: auto;
 }
@@ -149,5 +174,11 @@
 .form-label2
 {
   margin-left: -320px;
+}
+
+.form-label3
+{
+  margin-left: -360px;
+  margin-bottom: 0;
 }
 
