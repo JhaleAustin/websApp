@@ -74,14 +74,14 @@ function Homepage() {
                 <div class="col-md-6 ">
                   <div class="detail-box">
                     <h1>
-                      {peanutshell[0].topic}
+                      {peanutshell[0] && peanutshell[0].topic}
                     </h1>
                     <p>
-                      {peanutshell[0].description} 
+                      {peanutshell[0] && peanutshell[0].description} 
                     </p>
-            
                   </div>
                 </div>
+                
                 <div class="col-md-6">
                   <div class="img-box" style={{ margin: 100 }}>
                     <img src="https://th.bing.com/th/id/R.5d8287b39f5cafc8c4937fb20a56b0c9?rik=GSCnF4ov8ZbqIw&riu=http%3a%2f%2fclipart-library.com%2fimages_k%2ftransparent-peanut%2ftransparent-peanut-18.png&ehk=NSq5wcJJRVdLEsDGeHkNE0K9dZYaDmrcy8sofBS30vY%3d&risl=&pid=ImgRaw&r=0" alt="" />
@@ -98,36 +98,33 @@ function Homepage() {
               <div class="box">
 
                 <h1>
-              {peanutshell[1].topic}
+              {peanutshell[1] && peanutshell[1].topic}
               </h1>
              <p>
-               {peanutshell[1].description} </p>
+               {peanutshell[1] && peanutshell[1].description} </p>
             
               </div>
               <div class="box active">
                 <h1>
-              {peanutshell[2].topic}
+              {peanutshell[2] && peanutshell[2].topic}
               </h1>
              <p>
-               {peanutshell[2].description} </p>
+               {peanutshell[2] && peanutshell[2].description} </p>
             
               </div>
               <div class="box">
-
                 <h1>
-              {peanutshell[3].topic}
-              </h1>
-             <p>
-               {peanutshell[3].description} </p>
-            
+                  {peanutshell[3] && peanutshell[3].topic}
+                </h1>
+                <p>
+                  {peanutshell[4] && peanutshell[4].description} 
+                </p>
               </div>
             </div>
           </div>
         </section>
 
-
-
-        <div>
+        {/* <div>
           <div class="jumbotron text-center">
             <h1 class="display-4" style={{ fontFamily: 'Madimi One', position: 'relative' }}>
               <span style={{ borderBottom: '5px solid #006400', position: 'relative', display: 'inline-block', padding: '0 10px' }}>
@@ -324,7 +321,7 @@ function Homepage() {
             </div>
           </section>
 
-        </div>
+        </div> */}
 
 
 
