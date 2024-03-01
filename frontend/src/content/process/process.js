@@ -1,5 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import axios from 'axios';
+import Header from '../../Components/Layout/Header';  // Add this line
+
 
 function Process() {
 
@@ -29,6 +31,7 @@ function Process() {
 
   return (
     <Fragment>
+      <Header />
    
       <div class="container mt-4"  style={{ background: 'linear-gradient(to right, #9caa58, #f0cdaa), rgba(0, 0, 0, 1)' }}
  >
