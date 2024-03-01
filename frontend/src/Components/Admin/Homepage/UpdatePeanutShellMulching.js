@@ -24,13 +24,6 @@ const UpdatePeanutShellMulching = () => {
   let { id } = useParams();
   let navigate = useNavigate()
 
-    const errMsg = (message = '') => toast.error(message, {
-        position: toast.POSITION.BOTTOM_RIGHT
-    });
-    const successMsg = (message = '') => toast.success(message, {
-        position: toast.POSITION.BOTTOM_RIGHT
-    });
-
   const getTopicDetails =  async (id) => {
     try {
        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/home/show/peanutshellmulching/${id}`)
@@ -54,18 +47,18 @@ const UpdatePeanutShellMulching = () => {
       }
 
       if (error) {
-            errMsg(error)
-            
-        }
-        if (updateError) {
-            errMsg(updateError);
-           
-        }
-        if (isUpdated) {
-            navigate('/admin/peanutshellmulching');
-            successMsg('PEANUT SHELL DESCRIPTION IS UPDATED SUCCESSFULLY');
-           
-        }
+        toast.error('FAILED TO UPDATE PEANUT SHELL MULCHING DESCRIPTION');
+          
+      }
+      if (updateError) {
+        toast.error('FAILED TO UPDATE PEANUT SHELL MULCHING DESCRIPTION');
+         
+      }
+      if (isUpdated) {
+        toast.success('PEANUT SHELL MULCHING DESCRIPTION IS UPDATED SUCCESSFULLY');
+        navigate('/admin/peanutshellmuching');
+         
+      }
 
   }, [error, isUpdated, updateError, peanutshellmulching, id]);
 

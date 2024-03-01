@@ -43,22 +43,16 @@ const MulchingList = () => {
         getAdminMulching();
 
         if (error) {
-            toast.error(error, {
-                position: toast.POSITION.BOTTOM_RIGHT
-            });
+            toast.error('FAILED TO DELETE MULCHING INFORMATION');
         }
 
         if (deleteError) {
-            toast.error(deleteError, {
-                position: toast.POSITION.BOTTOM_RIGHT
-            });
+            toast.error('FAILED TO DELETE MULCHING INFORMATION');
         }
 
         if (isDeleted) {
 
-            toast.success('DESCRIPTION DELETED SUCCESSFULLY', {
-                position: toast.POSITION.BOTTOM_RIGHT
-            });
+            toast.success('MULCHING INFORMATION IS DELETED SUCCESSFULLY');
 
             navigate('/admin/mulching');
 

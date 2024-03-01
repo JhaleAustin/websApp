@@ -44,15 +44,15 @@ const UpdateBenefit = () => {
       }
 
         if (error) {
-        toast.error('FAILED TO UPDATE PEANUT SHELL DESCRIPTION');
+        toast.error('FAILED TO UPDATE BENEFIT DESCRIPTION');
             
         }
         if (updateError) {
-          toast.error('FAILED TO UPDATE PEANUT SHELL DESCRIPTION');
+          toast.error('FAILED TO UPDATE BENEFIT DESCRIPTION');
            
         }
         if (isUpdated) {
-            toast.success('PEANUT SHELL DESCRIPTION IS UPDATED SUCCESSFULLY');
+            toast.success('BENEFIT DESCRIPTION IS UPDATED SUCCESSFULLY');
             navigate('/admin/benefit');
            
         }

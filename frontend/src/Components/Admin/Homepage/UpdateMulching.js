@@ -24,13 +24,6 @@ const UpdateMulching = () => {
   let { id } = useParams();
   let navigate = useNavigate()
 
-    const errMsg = (message = '') => toast.error(message, {
-        position: toast.POSITION.BOTTOM_RIGHT
-    });
-    const successMsg = (message = '') => toast.success(message, {
-        position: toast.POSITION.BOTTOM_RIGHT
-    });
-
   const getTopicDetails =  async (id) => {
     try {
        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/home/show/mulching/${id}`)
@@ -54,16 +47,17 @@ const UpdateMulching = () => {
       }
 
       if (error) {
-            errMsg(error)
+        toast.error('FAILED TO UPDATE MULCHING DESCRIPTION');
             
         }
         if (updateError) {
-            errMsg(updateError);
+          toast.error('FAILED TO UPDATE MULCHING DESCRIPTION');
            
         }
         if (isUpdated) {
+          toast.success('MULCHING DESCRIPTION IS UPDATED SUCCESSFULLY');
             navigate('/admin/mulching');
-            successMsg('PEANUT SHELL DESCRIPTION IS UPDATED SUCCESSFULLY');
+            
            
         }
 

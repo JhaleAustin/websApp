@@ -43,22 +43,16 @@ const BenefitList = () => {
         getAdminBenefit();
 
         if (error) {
-            toast.error(error, {
-                position: toast.POSITION.BOTTOM_RIGHT
-            });
+            toast.error('FAILED TO DELETE BENEFIT INFORMATION');
         }
 
         if (deleteError) {
-            toast.error(deleteError, {
-                position: toast.POSITION.BOTTOM_RIGHT
-            });
+            toast.error('FAILED TO DELETE BENEFIT INFORMATION');
         }
 
         if (isDeleted) {
 
-            toast.success('DESCRIPTION DELETED SUCCESSFULLY', {
-                position: toast.POSITION.BOTTOM_RIGHT
-            });
+            toast.success('BENEFIT INFORMATION IS DELETED SUCCESSFULLY');
 
             navigate('/admin/benefit');
 
