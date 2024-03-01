@@ -389,7 +389,7 @@ a:focus {
 }
 
 .feature_section .feature_container .box:hover, .feature_section .feature_container .box.active {
-  background-color: #ff8a1d;
+  background-color: #dc9644;
   color: #ffffff;
 }
 

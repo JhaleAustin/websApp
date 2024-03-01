@@ -20,7 +20,7 @@ import MulchingList from './Components/Admin/Homepage/MulchingList'
 import ProcessList from './Components/Admin/Process/processList';
 import NewProcess from './Components/Admin/Process/NewProcess1';
 import UpdatePorcess from './Components/Admin/Process/UpdateProcess';
-import DocumentationList from './Components/Admin/Documentation/Docu';
+import DocumentationList from './Components/Admin/Documentation/DocuList';
 import NewDocumentation from './Components/Admin/Documentation/NewDocu2';
 import UpdateDocumention from './Components/Admin/Documentation/UpdateDocu';
 
@@ -60,7 +60,7 @@ function App() {
             {/* <Route path="/admin/updatepeanutshell/:id" element={<UpdatePeanutShell />} /> */}
 
             <Route path="/admin/updateprocess" element={<UpdatePorcess />} />
-            <Route path="/admin/updatedocumentation" element={<UpdateDocumention />} />
+            <Route path="/admin/updatedocumentation/:id" element={<UpdateDocumention />} />
           </Routes>
         </div>
       </Router>

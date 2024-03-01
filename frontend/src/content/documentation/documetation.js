@@ -14,8 +14,8 @@ function Documentation() {
 
   return (
   <Fragment>
-     <div   style={{ background: 'linear-gradient(to right, #b8aa19, #006400), rgba(0, 0, 0, 1)' }}
-    >
+     <div    style={{ background: 'linear-gradient(to right, #9caa58, #f0cdaa), rgba(0, 0, 0, 1)' }}
+  >
     <Documentation_2/>
     <div className="scroll-container">
       <Documentation_1 />
