@@ -1,0 +1,162 @@
+.dlist .np4
+{
+  margin-left: 75px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.home-form4 button
+{
+  background-color: #abc32f;
+  color: #164006;
+  border: 2px solid #164006;
+  margin-left: auto;
+  margin-right: 20px;
+  box-shadow: none !important;
+}
+
+.home-form4 button:hover
+{
+  background-color: #164006;
+  color: #abc32f;
+  border: 2px solid  #abc32f !important;
+}
+
+.home-form4 button:active
+{
+  background-color: #164006 !important;
+  color: #abc32f !important;
+  border: 2px solid  #abc32f !important;
+}
+
+.form4
+{
+
+  display: flex;
+  flex-direction: column;
+  width: 800px; /* Set the width to 500 pixels */
+  /* background: linear-gradient(to bottom right, #abc32f, #164006); */
+  background-color: #164006 !important;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  color: white;
+  /* padding-left: 50px; */
+  justify-content: center;
+  align-items: center;
+}
+
+.form4 .col-6 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  #collectionDate,
+  #height,
+  #length,
+  #width {
+    width: 100%;
+    box-shadow: none !important;
+    border: 3px solid  #abc32f !important;
+  }
+
+#imagesRow .gallery
+{
+  margin-top: -30px;
+    background-color: #abc32f;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    /* padding: 20px; */
+}
+
+#imagesRow .galleryItemRow
+{
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+#imagesRow .gallery-item
+{
+    justify-content: center;
+    align-items: center;
+    object-fit: cover;
+    width: 100px; /* Set your preferred width */
+    height: 100px; /* Set your preferred height */
+    position: relative;
+    overflow: hidden;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#imagesRow .custom-file-label
+{
+    background-color: #abc32f;
+    color: #164006;
+    border-radius: 10px;  
+    margin-left: -183px;
+    margin-top: 10px; 
+    padding: 10px;
+}
+
+#imagesRow .custom-file-label i
+{
+    margin-right: 5px; 
+}
+
+.form4 button
+{
+  margin: 0 auto;
+
+}
+
+.headerNew
+{
+    font-size: 30px;
+    letter-spacing: 5px;
+    background-color: #abc32f;
+    color: #164006;
+    padding: 10px;
+    padding-bottom: 10px;
+    border-radius: 10px;
+}
+
+.form4 .row
+{
+    margin-top: 20px;
+
+}
+
+
+.form-label-1
+{
+  margin-left: -300px;
+}
+
+.form-label-2
+{
+  margin-left: -250px;
+}
+
+.form-label-3
+{
+  margin-left: -240px;
+}
+
+.form-label-4
+{
+  margin-left: -250px;
+}
+
+
+
+
+

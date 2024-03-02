@@ -72,7 +72,14 @@ const UpdatePeanutShell = () => {
               description,
           };
   
-          const { data } = await axios.put(`http://localhost:3001/api/v1/home/peanutshell/${peanutshell._id}`, updatedData);
+          const { data } = await axios.put(`http://localhost:3001/api/v1/home/peanutshell/${peanutshell._id}`, updatedData,  
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              'Authorization': `Bearer ${getToken()}`,
+            },
+          });
+  
   
           if (data.success) {
               setIsUpdated(true);

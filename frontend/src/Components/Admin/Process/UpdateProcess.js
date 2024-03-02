@@ -38,20 +38,18 @@ const UpdateProcess = () => {
         e.preventDefault();
 
         try {
-           
-            // const config = {
-            //     headers: {
-            //         'Content-Type':   'multipart/form-data', 
-            //         'Authorization': `Bearer ${getToken()}`
-            //     }
-            // }
 
             const updatedData = {
               title,
               content,
           };
 
-            const { data } = await axios.put(`${process.env.REACT_APP_API}/api/v1/admin/process/${id}`, updatedData)
+            const { data } = await axios.put(`${process.env.REACT_APP_API}/api/v1/admin/process/${id}`, updatedData, {
+                  headers: {
+                      'Content-Type':   'multipart/form-data', 
+                      'Authorization': `Bearer ${getToken()}`
+                  }
+              });
            
             if (data.success) {
               setIsUpdated(true);

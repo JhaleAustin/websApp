@@ -71,7 +71,14 @@ const UpdatePeanutShellMulching = () => {
               description,
           };
   
-          const { data } = await axios.put(`http://localhost:3001/api/v1/home/peanutshellmulching/${peanutshellmulching._id}`, updatedData);
+          const { data } = await axios.put(`http://localhost:3001/api/v1/home/peanutshellmulching/${peanutshellmulching._id}`, updatedData,  
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              'Authorization': `Bearer ${getToken()}`,
+            },
+          });
+  
   
           if (data.success) {
               setIsUpdated(true);

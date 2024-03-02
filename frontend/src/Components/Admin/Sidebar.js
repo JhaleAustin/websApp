@@ -1,16 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   CDBSidebar,
   CDBSidebarContent,
   CDBSidebarMenu,
   CDBSidebarMenuItem,
 } from 'cdbreact';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
+import axios from 'axios'
+import { logout, getUser } from '../../utils/helpers'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 const Sidebar = () => {
   const [isProcessDropdownOpen, setIsProcessDropdownOpen] = useState(false);
   const [isDocumentationDropdownOpen, setIsDocumentationDropdownOpen] = useState(false);
   const [isHomeDropdownOpen, setIsHomeDropdownOpen] = useState(false);
+  const [user, setUser] = useState({})
+  const navigate = useNavigate();
 
   const toggleProcessDropdown = () => {
     setIsProcessDropdownOpen(!isProcessDropdownOpen);
@@ -27,6 +33,26 @@ const Sidebar = () => {
     setIsHomeDropdownOpen(!isHomeDropdownOpen);
     setIsProcessDropdownOpen(false);
   };
+
+  const logoutUser = async () => {
+    try {
+        await axios.get(`${process.env.REACT_APP_API}/api/v1/logout`)
+        setUser(null)
+        logout(() => navigate('/login'))
+    } catch (error) {
+        toast.error(error.response.data.message)
+    }
+  }
+
+  const logoutHandler = () => {
+    logoutUser();
+    navigate('/login')
+    toast.success('LOG OUT');
+}
+    useEffect(() => {
+      setUser(getUser())
+    }, [])
+
 
   return (
      <CDBSidebar backgroundColor="#abc32f" textColor="black" 
@@ -57,8 +83,11 @@ const Sidebar = () => {
             {isDocumentationDropdownOpen && (
               <div style={{ paddingLeft: '20px', marginTop: '10px' }}>
 
-                <NavLink exact to="/admin/documentationList" activeClassName="activeClicked">
-                  <CDBSidebarMenuItem icon="fa-solid fa-table">DOCUMENTATION</CDBSidebarMenuItem>
+                <NavLink exact to="/admin/withmulch" activeClassName="activeClicked">
+                  <CDBSidebarMenuItem icon="fa-solid fa-table">WITH MULCH</CDBSidebarMenuItem>
+                </NavLink>
+                <NavLink exact to="/admin/withoutmulch" activeClassName="activeClicked">
+                  <CDBSidebarMenuItem icon="fa-solid fa-table">WITHOUT MULCH</CDBSidebarMenuItem>
                 </NavLink>
 
               </div>
@@ -87,6 +116,10 @@ const Sidebar = () => {
               </div>
             )}
           </NavLink>
+
+          <Link to="/logout">
+              <button className="btn btn__login" onClick={logoutHandler}> <i className="fas fa-sign-out-alt"></i> </button>
+            </Link>
         
           
           </CDBSidebarMenu>

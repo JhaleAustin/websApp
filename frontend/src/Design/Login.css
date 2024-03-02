@@ -6,17 +6,60 @@
   user-select: none;
 }
 
+/* .wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; 
+  background-color: #164006;
+} */
+
+.l-col-10 {
+  max-width: 100%; /* This will make sure the content is centered horizontally */
+}
+
+/* Add this style to center the form in the container */
+.bg-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Add this style to center the content inside the form */
+.l-content {
+  text-align: center;
+
+}
+
+/* Add this style to center the form button */
+.field {
+  text-align: center;
+}
+
+.l-row
+{
+  margin: 0 auto;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  height: 100vh; 
+  background-color: #164006;
+
+}
+
 .l-content {
   text-align: center;
   padding: 15px 50px 50px 50px;
   width: 500px;
   position: absolute;
-  margin-top: 28px;
-  top: 50%;
+  /* margin-top: 28px; */
+  /* top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(255, 255, 255, 0.04);
+  transform: translate(-50%, -50%); */
+  margin: 0 auto;
+  background-color: #abc32f !important;
   box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.75);
+  border-radius: 10px;
 }
 
 .logo
@@ -34,34 +77,38 @@
   width: 100%;
   display: flex;
   background: rgba(0, 0, 0, 0.164);
+  border: 2px solid #164006;
 }
 .field span{
-  color: #abc32f;
+  color: #164006;
   width: 40px;
   line-height: 45px;
 }
 .field input{
   height: 100%;
   width: 100%;
-  background: transparent;
-  border: none;
+  background: white;
   outline: none;
-  color: #222;
+  color: black;
   font-size: 16px;
   font-family: 'Poppins',sans-serif;
+}
+
+.field input::placeholder{
+  color: black;
 }
 
 .field button 
 {
   width: 100%; /* Make the button take the full width of its container */
   box-sizing: border-box; /* Include padding and border in the element's total width */
-  color: white;
+  color: #164006;
   font-size: 18px;
   letter-spacing: 1px;
   font-weight: 600;
   cursor: pointer;
   font-family: 'Montserrat', sans-serif;
-  padding: 10px 20px; /* Adjust padding as needed */
+  /* padding: 10px 20px; Adjust padding as needed */
 }
 
 #login_button

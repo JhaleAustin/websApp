@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react'
-import { Link, useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Loader from '../Layout/Loader' 
 import MetaData from '../Layout/MetaData'
 import { toast } from 'react-toastify';
@@ -8,20 +8,13 @@ import axios from 'axios';
 import {authenticate} from '../../utils/helpers'
 import { getUser } from '../../utils/helpers';
 
-
-const clientID = "526985758798-b5jsd5g1grsqi5k3g49vka6r1dmu29b2.apps.googleusercontent.com";
-
     const Login = () => {
         
         const [email, setEmail] = useState('');
         const [password, setPassword] = useState('');
         const [loading, setLoading] = useState(false)
         const navigate = useNavigate()
-        let location = useLocation();
-        const redirect = location.search ? new URLSearchParams(location.search).get('redirect') : ''
-        const [showModal, setShowModal] = useState(false);
-    const [profile, setProfile] = useState(null);
-
+    
     const login = async (email, password) => {
         try {
             const config = {
@@ -38,19 +31,11 @@ const clientID = "526985758798-b5jsd5g1grsqi5k3g49vka6r1dmu29b2.apps.googleuserc
         } catch (error) {
             console.log('Server response:', error.response);
     
-            if (error.response && error.response.status === 400 && error.response.data.errors) {
-                // If the server returns validation errors, display them to the user
-                const validationErrors = error.response.data.errors;
-                validationErrors.forEach(errorMessage => {
-                    toast.error(errorMessage, {
-                        position: toast.POSITION.BOTTOM_RIGHT
-                    });
-                });
+            if (error)
+            {
+                toast.error("CANNOT BE LOGIN")
             } else {
-                // For other errors, show a generic message
-                toast.error("INVALID USER OR PASSWORD", {
-                    position: toast.POSITION.BOTTOM_RIGHT
-                });
+                toast.error("INVALID USER OR PASSWORD")
             }
         }
     };
@@ -75,7 +60,7 @@ const clientID = "526985758798-b5jsd5g1grsqi5k3g49vka6r1dmu29b2.apps.googleuserc
                                     <form onSubmit={submitHandler}>
                                         <div class="field">
                                             <span class="fa fa-envelope"></span>
-                                                <input placeholder="EMAIL OR PHONE"
+                                                <input placeholder=" EMAIL OR PHONE"
                                                     type="email"
                                                     id="email_field"
                                                     value={email}
@@ -83,7 +68,7 @@ const clientID = "526985758798-b5jsd5g1grsqi5k3g49vka6r1dmu29b2.apps.googleuserc
                                         </div>
                                         <div class="field space">
                                             <span class="fa fa-lock"></span>
-                                            <input required placeholder="PASSWORD"
+                                            <input required placeholder=" PASSWORD"
                                                     type="password"
                                                     id="password_field"
                                                     value={password}

@@ -1,6 +1,9 @@
 
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import ProtectedRoute from "./Components/Route/ProtectedRoute";
+
 import Login from "./Components/User/Login";
 import Analysis from './content/analysis/analysis';
 import Header from './Components/Layout/Header';  // Add this line
@@ -26,9 +29,13 @@ import ProcessList from './Components/Admin/Process/ProcessList';
 import NewProcess from './Components/Admin/Process/NewProcess1';
 import UpdateProcess from './Components/Admin/Process/UpdateProcess';
 
-import DocumentationList from './Components/Admin/Documentation/DocuList';
-import NewDocumentation from './Components/Admin/Documentation/NewDocu2';
-import UpdateDocumention from './Components/Admin/Documentation/UpdateDocu';
+import WithoutMulchingList from './Components/Admin/Documentation/WithoutMulchingList';
+import WithMulchingList from './Components/Admin/Documentation/WithMulchingList';
+import NewWithoutMulch from './Components/Admin/Documentation/NewWithoutMulch';
+import UpdateWithoutMulch from './Components/Admin/Documentation/UpdateWithoutMulch';
+import NewWithMulch from './Components/Admin/Documentation/NewWithMulch';
+import UpdateWithMulch from './Components/Admin/Documentation/UpdateWithMulch';
+
 
 function App() {
 
@@ -46,28 +53,122 @@ function App() {
  
           {/* AdminPage route */}
           <Routes>
-            <Route path="/admin/documentation" element={<NewDocumentation />} />
-            <Route path="/admin/documentationList" element={<DocumentationList />} />
+            <Route path="/admin/withoutmulch"
+              element={
+                <ProtectedRoute isAdmin={true}>
+                  <WithoutMulchingList />
+                </ProtectedRoute>
+              }/>
+            <Route path="/admin/update/withoutmulch/:id"
+              element={
+                  <ProtectedRoute isAdmin={true}>
+                    <UpdateWithoutMulch /> 
+                  </ProtectedRoute> 
+              }/>
+            <Route path="/admin/new/withoutmulch/:id" 
+              element={
+                <ProtectedRoute isAdmin={true}>
+                  <NewWithoutMulch /> 
+                </ProtectedRoute> 
+              }/>
+            <Route path="/admin/withmulch"
+              element={
+                <ProtectedRoute isAdmin={true}>
+                  <WithMulchingList />
+                </ProtectedRoute>
+              }/>
+            <Route path="/admin/update/withmulch/:id"
+              element={
+                  <ProtectedRoute isAdmin={true}>
+                    <UpdateWithMulch /> 
+                  </ProtectedRoute> 
+              }/>
+            <Route path="/admin/new/withmulch/:id" 
+              element={
+                <ProtectedRoute isAdmin={true}>
+                  <NewWithMulch /> 
+                </ProtectedRoute> 
+              }/>
 
-            <Route path="/admin/new/process" element={<NewProcess />} />
-            <Route path="/admin/process" element={<ProcessList />} />
-            <Route path="/admin/updateprocess/:id" element={<UpdateProcess />} />
 
-            <Route path="/admin/homepage" element={<NewHomepage />} />
+            <Route path="/admin/new/process"
+            element={
+                  <ProtectedRoute isAdmin={true}>
+                    <NewProcess /> 
+                  </ProtectedRoute> 
+              }/>
+            <Route path="/admin/process"
+            element={
+                  <ProtectedRoute isAdmin={true}>
+                    <ProcessList /> 
+                  </ProtectedRoute> 
+              }/>
+            <Route path="/admin/updateprocess/:id"
+            element={
+                  <ProtectedRoute isAdmin={true}>
+                    <UpdateProcess /> 
+                  </ProtectedRoute> 
+              }/>
 
-            <Route path="/admin/peanutshell" element={<PeanutShellList />} />
-            <Route path="/admin/updatepeanutshell/:id" element={<UpdatePeanutShell />} />
+            <Route path="/admin/homepage"
+            element={
+                  <ProtectedRoute isAdmin={true}>
+                    <NewHomepage /> 
+                  </ProtectedRoute> 
+              }/>
 
-            <Route path="/admin/mulching" element={<MulchingList />} />
-            <Route path="/admin/updatemulching/:id" element={<UpdateMulching />} />
+            <Route path="/admin/peanutshell"
+            element={
+                  <ProtectedRoute isAdmin={true}>
+                    <PeanutShellList /> 
+                  </ProtectedRoute> 
+              }/>
+            <Route path="/admin/updatepeanutshell/:id"
+            element={
+                  <ProtectedRoute isAdmin={true}>
+                    <UpdatePeanutShell /> 
+                  </ProtectedRoute> 
+              }/>
 
-            <Route path="/admin/peanutshellmulching" element={<PeanutShellMulchingList />} />
-            <Route path="/admin/updatepeanutshellmulching/:id" element={<UpdatePeanutShellMulching />} />
+            <Route path="/admin/mulching"
+            element={
+                  <ProtectedRoute isAdmin={true}>
+                    <MulchingList /> 
+                  </ProtectedRoute> 
+              }/>
+            <Route path="/admin/updatemulching/:id"
+            element={
+                  <ProtectedRoute isAdmin={true}>
+                    <UpdateMulching /> 
+                  </ProtectedRoute> 
+              }/>
 
-            <Route path="/admin/benefit" element={<BenefitList />} />
-            <Route path="/admin/updatebenefit/:id" element={<UpdateBenefit/>} />
+            <Route path="/admin/peanutshellmulching"
+            element={
+                  <ProtectedRoute isAdmin={true}>
+                    <PeanutShellMulchingList /> 
+                  </ProtectedRoute> 
+              }/>
+            <Route path="/admin/updatepeanutshellmulching/:id" 
+            element={
+                  <ProtectedRoute isAdmin={true}>
+                    <UpdatePeanutShellMulching /> 
+                  </ProtectedRoute> 
+              }/>
 
-            <Route path="/admin/updatedocumentation/:id" element={<UpdateDocumention />} />
+            <Route path="/admin/benefit"
+            element={
+                  <ProtectedRoute isAdmin={true}>
+                    <BenefitList /> 
+                  </ProtectedRoute> 
+              }/>
+            <Route path="/admin/updatebenefit/:id"
+            element={
+                  <ProtectedRoute isAdmin={true}>
+                    <UpdateBenefit /> 
+                  </ProtectedRoute> 
+              }/>
+
           </Routes>
         </div>
       </Router>

@@ -20,60 +20,59 @@ exports.newPlantTypes = async (req, res, next) => {
 
 exports.newDocumentation = async (req, res, next) => {
 
+	try {
 	const plantTypes = await Plant.findById(req.params.id);
 
-	if (!req.body.images) {
-        return res.status(400).json({ message: 'IMAGES ARRAY IS MISSING IN THE REQUEST BODY' });
-    } 
-	let images = Array.isArray(req.body.images) ? req.body.images : [req.body.images];
+	console.log(plantTypes)
+
+
+	let images = [];
+	// let images = Array.isArray(req.body.images) ? req.body.images : [req.body.images];
     
 	if (typeof req.body.images === 'string') {
 		images.push(req.body.images)
 	} else {
 		images = req.body.images
 	}
-  
-	let leaves = []
-	if (typeof req.body.leaves === 'string') {
-		leaves.push(req.body.leaves)
-	} else {
-		leaves = req.body.leaves
-	}
 
 	let imagesLinks = [];
-	for (let i = 0; i < images.length; i++) {
-		let imageDataUri = images[i]
+		for (let i = 0; i < images.length; i++) {
+			try {
+				let imageDataUri = images[i]
+				const result = await cloudinary.v2.uploader.upload(`${imageDataUri}`, {
+					folder: 'Documentations',
+					width: 150,
+					crop: "scale",
+				});
 
-		try {
-			const result = await cloudinary.v2.uploader.upload(`${imageDataUri}`, {
-				folder: 'Documentations',
-				width: 150,
-				crop: "scale",
-			});
+				imagesLinks.push({
+					public_id: result.public_id,
+					url: result.secure_url
+				})
 
-			imagesLinks.push({
-				public_id: result.public_id,
-				url: result.secure_url
-			})
+			} catch (error) {
+				console.log(error)
+			}
 
-		} catch (error) {
-			console.log(error)
 		}
-
-	}
-
 	req.body.images = imagesLinks;
+
+	let leaves;
+	if (typeof req.body.leaves === 'string') {
+		leaves = JSON.parse(req.body.leaves);
+	} else {
+		leaves = req.body.leaves;
+	}
 	
 	const documentation = await Documentation.create({
-
 		plantTypes: req.params.id,
-		collecttionDate: req.body.collecttionDate,
+		collectionDate: req.body.collectionDate,
 		height: req.body.height,
 		leaves: {
-					length: req.body.length,
-					width: req.body.width,
-				},
-		images: [imagesLinks]
+			length: leaves.length,
+			width: leaves.width,
+		},
+		images: imagesLinks
 	});
 
 	if (!documentation)
@@ -85,24 +84,72 @@ exports.newDocumentation = async (req, res, next) => {
 		success: true,
 		documentation
 	})
+
+} catch (error) {
+	res.status(400).json({
+		success: false,
+		message: 'FAILED TO ADD DATA',
+		error: error.message
+	});
+}
 }
 
-exports.getDocumentation = async (req, res, next) => {
-	  const Documentations = await Documentation.find({});
-	
- if (!Documentations) {
-		return res.status(404).json({
-			success: false,
-			message: 'No Documentations'
-		})
-	}
-	res.status(200).json({
-		success: true,
-		Documentations,
-		 })
+exports.getWithMulching = async (req, res, next) => {
+    try {
+		const plantType = await Plant.findOne({ types: "With Mulch" });
+
+        if (!plantType) {
+            return res.status(404).json({
+                success: false,
+                message: 'PlantType "With Mulch" not found',
+            });
+        }
+
+        const withMulch = await Documentation.find({ plantTypes: plantType._id });
+			res.status(200).json({
+            success: true,
+			plantTypes: plantType._id,
+            withMulch,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'ERROR FETCHING WITH MULCHING DATA COLLECTION',
+            error: error.message
+        });
+    }
 }
 
+exports.getWithoutMulching = async (req, res, next) => {
+    try {
+		const plantType = await Plant.findOne({ types: "Without Mulch" });
 
+        if (!plantType) {
+            return res.status(404).json({
+                success: false,
+                message: 'PlantType "Without Mulch" not found',
+            });
+        }
+
+		console.log(plantType._id)
+       
+        const withoutMulch = await Documentation.find({ plantTypes: plantType._id });
+		
+			res.status(200).json({
+            success: true,
+			plantTypes: plantType._id,
+            withoutMulch,
+
+			
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'ERROR FETCHING WITH MULCHING DATA COLLECTION',
+            error: error.message
+        });
+    }
+}
 
 exports.getDocumentations = async (req, res, next) => {
 	// const Documentations = await Documentation.find({});
@@ -142,30 +189,6 @@ exports.getSingleDocumentation = async (req, res, next) => {
 	})
 }
 
-// exports.updateDocumentation = async (req, res, next) => {
-// 	let Documentation = await Documentation.findById(req.params.id);
-// 	console.log(req.body)
-// 	if (!Documentation) {
-// 		return res.status(404).json({
-// 			success: false,
-// 			message: 'Documentation not found'
-// 		})
-// 	}
-// 	Documentation = await Documentation.findByIdAndUpdate(req.params.id, req.body, {
-// 		new: true,
-// 	})
-// 	if (!Documentation) {
-// 		return res.status(404).json({
-// 			success: false,
-// 			message: 'Documentation not updated'
-// 		})
-// 	}
-// 	res.status(200).json({
-// 		success: true,
-// 		Documentation
-// 	})
-// }
-
 exports.deleteDocumentation = async (req, res, next) => {
 	const documentation = await Documentation.findByIdAndDelete(req.params.id);
 	if (!documentation) {
@@ -181,123 +204,20 @@ exports.deleteDocumentation = async (req, res, next) => {
 	})
 }
 
-
-
-exports.newDocumentation = async (req, res, next) => {
-
-
-	console.log(req.body.setDate)
-	if (!req.body.images) {
-        return res.status(400).json({ message: 'Images array is missing in the request body' });
-    }
-	let images = Array.isArray(req.body.images) ? req.body.images : [req.body.images];
-    
-// 	let videos = []
-// 	if (typeof req.body.images === 'string') {
-// 		images.push(req.body.images)
-// 	} else {
-// 		images = req.body.images
-// 	}
-
-	    
-// 	let leaves = []
-// 	if (typeof req.body.leaves === 'string') {
-// 		leaves.push(req.body.leaves)
-// 	} else {
-// 		leaves = req.body.leaves
-// 	}
-
-// 	// if (typeof req.body.videos === 'string') {
-// 	// 	images.push(req.body.videos)
-// 	// } else {
-// 	// 	videos = req.body.videos
-// 	// }
-
-// 	let imagesLinks = [];
-
-// 	for (let i = 0; i < images.length; i++) {
-// 		let imageDataUri = images[i]
-// 		// console.log(imageDataUri)
-// 		try {
-// 			const result = await cloudinary.v2.uploader.upload(`${imageDataUri}`, {
-// 				folder: 'Documentations',
-// 				width: 150,
-// 				crop: "scale",
-// 			});
-
-// 			imagesLinks.push({
-// 				public_id: result.public_id,
-// 				url: result.secure_url
-// 			})
-
-// 		} catch (error) {
-// 			console.log(error)
-// 		}
-
-// 	}
-
-// 	let videoLinks = [];
-
-// 	for (let i = 0; i < videos.length; i++) {
-// 		let videoLink = videos[i];
-// 		try {
-// 			const result = await cloudinary.v2.uploader.upload(`${videoLink}`, {
-// 				folder: 'Documentations',
-// 				width: 150,
-// 				crop: "scale",
-// 			});
-	
-// 			consoles.log("dsdsdsd : " , result);
-// 			videoLinks.push({
-// 				public_id: result.public_id,
-// 				url: result.secure_url,
-// 			});
-	
-// 		} catch (error) {
-// 			console.log(error);
-// 		}
-// 	}
-	
-// 	// let leavesLinks = [];
-	
-// 	// for (let i = 0; i < leaves.length; i++) {
-// 	// 	let leaf = leaves[i];
-// 	// 	try {
-// 	// 		leavesLinks.push({
-// 	// 			length: leaf.length,
-// 	// 			width: leaf.width
-// 	// 		});
-// 	// 	} catch (error) {
-// 	// 		console.log(error);
-// 	// 	}
-// 	// }
-	
-// 	// Also, make sure that the variable names inside the try blocks match the correct names.
-	
-// 	req.body.images = imagesLinks;
-// 	req.body.video = videoLinks;
-// 	//   
-// 	const documentation = await Documentation.create(req.body);
-// 	if (!documentation)
-// 		return res.status(400).json({
-// 			success: false,
-// 			message: 'Documentation not created'
-// 		})
-// 	res.status(201).json({
-// 		success: true,
-// 		documentation
-// 	})
-// }
-
 exports.updateDocumentation = async (req, res, next) => {
-	let updateDocumentation = await Documentation.findById(req.params.id);
+
+	
+	const { collectionDate, height, leaves, length, width } = req.body;
+	try {
+	let documentation = await Documentation.findById(req.params.id);
 	// console.log(req.body)
-	if (!updateDocumentation) {
+	if (!documentation) {
 		return res.status(404).json({
 			success: false,
-			message: 'Documentation not found'
+			message: 'DATA NOT FOUND'
 		})
 	}
+
 	let images = []
 
 	if (typeof req.body.images === 'string') {
@@ -305,22 +225,24 @@ exports.updateDocumentation = async (req, res, next) => {
 	} else {
 		images = req.body.images
 	}
+
 	if (images !== undefined) {
 		// Deleting images associated with the Documentation
-		for (let i = 0; i < updateDocumentation.images.length; i++) {
+		for (let i = 0; i < documentation.images.length; i++) {
 			try {
-				let imageDataUri = updateDocumentation.images[i]
+				let imageDataUri = documentation.images[i]
 			const result = await cloudinary.v2.uploader.destroy(`${imageDataUri.public_id}`)
 			} catch (error) {
 				console.log(error)
 			}
 		}
 	}
+
 	let imagesLinks = [];
 	for (let i = 0; i < images.length; i++) {
 		try {
 			let imageDataUri = images[i]
-		const result = await cloudinary.v2.uploader.upload(`${imageDataUri}`, {
+			const result = await cloudinary.v2.uploader.upload(`${imageDataUri}`, {
 			folder: 'Documentations',
 			width: 150,
 			crop: "scale",
@@ -336,21 +258,40 @@ exports.updateDocumentation = async (req, res, next) => {
 
 	}
 
-	
 	req.body.images = imagesLinks
-	updateDocumentation = await updateDocumentation.findByIdAndUpdate(req.params.id, req.body, {
-		new: true,
-		runValidators: true,
-		useFindandModify: false
-	})
-	if (!updateDocumentation)
+
+	let leaves;
+	if (typeof req.body.leaves === 'string') {
+		leaves = JSON.parse(req.body.leaves);
+	} else {
+		leaves = req.body.leaves;
+	}
+
+	documentation.collectionDate = collectionDate,
+	documentation.height = height,
+	// documentation.leaves.length = length,
+	// documentation.leaves.width = width,
+	documentation.leaves = leaves;
+	documentation.images = imagesLinks
+
+	documentation = await documentation.save();
+
+	if (!documentation)
 		return res.status(400).json({
 			success: false,
-			message: 'Documentation not updated'
+			message: 'FAILED TO UPDATE DATA'
 		})
 	// console.log(Documentation)
 	return res.status(200).json({
 		success: true,
-		Documentation
+		documentation
 	})
+	} catch (error) {
+		// Handle any potential errors here
+		console.error('ERROR UPDATING DATA: ', error);
+		res.status(500).json({
+			success: false,
+			message: 'INTERNAL SERVER ERROR'
+		});
+	}
 }

@@ -23,9 +23,7 @@ function Header() {
   const logoutHandler = () => {
     logoutUser();
     navigate('/login')
-    toast.success('LOG OUT', {
-        position: toast.POSITION.BOTTOM_RIGHT
-    });
+    toast.success('LOG OUT');
 }
     useEffect(() => {
       setUser(getUser())

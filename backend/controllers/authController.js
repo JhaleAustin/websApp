@@ -21,6 +21,7 @@ exports.registerUser = async (req, res, next) => {
         user,
     });
 };
+
 exports.loginUser = async (req, res, next) => {
     const { email, password } = req.body;
 

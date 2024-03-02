@@ -1,4 +1,4 @@
-const User = require('../models/user')
+const User = require('../models/authCollection')
 const jwt = require("jsonwebtoken")
 
 exports.isAuthenticatedUser = async (req, res, next) => {
@@ -20,3 +20,5 @@ exports.authorizeRoles = (...roles) => {
         next()
     }
 }
+
+

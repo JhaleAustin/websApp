@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import './Design/adminCss.css';
 import './Design/Login.css';
 import './Design/Header.css';
 import './Design/Header.scss';
 import './Design/Home.css';
 import './Design/DataTable.css';
 import './Design/Topic.css';
+import './Design/Documentation.css';
 import { ToastContainer } from 'react-toastify';
 import './css/style.css'; // Import your custom styles
 import './css/responsive.css';

@@ -27,15 +27,15 @@ const NewProcess1 = () => {
   const newProcess = async (formData) => {
 
     try {
-      // const config = {
-      //     headers: {
-      //         'Content-Type': 'application/json',
-      //         'Authorization': `Bearer ${getToken()}`
-      //     }
-      // }
+      const config = {
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${getToken()}`
+          }
+      }
       // console.log(formData);
 
-      const { data } = await axios.post('http://localhost:3001/api/v1/process/new', formData)
+      const { data } = await axios.post('http://localhost:3001/api/v1/process/new', formData, config)
 
       toast.success('STEP IS CREATED SUCCESSFULLY');
 

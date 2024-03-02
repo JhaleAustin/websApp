@@ -2,36 +2,22 @@ const express = require('express');
 const router = express.Router();
 const upload = require('../utils/multer')
 
-const { newPlantTypes, newDocumentation, getDocumentations,getDocumentation, getSingleDocumentation,
+const { newPlantTypes, newDocumentation, getDocumentations, getWithMulching, getWithoutMulching, getSingleDocumentation,
      updateDocumentation, deleteDocumentation }
       = require('../controllers/docuController');
 
-// const { isAuthenticatedUser, authorizeRoles } = require('../middlewares/auth')
-
-// router.post('/Documentation/new', isAuthenticatedUser,
-//  upload.array('images', 10), newDocumentation)
-
-router.post('/planttypes/new', newPlantTypes)
-
-// router.post('/withmulch/new/:id',upload.array('images', 10), newDocumentation)
-
-router.post('/documentation/new/:id',upload.array('images', 10), newDocumentation)
-
+const { isAuthenticatedUser, authorizeRoles } = require('../middlewares/auth')
 
 router.get('/Documentations', getDocumentations)
 
-//  router.get('/Documentation', getDocumentation)
+//ADMIN
+router.post('/planttypes/new', isAuthenticatedUser, authorizeRoles('admin'), newPlantTypes)
 
-router.get('/Documentation/:id', getSingleDocumentation);
+router.get('/documentation/show/withmulch', isAuthenticatedUser, authorizeRoles('admin'), getWithMulching)
+router.get('/documentation/show/withoutmulch', isAuthenticatedUser, authorizeRoles('admin'), getWithoutMulching)
+router.get('/admin/documentation/:id', getSingleDocumentation);
 
-// router.route('/admin/Documentation/:id', isAuthenticatedUser,).put(upload.array('images', 10),
-//  updateDocumentation).delete(deleteDocumentation);
-
-router.route('/admin/Documentation/:id').put(upload.array('images', 10),
- updateDocumentation).delete(deleteDocumentation);
-
-
-// router.get('/admin/Documentations', isAuthenticatedUser,
-//  authorizeRoles('admin'), getAdminDocumentations);
+router.post('/admin/documentation/:id', isAuthenticatedUser, authorizeRoles('admin'), upload.array('images'), newDocumentation)
+router.route('/admin/documentation/:id', isAuthenticatedUser, authorizeRoles('admin')).put(upload.array('images'), updateDocumentation).delete(deleteDocumentation);
 
 module.exports = router;

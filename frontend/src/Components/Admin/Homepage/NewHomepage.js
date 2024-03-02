@@ -34,19 +34,19 @@ const NewHomepage = () => {
    const newTopic = async (formData) => {
        
         try {
-            // const config = {
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //         'Authorization': `Bearer ${getToken()}`
-            //     }
-            // }
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${getToken()}`
+                }
+            }
             // console.log(formData);
 
             if (!selectedTopic || !selectedTopic._id) {
               toast.error('PLEASE SELECT A TOPIC');
               return;
             }
-             const { data } = await axios.post(`http://localhost:3001/api/v1/home/topic/${selectedTopic._id}`, formData )
+             const { data } = await axios.post(`http://localhost:3001/api/v1/home/topic/${selectedTopic._id}`, formData, config)
              console.log(data);
              setSuccess(data.success);
 
