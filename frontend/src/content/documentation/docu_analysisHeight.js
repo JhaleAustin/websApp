@@ -42,19 +42,15 @@ function Docu_Analysis(handleMaterialChange) {
 const getCategories = (timeframe) => {
   const numIntervals = 7;
   switch (timeframe) {
-    case "week":
-      return Array.from({ length: 7 }, (_, index) => `Day ${index + 1}`);
-    case "month":
-      return Array.from({ length: 31 }, (_, index) => `Day ${index + 1}`);
-    case "year":
-      // return Array.from({ length: 365 }, (_, index) => `Year ${index + 1}`);
+    case "Day":
+      return Array.from({ length: 14 }, (_, index) => `Day ${index + 1}`);
     default:
       return [];
   }
 };
 
   const [state, setState] = useState({
-    selectedTimeframe: "week",
+    selectedTimeframe: "Day",
     options: {
       colors: ["#E91E63", "#FF9800"],
       chart: {

@@ -7,18 +7,14 @@ function Analysis() {
   const getCategories = (timeframe) => {
     const numIntervals = 7;
     switch (timeframe) {
-      case "week":
-        return Array.from({ length: 7 }, (_, index) => `Day ${index + 1}`);
-      case "month":
-        return Array.from({ length: 31 }, (_, index) => `Day ${index + 1}`);
-      case "year":
-        // return Array.from({ length: 365 }, (_, index) => `Year ${index + 1}`);
-      default:
+      case "Day":
+        return Array.from({ length: 14 }, (_, index) => `Day ${index + 1}`);
+       default:
         return [];
     }
   };
   const [state, setState] = useState({
-    selectedTimeframe: "week",
+    selectedTimeframe: "Day",
     options: {
       colors: ["#E91E63", "#FF9800", "#2196F3"],
       chart: {
@@ -31,7 +27,7 @@ function Analysis() {
         },
       },
       xaxis: {
-        categories: getCategories("week"),
+        categories: getCategories("Day"),
       },
       yaxis: {
         min: 0,
@@ -62,6 +58,7 @@ function Analysis() {
 
   const [inputValues, setInputValues] = useState({
     height: 0,
+    numberLeaves:0
   });
 
   const [inputs, setInputs] = useState([]);
@@ -157,7 +154,18 @@ function Analysis() {
                 />
               </div>
 
-              <div className="scroll-container">
+
+              <div className="form-group">
+                <input
+                  className="form-control"
+                  type="number"
+                  name="numberLeaves"
+                  placeholder="HeinumberLeavesght"
+                  value={inputValues.numberLeaves}
+                  onChange={(e) => handleInputChange('numberLeaves', e.target.value)}
+                />
+              </div>
+              {/* <div className="scroll-container">
                 <button type="button" onClick={addInput}>
                   Add Leaves
                 </button>
@@ -190,7 +198,7 @@ function Analysis() {
                     </button>
                   </div>
                 ))}
-              </div>
+              </div> */}
 
               <div className="form-group">
                 <button className="btn btn-primary btn-block" type="submit">

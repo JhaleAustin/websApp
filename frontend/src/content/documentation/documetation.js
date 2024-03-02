@@ -9,22 +9,42 @@ import Documentation_1 from "./documentation_1";
 
 import Documentation_2 from "./documentation_2";
 
-import Docu_Analysis from "./docu_analysis";
+import Docu_AnalysisHeight from "./docu_analysisHeight";
+
+import Docu_AnalysisLeaves from "./docu_analysiLeaves";
 function Documentation() {
 
   return (
   <Fragment>
      <div    style={{ background: 'linear-gradient(to right, #9caa58, #f0cdaa), rgba(0, 0, 0, 1)' }}
   >
-    <Documentation_2/>
+      <div className=" py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <h1 class="display-4" className='custom-font2' style={{margin:50}}>
+            <span style={{ borderBottom: '5px solid #006400', position: 'relative', display: 'inline-block', padding: '0 10px' }}>
+             Height Analysis
+            </span>
+          </h1>
+    <Docu_AnalysisHeight/>
+    </div> </div>  
+
+
+    <div className=" py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <h1 class="display-4" className='custom-font2' style={{margin:50}}>
+            <span style={{ borderBottom: '5px solid #006400', position: 'relative', display: 'inline-block', padding: '0 10px' }}>
+             Leaves Analysis
+            </span>
+          </h1>
+    <Docu_AnalysisLeaves/>
+    </div> </div>  
+
+
+
     <div className="scroll-container">
       <Documentation_1 />
     </div>
-    <div className=" py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-         
-    <Docu_Analysis/>
-    </div> </div>  
+  
 
  
     </div>
