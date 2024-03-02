@@ -22,14 +22,14 @@ const ProcessList = () => {
    
     const getAdminProcess = async () => {
          try {
-            // const config = {
-            //     headers: {
-            //         'Content-Type': 'multipart/form-data',
-            //         'Authorization': `Bearer ${getToken()}`
-            //     }
-            // };
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${getToken()}`
+                }
+            };
 
-            const { data } = await axios.get(`http://localhost:3001/api/v1/admin/process`);
+            const { data } = await axios.get(`http://localhost:3001/api/v1/admin/process`, config);
 
             console.log(data.process);
             setProcess(data.process);
