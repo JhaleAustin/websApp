@@ -8,7 +8,9 @@ import axios from 'axios';
 import "../../App.css";
 
 function Docu_Analysis(handleMaterialChange) {
-  const [materials, setMaterials] = useState([]);
+  const [withMulch, setWithMulch] = useState([]);
+  
+  const [withoutMulch, setWithoutMulch] = useState([]);
   const [plantHeight1, setPlantHeight1] = useState([]);
   const [leavesLength, setLeavesLength] = useState([]);
   const [leavesWidth, setLeavesWidth] = useState([]);
@@ -18,9 +20,10 @@ function Docu_Analysis(handleMaterialChange) {
   useEffect(() => {
     const fetchMaterials = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/api/v1/Documentations`);
-        console.log("Data" , response.data.Documentations);
-        setMaterials(response.data.Documentations);
+        const response = await axios.get(`http://localhost:3001/api/v1/Documentations2`);
+        console.log("Data" , response.data.withMulch);
+        setWithMulch(response.data.withMulch);
+        setWithoutMulch(response.data.withoutMulch);
         setLoading(false);
       } catch (error) {
         console.error('ERROR FETCHING MATERIALS:', error);
@@ -127,10 +130,6 @@ const getCategories = (timeframe) => {
 
  
 useEffect(() => {
-  // Filter data where plantType is 'mulch'
-const getwithMulch = materials.filter(material => material.plantType === 'With Mulch'); 
-const heightsWithMulch = getwithMulch.map(material => material.height);
-console.log("Data with mulch : ", heightsWithMulch)
 
 // let prev = 0;
 // let prevIndex = 0;
@@ -161,44 +160,40 @@ console.log("Data with mulch : ", heightsWithMulch)
 // console.log("Leg result:",heightsWithMulch22)
 //   setPlantHeightWithMulch(heightsWithMulch22);
 let prev = 0,prevIndex=0;
- const heightsWithMulch22 = heightsWithMulch.map((material, index) => {
+ const heightsWithMulch22 = withMulch.map((wMulch, index) => {
   if (index < 1) {
-    const currentHeight = material;
+    const currentHeight = wMulch.height;
     prev = currentHeight; 
     prevIndex=0;
      return currentHeight;
   } else {
-     const height2 = material;
+     const height2 =wMulch.height;
     const result = prev + (height2 - prev) / ((index+1) - prevIndex);
-    prev = result; // Update prev for the next iteration
+    prev = result; 
     return result;
   }
 });
 setPlantHeightWithMulch(heightsWithMulch22);
 
-
-const getwithoutMulch = materials.filter(material => material.plantType === 'Without Mulch');
-const getwithoutMulchHeight = getwithoutMulch.map(material => material.height);
-console.log("Data without mulch : ", getwithoutMulchHeight)
-const resultAnalysisWithoutMulch = getwithoutMulchHeight.map((withouM, index) => {
+ 
+const resultAnalysisWithoutMulch = withoutMulch.map((withouM, index) => {
   if (index < 1) {
-    // If it's the first iteration, just return the current height
-    const currentHeight = withouM;
+  
+    const currentHeight = withouM.height;
     prev = currentHeight; 
     prevIndex=0;
-    // Set prev for the next iteration
+   
     return currentHeight;
   } else {
-    // For subsequent iterations, calculate using the simple linear regression formula
-    const height2 = withouM;
+    const height2 = withouM.height;
     const result = prev + (height2 - prev) / ((index+1) - prevIndex);
-    prev = result; // Update prev for the next iteration
+    prev = result; 
     return result;
   }
 });
 setPlantHeightWithoutMulch(resultAnalysisWithoutMulch);
 
-}, [materials]);
+}, [withMulch]);
 
 
 

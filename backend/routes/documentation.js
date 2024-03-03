@@ -2,13 +2,15 @@ const express = require('express');
 const router = express.Router();
 const upload = require('../utils/multer')
 
-const { newPlantTypes, newDocumentation, getDocumentations, getWithMulching, getWithoutMulching, getSingleDocumentation,
+const { newPlantTypes, newDocumentation, getDocumentations,getDocumentations2, getWithMulching, getWithoutMulching, getSingleDocumentation,
      updateDocumentation, deleteDocumentation }
       = require('../controllers/docuController');
 
 const { isAuthenticatedUser, authorizeRoles } = require('../middlewares/auth')
 
 router.get('/Documentations', getDocumentations)
+
+router.get('/Documentations2', getDocumentations2)
 
 //ADMIN
 router.post('/planttypes/new', isAuthenticatedUser, authorizeRoles('admin'), newPlantTypes)
