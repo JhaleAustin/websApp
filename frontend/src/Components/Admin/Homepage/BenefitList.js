@@ -22,14 +22,14 @@ const BenefitList = () => {
 
     const getAdminBenefit = async () => {
         try {
-           // const config = {
-           //     headers: {
-           //         'Content-Type': 'multipart/form-data',
-           //         'Authorization': `Bearer ${getToken()}`
-           //     }
-           // };
+           const config = {
+               headers: {
+                   'Content-Type': 'multipart/form-data',
+                   'Authorization': `Bearer ${getToken()}`
+               }
+           };
 
-           const { data } = await axios.get(`http://localhost:3001/api/v1/`);
+           const { data } = await axios.get(`http://localhost:3001/api/v1/`, config);
 
            setBenefit(data.benefit);
 
@@ -63,13 +63,13 @@ const BenefitList = () => {
 
     const deleteBenefit = async (id) => {
         try {
-            // const config = {
-            //     headers: {
-            //         'Content-Type': 'multipart/form-data',
-            //         'Authorization': `Bearer ${getToken()}`
-            //     }
-            // };
-            const { data } = await axios.delete(`http://localhost:3001/api/v1/home/benefit/${id}`);
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${getToken()}`
+                }
+            };
+            const { data } = await axios.delete(`http://localhost:3001/api/v1/home/benefit/${id}`, config);
             
             setIsDeleted(data.success);
             setLoading(false);
@@ -183,15 +183,15 @@ const BenefitList = () => {
 
     const deleteBenefitHandler2 = async () => {
         try {
-            // const config = {
-            //     headers: {
-            //         'Content-Type': 'multipart/form-data',
-            //         'Authorization': `Bearer ${getToken()}`
-            //     }
-            // };
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${getToken()}`
+                }
+            };
 
             const deleteRequests = selectedBenefit.map(async (id) => {
-              return axios.delete(`${process.env.REACT_APP_API}/api/v1/home/benefit/${id}`);
+              return axios.delete(`${process.env.REACT_APP_API}/api/v1/home/benefit/${id}`, config);
             });
 
             const responses = await Promise.all(deleteRequests);

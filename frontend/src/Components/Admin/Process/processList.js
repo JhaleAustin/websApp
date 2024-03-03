@@ -62,13 +62,13 @@ const ProcessList = () => {
 
     const deleteProcess= async (id) => {
         try {
-            // const config = {
-            //     headers: {
-            //         'Content-Type': 'multipart/form-data',
-            //         'Authorization': `Bearer ${getToken()}`
-            //     }
-            // };
-            const { data } = await axios.delete(`http://localhost:3001/api/v1/admin/process/${id}`);
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${getToken()}`
+                }
+            };
+            const { data } = await axios.delete(`http://localhost:3001/api/v1/admin/process/${id}`,config);
 
             setIsDeleted(data.success);
             setLoading(false);

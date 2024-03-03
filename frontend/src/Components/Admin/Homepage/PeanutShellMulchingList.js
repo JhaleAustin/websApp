@@ -22,14 +22,14 @@ const PeanutShellMulchingList = () => {
 
     const getAdminPeanutShellMulching = async () => {
         try {
-           // const config = {
-           //     headers: {
-           //         'Content-Type': 'multipart/form-data',
-           //         'Authorization': `Bearer ${getToken()}`
-           //     }
-           // };
+           const config = {
+               headers: {
+                   'Content-Type': 'multipart/form-data',
+                   'Authorization': `Bearer ${getToken()}`
+               }
+           };
 
-           const { data } = await axios.get(`http://localhost:3001/api/v1/`);
+           const { data } = await axios.get(`http://localhost:3001/api/v1/`, config);
 
            setPeanutShellMulching(data.peanutshellmulching);
 
@@ -63,13 +63,13 @@ const PeanutShellMulchingList = () => {
 
     const deletePeanutShellMulching = async (id) => {
         try {
-            // const config = {
-            //     headers: {
-            //         'Content-Type': 'multipart/form-data',
-            //         'Authorization': `Bearer ${getToken()}`
-            //     }
-            // };
-            const { data } = await axios.delete(`http://localhost:3001/api/v1/home/peanutshellmulching/${id}`);
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${getToken()}`
+                }
+            };
+            const { data } = await axios.delete(`http://localhost:3001/api/v1/home/peanutshellmulching/${id}`, config);
             
             setIsDeleted(data.success);
             setLoading(false);
@@ -183,15 +183,15 @@ const PeanutShellMulchingList = () => {
 
     const deletePeanutShellMulchingHandler2 = async () => {
         try {
-            // const config = {
-            //     headers: {
-            //         'Content-Type': 'multipart/form-data',
-            //         'Authorization': `Bearer ${getToken()}`
-            //     }
-            // };
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${getToken()}`
+                }
+            };
 
             const deleteRequests = selectedPeanutShellMulching.map(async (id) => {
-              return axios.delete(`${process.env.REACT_APP_API}/api/v1/home/peanutshellmulching/${id}`);
+              return axios.delete(`${process.env.REACT_APP_API}/api/v1/home/peanutshellmulching/${id}`, config);
             });
 
             const responses = await Promise.all(deleteRequests);

@@ -44,6 +44,25 @@ exports.getAllProcess = async (req, res, next) => {
         });
     }
 };
+
+exports.getProcess = async (req, res, next) => {
+    try {
+        const process = await processCollection.find();
+
+        res.status(200).json({
+            success: true,
+            process
+        });
+    } catch (error) {
+        res.status(500).json({
+   
+			success: false,
+            message: 'ERROR FETCHING PROCESS',
+            error: error.message
+        });
+    }
+};
+
 exports.getSingleProcess = async (req, res, next) => {
 	const process = await processCollection.findById(req.params.id);
 	if (!process) {

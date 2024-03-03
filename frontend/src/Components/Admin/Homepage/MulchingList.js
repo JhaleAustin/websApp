@@ -22,14 +22,14 @@ const MulchingList = () => {
 
     const getAdminMulching = async () => {
         try {
-           // const config = {
-           //     headers: {
-           //         'Content-Type': 'multipart/form-data',
-           //         'Authorization': `Bearer ${getToken()}`
-           //     }
-           // };
+           const config = {
+               headers: {
+                   'Content-Type': 'multipart/form-data',
+                   'Authorization': `Bearer ${getToken()}`
+               }
+           };
 
-           const { data } = await axios.get(`http://localhost:3001/api/v1/`);
+           const { data } = await axios.get(`http://localhost:3001/api/v1/`, config);
 
            setMulching(data.mulching);
 
@@ -63,13 +63,13 @@ const MulchingList = () => {
 
     const deleteBenefit = async (id) => {
         try {
-            // const config = {
-            //     headers: {
-            //         'Content-Type': 'multipart/form-data',
-            //         'Authorization': `Bearer ${getToken()}`
-            //     }
-            // };
-            const { data } = await axios.delete(`http://localhost:3001/api/v1/home/mulching/${id}`);
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${getToken()}`
+                }
+            };
+            const { data } = await axios.delete(`http://localhost:3001/api/v1/home/mulching/${id}`, config);
             
             setIsDeleted(data.success);
             setLoading(false);
@@ -183,15 +183,15 @@ const MulchingList = () => {
 
     const deleteBenefitHandler2 = async () => {
         try {
-            // const config = {
-            //     headers: {
-            //         'Content-Type': 'multipart/form-data',
-            //         'Authorization': `Bearer ${getToken()}`
-            //     }
-            // };
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${getToken()}`
+                }
+            };
 
             const deleteRequests = selectedMulching.map(async (id) => {
-              return axios.delete(`${process.env.REACT_APP_API}/api/v1/home/mulching/${id}`);
+              return axios.delete(`${process.env.REACT_APP_API}/api/v1/home/mulching/${id}`, config);
             });
 
             const responses = await Promise.all(deleteRequests);

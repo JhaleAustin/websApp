@@ -21,14 +21,14 @@ const PeanutShellList = () => {
 
     const getAdminPeanutShells = async () => {
         try {
-           // const config = {
-           //     headers: {
-           //         'Content-Type': 'multipart/form-data',
-           //         'Authorization': `Bearer ${getToken()}`
-           //     }
-           // };
+           const config = {
+               headers: {
+                   'Content-Type': 'multipart/form-data',
+                   'Authorization': `Bearer ${getToken()}`
+               }
+           };
 
-           const { data } = await axios.get(`http://localhost:3001/api/v1/`);
+           const { data } = await axios.get(`http://localhost:3001/api/v1/`, config);
 
            setPeanutShells(data.peanutshell);
 
@@ -64,13 +64,13 @@ const PeanutShellList = () => {
 
     const deletePeanutShell = async (id) => {
         try {
-            // const config = {
-            //     headers: {
-            //         'Content-Type': 'multipart/form-data',
-            //         'Authorization': `Bearer ${getToken()}`
-            //     }
-            // };
-            const { data } = await axios.delete(`http://localhost:3001/api/v1/home/peanutshell/${id}`);
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${getToken()}`
+                }
+            };
+            const { data } = await axios.delete(`http://localhost:3001/api/v1/home/peanutshell/${id}`, config);
             
             setIsDeleted(data.success);
             setLoading(false);
@@ -184,15 +184,15 @@ const PeanutShellList = () => {
 
     const deletePeanutShellHandler2 = async () => {
         try {
-            // const config = {
-            //     headers: {
-            //         'Content-Type': 'multipart/form-data',
-            //         'Authorization': `Bearer ${getToken()}`
-            //     }
-            // };
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${getToken()}`
+                }
+            };
 
             const deleteRequests = selectedPeanutShells.map(async (id) => {
-              return axios.delete(`${process.env.REACT_APP_API}/api/v1/home/peanutshell/${id}`);
+              return axios.delete(`${process.env.REACT_APP_API}/api/v1/home/peanutshell/${id}`, config);
             });
 
             const responses = await Promise.all(deleteRequests);

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const upload = require('../utils/multer')
 
-const { newProcess, getProcesss,getProcess, getSingleProcess,
+const { newProcess,getProcess, getSingleProcess,
      updateProcess, deleteProcess, getAllProcess }
       = require('../controllers/processController');
 
@@ -10,7 +10,7 @@ const { isAuthenticatedUser, authorizeRoles } = require('../middlewares/auth')
 
 router.post('/process/new', isAuthenticatedUser, authorizeRoles('admin'), newProcess);
 
-// router.get('/process', getProcess)
+router.get('/process', getProcess)
 
 router.get('/process/show/:id', getSingleProcess);
 

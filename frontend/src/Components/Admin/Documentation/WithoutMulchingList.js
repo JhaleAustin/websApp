@@ -67,13 +67,13 @@ const WithoutMulchingList = () => {
 
     const deleteWithoutMulchs = async (id) => {
         try {
-            // const config = {
-            //     headers: {
-            //         'Content-Type': 'multipart/form-data',
-            //         'Authorization': `Bearer ${getToken()}`
-            //     }
-            // };
-            const { data } = await axios.delete(`http://localhost:3001/api/v1/admin/documentation/${id}`);
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${getToken()}`
+                }
+            };
+            const { data } = await axios.delete(`http://localhost:3001/api/v1/admin/documentation/${id}`, config);
             
             setIsDeleted(data.success);
             setLoading(false);
@@ -242,15 +242,15 @@ const WithoutMulchingList = () => {
 
     const deleteWithoutMulchsHandler2 = async () => {
         try {
-            // const config = {
-            //     headers: {
-            //         'Content-Type': 'multipart/form-data',
-            //         'Authorization': `Bearer ${getToken()}`
-            //     }
-            // };
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${getToken()}`
+                }
+            };
 
             const deleteRequests = selectedWithoutMulch.map(async (id) => {
-              return axios.delete(`${process.env.REACT_APP_API}/api/v1/admin/documentation/${id}`);
+              return axios.delete(`${process.env.REACT_APP_API}/api/v1/admin/documentation/${id}`, config);
             });
 
             const responses = await Promise.all(deleteRequests);

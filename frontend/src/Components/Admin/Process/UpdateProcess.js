@@ -44,7 +44,7 @@ const UpdateProcess = () => {
               content,
           };
 
-            const { data } = await axios.put(`${process.env.REACT_APP_API}/api/v1/admin/process/${id}`, updatedData, {
+            const { data } = await axios.put(`http://localhost:3001/api/v1/admin/process/${id}`, updatedData, {
                   headers: {
                       'Content-Type':   'multipart/form-data', 
                       'Authorization': `Bearer ${getToken()}`
