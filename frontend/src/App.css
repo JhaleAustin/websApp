@@ -5,7 +5,9 @@
 .App {
   
   text-align: center;
-  background-color: #abc32f !important;
+  /* background-color: #164006 !important; */
+  background: linear-gradient(to bottom, #abc32f, #164006) !important;
+
 }
 
 .centeredDiv {

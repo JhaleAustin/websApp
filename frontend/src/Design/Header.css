@@ -11,7 +11,7 @@
 
 #profile, #cart, #myOrders, #dashboard
 {
-    color: white;
+    color: black;
 }
 
 #profile:hover, #cart:hover, #myOrders:hover, #dashboard:hover
