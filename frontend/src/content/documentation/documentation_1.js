@@ -66,8 +66,40 @@ function Documentation_1(handledocuChange) {
                   {docu.plantType}</h2>
               </div>
               <p style={{ fontSize: 'medium', fontFamily: 'Inconsolata, sans-serif' }}>
-                Your date here
+              {docu.collectionDate}
               </p>
+              <div className="uk-text-center">
+              <p style={{ fontSize: '16px', background: 'linear-gradient(90deg, rgba(0,255,0,0.5), rgba(255,255,0,0.5))', color: '#000000', padding: '8px' }}>
+               
+                  {/* Display details from selectedocu */}
+                  Height: {docu.height}
+                </p>
+                <p style={{ fontSize: '16px', background: 'linear-gradient(90deg, rgba(0,255,0,0.5), rgba(255,255,0,0.5))', color: '#000000', padding: '8px' }}>
+                  {/* Display details from selectedocu */}
+                  Leaves : {docu.numOfLeaves}</p>
+                <table className="uk-table uk-table-hover uk-table-divider" style={{ height:100,backgroundColor: 'lightgreen', borderColor: 'lightyellowgreen' }}>
+                  {/* Header row */}
+                  <thead>
+                    <tr>
+                      <th>Length</th>
+                      <th>Width</th>
+                    </tr>
+                  </thead>
+                  {/* Mapping logic for leaves with alternating colors */}
+                  <tbody>
+                    {/* key={index} {selectedocu.leaves.map((leaf, index) => ( */}
+                    {/* <tr style={{ backgroundColor: index % 2 === 0 ? '#f2f2f2' : '#ffffff' }}> */}
+                    <tr style={{ backgroundColor: '#f2f2f2' }}>
+                      <td>{docu.leaves.length.toString().replace(/,/g, '')}</td>
+
+                      <td>{docu.leaves.width}</td>
+                    </tr>
+                    {/* ))} */}
+                  </tbody>
+                </table>
+
+                {/* ... other details */}
+              </div>
             </div>
             <div class="row">
               <div class="col-sm">
