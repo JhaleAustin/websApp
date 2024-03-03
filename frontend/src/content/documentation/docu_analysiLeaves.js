@@ -71,6 +71,12 @@ const getCategories = (timeframe) => {
       yaxis: {
         min: 0,
         tickAmount: 6, // Adjust based on your preference
+        labels: {
+          formatter: function (value) {
+            // Format the y-axis labels to two decimal places
+            return parseFloat(value).toFixed(2);
+          }
+        }
       },
     },
     series: [
@@ -170,7 +176,8 @@ let prev = 0,prevIndex=0;
      const height2 =wMulch.numOfLeaves;
     const result = prev + (height2 - prev) / ((index+1) - prevIndex);
     prev = result; 
-    return result;
+    
+    return parseFloat(result.toFixed(2));
   }
 });
 setPlantHeightWithMulch(heightsWithMulch22);
@@ -188,7 +195,8 @@ const resultAnalysisWithoutMulch = withoutMulch.map((withouM, index) => {
     const height2 = withouM.numOfLeaves;
     const result = prev + (height2 - prev) / ((index+1) - prevIndex);
     prev = result; 
-    return result;
+  
+    return parseFloat(result.toFixed(2));
   }
 });
 setPlantHeightWithoutMulch(resultAnalysisWithoutMulch);
