@@ -11,7 +11,7 @@
 
   .pfront2 .step
   {
-    margin-top: -10px !important;
+    margin-bottom: 40px;
     /* margin-left: 60px !important; */
     margin-left: auto !important;
     margin-right: auto !important;
@@ -19,7 +19,7 @@
     border: 5px solid #164006;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     height: 500px;
-    width: 1195px;
+    width: 1200px;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -28,6 +28,30 @@
     
   }
 
+  .step .desc
+  {
+    margin: auto;
+    /* background-color: #164006; */
+    padding-bottom: 20px;
+    padding-top: 20px;
+  }
+
+  .desc h2,p
+  {
+    margin: auto;
+    background-color: #164006;
+  }
+
+  .step .col-md-4
+  {
+    margin: auto;
+    background-color: #164006;
+  }
+
+  .desc .text-3xl, .mt-3
+  {
+    color: #abc32f !important;
+  }
   .pfront1 {
     margin-top: 50px !important;
     margin-bottom: 50px !important;
@@ -42,7 +66,8 @@
 
   #right-video
   {
-
+    margin: auto;
+    margin-left: 15px !important;
   }
 
   #right-video iframe
