@@ -8,6 +8,7 @@ import 'bulma/css/bulma.min.css';
 import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/react/20/solid'
 
 import Slider from 'react-slick';
+import Header from '../Components/Layout/Header';  // Add this line
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
@@ -63,6 +64,7 @@ function Homepage() {
   return (
 
     <Fragment >
+      <Header />
       <div style={{ background: 'linear-gradient(to right, #9caa58, #f0cdaa), rgba(0, 0, 0, 1)' }}>
 
 
