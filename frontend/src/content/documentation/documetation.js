@@ -7,7 +7,7 @@ import "../../App.css";
 import 'bulma/css/bulma.min.css';
 import Documentation_1 from "./documentation_1";
 
-import Documentation_2 from "./documentation_2";
+import Documentation_withoutMulch from "./documentation_withoutMulch";
 
 import Docu_AnalysisHeight from "./docu_analysisHeight";
 
@@ -42,7 +42,23 @@ function Documentation() {
 
 
     <div className="scroll-container">
+    <h1 class="display-4" className='custom-font2' style={{margin:50}}>
+            <span style={{ borderBottom: '5px solid #006400', position: 'relative', display: 'inline-block', padding: '0 10px' }}>
+             WITH MULCH
+            </span>
+          </h1>
       <Documentation_1 />
+    </div>
+  
+
+ 
+    <div className="scroll-container">
+    <h1 class="display-4" className='custom-font2' style={{margin:50}}>
+            <span style={{ borderBottom: '5px solid #006400', position: 'relative', display: 'inline-block', padding: '0 10px' }}>
+             WITHOUT MULCH
+            </span>
+          </h1>
+      <Documentation_withoutMulch />
     </div>
   
 

@@ -152,6 +152,72 @@ exports.getWithoutMulching = async (req, res, next) => {
     }
 }
 
+
+exports.getDocumentations2 = async (req, res, next) => {
+	// const Documentations = await Documentation.find({});
+	// const resPerPage = 4;
+	// const DocumentationsCount = await Documentation.countDocuments();
+	// const apiFeatures = new APIFeatures(Documentation.find(), req.query).search().filter()
+	// apiFeatures.pagination(resPerPage);
+	// const Documentations = await apiFeatures.query;
+	// const filteredDocumentationsCount = Documentations.length
+	// if (!Documentations) {
+	// 	return res.status(404).json({
+	// 		success: false,
+	// 		message: 'No Documentations'
+	// 	})
+	// }
+	// res.status(200).json({
+	// 	success: true,
+	// 	count: Documentations.length,
+	// 	DocumentationsCount,
+	// 	Documentations,
+	// 	resPerPage,
+	// 	filteredDocumentationsCount,
+	// })
+
+
+
+
+	const plantType1 = await Plant.findOne({ types: "With Mulch" });
+
+        if (!plantType1) {
+            return res.status(404).json({
+                success: false,
+                message: 'PlantType "With Mulch" not found',
+            });
+        }
+
+        const withMulch = await Documentation.find({ plantTypes: plantType1._id });
+  
+	const plantType2 = await Plant.findOne({ types: "Without Mulch" });
+
+        if (!plantType2) {
+            return res.status(404).json({
+                success: false,
+                message: 'PlantType "Without Mulch" not found',
+            });
+        }
+       
+        const withoutMulch = await Documentation.find({ plantTypes: plantType2._id });
+		
+
+
+			res.status(200).json({
+            success: true,
+			plantTypes1: plantType1._id,
+            withoutMulch,
+			plantTypes2: plantType2._id,
+            withMulch,
+ 
+        });
+ 
+
+}
+
+
+
+
 exports.getDocumentations = async (req, res, next) => {
 	// const Documentations = await Documentation.find({});
 	const resPerPage = 4;

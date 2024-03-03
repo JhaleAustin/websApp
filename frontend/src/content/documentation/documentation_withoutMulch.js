@@ -20,8 +20,7 @@ function Documentation_1(handledocuChange) {
       try {
         const response = await axios.get(`http://localhost:3001/api/v1/Documentations2`);
         console.log("Datat", response.data);
-        setWithMulch(response.data.withMulch);
-        
+ 
         setWithoutMulch(response.data.withoutMulch);
         setLoading(false);
       } catch (error) {
@@ -50,7 +49,7 @@ function Documentation_1(handledocuChange) {
       
 
        
-        {withMulch.map((docu) => (
+        {withoutMulch.map((docu) => (
 
           <><div class="container text-center"    
           style={{
