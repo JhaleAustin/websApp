@@ -14,9 +14,8 @@ const NewWithMulch = () => {
   const [height, setHeight] = useState();
   const [length, setLength] = useState();
   const [width, setWidth] = useState();
+  const [numOfLeaves, setNumOfLeaves] = useState();
   const [collectionDate, setCollectionDate] = useState('');
-  const [files, setImages] = useState([]);
-  const [inputs, setInputs] = useState([]); 
   const [error, setError] = useState('')
   const [images, setImages2] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([])
@@ -31,6 +30,8 @@ const NewWithMulch = () => {
     formData.append('height', height);
     formData.append('collectionDate', collectionDate);
     formData.append('leaves', JSON.stringify({ length, width })); 
+    formData.append('numOfLeaves', numOfLeaves);
+
 
     images.forEach(image => {
         formData.append('images', image);
@@ -122,7 +123,7 @@ const NewWithMulch = () => {
                         </div>
 
                         <div className="row">
-                            <div className="col-md-6">
+                            <div className="col-md-4">
                                 <label htmlFor="length" className="form-label-3">LENGTH: (CM)</label>
                                 <input
                                     type="number"
@@ -132,7 +133,7 @@ const NewWithMulch = () => {
                                     onChange={(e) => setLength(e.target.value)}
                                 />
                             </div>  
-                            <div className="col-md-6">
+                            <div className="col-md-4">
                                 <label htmlFor="width" className="form-label-4">WIDTH: (CM)</label>
                                 <input
                                     type="number"
@@ -140,6 +141,16 @@ const NewWithMulch = () => {
                                     id="width"
                                     value={width}
                                     onChange={(e) => setWidth(e.target.value)}
+                                />
+                            </div>  
+                            <div className="col-md-4">
+                                <label htmlFor="numOfLeaves" className="form-label-5">NUMBER OF LEAVES:</label>
+                                <input
+                                    type="number"
+                                    className="form-control"
+                                    id="numOfLeaves"
+                                    value={numOfLeaves}
+                                    onChange={(e) => setNumOfLeaves(e.target.value)}
                                 />
                             </div>  
                         </div>

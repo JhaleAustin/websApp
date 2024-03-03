@@ -72,6 +72,7 @@ exports.newDocumentation = async (req, res, next) => {
 			length: leaves.length,
 			width: leaves.width,
 		},
+		numOfLeaves: req.body.numOfLeaves,
 		images: imagesLinks
 	});
 
@@ -180,7 +181,7 @@ exports.getSingleDocumentation = async (req, res, next) => {
 	if (!getDocumentation) {
 		return res.status(404).json({
 			success: false,
-			message: 'Documentation not found'
+			message: 'DATA NOT FOUND'
 		})
 	}
 	res.status(200).json({
@@ -194,20 +195,20 @@ exports.deleteDocumentation = async (req, res, next) => {
 	if (!documentation) {
 		return res.status(404).json({
 			success: false,
-			message: 'Documentation not found'
+			message: 'DATA NOT FOUND'
 		})
 	}
 
 	res.status(200).json({
 		success: true,
-		message: 'Documentation deleted'
+		message: 'DATA NOT DELETED'
 	})
 }
 
 exports.updateDocumentation = async (req, res, next) => {
 
 	
-	const { collectionDate, height, leaves, length, width } = req.body;
+	const { collectionDate, height, leaves, numOfLeaves, length, width } = req.body;
 	try {
 	let documentation = await Documentation.findById(req.params.id);
 	// console.log(req.body)
@@ -272,6 +273,7 @@ exports.updateDocumentation = async (req, res, next) => {
 	// documentation.leaves.length = length,
 	// documentation.leaves.width = width,
 	documentation.leaves = leaves;
+	documentation.numOfLeaves = numOfLeaves;
 	documentation.images = imagesLinks
 
 	documentation = await documentation.save();

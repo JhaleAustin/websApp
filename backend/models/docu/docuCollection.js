@@ -29,6 +29,11 @@ const docuSchema = new mongoose.Schema({
             },
         },
 
+    numOfLeaves: {
+        type: Number,
+        required: true
+    },
+    
     images: [
         {
             public_id: {

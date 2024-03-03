@@ -55,7 +55,8 @@
   #collectionDate,
   #height,
   #length,
-  #width {
+  #width,
+  #numOfLeaves {
     width: 100%;
     box-shadow: none !important;
     border: 3px solid  #abc32f !important;
@@ -148,12 +149,17 @@
 
 .form-label-3
 {
-  margin-left: -240px;
+  margin-left: -120px;
 }
 
 .form-label-4
 {
-  margin-left: -250px;
+  margin-left: -125px;
+}
+
+.form-label-5
+{
+  margin-left: -70px;
 }
 
 

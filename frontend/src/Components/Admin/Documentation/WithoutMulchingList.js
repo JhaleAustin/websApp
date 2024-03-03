@@ -150,6 +150,11 @@ const WithoutMulchingList = () => {
                     sort: 'asc'
                     },
                 {
+                    label: 'NUMBER OF LEAVES',
+                    field: 'numOfLeaves',
+                    sort: 'asc'
+                },
+                {
                     label: 'IMAGES',
                     field: 'images',
                     sort: 'asc'
@@ -204,7 +209,11 @@ const WithoutMulchingList = () => {
                     {withoutmulchs.leaves && withoutmulchs.leaves.width}
                     </div>
                 ),
-                        
+                numOfLeaves: (
+                    <div className="d-flex align-items-right">
+                    {withoutmulchs.numOfLeaves}
+                    </div>
+                ),     
                 images: withoutmulchs.images.map((image, index) => (
                     <img key={index} src={image.url} alt={`Image ${index}`} style={{ width: '50px', height: '50px' }} />
                 )),

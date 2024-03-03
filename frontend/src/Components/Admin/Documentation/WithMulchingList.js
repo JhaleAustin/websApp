@@ -150,6 +150,11 @@ const WithMulchingList = () => {
                     sort: 'asc'
                     },
                 {
+                    label: 'NUMBER OF LEAVES',
+                    field: 'numOfLeaves',
+                    sort: 'asc'
+                },
+                {
                     label: 'IMAGES',
                     field: 'images',
                     sort: 'asc'
@@ -201,6 +206,12 @@ const WithMulchingList = () => {
                 width: (
                     <div className="d-flex align-items-right">
                     {withmulchs.leaves && withmulchs.leaves.width}
+                    </div>
+                ),
+
+                numOfLeaves: (
+                    <div className="d-flex align-items-right">
+                    {withmulchs.numOfLeaves}
                     </div>
                 ),
                         
