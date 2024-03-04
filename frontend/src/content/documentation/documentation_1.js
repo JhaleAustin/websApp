@@ -45,12 +45,13 @@ function Documentation_1(handledocuChange) {
 
   return (
     <Fragment>
+      
       <div className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
        
       
 
        
-        {withMulch.map((docu) => (
+        {withMulch.map((docu,index) => (
 
           <><div class="container text-center"    
           style={{
@@ -60,7 +61,7 @@ function Documentation_1(handledocuChange) {
             boxShadow: '0 20px 20px rgba(0, 0, 0, 0.5)', // Box shadow with 10px distance
             borderRadius: '10px', // Border radius
             width:600,
-            height:800
+            height:950
           }}>
             <div class="row">
               <div class="col-sm-12">
@@ -71,14 +72,6 @@ function Documentation_1(handledocuChange) {
               {docu.collectionDate}
               </p>
               <div className="uk-text-center">
-              <p style={{ fontSize: '16px', background: 'linear-gradient(90deg, rgba(0,255,0,0.5), rgba(255,255,0,0.5))', color: '#000000', padding: '8px' }}>
-               
-                  {/* Display details from selectedocu */}
-                  Height: {docu.height}
-                </p>
-                <p style={{ fontSize: '16px', background: 'linear-gradient(90deg, rgba(0,255,0,0.5), rgba(255,255,0,0.5))', color: '#000000', padding: '8px' }}>
-                  {/* Display details from selectedocu */}
-                  Leaves : {docu.numOfLeaves}</p>
                   <table className="uk-table uk-table-hover uk-table-divider" style={{ height: 100, backgroundColor: 'lightgreen', borderColor: 'lightyellowgreen' }}>
   {/* Header row */}
   <thead>
@@ -88,49 +81,56 @@ function Documentation_1(handledocuChange) {
     </tr>
     <tr>
       <th>HEIGHT</th>
-      <th>LEAVES</th>
+      <th>NUMBER OF LEAVES</th>
       <th>HEIGHT</th>
-      <th>LEAVES</th>
+      <th>NUMBER OF LEAVES</th>
     </tr>
   </thead>
+  
   {/* Body */}
   <tbody>
     {/* Replace docu.leaves with your actual data structure */}
     <tr style={{ backgroundColor: '#f2f2f2' }}>
       {/* WITH MULCH */}
-      <td> {docu.height}</td>
+      <td>{docu.height}</td>
       <td>{docu.numOfLeaves}</td>
 
       {/* WITHOUT MULCH */}
-   
-      <><td>{docu.numOfLeaves}
-      </td><td>{docu.numOfLeaves}</td></>
-    
+      <td>{withoutMulch[index].height}</td>
+      <td>{withoutMulch[index].numOfLeaves}</td>
     </tr>
+
+   
+  </tbody>
+  <thead>
+  <tr>
+    <th colSpan="4" style={{ textAlign: 'center' }}>LEAVES</th>
+  </tr>
+    <tr>
+      <th>LENGTH</th>
+      <th>WIDTH</th>
+      <th>LENGTH</th>
+      <th>WIDTH</th>
+    </tr>
+  </thead>
+  {/* Body */}
+  <tbody>
+
+
+    <tr style={{ backgroundColor: '#f2f2f2' }}>
+      {/* WITH MULCH */}
+      <td>{docu.leaves.length}</td>
+      <td>{docu.leaves.width}</td>
+
+      {/* WITHOUT MULCH */}
+      <td>{withoutMulch[index].leaves.length}</td>
+      <td>{withoutMulch[index].leaves.width}</td>
+    </tr>
+
     {/* Add more rows as needed */}
   </tbody>
 </table>
 
-                <table className="uk-table uk-table-hover uk-table-divider" style={{ height:100,backgroundColor: 'lightgreen', borderColor: 'lightyellowgreen' }}>
-                  {/* Header row */}
-                  <thead>
-                    <tr>
-                      <th>Length</th>
-                      <th>Width</th>
-                    </tr>
-                  </thead>
-                  {/* Mapping logic for leaves with alternating colors */}
-                  <tbody>
-                    {/* key={index} {selectedocu.leaves.map((leaf, index) => ( */}
-                    {/* <tr style={{ backgroundColor: index % 2 === 0 ? '#f2f2f2' : '#ffffff' }}> */}
-                    <tr style={{ backgroundColor: '#f2f2f2' }}>
-                      <td>{docu.leaves.length.toString().replace(/,/g, '')}</td>
-
-                      <td>{docu.leaves.width}</td>
-                    </tr>
-                    {/* ))} */}
-                  </tbody>
-                </table>
 
                 {/* ... other details */}
               </div>

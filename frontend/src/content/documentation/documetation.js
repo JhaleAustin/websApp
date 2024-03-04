@@ -16,36 +16,38 @@ function Documentation() {
 
   return (
   <Fragment>
-     <div    style={{ background: 'linear-gradient(to right, #9caa58, #f0cdaa), rgba(0, 0, 0, 1)' }}
-  >
-      <div className=" py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <h1 class="display-4" className='custom-font2' style={{margin:50}}>
-            <span style={{ borderBottom: '5px solid #006400', position: 'relative', display: 'inline-block', padding: '0 10px' }}>
+     <div class="row">
+            <div class="col-12 pfront1">
+              <div class="container pfront2">
+          
+         <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <h1 class="display-4" className='custom-font2' style={{margin:25}}>
+            <span style={{ borderBottom: ' solid #006400', position: 'relative', display: 'inline-block'  }}>
              Height Analysis
             </span>
           </h1>
     <Docu_AnalysisHeight/>
-    </div> </div>  
+    </div>    
 
 
-    <div className=" py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <h1 class="display-4" className='custom-font2' style={{margin:50}}>
-            <span style={{ borderBottom: '5px solid #006400', position: 'relative', display: 'inline-block', padding: '0 10px' }}>
+        <h1 class="display-4" className='custom-font2' style={{margin:25}}>
+            <span style={{ borderBottom: 'solid #006400', position: 'relative', display: 'inline-block' }}>
              Leaves Analysis
             </span>
           </h1>
     <Docu_AnalysisLeaves/>
-    </div> </div>  
+    </div> 
 
 
-
-  <h1 class="display-4" className='custom-font2' style={{margin:50}}>
-            <span style={{ borderBottom: '5px solid #006400', position: 'relative', display: 'inline-block', padding: '0 10px' }}>
+    <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      
+  <h1 class="display-4" className='custom-font2'  style={{margin:25}}>
+            <span style={{ borderBottom: 'solid #006400', position: 'relative', display: 'inline-block'  }}>
              WITH MULCH
             </span>
           </h1>
+          </div>
       <Documentation_1 />
    
   
@@ -60,6 +62,8 @@ function Documentation() {
     
 
   */}
+    </div>
+    </div>
     </div>
   </Fragment>
   );
