@@ -105,6 +105,59 @@
 
 /*Analysis*/
 
+.register-photo {
+  background:#f1f7fc;
+  padding:80px 0; 
+}
+
+.register-photo2 {
+  background:#f1f7fc;
+  padding:80px 0;
+  height: 800px;
+  width:1100px;
+}
+
+.register-photo .image-holder {
+  display:table-cell;
+  width:auto;
+  /* background:url(../../assets/img/meeting.jpg); */
+  background-size:cover;
+}
+
+.register-photo .form-container {
+  display:table;
+  max-width:auto;
+  width:80%;
+  margin:0 auto;
+}
+
+.register-photo form {
+  display:table-cell;
+  width:460px;
+  background-color:#fffdfd;
+  padding:40px 60px;
+  color:#505e6c;
+}
+
+@media (max-width:991px) {
+  .register-photo form {
+    padding:40px;
+  }
+}
+
+.image-holder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ }
+
+.chart-container {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .container2 {
   background-color: #ffffff; 
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
