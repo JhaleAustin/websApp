@@ -79,7 +79,7 @@ function Header() {
             <li>
             {user && user.role === 'admin' && (
               <div className="col-12 col-md-3 mt-4 mt-md-0 text-center">
-                <Link to="/admin/documentation" style={{ textDecoration: 'none' }} >
+                <Link to="/admin/peanutshell" style={{ textDecoration: 'none' }} >
                   <span id="dashboard" className="ml-3">DASHBOARD</span>
                 </Link>
               </div>

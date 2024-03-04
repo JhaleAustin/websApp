@@ -1,0 +1,312 @@
+/*Homepage*/
+
+@import url('https://fonts.googleapis.com/css2?family=Freehand&display=swap');
+
+.homepageP
+{
+  flex-direction: row;
+  position: relative;
+}
+
+hr
+{
+  background-color: #164006 !important;
+}
+
+.hero_area
+{
+  margin-top: 20px;
+  background-color: transparent !important;
+  margin-bottom: 200px !important;
+}
+
+.hero_area .row
+{
+  flex-direction: row;
+  position: relative;
+  margin: auto;
+}
+
+.detail-box h1
+{
+  color: #164006 !important;
+  text-align: center;
+}
+
+.detail-box p
+{
+  color: black !important;
+  text-align: justify;
+}
+
+.homepageP .feature_section
+{
+  margin-top: 180px;
+}
+
+.feature_section .container
+{
+  margin-bottom: 50px !important;
+}
+
+.feature_section .box
+{
+  border: 2px solid #164006;
+  box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.8);
+  background-color: transparent !important;
+}
+
+/* .feature_section .box:hover
+{
+  border: 2px solid #164006;
+  box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.8);
+  background-color: #164006 !important;
+}
+
+.feature_section .box:hover h1 
+{
+  color: white !important;
+}
+
+.feature_section .box:hover p
+{
+  color: #abc32f;
+} */
+
+.feature_section .box h1
+{
+  color: black !important;
+  margin-bottom: 10px;
+}
+
+.feature_section .box p
+{
+  color: #164006;
+  text-align: justify;
+}
+
+.feature_section .active
+{
+  background-color: #164006 !important;
+}
+
+/* .feature_section .active:hover
+{
+  background-color: transparent !important;
+} */
+
+.feature_section .active h1
+{
+  color: white !important;
+  margin-bottom: 10px;
+}
+
+.feature_section .active p
+{
+  color: #abc32f;
+  text-align: justify;
+}
+
+/* .feature_section .active:hover h1
+{
+  color:black !important;
+}
+
+.feature_section .active:hover p
+{
+  color: #164006;
+  
+} */
+
+/* MULCHING */
+
+.homepageM
+{
+  flex-direction: row;
+  position: relative;
+  margin: auto;
+  margin-top: -250px !important;
+  background-color: #164006;
+  padding-left: 10px;
+  width: 1270px;
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 50px !important;
+
+}
+
+.jumbotron{
+  background-color: transparent !important;
+  color: #000000;
+  padding: 50px;
+  height: 1000px !important;
+}
+
+.jumbotron .text-uppercase {
+  font-Family: 'Madimi One';
+  position: 'relative';
+  font-size: xx-large;
+  color: white;
+  margin-top: -30px;
+}
+
+.custom-font 
+{
+    font-family: 'Madimi One', sans-serif;
+    font-size: larger;
+    margin: 25px;
+    margin-top: 15px !important;
+    color: #abc32f;
+    text-align: justify;
+}
+  
+.jumbotron .card 
+{
+  background: #abc32f !important;
+  height: 340px !important;
+}
+
+.jumbotron .card-title {
+  background: transparent !important;
+  color: black;
+  border: 2px solid #164006;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 0; 
+  font-size: 20px;
+  margin-top: 5px;
+}
+
+.jumbotron .card-text
+{
+  text-align: justify;
+  margin: 10px;
+  color: #164006;
+}
+
+/* PEANUT SHELL MULCHING   */
+
+.homepagePSM .custom-font3 
+{
+  font-Family: 'Madimi One';
+  position: 'relative';
+  font-size: 30px;
+  color: #164006;
+  margin-top: 25px !important;
+}
+  
+.service-area 
+{
+  padding-top: 30px;
+  padding-bottom: 15px;
+}
+
+.single-service {
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Add shadow at the bottom */
+  background: #164006; /* Gradient colors - adjust as needed */
+  height: 600px;
+  padding: 20px;
+  margin: 10px;
+  border: 2px solid #164006; /* Add a border for better separation */
+}
+
+.service-area .active
+{
+  background: transparent !important;
+  
+}
+
+.service-area .desc 
+{
+  margin-top: 15px;
+}
+
+.service-area .single-service h2{
+  color: white;
+  margin-bottom: 5px;
+}
+
+.service-area .single-service p{
+  color: #abc32f;
+  text-align: justify;
+}
+
+.service-area .active h2{
+  color: black;
+  margin-bottom: 5px;
+}
+
+.service-area .active p{
+  color: #164006;
+  text-align: justify;
+  margin-bottom: 15px;
+}
+
+/* BENEFIT */
+
+.homepageB
+{
+  flex-direction: row;
+  position: relative;
+  margin: auto;
+  background-color: #164006;
+  padding-left: 10px;
+  width: 1270px;
+  height: auto;
+  border-radius: 5px;
+  margin-top: 50px !important;
+}
+
+.jumbotron2 
+{  
+ color: #fff;
+ padding-left: 70px;
+ padding-right: 70px;
+ padding-bottom: 50px;
+ height: auto;
+
+
+}
+
+.jumbotron2 .display-4
+{  
+  font-Family: 'Madimi One';
+  font-size: xx-large;
+  color: white;
+  padding-top: 30px;
+  padding-bottom: 30px;
+
+}
+
+.light-blue-violet-bg {
+  background: #abc32f;
+  border-radius: 10px;
+  height: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 30px !important;
+}
+
+  
+.single-feat2 .count h1 {
+  color: black; 
+font-weight: bold;
+font-size: 30px;
+}
+
+
+.single-feat2 .desc h2 
+{
+  color: black; 
+  margin-top: 10px !important;
+}
+
+.single-feat2 .desc p
+{
+  color: #164006; 
+  margin-top: 10px !important;
+  text-align: justify;
+}
+  
+  
+  

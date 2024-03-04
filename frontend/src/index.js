@@ -9,11 +9,10 @@ import './Design/DataTable.css';
 import './Design/Topic.css';
 import './Design/Documentation.css';
 import './Design/Process.css';
+import './Design/Homepage.css';
 import { ToastContainer } from 'react-toastify';
 import './css/style.css'; // Import your custom styles
 import './css/responsive.css';
-
-import './homepage.css';
 import './css/bootstrap.css'; 
 
 import App from './App';
