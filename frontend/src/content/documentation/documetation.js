@@ -41,28 +41,25 @@ function Documentation() {
 
 
 
-    <div className="scroll-container">
-    <h1 class="display-4" className='custom-font2' style={{margin:50}}>
+  <h1 class="display-4" className='custom-font2' style={{margin:50}}>
             <span style={{ borderBottom: '5px solid #006400', position: 'relative', display: 'inline-block', padding: '0 10px' }}>
              WITH MULCH
             </span>
           </h1>
       <Documentation_1 />
-    </div>
+   
   
 
  
-    <div className="scroll-container">
-    <h1 class="display-4" className='custom-font2' style={{margin:50}}>
+    {/* <h1 class="display-4" className='custom-font2' style={{margin:50}}>
             <span style={{ borderBottom: '5px solid #006400', position: 'relative', display: 'inline-block', padding: '0 10px' }}>
              WITHOUT MULCH
             </span>
           </h1>
       <Documentation_withoutMulch />
-    </div>
-  
+    
 
- 
+  */}
     </div>
   </Fragment>
   );

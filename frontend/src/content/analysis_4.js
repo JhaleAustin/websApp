@@ -1,8 +1,47 @@
 import React, { Fragment, useState, useEffect } from "react";
 import Chart from "react-apexcharts";
-import regression from "regression";
-
+import axios from 'axios';
 function Analysis() {
+
+  const [withMulch, setWithMulch] = useState([]);
+  
+  
+  const [meanWM, setmeanwM] = useState();
+  const [meanWwM, setmeanWwM] = useState([]);
+  const [predictwitouthM, setpredictwithoutM] = useState();
+  const [predictwithM, setpredictwithM] = useState([]);
+  const [withoutMulch, setWithoutMulch] = useState([]);
+  const [plantHeight1, setPlantHeight1] = useState([]);
+  const [leavesLength, setLeavesLength] = useState([]);
+  const [leavesWidth, setLeavesWidth] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [plantHeightWithMulch, setPlantHeightWithMulch] = useState([]);
+
+  const [plantHeightWithoutMulch, setPlantHeightWithoutMulch] = useState([]);
+
+ 
+ 
+  useEffect(() => {
+    const fetchMaterials = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3001/api/v1/Documentations2`);
+        setWithMulch(response.data.withMulch);
+        setWithoutMulch(response.data.withoutMulch);
+        setLoading(false);
+      } catch (error) {
+        console.error('ERROR FETCHING MATERIALS:', error);
+        setError('ERROR FETCHING MATERIALS. PLEASE TRY AGAIN.');
+        setLoading(false);
+      }
+    };
+
+    fetchMaterials();
+  }, []);
+
+
+ 
+
 
   const getCategories = (timeframe) => {
     const numIntervals = 7;
@@ -13,6 +52,7 @@ function Analysis() {
         return [];
     }
   };
+
   const [state, setState] = useState({
     selectedTimeframe: "Day",
     options: {
@@ -42,17 +82,7 @@ function Analysis() {
       {
         name: "Plant With Mulch",
         data: [],
-      },
-      {
-        name: "Regression Line - Without Mulch",
-        type: "line",
-        data: [],
-      },
-      {
-        name: "Regression Line - With Mulch",
-        type: "line",
-        data: [],
-      },
+      }
     ],
   });
 
@@ -63,41 +93,6 @@ function Analysis() {
 
   const [inputs, setInputs] = useState([]);
 
-  const [plantHeightWithoutMulch, setPlantHeightWithoutMulch] = useState([]);
-  const [plantHeightWithMulch, setPlantHeightWithMulch] = useState([]);
-
-  useEffect(() => {
-    // Calculate regression line data
-    const regressionDataWithoutMulch = regression.linear(
-      plantHeightWithoutMulch.map((value, index) => [index, parseFloat(value)])
-    );
-    const regressionDataWithMulch = regression.linear(
-      plantHeightWithMulch.map((value, index) => [index, parseFloat(value)])
-    );
-
-    // Update the state with regression line data
-    setState((prevState) => ({
-      ...prevState,
-      series: [
-        {
-          ...prevState.series[0],
-          data: plantHeightWithoutMulch.map((value) => parseFloat(value)),
-        },
-        {
-          ...prevState.series[1],
-          data: plantHeightWithMulch.map((value) => parseFloat(value)),
-        },
-        {
-          ...prevState.series[2],
-          data: regressionDataWithoutMulch.points.map((point) => point[1]),
-        },
-        {
-          ...prevState.series[3],
-          data: regressionDataWithMulch.points.map((point) => point[1]),
-        },
-      ],
-    }));
-  }, [plantHeightWithoutMulch, plantHeightWithMulch]);
 
   const handleInputChange = (key, value) => {
     setInputValues((prevValues) => ({
@@ -108,24 +103,161 @@ function Analysis() {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    // Add logic to update plantHeightWithoutMulch and plantHeightWithMulch based on form values
-    // For example, push the height value to the respective arrays
-    setPlantHeightWithoutMulch([...plantHeightWithoutMulch, inputValues.height]);
-    // Reset input values
-    setInputValues({
-      height: 0,
+  //  setPlantHeightWithoutMulch([...plantHeightWithoutMulch, inputValues.height]);
+    let prev = 0,prevIndex=0,h2=0;
+
+    let meanWithMulch = 0, sumWithMulch = 0;
+    let meanWithoutMulch = 0,sumWithoutMulch=0;
+
+  
+    plantHeightWithMulch.map((withM, index) => {
+      if (index >= 1) {
+        meanWithMulch += withM;
+        sumWithMulch += 1;
+      }
     });
+    
+    meanWithMulch = parseFloat((meanWithMulch / sumWithMulch).toFixed(2));
+ 
+    
+
+      plantHeightWithoutMulch.map((withouM, index) => {
+        if (index >= 1) { 
+            meanWithoutMulch += withouM;
+            sumWithoutMulch += 1;
+         
+        }
+      });
+    
+      meanWithoutMulch = parseFloat((meanWithoutMulch / sumWithoutMulch).toFixed(2));
+    console.log("MEAN WITHOUT", meanWithoutMulch);
+    
+//     for (let i = 0; i < withMulch.length; i++) {
+//       if (i < 1) {
+//         const currentHeight = parseFloat(inputValues.height);
+//         prev = currentHeight;
+//         setpredictwithM(parseFloat(currentHeight.toFixed(2)));
+        
+// console.log("Current  : ",currentHeight);
+//       } else {
+//         const result = prev + ((prev + meanWithMulch)-prev) / ((i + 1) - i);
+//         prev = prev + meanWithMulch;
+        
+// console.log("Result  : ",result);
+//      setpredictwithM(parseFloat(result.toFixed(2)));
+//          }
+//     }
+
+// console.log("Predicted Analysis : ",predictwithM);
+
+
+const predictions = [];
+
+for (let i = 0; i < withMulch.length; i++) {
+    if (i < 1) {
+        const currentHeight = parseFloat(inputValues.height);
+        prev = currentHeight;
+        predictions.push(parseFloat(currentHeight.toFixed(2)));
+        console.log("Current  : ", currentHeight);
+    } else {
+        const result = prev + ((prev + meanWithMulch) - prev) / ((i + 1) - i);
+     
+        prev = prev + meanWithMulch;
+        predictions.push(parseFloat(result.toFixed(2)));
+         }
+}
+
+
+const predictions2 = [];
+
+for (let i = 0; i < withoutMulch.length; i++) {
+    if (i < 1) {
+        const currentHeight = parseFloat(inputValues.numberLeaves);
+        prev = currentHeight;
+        console.log("Result WITHOUT  : ",prev);
+   
+        predictions2.push(parseFloat(currentHeight.toFixed(2)));
+         } else {
+        const result = prev + ((prev + meanWithoutMulch) - prev) / ((i + 1) - i);
+        console.log("Result WITHOUT  : ", prev);
+        prev = prev + meanWithoutMulch;
+        predictions2.push(parseFloat(result.toFixed(2)));
+        console.log("Result WITHOUT  : ", prev);
+   }
+}
+
+// setpredictwithM(predictions);
+
+// console.log("Predicted Analysis : ",predictwithM);
+
+//    //setpredictwithoutM
+     
+   setState((prevState) => ({
+     ...prevState,
+     series: [
+       {
+         ...prevState.series[0],
+         data: predictions.map((value) => parseFloat(value)),
+       },
+       {
+         ...prevState.series[1],
+         data: predictions2.map((value) => parseFloat(value)),
+       }
+     ],
+   }));
   };
 
-  const removeInput = (index) => {
-    const newInputs = [...inputs];
-    newInputs.splice(index, 1);
-    setInputs(newInputs);
-  };
+  
+useEffect(() => {
 
-  const addInput = () => {
-    setInputs([...inputs, { length: '', width: '' }]);
-  };
+  let prev = 0,prevIndex=0;
+   const heightsWithMulch22 = withMulch.map((wMulch, index) => {
+    if (index < 1) {
+      const currentHeight = wMulch.height;
+      prev = currentHeight; 
+      prevIndex=0;
+   
+    } else {
+       const height2 =wMulch.height;
+       
+      const result = height2 - prev ;
+      prev = height2 ;
+     
+      return parseFloat(result.toFixed(2));
+    }
+  });
+
+  console.log("Plant With " ,heightsWithMulch22);
+
+  setPlantHeightWithMulch(heightsWithMulch22);
+  
+   
+  const resultAnalysisWithoutMulch = withoutMulch.map((withouM, index) => {
+    if (index < 1) {
+      const currentHeight = withouM.height;
+      prev = currentHeight; 
+      prevIndex=0;
+   
+    } else {
+       const height2 =withouM.height;
+       
+      const result = height2 - prev ;
+      prev = height2 ;
+     
+      return parseFloat(result.toFixed(2));
+    }
+  });
+  setPlantHeightWithoutMulch(resultAnalysisWithoutMulch);
+   
+  console.log("Plant Height WithMulch :",plantHeightWithMulch);
+
+  
+  console.log("Plant Height Without Mulch :",plantHeightWithMulch);
+
+  }, [withMulch]);
+  
+  
+  
 
   return (
     <Fragment>
@@ -165,40 +297,7 @@ function Analysis() {
                   onChange={(e) => handleInputChange('numberLeaves', e.target.value)}
                 />
               </div>
-              {/* <div className="scroll-container">
-                <button type="button" onClick={addInput}>
-                  Add Leaves
-                </button>
-                {inputs.map((value, index) => (
-                  <div key={index} className="form-row">
-                    <div className="form-group">
-                      <input
-                        className="form-control"
-                        type="number"
-                        name="length"
-                        placeholder="Length"
-                        value={value.length}
-                        onChange={(e) => handleInputChange(index, 'length', e.target.value)}
-                      />
-                    </div>
-
-                    <div className="form-group">
-                      <input
-                        className="form-control"
-                        type="number"
-                        name="width"
-                        placeholder="Width"
-                        value={value.width}
-                        onChange={(e) => handleInputChange(index, 'width', e.target.value)}
-                      />
-                    </div>
-
-                    <button type="button" onClick={() => removeInput(index)}>
-                      x
-                    </button>
-                  </div>
-                ))}
-              </div> */}
+            
 
               <div className="form-group">
                 <button className="btn btn-primary btn-block" type="submit">

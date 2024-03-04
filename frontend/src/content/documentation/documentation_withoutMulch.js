@@ -104,10 +104,7 @@ function Documentation_1(handledocuChange) {
             </div>
             <div class="row">
               <div class="col-sm">
-
-
-                <button className="uk-button button2" onClick={() => openModal(docu)}>
-
+ 
 
 
                   <div  >
@@ -120,7 +117,7 @@ function Documentation_1(handledocuChange) {
                         style={{ width: '300px', height: '300px' }} />
                     ))}
                   </div>
-                </button>
+               
               </div>
 
             </div>
@@ -130,44 +127,7 @@ function Documentation_1(handledocuChange) {
         ))}
       </div>
 
-      <div id="modal-center" className="uk-flex-top" uk-modal="true" >
-        <div className="uk-modal-dialog uk-modal-body uk-margin-auto-vertical" style={{ height: '600px' }}>
-          <button className="uk-modal-close-default" type="button" uk-close></button>
-          {selectedocu && (
-            <div className="scroll-container uk-text-center">
-              <p>
-                {/* Display details from selectedocu */}
-                Height: {selectedocu.height}
-              </p>
-              <p style={{ fontSize: '16px', background: 'linear-gradient(90deg, rgba(0,255,0,0.5), rgba(255,255,0,0.5))', color: '#000000', padding: '8px' }}>
-                {/* Display details from selectedocu */}
-                Leaves : {selectedocu.numOfLeaves}</p>
-              <table className="uk-table uk-table-hover uk-table-divider" style={{ backgroundColor: 'lightgreen', borderColor: 'lightyellowgreen' }}>
-                {/* Header row */}
-                <thead>
-                  <tr>
-                    <th>Length</th>
-                    <th>Width</th>
-                  </tr>
-                </thead>
-                {/* Mapping logic for leaves with alternating colors */}
-                <tbody>
-                  {/* key={index} {selectedocu.leaves.map((leaf, index) => ( */}
-                  {/* <tr style={{ backgroundColor: index % 2 === 0 ? '#f2f2f2' : '#ffffff' }}> */}
-                  <tr style={{ backgroundColor: '#f2f2f2' }}>
-                    <td>{selectedocu.leaves.length.toString().replace(/,/g, '')}</td>
-
-                    <td>{selectedocu.leaves.width}</td>
-                  </tr>
-                  {/* ))} */}
-                </tbody>
-              </table>
-
-              {/* ... other details */}
-            </div>
-          )}
-        </div>
-      </div>
+     
 
     </Fragment>
   );
