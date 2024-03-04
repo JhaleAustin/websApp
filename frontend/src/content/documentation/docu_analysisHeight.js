@@ -57,7 +57,7 @@ const getCategories = (timeframe) => {
     options: {
       colors: ["#E91E63", "#FF9800"],
       chart: {
-        id: "basic-bar",
+        id: "PREDECTIVE ",
         events: {
           markerClick: function (event, chartContext, { seriesIndex, dataPointIndex }) {
             // Handle drag event here
