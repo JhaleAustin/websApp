@@ -46,118 +46,98 @@ function Documentation_1(handledocuChange) {
   return (
     <Fragment>
       
-      <div className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
+      <div className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8 dataCC">
        
       
 
        
         {withMulch.map((docu,index) => (
 
-          <><div class="container text-center"    
-          style={{
-            padding: 20,
-            background: 'linear-gradient(to right, #b8ab9c, #c19c89, #a7836c)',
-            border: '1px solid #ccc', // Border style and color
-            boxShadow: '0 20px 20px rgba(0, 0, 0, 0.5)', // Box shadow with 10px distance
-            borderRadius: '10px', // Border radius
-            width:600,
-            height:950
-          }}>
+          <><div class="container text-center"   > 
+          
             <div class="row">
-              <div class="col-sm-12">
-                <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                  {docu.plantType}</h2>
-              </div>
-              <p style={{ fontSize: 'medium', fontFamily: 'Inconsolata, sans-serif' }}>
-              {docu.collectionDate}
-              </p>
-              <div className="uk-text-center">
-                  <table className="uk-table uk-table-hover uk-table-divider" style={{ height: 100, backgroundColor: 'lightgreen', borderColor: 'lightyellowgreen' }}>
-  {/* Header row */}
-  <thead>
-    <tr>
-      <th colSpan="2">WITH MULCH</th>
-      <th colSpan="2">WITHOUT MULCH</th>
-    </tr>
-    <tr>
-      <th>HEIGHT</th>
-      <th>NUMBER OF LEAVES</th>
-      <th>HEIGHT</th>
-      <th>NUMBER OF LEAVES</th>
-    </tr>
-  </thead>
-  
-  {/* Body */}
-  <tbody>
-    {/* Replace docu.leaves with your actual data structure */}
-    <tr style={{ backgroundColor: '#f2f2f2' }}>
-      {/* WITH MULCH */}
-      <td>{docu.height}</td>
-      <td>{docu.numOfLeaves}</td>
+              <div class="col-md-12">
+                <div class="row dataCCC">
+                  <p style={{ fontFamily: 'Inconsolata, sans-serif' }}>
+                  {docu.collectionDate}
+                  </p>
+                  <div className="uk-text-center">
+                    <table className="uk-table uk-table-hover uk-table-divider" style={{ height: 100, backgroundColor: '#abc32f', borderColor: 'lightyellowgreen' }}>
+                      <thead>
+                        <tr>
+                          <th colSpan="2" style={{ backgroundColor: 'white'}}>WITH MULCH</th>
+                          <th colSpan="2" style={{ backgroundColor: 'white'}}>WITHOUT MULCH</th>
+                        </tr>
+                        <tr>
+                          <th>HEIGHT</th>
+                          <th>NUMBER OF LEAVES</th>
+                          <th>HEIGHT</th>
+                          <th>NUMBER OF LEAVES</th>
+                        </tr>
+                      </thead>
+      
+                      <tbody>
+                        {/* Replace docu.leaves with your actual data structure */}
+                        <tr style={{ backgroundColor: '#abc32f' }}>
+                          {/* WITH MULCH */}
+                          <td>{docu.height}</td>
+                          <td>{docu.numOfLeaves}</td>
 
-      {/* WITHOUT MULCH */}
-      <td>{withoutMulch[index].height}</td>
-      <td>{withoutMulch[index].numOfLeaves}</td>
-    </tr>
+                          {/* WITHOUT MULCH */}
+                          <td>{withoutMulch[index].height}</td>
+                          <td>{withoutMulch[index].numOfLeaves}</td>
+                        </tr>
 
-   
-  </tbody>
-  <thead>
-  <tr>
-    <th colSpan="4" style={{ textAlign: 'center' }}>LEAVES</th>
-  </tr>
-    <tr>
-      <th>LENGTH</th>
-      <th>WIDTH</th>
-      <th>LENGTH</th>
-      <th>WIDTH</th>
-    </tr>
-  </thead>
-  {/* Body */}
-  <tbody>
+                      
+                      </tbody>
+                      
+                      <thead>
+                      <tr>          
+                        <th colSpan="4" style={{ textAlign: 'center', backgroundColor:'white'}}>LEAVES</th>
+                      </tr>
+                        <tr>
+                          <th>LENGTH</th>
+                          <th>WIDTH</th>
+                          <th>LENGTH</th>
+                          <th>WIDTH</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
 
 
-    <tr style={{ backgroundColor: '#f2f2f2' }}>
-      {/* WITH MULCH */}
-      <td>{docu.leaves.length}</td>
-      <td>{docu.leaves.width}</td>
+                        <tr style={{ backgroundColor: '#abc32f' }}>
+                          {/* WITH MULCH */}
+                          <td>{docu.leaves.length}</td>
+                          <td>{docu.leaves.width}</td>
 
-      {/* WITHOUT MULCH */}
-      <td>{withoutMulch[index].leaves.length}</td>
-      <td>{withoutMulch[index].leaves.width}</td>
-    </tr>
+                          {/* WITHOUT MULCH */}
+                          <td>{withoutMulch[index].leaves.length}</td>
+                          <td>{withoutMulch[index].leaves.width}</td>
+                        </tr>
 
-    {/* Add more rows as needed */}
-  </tbody>
-</table>
-
-
-                {/* ... other details */}
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm">
-
-
-           
-
-                  <div  >
-                    {docu.images.map((img, index) => (
-                      <img
-                        key={index}
-                        src={img.url}
-                        alt=""
-                        className="rounded-lg bg-gray-100"
-                        style={{ width: '600px', height: '500px' }} />
-                    ))}
+                        {/* Add more rows as needed */}
+                      </tbody>
+                    </table>
                   </div>
-                  
+                </div>
+                <div class="row">
+                  <div class="col-sm">
+                    <div  >
+                      {docu.images.map((img, index) => (
+                        <img
+                          key={index}
+                          src={img.url}
+                          alt=""
+                          className="rounded-lg bg-gray-100"
+                          style={{ width: '600px', height: '500px' }} />
+                      ))}
+                    </div>                  
+                  </div>
+                </div>
               </div>
-
             </div>
-
           </div></>
-
         ))}
       </div>
  

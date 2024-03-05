@@ -60,6 +60,24 @@ function Analysis() {
     selectedTimeframe: "Day",
     options: {
       colors: ["#abc32f", "#E4ED22"],
+      toolbar: {
+        show: true,
+        tools: {
+          download: true,
+          selection: true,
+          zoom: true,
+          zoomin: true,
+          zoomout: true,
+          pan: true,
+        },
+        autoSelected: 'zoom', // Default selection tool
+      },
+      legend: {
+        labels: {
+          colors: 'white', // Color for the legend text
+          letterSpacing: '2px'
+        },
+      },
       chart: {
         id: "Predictive Growth Analysis",
         events: {

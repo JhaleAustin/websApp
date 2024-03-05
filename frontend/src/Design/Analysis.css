@@ -85,6 +85,14 @@
     padding:80px 0; 
   }
 
+  .register-photo2 {
+    border: 2px solid#164006 !important;
+    padding:80px 0; 
+    background-color:  #164006 !important;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  }
+
 .register-photo h1 {
     color: #abc32f;
     font-size: 20px;
@@ -117,4 +125,70 @@
     justify-content: center;
     align-items: center;
     color: black;
+    margin-top: 20px;
   }
+
+.apexcharts-toolbar
+{
+    background-color: white; /* Set the background color for the toolbar */
+}
+
+.custom-font3
+{
+    font-size: 30px;
+    color: #164006;
+    letter-spacing: 3px;
+}
+
+.anaL
+{
+    margin-top: 10px !important;
+}
+
+.dataC
+{
+    margin-top: 50px;
+    border-radius: 10px;
+}
+
+.dataCC
+{
+    margin-top: -100px;
+    border-radius: 10px;
+}
+
+.dataCC .container
+{
+    background-color: #164006;
+    padding: 20px;
+    border-radius: 10px;
+    margin: auto;
+}
+
+.dataCCC
+{
+   text-align: center;
+   justify-content: center;
+   align-items: center;
+
+}
+
+.dataCC p
+{
+    color: #abc32f !important;
+    margin-bottom: 10px;
+    font-size: 30px;
+
+}
+
+.dataCC th, .dataCC tr, .dataCC td
+{
+    color: #164006 !important;
+    border: 1px solid #164006 !important;
+
+}
+
+.dataCC img
+{
+    border: 2px solid #abc32f;
+}

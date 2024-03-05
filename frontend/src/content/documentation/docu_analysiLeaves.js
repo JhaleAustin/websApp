@@ -55,9 +55,9 @@ const getCategories = (timeframe) => {
   const [state, setState] = useState({
     selectedTimeframe: "Day",
     options: {
-      colors: ["#E91E63", "#FF9800"],
+      colors:  ["#abc32f", "#E4ED22"],
       chart: {
-        id: "basic-bar",
+        id: "Predictive Growth Analysis ",
         events: {
           markerClick: function (event, chartContext, { seriesIndex, dataPointIndex }) {
             // Handle drag event here
@@ -65,8 +65,20 @@ const getCategories = (timeframe) => {
           },
         },
       },
+      legend: {
+        labels: {
+          colors: 'white', // Color for the legend text
+          letterSpacing: '2px'
+        },
+      },
       xaxis: {
         categories: getCategories("week"),
+        labels:
+        {
+          style: {
+            colors: 'white',
+          },
+        }
       },
       yaxis: {
         min: 0,
@@ -75,8 +87,11 @@ const getCategories = (timeframe) => {
           formatter: function (value) {
             // Format the y-axis labels to two decimal places
             return parseFloat(value).toFixed(2);
-          }
-        }
+          },
+          style: {
+            colors: 'white',
+          },
+        },
       },
     },
     series: [
@@ -333,7 +348,6 @@ setPlantHeightWithoutMulch(resultAnalysisWithoutMulch);
 <div className="register-photo2" >
 <div className="form-container">
   <div className="image-holder">
-    <h1>Plant Growth Chart</h1>
     <div className="chart-container">
       <Chart options={state.options} series={state.series} type="area" width="1000px" />
     </div>
