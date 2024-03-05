@@ -50,7 +50,7 @@ function Analysis() {
     const numIntervals = 7;
     switch (timeframe) {
       case "Day":
-        return Array.from({ length: 14 }, (_, index) => `Day ${index + 1}`);
+        return Array.from({ length: 15 }, (_, index) => `Day ${index + 1}`);
        default:
         return [];
     }
@@ -71,11 +71,22 @@ function Analysis() {
       },
       xaxis: {
         categories: getCategories("Day"),
+        labels: {
+          style: {
+            colors: 'white',
+          },
+        },
       },
       yaxis: {
         min: 0,
         tickAmount: 6,
+        labels: {
+          style: {
+            colors: 'white',
+          },
+        },
       },
+      
     },
     series: [
       {
@@ -123,7 +134,8 @@ function Analysis() {
     meanWithMulch = parseFloat((meanWithMulch / sumWithMulch).toFixed(2));
  
     
-
+  console.log("List Leaves :",plantHeightWithoutMulch);
+  
       plantHeightWithoutMulch.map((withouM, index) => {
         if (index >= 1) { 
             meanWithoutMulch += withouM;
@@ -131,8 +143,9 @@ function Analysis() {
          
         }
       });
-    
       meanWithoutMulch = parseFloat((meanWithoutMulch / sumWithoutMulch).toFixed(2));
+      console.log("List Leaves MEAN:",meanWithoutMulch);
+  
 
 const predictions = [];
 
@@ -212,14 +225,14 @@ useEffect(() => {
   setPlantHeightWithMulch(heightsWithMulch22);
   
    
-  const resultAnalysisWithoutMulch = withoutMulch.map((withouM, index) => {
+  const resultAnalysisWithoutMulch = withMulch.map((withouM, index) => {
     if (index < 1) {
-      const currentHeight = withouM.height;
+      const currentHeight = withouM.numOfLeaves;
       prev = currentHeight; 
       prevIndex=0;
    
     } else {
-       const height2 =withouM.height;
+       const height2 =withouM.numOfLeaves;
        
       const result = height2 - prev ;
       prev = height2 ;
@@ -227,8 +240,10 @@ useEffect(() => {
       return parseFloat(result.toFixed(2));
     }
   });
+
   setPlantHeightWithoutMulch(resultAnalysisWithoutMulch);
    
+  console.log("All lEAVES",plantHeightWithoutMulch);
   }, [withMulch]);
   
   
