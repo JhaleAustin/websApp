@@ -83,12 +83,12 @@
 .ana {
     border: 2px solid#164006 !important;
     padding:80px 0; 
-    background-color: grey;
   }
 
 .register-photo h1 {
     color: #abc32f;
     font-size: 20px;
+    letter-spacing: 3px;
   }
   
   .register-photo .image-holder {
@@ -102,6 +102,7 @@
     max-width:auto;
     width:80%;
     margin:0 auto;
+    margin-top: -100px !important;
   }
 
   .image-holder {

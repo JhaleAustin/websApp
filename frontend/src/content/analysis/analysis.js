@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect, useRef } from "react";
 import Chart from "react-apexcharts";
 import axios from 'axios';
 import Header from '../../Components/Layout/Header';  // Add this line
@@ -23,7 +23,7 @@ function Analysis() {
 
   const [plantHeightWithoutMulch, setPlantHeightWithoutMulch] = useState([]);
 
- 
+  const chartContainerRef = useRef(null);
  
   useEffect(() => {
     const fetchMaterials = async () => {
@@ -200,6 +200,10 @@ for (let i = 0; i < withoutMulch.length; i++) {
        }
      ],
    }));
+
+   if (chartContainerRef.current) {
+    chartContainerRef.current.scrollIntoView({ behavior: 'smooth' });
+  }
   };
 
   
@@ -256,7 +260,7 @@ useEffect(() => {
       <div class="row analysisT">
         <div class="col-md-9">          
           <p>
-            “Begin a journey of improved vegetable development with the use of peanut shells as mulch, supported by our advanced predictive analysis technology. Inputting essential information such as plant height and leaf count yields a thorough 14-day growth forecast graph, providing useful insights into the probable outcomes of your gardening methods. Witness the exciting potential of data-driven decision-making as our computers solve the complex relationship between peanut shell mulching and plant development. Our user-friendly interface enables you to make informed decisions, resulting in more resilient and healthier crops. With our innovative predictive analysis, 
+            “Begin a journey of improved vegetable development with the use of peanut shells as mulch, supported by our advanced predictive analysis. Inputting essential information such as plant height and leaf count yields, a thorough 15-day growth prediction analysi, providing useful insights into the probable outcomes of your gardening methods. Witness the exciting potential of data-driven decision-making as our computers solve the complex relationship between peanut shell mulching and plant development. Our user-friendly interface enables you to make informed decisions, resulting in more resilient and healthier crops. With our innovative predictive analysis, 
               you can take your cultivation experience to the next level.”
           </p> 
         </div>
@@ -295,7 +299,7 @@ useEffect(() => {
         </div>
       </div>
         
-      <div class="row ana">
+      <div class="row ana" ref={chartContainerRef}>
         <div className="register-photo container">
                   <div className="form-container">
                     <div className="image-holder">
