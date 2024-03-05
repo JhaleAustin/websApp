@@ -117,13 +117,15 @@ const Sidebar = () => {
             )}
           </NavLink>
 
-          <Link to="/logout">
-              <button className="btn btn__login" onClick={logoutHandler}> <i className="fas fa-sign-out-alt"></i> </button>
-            </Link>
-        
           
+        
           </CDBSidebarMenu>
         </CDBSidebarContent> 
+        <Link to="/logout" className="sideBLogOut">
+          <button className="btn btn__login" onClick={logoutHandler}> 
+           <i className="fas fa-sign-out-alt fa-flip-horizontal"></i> 
+          </button>
+        </Link>
       </CDBSidebar>
   );
 };

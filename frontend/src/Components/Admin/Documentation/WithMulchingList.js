@@ -295,7 +295,7 @@ const WithMulchingList = () => {
                                 searching={false} 
                                 noRecordsPerPageLabel={true} 
                                 fullPagination  
-                                entriesOptions={[5, 10]} 
+                                entriesOptions={[5, 10, 15]} 
                                 entries={5} 
                                 pagesAmount={4}
                                 sortable={false}
