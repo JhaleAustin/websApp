@@ -55,7 +55,6 @@ function Analysis() {
         return [];
     }
   };
-
   const [state, setState] = useState({
     selectedTimeframe: "Day",
     options: {
@@ -69,6 +68,7 @@ function Analysis() {
           },
         },
       },
+      
       xaxis: {
         categories: getCategories("Day"),
         labels: {
@@ -89,14 +89,22 @@ function Analysis() {
       
     },
     series: [
+      
       {
         name: "HEIGHT",
         data: [],
+        style: {
+          colors: 'white',
+        },
+        
       },
       {
         name: "NUMBER OF LEAVES",
         data: [],
-      }
+        style: {
+          colors: 'white',
+        },
+      },
     ],
   });
 
@@ -193,6 +201,7 @@ for (let i = 0; i < withoutMulch.length; i++) {
        {
          ...prevState.series[0],
          data: predictions.map((value) => parseFloat(value)),
+         
        },
        {
          ...prevState.series[1],
@@ -305,7 +314,7 @@ useEffect(() => {
                     <div className="image-holder">
                       <h1>PREDICTIVE GROWTH ANALYSIS OF PETCHAY USING PEANUT SHELL MULCHING</h1>
                       <div className="chart-container">
-                        <Chart options={state.options} series={state.series} type="area" width="1000px" />
+                        <Chart options={state.options} series={state.series}  type="area" width="1000px" />
                       </div>
                     </div>
 
