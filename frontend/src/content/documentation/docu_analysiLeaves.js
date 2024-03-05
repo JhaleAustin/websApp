@@ -176,8 +176,8 @@ let prev = 0,prevIndex=0;
      const height2 =wMulch.numOfLeaves;
     const result = prev + (height2 - prev) / ((index+1) - prevIndex);
     prev = result; 
-    
-    return parseFloat(result.toFixed(2));
+    return Math.round(result);
+
   }
 });
 setPlantHeightWithMulch(heightsWithMulch22);
@@ -195,8 +195,8 @@ const resultAnalysisWithoutMulch = withoutMulch.map((withouM, index) => {
     const height2 = withouM.numOfLeaves;
     const result = prev + (height2 - prev) / ((index+1) - prevIndex);
     prev = result; 
-  
-    return parseFloat(result.toFixed(2));
+    return Math.round(result);
+
   }
 });
 setPlantHeightWithoutMulch(resultAnalysisWithoutMulch);

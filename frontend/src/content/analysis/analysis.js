@@ -55,6 +55,7 @@ function Analysis() {
         return [];
     }
   };
+
   const [state, setState] = useState({
     selectedTimeframe: "Day",
     options: {
@@ -68,7 +69,6 @@ function Analysis() {
           },
         },
       },
-      
       xaxis: {
         categories: getCategories("Day"),
         labels: {
@@ -89,22 +89,14 @@ function Analysis() {
       
     },
     series: [
-      
       {
         name: "HEIGHT",
         data: [],
-        style: {
-          colors: 'white',
-        },
-        
       },
       {
         name: "NUMBER OF LEAVES",
         data: [],
-        style: {
-          colors: 'white',
-        },
-      },
+      }
     ],
   });
 
@@ -172,21 +164,20 @@ for (let i = 0; i < withMulch.length; i++) {
 
 
 const predictions2 = [];
-
 for (let i = 0; i < withoutMulch.length; i++) {
-    if (i < 1) {
-        const currentHeight = parseFloat(inputValues.numberLeaves);
-        prev = currentHeight;
-        console.log("Result WITHOUT  : ",prev);
-   
-        predictions2.push(parseFloat(currentHeight.toFixed(2)));
-         } else {
-        const result = prev + ((prev + meanWithoutMulch) - prev) / ((i + 1) - i);
-        console.log("Result WITHOUT  : ", prev);
-        prev = prev + meanWithoutMulch;
-        predictions2.push(parseFloat(result.toFixed(2)));
-        console.log("Result WITHOUT  : ", prev);
-   }
+  if (i < 1) {
+      const currentHeight = parseFloat(inputValues.numberLeaves);
+      prev = currentHeight;
+      console.log("Result WITHOUT  : ",prev);
+ 
+      predictions2.push(Math.round(currentHeight));
+       } else {
+      const result = prev + ((prev + meanWithoutMulch) - prev) / ((i + 1) - i);
+      console.log("Result WITHOUT  : ", prev);
+      prev = prev + meanWithoutMulch;
+      predictions2.push(Math.round(result));
+      console.log("Result WITHOUT  : ", prev);
+ }
 }
 
 // setpredictwithM(predictions);
@@ -201,7 +192,6 @@ for (let i = 0; i < withoutMulch.length; i++) {
        {
          ...prevState.series[0],
          data: predictions.map((value) => parseFloat(value)),
-         
        },
        {
          ...prevState.series[1],
