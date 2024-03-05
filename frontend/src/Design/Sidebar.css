@@ -11,3 +11,25 @@
 {
     box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.2);
 }
+
+.sideBLogOut
+{
+    margin: auto;
+    margin-right: 0 !important;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #164006;
+    width: 50px;
+    padding: 10px;
+    border-radius: 10px 0 0 10px;
+        /* color: #abc32f;
+        font-size: 30px; */
+}
+
+.fa-flip-horizontal
+{
+    font-size: 30px;
+    color: #abc32f;
+}

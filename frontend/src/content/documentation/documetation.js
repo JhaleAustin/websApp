@@ -2,6 +2,7 @@
 import React, { Fragment, useState } from "react";
 
 import "../../App.css";
+import Header from '../../Components/Layout/Header'; 
 
 import 'bulma/css/bulma.min.css';
 import Documentation_1 from "./documentation_1";
@@ -13,6 +14,7 @@ function Documentation() {
 
   return (
   <Fragment>
+    <Header />
      <div class="row">
             <div class="col-12 pfront1">
               <div class="container pfront2">
