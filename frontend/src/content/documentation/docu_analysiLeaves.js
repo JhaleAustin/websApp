@@ -182,37 +182,16 @@ useEffect(() => {
 //   setPlantHeightWithMulch(heightsWithMulch22);
 let prev = 0,prevIndex=0;
  const heightsWithMulch22 = withMulch.map((wMulch, index) => {
-  if (index < 1) {
-    const currentHeight = wMulch.numOfLeaves;
-    prev = currentHeight; 
-    prevIndex=0;
-     return currentHeight;
-  } else {
-     const height2 =wMulch.numOfLeaves;
-    const result = prev + (height2 - prev) / ((index+1) - prevIndex);
-    prev = result; 
-    return Math.round(result);
-
-  }
+     const currentHeight = wMulch.numOfLeaves;
+      return currentHeight;
 });
 setPlantHeightWithMulch(heightsWithMulch22);
 
  
 const resultAnalysisWithoutMulch = withoutMulch.map((withouM, index) => {
-  if (index < 1) {
-  
     const currentHeight = withouM.numOfLeaves;
-    prev = currentHeight; 
-    prevIndex=0;
-   
     return currentHeight;
-  } else {
-    const height2 = withouM.numOfLeaves;
-    const result = prev + (height2 - prev) / ((index+1) - prevIndex);
-    prev = result; 
-    return Math.round(result);
 
-  }
 });
 setPlantHeightWithoutMulch(resultAnalysisWithoutMulch);
 

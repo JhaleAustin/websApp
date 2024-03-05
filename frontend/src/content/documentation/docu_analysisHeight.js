@@ -180,39 +180,54 @@ useEffect(() => {
 // });
 // console.log("Leg result:",heightsWithMulch22)
 //   setPlantHeightWithMulch(heightsWithMulch22);
-let prev = 0,prevIndex=0;
- const heightsWithMulch22 = withMulch.map((wMulch, index) => {
-  if (index < 1) {
-    const currentHeight = wMulch.height;
-    prev = currentHeight; 
-    prevIndex=0;
-     return currentHeight;
-  } else {
-     const height2 =wMulch.height;
-    const result = prev + (height2 - prev) / ((index+1) - prevIndex);
-    prev = result; 
+// let prev = 0,prevIndex=0;
+//  const heightsWithMulch22 = withMulch.map((wMulch, index) => {
+//   if (index < 1) {
+//     const currentHeight = wMulch.height;
+//     prev = currentHeight; 
+//     prevIndex=0;
+//      return currentHeight;
+//   } else {
+//      const height2 =wMulch.height;
+//     const result = prev + (height2 - prev) / ((index+1) - prevIndex);
+//     prev = result; 
    
-    return parseFloat(result.toFixed(2));
-  }
+//     return parseFloat(result.toFixed(2));
+//   }
+// });
+// setPlantHeightWithMulch(heightsWithMulch22);
+
+
+let prev = 0,prevIndex=0;
+ const heightsWithMulch22 = withMulch.map((wMulch) => {
+   const currentHeight = wMulch.height;
+     return currentHeight;
 });
 setPlantHeightWithMulch(heightsWithMulch22);
 
  
-const resultAnalysisWithoutMulch = withoutMulch.map((withouM, index) => {
-  if (index < 1) {
+// const resultAnalysisWithoutMulch = withoutMulch.map((withouM, index) => {
+//   if (index < 1) {
   
-    const currentHeight = withouM.height;
-    prev = currentHeight; 
-    prevIndex=0;
+//     const currentHeight = withouM.height;
+//     prev = currentHeight; 
+//     prevIndex=0;
    
-    return currentHeight;
-  } else {
-    const height2 = withouM.height;
-    const result = prev + (height2 - prev) / ((index+1) - prevIndex);
-    prev = result; 
+//     return currentHeight;
+//   } else {
+//     const height2 = withouM.height;
+//     const result = prev + (height2 - prev) / ((index+1) - prevIndex);
+//     prev = result; 
   
-    return parseFloat(result.toFixed(2));
-  }
+//     return parseFloat(result.toFixed(2));
+//   }
+// });
+
+
+
+const resultAnalysisWithoutMulch = withoutMulch.map((withouM) => {
+    const currentHeight = withouM.height;
+    return currentHeight;
 });
 setPlantHeightWithoutMulch(resultAnalysisWithoutMulch);
 
