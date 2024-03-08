@@ -36,6 +36,8 @@ import UpdateWithoutMulch from './Components/Admin/Documentation/UpdateWithoutMu
 import NewWithMulch from './Components/Admin/Documentation/NewWithMulch';
 import UpdateWithMulch from './Components/Admin/Documentation/UpdateWithMulch';
 
+import Inquiry from './content/inquiries/Forum';
+
 
 function App() {
 
@@ -49,6 +51,7 @@ function App() {
             <Route path="/process" element={<Process />} />
             <Route path="/documentation" element={<Documentation />} />
             <Route path="/analysis" element={<Analysis />} />
+            <Route path="/forum" element={<Inquiry />} />
           </Routes>
  
           {/* AdminPage route */}

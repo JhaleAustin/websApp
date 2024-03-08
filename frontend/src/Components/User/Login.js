@@ -27,7 +27,7 @@ import { getUser } from '../../utils/helpers';
     
             // If the request is successful, proceed with authentication
             const data = response.data;
-            authenticate(data, () => navigate("/admin/peanutshell"));
+            authenticate(data, () => navigate("/forum"));
         } catch (error) {
             console.log('Server response:', error.response);
     

@@ -4,7 +4,7 @@ import './index.css';
 import './Design/Login.css';
 import './Design/Header.css';
 import './Design/Sidebar.css';
-
+import './Design/Forum.css';
 import './Design/Header.scss';
 import './Design/Home.css';
 import './Design/DataTable.css';

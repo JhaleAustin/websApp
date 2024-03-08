@@ -1,0 +1,341 @@
+.bootdey
+{
+    background: #abc32f !important;
+    align-items: start;
+    text-align: left;
+    margin-top: 50px !important;
+    margin-bottom: 50px !important;
+    border-radius: 10px;
+    border: 5px solid #164006;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+
+}
+
+.bootdey .img-sm {
+    width: 40px;
+    height: 40px;
+}
+
+.bootdey h1 {
+    color: #164006;
+    margin-bottom: 5px;
+}
+
+.bootdey p {
+    color: black;
+    margin-left: 0;
+}
+
+.bootdey .mar-btm {
+    margin-bottom: 10px;
+}
+
+.bootdey .detailsD {
+    word-wrap: break-word;
+    margin-top: 20px !important;
+}
+
+.bootdey .panel {
+    box-shadow: 0 2px 0 rgba(0,0,0,0.075);
+    border-radius: 0;
+    border: 0;
+    margin-bottom: 15px;
+}
+
+.bootdey textarea
+{
+    border: 2px solid #164006;
+    box-shadow: none !important;
+}
+
+.bootdey textarea:focus
+{
+    border: 2px solid #164006;
+    box-shadow: none !important;
+}
+
+.bootdey .postS
+{
+    margin-bottom: 20px !important;
+}
+
+
+.bootdey .postSo{
+    padding: 25px 20px;
+    border: 2px solid #164006;
+    border-radius: 10px;
+}
+
+.bootdey .pad-ver
+{
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.bootdey .pad-ver:hover
+{
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: #164006;
+}
+
+.answerC .gallery
+{
+    margin-top: 15px !important;
+}
+
+.bootdey .replyD
+{
+    margin-left: 30px;
+}
+
+.bootdey .answerC
+{
+    margin-left: 30px;
+}
+
+.bootdey .mar-top .replyA
+{
+    background-color: #164006;
+    color: #abc32f;
+    border: 2px solid #164006;
+    box-shadow: none !important;
+    letter-spacing: 2px;
+    width: auto;
+    height: auto;
+}
+
+.bootdey .replyAC
+{
+    display: inline-block;
+
+    cursor: pointer;
+    color: #164006;
+    margin-right: 10px;
+}
+
+.bootdey .replyACR {
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-end;
+}
+.bootdey .mar-top .replyA:hover
+{
+    background-color: #abc32f;
+    color: #164006;
+    border: 2px solid #164006;
+}
+
+.bootdey .mar-top .replyA:focus
+{
+    background-color: #abc32f;
+    color: #164006;
+    border: 2px solid #164006;
+}
+
+.bootdey .media-block .media-left {
+    display: block;
+    float: left
+}
+
+.bootdey .media-block .media-body {
+    display: block;
+    overflow: hidden;
+    width: auto
+}
+
+.bootdey .middle .media-left,
+.bootdey .middle .media-body {
+    vertical-align: middle
+}
+
+.bootdey .thumbnail {
+    border-radius: 0;
+    border-color: #164006;
+}
+
+.bootdey .dateD{
+    color: black;
+    font-size: 5px;
+}
+
+.bootdey .text-sm {
+    font-size: 0.9em;
+}
+.bootdey .text-5x, .bootdey .text-4x, 
+.bootdey .text-5x, .bootdey .text-2x, 
+.bootdey .text-lg, .bootdey .text-sm, 
+.bootdey .text-xs 
+{
+    line-height: 1.25;
+}
+
+.bootdey .btn-trans 
+{
+    background-color: transparent;
+    border-color: transparent;
+    color: #929292;
+}
+
+.bootdey .btn-icon 
+{
+    padding-left: 9px;
+    padding-right: 9px;
+}
+
+.bootdey .btn-sm, .bootdey .btn-group-sm>.btn, 
+.bootdey .btn-icon .btn-sm 
+{
+    padding: 5px 10px !important;
+}
+
+.bootdey .mar-top {
+    margin-top: 15px;
+}
+
+/* MODAL */
+
+.bootdey .modal {
+    position: fixed;
+    margin-top: 100px !important;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: auto;
+  }
+  
+  .bootdey .modal-content {
+    background-color: #abc32f;
+    margin-top: 100px !important;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  
+.bootdey .close {
+    color: #164006;
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+.bootdey .title {
+    color: #164006;
+    margin: auto;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+.bootdey .close:hover, .bootdey .close:focus {
+    color: #164006;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+.bootdey .camera-icon {
+    display: inline-block;
+    padding: 10px;
+    cursor: pointer;
+    color: #164006;
+    margin-left: 10px;
+  }
+
+.bootdey #inquiry, .bootdey #answer
+{
+    height: auto;
+}
+
+.bootdey .panel-body {
+    padding: 25px 20px;
+    display: flex;
+    flex-direction: column; /* Ensure flex children stack vertically */
+}
+
+.bootdey .col-md-12
+{
+    margin-top: 20px;
+}
+
+.bootdey .gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px; /* Adjust the gap between items as needed */
+}
+
+.bootdey .gallery-item {
+    position: relative;
+    overflow: hidden;
+}
+
+.bootdey .gallery-item img {
+    width: 100%;
+    height: auto;
+    border: 1px solid #ddd; /* Add a border for better visibility */
+}
+
+.bootdey .gallery-item button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.bootdey .modal .pull-right
+{
+    background-color: #164006;
+    color: #abc32f;
+    border: 2px solid #164006;
+    box-shadow: none !important;
+    letter-spacing: 2px;
+}
+
+.bootdey .modal .pull-right:hover
+{
+    background-color: #abc32f;
+    color: #164006;
+    border: 2px solid #164006;
+}
+
+.bootdey .modal .pull-right:focus
+{
+    background-color: #abc32f;
+    color: #164006;
+    border: 2px solid #164006;
+}
+
+/* DELETE MODAL */
+
+.deleteM
+{
+    /* Add your modal styling here */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent !important;
+}
+
+.deleteM .modal-content {
+    /* Add your modal content styling here */
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+}
+
+.deleteM .modal-content p {
+    margin-bottom: 20px;
+}

@@ -34,14 +34,6 @@ function Documentation_1(handledocuChange) {
     fetchwithMulch();
   }, []);
 
-  const openModal = (docu2) => {
-    setselectedocu(docu2);
-    console.log("Select",selectedocu);
-    const modal = UIkit.modal("#modal-center");
-    if (modal) {
-      modal.show();
-    }
-  };
 
   return (
     <Fragment>

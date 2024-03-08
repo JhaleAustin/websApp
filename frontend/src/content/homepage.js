@@ -121,14 +121,16 @@ function Homepage() {
                       <p>
                         {peanutshell[3] && peanutshell[3].description}
                       </p>
-                    </div>
-                    
+                    </div> 
                   </div>
+                  <a className="sources" href="https://foodsnutrients.com/what-is-the-use-of-peanut-shells/">CLICK TO VIEW SOURCE</a>
                 </div>
+                   
                 <hr></hr>
               </section>
 
-              </div>
+            
+            </div>
 
             
             <div class="homepageM">
@@ -183,13 +185,17 @@ function Homepage() {
                           </div>
                         </div>
                       </div>
+                      <a className="sourcesY" href="https://homesteadandchill.com/garden-mulch-101/">CLICK TO VIEW SOURCE</a>
+
                     </div>
+
                   </div>
 
+
                 </div>
-
+                
               </div>
-
+              
             </div> 
             <hr></hr>
            
@@ -242,7 +248,7 @@ function Homepage() {
                   </div>
                 </div>
               </section>
-          
+              
             </div>
             <hr></hr>
 
@@ -325,6 +331,8 @@ function Homepage() {
                     </div>
                   </div>
                 </section>
+                <a className="sourcesX" href="https://offgridgrandpa.com/benefits-of-mulching/">CLICK TO VIEW SOURCE</a>
+
               </div>
             </div>
           </div>

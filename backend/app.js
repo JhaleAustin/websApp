@@ -5,7 +5,8 @@ const cors = require('cors')
 
 const documentation = require('./routes/documentation')
 const process = require('./routes/process')
-const record = require('./routes/record')
+const inquiries = require('./routes/inquiries')
+const answers = require('./routes/answers')
 const home = require('./routes/home')
 const user = require('./routes/auth')
 
@@ -19,6 +20,8 @@ app.use(cookie());
 
 app.use('/api/v1', documentation);
 app.use('/api/v1', process);
+app.use('/api/v1', inquiries);
+app.use('/api/v1', answers);
 app.use('/api/v1', home);
 app.use('/api/v1', user);
 

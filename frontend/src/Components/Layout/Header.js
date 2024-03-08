@@ -73,7 +73,14 @@ function Header() {
                   <span id="myOrders" className="ml-3">ANALYSIS</span>
                 </Link>
               </div>
-              
+            </li>
+    
+            <li>
+              <div className="col-12 col-md-3 mt-4 mt-md-0 text-center">
+                <Link to="/forum" style={{ textDecoration: 'none' }} >
+                  <span id="myOrders" className="ml-3">FORUM</span>
+                </Link>
+              </div>
             </li>
            
             <li>

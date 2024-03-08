@@ -8,6 +8,45 @@
   position: relative;
 }
 
+.sources
+{
+  color: #164006;
+}
+
+.sources:hover
+{
+  color: black;
+  text-decoration: none;
+  
+}
+
+.sourcesX
+{
+  color: #abc32f;
+}
+
+.sourcesX:hover
+{
+  color: white;
+  text-decoration: none;
+  
+}
+
+.sourcesY
+{
+  color: #abc32f;
+  margin-top: -20px !important;
+
+}
+
+.sourcesY:hover
+{
+  
+  color: white;
+  text-decoration: none;
+  
+}
+
 hr
 {
   background-color: #164006 !important;
