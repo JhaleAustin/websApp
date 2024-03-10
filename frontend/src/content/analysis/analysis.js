@@ -1,8 +1,7 @@
 import React, { Fragment, useState, useEffect, useRef } from "react";
 import Chart from "react-apexcharts";
 import axios from 'axios';
-import Header from '../../Components/Layout/Header';  // Add this line
-
+import Header from '../../Components/Layout/Header';  
 
 function Analysis() {
 
@@ -21,7 +20,7 @@ function Analysis() {
   const [error, setError] = useState('');
   const [plantHeightWithMulch, setPlantHeightWithMulch] = useState([]);
 
-  const [plantHeightWithoutMulch, setPlantHeightWithoutMulch] = useState([]);
+  const [plantLeavesWithMulch, setPlantLeavesWithMulch] = useState([]);
 
   const chartContainerRef = useRef(null);
  
@@ -70,11 +69,11 @@ function Analysis() {
           zoomout: true,
           pan: true,
         },
-        autoSelected: 'zoom', // Default selection tool
+        autoSelected: 'zoom', 
       },
       legend: {
         labels: {
-          colors: 'white', // Color for the legend text
+          colors: 'white',
           letterSpacing: '2px'
         },
       },
@@ -82,7 +81,6 @@ function Analysis() {
         id: "Predictive Growth Analysis",
         events: {
           markerClick: function (event, chartContext, { seriesIndex, dataPointIndex }) {
-            // Handle drag event here
             console.log("Marker clicked!", seriesIndex, dataPointIndex);
           },
         },
@@ -125,6 +123,15 @@ function Analysis() {
 
   const [inputs, setInputs] = useState([]);
 
+  const newAnalysis = async (formData) => {
+    try {
+      const { data } = await axios.post(`http://localhost:3001/api/v1/analysis`, formData);
+      console.log("Analysis result:", data); // Assuming the server responds with the result
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
 
   const handleInputChange = (key, value) => {
     setInputValues((prevValues) => ({
@@ -133,9 +140,21 @@ function Analysis() {
     }));
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-  //  setPlantHeightWithoutMulch([...plantHeightWithoutMulch, inputValues.height]);
+
+    let  height = parseFloat(inputValues.height);
+    let  numOfLeaves = inputValues.numberLeaves;
+      
+    
+    const formData = {
+      height: parseFloat(inputValues.height),
+      numOfLeaves: parseInt(inputValues.numberLeaves),
+    };
+    
+    await newAnalysis(formData);
+    
+
     let prev = 0,prevIndex=0,h2=0;
 
     let meanWithMulch = 0, sumWithMulch = 0;
@@ -151,10 +170,8 @@ function Analysis() {
     
     meanWithMulch = parseFloat((meanWithMulch / sumWithMulch).toFixed(2));
  
-    
-  console.log("List Leaves :",plantHeightWithoutMulch);
-  
-      plantHeightWithoutMulch.map((withouM, index) => {
+ 
+      plantLeavesWithMulch.map((withouM, index) => {
         if (index >= 1) { 
             meanWithoutMulch += withouM;
             sumWithoutMulch += 1;
@@ -162,8 +179,7 @@ function Analysis() {
         }
       });
       meanWithoutMulch = parseFloat((meanWithoutMulch / sumWithoutMulch).toFixed(2));
-      console.log("List Leaves MEAN:",meanWithoutMulch);
-  
+     
 
 const predictions = [];
 
@@ -186,24 +202,27 @@ for (let i = 0; i < withoutMulch.length; i++) {
   if (i < 1) {
       const currentHeight = parseFloat(inputValues.numberLeaves);
       prev = currentHeight;
-      console.log("Result WITHOUT  : ",prev);
- 
       predictions2.push(Math.round(currentHeight));
        } else {
       const result = prev + ((prev + meanWithoutMulch) - prev) / ((i + 1) - i);
-      console.log("Result WITHOUT  : ", prev);
       prev = prev + meanWithoutMulch;
       predictions2.push(Math.round(result));
-      console.log("Result WITHOUT  : ", prev);
- }
+    }
+
+// let  height = parseFloat(inputValues.height);
+// let  numOfLeaves = inputValues.numberLeaves;
+  
+
+// const formData = {
+//   height: parseFloat(inputValues.height),
+//   numOfLeaves: parseInt(inputValues.numberLeaves),
+// };
+
+// await newAnalysis(formData);
+
 }
 
-// setpredictwithM(predictions);
-
-// console.log("Predicted Analysis : ",predictwithM);
-
-//    //setpredictwithoutM
-     
+    
    setState((prevState) => ({
      ...prevState,
      series: [
@@ -221,9 +240,17 @@ for (let i = 0; i < withoutMulch.length; i++) {
    if (chartContainerRef.current) {
     chartContainerRef.current.scrollIntoView({ behavior: 'smooth' });
   }
+  
+  setInputValues({
+    height: 0,
+    numberLeaves: 0,
+  });
+  
   };
 
-  
+
+
+
 useEffect(() => {
 
   let prev = 0,prevIndex=0;
@@ -243,6 +270,7 @@ useEffect(() => {
     }
   });
 
+  console.log("WITHOUT" , heightsWithMulch22);
   setPlantHeightWithMulch(heightsWithMulch22);
   
    
@@ -262,9 +290,9 @@ useEffect(() => {
     }
   });
 
-  setPlantHeightWithoutMulch(resultAnalysisWithoutMulch);
+  setPlantLeavesWithMulch(resultAnalysisWithoutMulch);
    
-  console.log("All lEAVES",plantHeightWithoutMulch);
+  console.log("All lEAVES",plantLeavesWithMulch);
   }, [withMulch]);
   
   

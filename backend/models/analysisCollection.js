@@ -12,7 +12,7 @@ const analysisSchema = new mongoose.Schema({
         required: true
     },
     analysisDate: {
-        type: String,
+        type: Date,
         required: true
     }
 })

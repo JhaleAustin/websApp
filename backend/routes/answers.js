@@ -5,11 +5,13 @@ const upload = require('../utils/multer')
 const { isAuthenticatedUser, authorizeRoles }  = require('../middlewares/auth')
 
 
-const { newAnswer, getAllAnswers, updateAnswer, deleteAnswer}
+const { newAnswer, getAllAnswers, getAdminForum, deleteAnswer}
      = require('../controllers/answersController');
 
 router.post('/answer/:id', isAuthenticatedUser, upload.array('images'), newAnswer);
 router.get('/answers', getAllAnswers)
+router.get('/forum', isAuthenticatedUser, authorizeRoles('admin'), getAdminForum)
+// router.get('/forum', getAdminForum)
 router.route('/answers/:id', isAuthenticatedUser, authorizeRoles('admin')).delete(deleteAnswer);
 
 module.exports = router;

@@ -30,3 +30,21 @@ exports.newAnalysis = async (req, res, next) => {
       });
     }
   };
+
+  exports.getAllAnalysis = async (req, res, next) => {
+    try {
+        const analyze = await Analysis.find();
+
+        res.status(200).json({
+            success: true,
+            analyze
+        });
+    } catch (error) {
+        res.status(500).json({
+   
+			success: false,
+            message: 'ERROR FETCHING ANALYSIS',
+            error: error.message
+        });
+    }
+};

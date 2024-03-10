@@ -1,6 +1,7 @@
 const { now } = require('mongoose');
 const Answer = require('../models/answersCollection');
 const Inquiry = require('../models/inquiriesCollection');
+const User = require('../models/authCollection');
 const cloudinary = require('cloudinary');
 
 exports.newAnswer = async (req, res, next) => {
@@ -107,3 +108,23 @@ exports.deleteAnswer = async (req, res, next) => {
 		message: 'ANSWER NOT DELETED'
 	})
 }
+
+exports.getAdminForum= async (req, res, next) => {
+  try {
+      const answers = await Answer.find()
+      .populate ('inquiry')
+      .populate('admin');
+
+      res.status(200).json({
+          success: true,
+          answers
+      });
+  } catch (error) {
+      res.status(500).json({
+ 
+    success: false,
+          message: 'ERROR FETCHING ANSWERS',
+          error: error.message
+      });
+  }
+};

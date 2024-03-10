@@ -69,6 +69,18 @@ const Sidebar = () => {
             <Link to="/" className="sidebar__content__logo">
               <img class="slogo" src="/images/logo.png"></img>
             </Link>
+
+            <NavLink exact to="/admin/forum" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="fa-regular fa-newspaper">
+                FORUM
+              </CDBSidebarMenuItem>
+            </NavLink>
+
+            <NavLink exact to="/admin/analysis" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="fa-solid fa-chart-line">
+                ANALYSIS
+              </CDBSidebarMenuItem>
+            </NavLink>
             
             <NavLink exact to="/admin/process" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="fa-solid fa-seedling">
