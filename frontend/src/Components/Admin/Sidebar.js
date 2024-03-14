@@ -70,6 +70,12 @@ const Sidebar = () => {
               <img class="slogo" src="/images/logo.png"></img>
             </Link>
 
+            <NavLink exact to="/dashboard" activeClassName="activeClicked">
+            <CDBSidebarMenuItem icon="fas fa-tachometer-alt"> {/* Assuming 'fa-tachometer-alt' is the icon for dashboard */}
+              DASHBOARD
+            </CDBSidebarMenuItem>
+          </NavLink>
+
             <NavLink exact to="/admin/forum" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="fa-regular fa-newspaper">
                 FORUM

@@ -4,6 +4,7 @@ import MetaData from '../../Layout/MetaData';
 import WeeklyAnalysisChart from './Analysis/WeeklyAnalysisChart';
 import DailyAnalysisChart from './Analysis/DailyAnalysisChart';
 
+import DailyAnalysisChart2 from './Forum/DailyAnalysisChart';
 function AnalysisChart() {
   return (
     <Fragment>
@@ -18,6 +19,9 @@ function AnalysisChart() {
                 <div className="row">
                   <div className="col-md-12 dailyC" style={{ maxHeight: '50vh'}}>
                     <DailyAnalysisChart />
+                  </div>
+                  <div className="col-md-12 dailyC" style={{ maxHeight: '50vh'}}>
+                    <DailyAnalysisChart2 />
                   </div>
                   <div className="col-md-12" style={{ maxHeight: '50vh'}}>
                     <WeeklyAnalysisChart />
