@@ -36,15 +36,19 @@ const InquiryList = () => {
     getAdminInquiry();
   }, [selectedInquiryRowId]);
 
+  useEffect(() => {
+    setSelectedFollowupRowId(null); // Reset selectedFollowupRowId to null when selectedAnswerRowId changes
+  }, [selectedAnswerRowId]);
+
+  
   const handleInquiryFilterChange = (value) => {
     setInquiryFilter(value);
   };
 
   const handleInquiryRowClick = (inquiryRowId) => {
-    setSelectedInquiryRowId((previnquiryRowId) => (previnquiryRowId=== inquiryRowId ? null : inquiryRowId));
-
-    setSelectedAnswerRowId(null); // Reset selected answer row ID when a new inquiry is selected
-    setSelectedFollowupRowId(null); // Reset selected follow-up row ID when a new inquiry is selected
+    setSelectedInquiryRowId((prevInquiryRowId) => (prevInquiryRowId === inquiryRowId ? null : inquiryRowId));
+    setSelectedAnswerRowId(null);
+    setSelectedFollowupRowId(null);
   };
 
   const inquiryList = () => {
@@ -92,13 +96,10 @@ const InquiryList = () => {
 
     return data;
   };
-  
-  useEffect(() => {
-    setSelectedFollowupRowId(null); // Reset selected follow-up row ID when selectedAnswerRowId changes
-  }, [selectedAnswerRowId]);
+
   return (
     <Fragment>
-      <MetaData title={'ANSWERS'} />
+      <MetaData title={'FORUM'} />
       <div className="row dlist">
         <div className="col-12 col-md-2">
           <Sidebar />
@@ -137,19 +138,19 @@ const InquiryList = () => {
                 />
               </div>
             )}
-            {selectedInquiryRowId && (
+            {selectedInquiryRowId !== null && (
               <AnswerList
                 inquiryRowId={selectedInquiryRowId}
                 onAnswerRowClick={(answerRowId) => setSelectedAnswerRowId(answerRowId)}
               />
             )}
-            {selectedAnswerRowId && (
+            {selectedAnswerRowId !== null && (
               <FollowupList
                 answerRowId={selectedAnswerRowId}
                 onFollowupRowClick={(followupRowId) => setSelectedFollowupRowId(followupRowId)}
               />
             )}
-            {selectedFollowupRowId && <ReplyList followupRowId={selectedFollowupRowId} />}
+            {selectedFollowupRowId !== null && <ReplyList followupRowId={selectedFollowupRowId} />}
           </div>
         </div>
       </div>

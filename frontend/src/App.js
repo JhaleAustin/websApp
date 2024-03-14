@@ -186,7 +186,7 @@ function App() {
                   </ProtectedRoute> 
               }/> */}
 
-            <Route path="/admin/inquiries"
+            <Route path="/admin/forum"
             element={
                   <ProtectedRoute isAdmin={true}>
                     <InquiryList /> 
