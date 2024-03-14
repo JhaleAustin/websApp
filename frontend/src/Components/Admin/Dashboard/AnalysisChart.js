@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import Chart from "react-apexcharts";
-import axios from 'axios';
-import { getToken } from '../../../utils/helpers';
+import React, { Fragment } from "react";
+
+import Sidebar from '../Sidebar';
+import MetaData from '../../Layout/MetaData';
 
 import WeeklyAnalysisChart from './Analysis/WeeklyAnalysisChart';
 import DailyAnalysisChart from './Analysis/DailyAnalysisChart';
@@ -9,10 +9,22 @@ import DailyAnalysisChart from './Analysis/DailyAnalysisChart';
 function AnalysisChart() {
   
   return (
-    <div>
-      <DailyAnalysisChart />
-      <WeeklyAnalysisChart />
-    </div>
+    <Fragment>
+      <MetaData title={'FORUM'} />
+      <div className="row dlist">
+        <div className="col-12 col-md-2">
+          <Sidebar />
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <DailyAnalysisChart />
+          </div>
+          <div class="col-md-12">
+            <WeeklyAnalysisChart />
+          </div>
+        </div>
+      </div>
+    </Fragment>
   );
 }
 

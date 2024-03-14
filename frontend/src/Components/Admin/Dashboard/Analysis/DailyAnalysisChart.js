@@ -27,7 +27,7 @@ function DailyAnalysisChart() {
 
       const analyzedDataWithCount = response.data.analyze.map(item => ({
         ...item,
-        inputCount: countedData[new Date(item.analysisDate).toDateString()] || 0,
+        inputCount: countedData[new Date(item.analysisDate).toDateString()] || 0,        
       }));
 
       setAnalysis(analyzedDataWithCount);
@@ -48,6 +48,7 @@ function DailyAnalysisChart() {
 
   const options = {
     chart: {
+      colors: ["#abc32f"],
       id: 'ANALYSIS REPORT',
       height: 350,
       type: 'line',
@@ -59,10 +60,22 @@ function DailyAnalysisChart() {
         },
       },
       toolbar: {
-        show: false,
+        show: true,
+        tools: {
+          download: true,
+          selection: true,
+          zoom: true,
+          zoomin: true,
+          zoomout: true,
+          pan: true,
+        },
+        autoSelected: 'zoom', 
       },
-      zoom: {
-        enabled: false,
+      legend: {
+        labels: {
+          colors: 'white',
+          letterSpacing: '2px'
+        },
       },
     },
     dataLabels: {
@@ -83,13 +96,26 @@ function DailyAnalysisChart() {
       range: XAXISRANGE,
       min: new Date(new Date().getFullYear(), selectedMonth, 1).getTime(),
       max: new Date(new Date().getFullYear(), selectedMonth + 1, 0).getTime(),
+      labels: {
+        style: {
+          colors: 'white',
+        },
+      },
     },
     yaxis: {
-      max: 20,
+      max: 50,
+      labels: {
+        style: {
+          colors: 'white',
+        },
+      },
     },
-    legend: {
-      show: false,
-    },
+    series: [
+      {
+        name: "NUMBER OF USERS",
+        data: [],
+      },
+    ],
   };
 
   const series = [{

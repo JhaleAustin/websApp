@@ -62,6 +62,15 @@ function Analysis() {
     selectedTimeframe: "Day",
     options: {
       colors: ["#abc32f", "#E4ED22"],
+      height: 350,
+      type: 'line',
+      animations: {
+        enabled: true,
+        easing: 'linear',
+        dynamicAnimation: {
+          speed: 1000,
+        },
+      },
       toolbar: {
         show: true,
         tools: {
