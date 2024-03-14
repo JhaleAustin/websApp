@@ -13,14 +13,14 @@ import Filter from 'bad-words';
 function Forum() {
     const [user, setUser] = useState(getUser())
     const [displayedItems, setDisplayedItems] = useState(2);
-
+ 
     const [allInquiries, setAllInquiries] = useState([]);
     const [allAnswers, setAllAnswers] = useState([]);
     const [allFollowups, setAllFollowups] = useState([]);
     const [allReplies, setAllReplies] = useState([]);
 
     const [answer, setAnswer] = useState();
-    const [inquiry, setInquiry] = useState();
+    const [inquiry, setInquiry] = useState('');
     const [followup, setFollowUp] = useState();
     const [reply, setReply] = useState();
 
@@ -181,41 +181,46 @@ const customBadWords = [
         }
     }, [error, deleteError, isDeleted]);
   
-    const submitInquiry = async () => {
+  // Define inquiry state variable and its setter function
 
+  const submitInquiry = async () => {
+    // Check if the inquiry text is blank
+    if (inquiry.trim() === '') {
+        // Display a toast notification indicating that the user must input in the text field
+        toast.error('Please enter your inquiry before submitting.');
+        return; // Stop further execution
+    } else {
         const filteredInquiry = filterBadWords(inquiry); // Filter bad words from the inquiry text
 
         const formData = new FormData();
         formData.append('inquiry', filteredInquiry);
-    
+
         images.forEach(image => {
             formData.append('images', image);
         });
-           
+
         try {
-            const { data } = await axios.post(`http://localhost:3001/api/v1/inquiry`, formData,
-            {
-              headers: {
-                'Content-Type': 'multipart/form-data',
-              },
+            const { data } = await axios.post(`http://localhost:3001/api/v1/inquiry`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
             });
             console.log(formData);
             setSuccess(data.success);
-        
-                toast.success('POST ADDED');
-                closeModal();
-                setInquiry('');
-                setImages2([]);
-                setImagesPreview([]);
 
-                getAllInquiries();
+            toast.success('POST ADDED');
+            closeModal();
+            setInquiry(''); // Reset inquiry input after submission
+            setImages2([]);
+            setImagesPreview([]);
 
-          } catch (error) 
-          {
+            getAllInquiries();
+        } catch (error) {
             setError(error.response.data.message);
             toast.error('FAILED TO POST');
-          }
-        };
+        }
+    }
+};
 
     const submitAnswer = async (id) => {
 
