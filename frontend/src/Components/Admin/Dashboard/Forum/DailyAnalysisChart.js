@@ -116,7 +116,7 @@ function DailyAnalysisChart() {
       curve: 'smooth',
     },
     title: {
-      text: 'Analysis Report',
+      text: 'DAILY INTERACTION REPORT',
       align: 'center',
       style: {
         color: '#164006',

@@ -19,9 +19,8 @@ function AnalysisChart() {
                   <div className="col-md-12 dailyC" style={{ maxHeight: '50vh'}}>
                     <DailyAnalysisChart />
                   </div>
-          
-                  <div className="col-md-12" style={{ maxHeight: '50vh'}}>
-                    <WeeklyAnalysisChart />
+                  <div className="col-md-12 dailyC" style={{ maxHeight: '50vh'}}>
+                    <DailyAnalysisChart2 />
                   </div>
                 </div>
               </div>

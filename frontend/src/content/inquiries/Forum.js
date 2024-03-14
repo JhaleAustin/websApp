@@ -223,7 +223,7 @@ const customBadWords = [
 };
 
     const submitAnswer = async (id) => {
-        if (inquiry.trim() === '') {
+        if (answer.trim() === '') {
             // Display a toast notification indicating that the user must input in the text field
             toast.error('Please enter your inquiry before submitting.');
             return; // Stop further execution
@@ -265,7 +265,7 @@ const customBadWords = [
         };
 
     const submitFollowup = async (id) => {
-        if (inquiry.trim() === '') {
+        if (followup.trim() === '') {
             // Display a toast notification indicating that the user must input in the text field
             toast.error('Please enter your inquiry before submitting.');
             return; // Stop further execution
@@ -306,7 +306,7 @@ const customBadWords = [
         };
 
     const submitReply = async (id) => {
-        if (inquiry.trim() === '') {
+        if (reply.trim() === '') {
             // Display a toast notification indicating that the user must input in the text field
             toast.error('Please enter your inquiry before submitting.');
             return; // Stop further execution

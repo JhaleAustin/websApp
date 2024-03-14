@@ -334,14 +334,15 @@ useEffect(() => {
             “Begin a journey of improved vegetable development with the use of peanut shells as mulch, 
               supported by our advanced predictive growth analysis. 
               Inputting essential information such as plant height and leaf count,
-              a thorough 15-day growth prediction analysi, providing useful insights into the 
+              a thorough 15-day growth prediction analysis, providing useful insights into the 
               probable outcomes of your petchay plant growth. Witness the exciting potential of 
               data-driven decision-making as our system solve the complex relationship between 
               peanut shell mulching and plant development. Our user-friendly interface 
               enables you to make informed decisions, resulting in more resilient and healthier crops. 
               With our innovative predictive analysis, 
               you can take your cultivation experience to the next level. 
-              Keep in mind that your pechay plant should have already matured, exhibiting both height and leaf.”
+              Keep in mind that your pechay plant used loam soil and should have already matured,
+              exhibiting both height and leaf.”
           </p> 
         </div>
               
