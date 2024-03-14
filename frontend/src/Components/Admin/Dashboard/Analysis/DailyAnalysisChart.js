@@ -61,7 +61,7 @@ function DailyAnalysisChart() {
   const options = {
     chart: {
       colors: ["#abc32f"],
-      id: 'ANALYSIS REPORT',
+      id: 'DAILY ANALYSIS REPORT',
       height: 350,
       type: 'line',
       animations: {
@@ -91,7 +91,7 @@ function DailyAnalysisChart() {
       curve: 'smooth',
     },
     title: {
-      text: 'ANALYSIS REPORT',
+      text: 'DAILY ANALYSIS REPORT',
       align: 'center',
       style: {
         color: '#164006',
