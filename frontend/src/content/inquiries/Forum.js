@@ -223,7 +223,11 @@ const customBadWords = [
 };
 
     const submitAnswer = async (id) => {
-
+        if (inquiry.trim() === '') {
+            // Display a toast notification indicating that the user must input in the text field
+            toast.error('Please enter your inquiry before submitting.');
+            return; // Stop further execution
+        } else {
         const filteredAnswer = filterBadWords(answer); // Filter bad words from the answer text
 
         const formData = new FormData();
@@ -257,11 +261,15 @@ const customBadWords = [
           {
             setError(error.response.data.message);
             toast.error('FAILED TO REPLY');
-          }
+          }}
         };
 
     const submitFollowup = async (id) => {
-
+        if (inquiry.trim() === '') {
+            // Display a toast notification indicating that the user must input in the text field
+            toast.error('Please enter your inquiry before submitting.');
+            return; // Stop further execution
+        } else {
         const filteredAnswer = filterBadWords(followup); // Filter bad words from the answer text
 
         const formData = new FormData();
@@ -294,11 +302,15 @@ const customBadWords = [
           {
             setError(error.response.data.message);
             toast.error('FAILED TO REPLY');
-          }
+          }}
         };
 
     const submitReply = async (id) => {
-
+        if (inquiry.trim() === '') {
+            // Display a toast notification indicating that the user must input in the text field
+            toast.error('Please enter your inquiry before submitting.');
+            return; // Stop further execution
+        } else {
             const filteredAnswer = filterBadWords(reply); // Filter bad words from the answer text
     
             const formData = new FormData();
@@ -332,7 +344,7 @@ const customBadWords = [
               {
                 setError(error.response.data.message);
                 toast.error('FAILED TO REPLY');
-              }
+              }}
             };
 
     const deleteAnswer = async (id) => {
