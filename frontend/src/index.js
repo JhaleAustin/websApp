@@ -13,6 +13,8 @@ import './Design/Documentation.css';
 import './Design/Process.css';
 import './Design/Homepage.css';
 import './Design/Analysis.css';
+import './Design/Dashboard.css';
+import './Design/Chart.css';
 import { ToastContainer } from 'react-toastify';
 import './css/style.css'; // Import your custom styles
 import './css/responsive.css';

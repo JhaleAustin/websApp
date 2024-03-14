@@ -44,10 +44,6 @@ function Analysis() {
     fetchMaterials();
   }, []);
 
-
- 
-
-
   const getCategories = (timeframe) => {
     const numIntervals = 7;
     switch (timeframe) {

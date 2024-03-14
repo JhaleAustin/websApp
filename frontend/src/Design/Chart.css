@@ -1,0 +1,51 @@
+.chartAnalysis .ftable option
+{
+    background-color: #164006;
+    border: 2px solid #abc32f; 
+    color: #abc32f;
+    box-shadow: none !important;
+
+}
+
+.chartAnalysis .ftable option:hover
+{
+    background-color: #abc32f;
+    border: 2px solid #164006; 
+    color: #164006;
+    box-shadow: none !important;
+
+}
+
+.chartAnalysis .ftable:hover
+{
+    background-color: #164006;
+    border: 2px solid #abc32f; 
+    color: #abc32f;
+    box-shadow: none !important;
+
+}
+
+.chartAnalysis .ftable:active
+{
+    background-color: #164006 !important;
+    border: 2px solid #abc32f !important; 
+    color: #abc32f !important;
+    box-shadow: none !important;
+
+}
+
+.chartAnalysis .ftable
+{
+    background-color: #164006; 
+    width: auto;
+    color: #abc32f;
+    border: 2px solid #abc32f; 
+    box-shadow: none !important;
+    padding: 5px;
+    margin-left: -1000px;
+}
+
+.dailyC
+{
+    margin-bottom: 50px !important;
+}
