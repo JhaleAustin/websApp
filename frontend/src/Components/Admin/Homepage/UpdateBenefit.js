@@ -70,7 +70,7 @@ const UpdateBenefit = () => {
   
           const { data } = await axios.put(`http://localhost:3001/api/v1/home/benefit/${benefit._id}`, updatedData,  {
             headers: {
-              'Content-Type': 'multipart/form-data',
+              // 'Content-Type': 'multipart/form-data',
               'Authorization': `Bearer ${getToken()}`,
             },
           });
@@ -87,7 +87,7 @@ const UpdateBenefit = () => {
 
   return (
     <Fragment>
-    <MetaData title={'UPLOAD TOPIC'} />
+    <MetaData title={'UPLOAD BENEFIT'} />
     <div className="row dlist">
       <div className="col-12 col-md-2">    
         <Sidebar />

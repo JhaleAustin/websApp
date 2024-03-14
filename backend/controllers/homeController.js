@@ -103,7 +103,7 @@ exports.newTopic = async (req, res, next) => {
 
 exports.updatePeanutShell = async (req, res, next) => {
     const { topic, description } = req.body;
-
+    console.log(req.body)
     try {
         let peanutshell = await peanutshellCollection.findById(req.params.id);
 
@@ -197,7 +197,7 @@ exports.updateBenefits = async (req, res, next) => {
 
         res.status(201).json({
             success: true,
-            peanutshellmulching
+            benefit
         });
     } catch (error) {
         // Handle any potential errors here

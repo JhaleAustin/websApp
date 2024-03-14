@@ -56,7 +56,7 @@ const UpdatePeanutShellMulching = () => {
       }
       if (isUpdated) {
         toast.success('PEANUT SHELL MULCHING DESCRIPTION IS UPDATED SUCCESSFULLY');
-        navigate('/admin/peanutshellmuching');
+        navigate('/admin/peanutshellmulching');
          
       }
 
@@ -74,7 +74,7 @@ const UpdatePeanutShellMulching = () => {
           const { data } = await axios.put(`http://localhost:3001/api/v1/home/peanutshellmulching/${peanutshellmulching._id}`, updatedData,  
           {
             headers: {
-              'Content-Type': 'multipart/form-data',
+              // 'Content-Type': 'multipart/form-data',
               'Authorization': `Bearer ${getToken()}`,
             },
           });
@@ -92,7 +92,7 @@ const UpdatePeanutShellMulching = () => {
 
   return (
     <Fragment>
-    <MetaData title={'UPDATE TOPIC'} />
+    <MetaData title={'UPDATE PEANUT SHELL MULCHING'} />
     <div className="row dlist">
       <div className="col-12 col-md-2">    
         <Sidebar />

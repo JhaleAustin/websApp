@@ -29,7 +29,7 @@ const UpdatePeanutShell = () => {
        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/home/show/peanutshell/${id}`)
        setPeanutShells(data.peanutshell)
       //  console.log(id)
-       console.log(data.peanutshell)
+       console.log('data: ',data.peanutshell)
        setLoading(false)
        
     } catch (error) {
@@ -75,7 +75,7 @@ const UpdatePeanutShell = () => {
           const { data } = await axios.put(`http://localhost:3001/api/v1/home/peanutshell/${peanutshell._id}`, updatedData,  
           {
             headers: {
-              'Content-Type': 'multipart/form-data',
+              // 'Content-Type': 'multipart/form-data',
               'Authorization': `Bearer ${getToken()}`,
             },
           });
@@ -93,7 +93,7 @@ const UpdatePeanutShell = () => {
 
   return (
     <Fragment>
-    <MetaData title={'UPDATE TOPIC'} />
+    <MetaData title={'UPDATE PEANUT SHELL'} />
     <div className="row dlist">
       <div className="col-12 col-md-2">    
         <Sidebar />
