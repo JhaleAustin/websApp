@@ -8,17 +8,22 @@ import {getUser, getToken} from '../../utils/helpers'
 import Header from '../../Components/Layout/Header'; 
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';  
-
-
+import Filter from 'bad-words'; 
 
 function Forum() {
     const [user, setUser] = useState(getUser())
+    const [displayedItems, setDisplayedItems] = useState(2);
 
     const [allInquiries, setAllInquiries] = useState([]);
     const [allAnswers, setAllAnswers] = useState([]);
+    const [allFollowups, setAllFollowups] = useState([]);
+    const [allReplies, setAllReplies] = useState([]);
 
     const [answer, setAnswer] = useState();
     const [inquiry, setInquiry] = useState();
+    const [followup, setFollowUp] = useState();
+    const [reply, setReply] = useState();
+
     const [images, setImages2] = useState([]);
     const [imagesPreview, setImagesPreview] = useState([])
 
@@ -29,15 +34,67 @@ function Forum() {
     const [deleteError, setDeleteError] = useState('');
     
     const [showModal, setShowModal] = useState(false);
-    const [showReplySection, setShowReplySection] = useState(false);
-    const [showDeleteModal, setShowDeleteModal] = useState(false);
-    const [answerToDeleteId, setAnswerToDeleteId] = useState(null);
+
+    const [showDeleteInquiryModal, setShowDeleteInquiryModal] = useState(false);
+    const [inquiryToDeleteId, setInquiryToDeleteId] = useState(null);
+    const [inquirySubmitted, setInquirySubmitted] = useState(false);
     const [selectedInquiryId, setSelectedInquiryId] = useState(null);
+    
+    const [showAnswerSection, setShowAnswerSection] = useState(false);
+    const [showDeleteAnswerModal, setShowDeleteAnswerModal] = useState(false);
+    const [answerToDeleteId, setAnswerToDeleteId] = useState(null);
+    const [answerSubmitted, setAnswerSubmitted] = useState(false);
+    const [selectedAnswerId, setSelectedAnswerId,] = useState(null);
+    
+    const [showFollowUpSection, setShowFollowUpSection] = useState(false);
+    const [showDeleteFollowUpModal, setShowDeleteFollowUpModal] = useState(false);
+    const [followupToDeleteId, setFollowupToDeleteId] = useState(null);
+    const [followupSubmitted, setFollowupSubmitted] = useState(false);
+    const [selectedFollowupId, setSelectedFollowupId,] = useState(null);
+    
+    const [showReplySection, setShowReplySection] = useState(false);
+    const [showDeleteReplyModal, setShowDeleteReplyModal] = useState(false);
+    const [replyToDeleteId, setReplyToDeleteId] = useState(null);
     const [replySubmitted, setReplySubmitted] = useState(false);
+    const [selectedReplyId, setSelectedReplyId,] = useState(null);
 
+const customBadWords = [
+'tangina', 'putangina', 'gago', 'hudas', //tagalog
+'puta', 'kingina', 'lintik', 'ulol', 'ulul',
+'gaga', 'gagi', 'tarantado', 'tado', 'bwiset',
+'bwisit', 'buset', 'kupal', 'punyeta', 'pakyu', 
+'pakingshet', 'shet', 'ogag', 'leche', 'puchang', 
+'peste', 'piste', 
+'ukinam', 'yawa', //bisaya
+'puke', 'titi', 'tite', 'tete', 'puki', 'burat', //sexual
+'fucker', 'shit', 'hole', 'stupid', 'cunt' //english
+]; 
 
+  const generateRegex = (word) => {
+    const escapedWord = word.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+    return new RegExp(`\\b${escapedWord}\\b|${escapedWord}`, 'gi');
+  };
 
-    // let { id } = useParams();
+  const badWordsFilter = new Filter({ list: customBadWords });
+
+  const filterBadWords = (text) => {
+    const lines = text.split('\n');
+    const filteredLines = lines.map((line) => {
+      return badWordsFilter.clean(line, (match) => {
+        return '*'.repeat(match.length);
+      });
+    });
+
+    // Apply custom filtering using regular expressions
+    const customFilteredLines = filteredLines.map((line) => {
+      return customBadWords.reduce((result, word) => {
+        const regex = generateRegex(word);
+        return result.replace(regex, (match) => '*'.repeat(match.length));
+      }, line);
+    });
+
+    return customFilteredLines.join('\n');
+  };
 
     const getAllInquiries =  async () => {
         try {
@@ -68,23 +125,55 @@ function Forum() {
             setError(error.response.data.message);
         }
     }
+    
+    const getAllReplies =  async () => {
+        try {
+
+            const response = await axios.get(`http://localhost:3001/api/v1/replies`);
+
+            setAllReplies(response.data.replies);
+
+            console.log(response.data.replies)
+
+            setLoading(false);
+        } catch (error) {
+            setError(error.response.data.message);
+        }
+    }
+
+    const getAllFollowUps =  async () => {
+        try {
+
+            const response = await axios.get(`http://localhost:3001/api/v1/followups`);
+
+            setAllFollowups(response.data.followups);
+
+            console.log(response.data.followups)
+
+            setLoading(false);
+        } catch (error) {
+            setError(error.response.data.message);
+        }
+    }
 
     useEffect(() => {
         
         getAllInquiries();
         getAllAnswers();
+        getAllReplies();
+        getAllFollowUps();
 
         if (error) {
-            toast.error('FAILED TO DELETE YOUR REPLY');
+            toast.error('FAILED TO DELETE');
         }
 
         if (deleteError) {
-            toast.error('FAILED TO DELETE YOUR REPLY');
+            toast.error('FAILED TO DELETE');
         }
 
         if (isDeleted) {
 
-            toast.success('YOUR REPLY IS DELETED SUCCESSFULLY');
+            toast.success('DELETED SUCCESSFULLY');
             getAllAnswers();
 
             setIsDeleted(false);
@@ -94,8 +183,10 @@ function Forum() {
   
     const submitInquiry = async () => {
 
+        const filteredInquiry = filterBadWords(inquiry); // Filter bad words from the inquiry text
+
         const formData = new FormData();
-        formData.append('inquiry', inquiry);
+        formData.append('inquiry', filteredInquiry);
     
         images.forEach(image => {
             formData.append('images', image);
@@ -128,8 +219,10 @@ function Forum() {
 
     const submitAnswer = async (id) => {
 
+        const filteredAnswer = filterBadWords(answer); // Filter bad words from the answer text
+
         const formData = new FormData();
-        formData.append('answer', answer);
+        formData.append('answer', filteredAnswer);
         images.forEach(image => {
             formData.append('images', image);
         });
@@ -146,8 +239,8 @@ function Forum() {
             
             setSuccess(data.success);
             
-                toast.success('REPLY ADDED');
-                setReplySubmitted(true);
+                toast.success('COMMENTED SUCCESSFULLY');
+                setAnswerSubmitted(true);
                 setAnswer('');
                 setImages2([]);
                 setImagesPreview([]);
@@ -162,6 +255,81 @@ function Forum() {
           }
         };
 
+    const submitFollowup = async (id) => {
+
+        const filteredAnswer = filterBadWords(followup); // Filter bad words from the answer text
+
+        const formData = new FormData();
+        formData.append('followup', filteredAnswer);
+        images.forEach(image => {
+            formData.append('images', image);
+        });
+           
+        try {
+          
+            const { data } = await axios.post(`http://localhost:3001/api/v1/followup/${id}`, formData,
+            {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+              },
+            });
+            
+            setSuccess(data.success);
+            
+                toast.success('COMMENTED SUCCESSFULLY');
+                setFollowupSubmitted(true);
+                setFollowUp('');
+                setImages2([]);
+                setImagesPreview([]);
+
+                getAllFollowUps();
+
+            
+          } catch (error) 
+          {
+            setError(error.response.data.message);
+            toast.error('FAILED TO REPLY');
+          }
+        };
+
+    const submitReply = async (id) => {
+
+            const filteredAnswer = filterBadWords(reply); // Filter bad words from the answer text
+    
+            const formData = new FormData();
+            formData.append('reply', filteredAnswer);
+            images.forEach(image => {
+                formData.append('images', image);
+            });
+               
+            try {
+              
+                const { data } = await axios.post(`http://localhost:3001/api/v1/reply/${id}`, formData,
+                {
+                  headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${getToken()}`,
+                  },
+                });
+                
+                setSuccess(data.success);
+                
+                    toast.success('COMMENTED SUCCESSFULLY');
+                    setFollowupSubmitted(true);
+                    setReply('');
+                    setImages2([]);
+                    setImagesPreview([]);
+    
+                    getAllReplies();
+    
+                
+              } catch (error) 
+              {
+                setError(error.response.data.message);
+                toast.error('FAILED TO REPLY');
+              }
+            };
+
     const deleteAnswer = async (id) => {
         try {
             const config = {
@@ -174,11 +342,80 @@ function Forum() {
             
             setIsDeleted(data.success);
             setLoading(false);
+            getAllAnswers();
+
 
         } catch (error) {
             setDeleteError(error.response.data.message);
         }
     };
+
+    const deleteInquiry = async (id) => {
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${getToken()}`
+                }
+            };
+            const { data } = await axios.delete(`http://localhost:3001/api/v1/inquiry/${id}`, config);
+            
+            setIsDeleted(data.success);
+            setLoading(false);
+            getAllInquiries();
+
+
+        } catch (error) {
+            setDeleteError(error.response.data.message);
+        }
+
+
+    };
+
+    const deleteFollowUp = async (id) => {
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${getToken()}`
+                }
+            };
+            const { data } = await axios.delete(`http://localhost:3001/api/v1/followups/${id}`, config);
+            
+            setIsDeleted(data.success);
+            setLoading(false);
+            getAllFollowUps();
+
+
+        } catch (error) {
+            setDeleteError(error.response.data.message);
+        }
+
+
+    };
+
+    const deleteReply = async (id) => {
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${getToken()}`
+                }
+            };
+            const { data } = await axios.delete(`http://localhost:3001/api/v1/replies/${id}`, config);
+            
+            setIsDeleted(data.success);
+            setLoading(false);
+            getAllReplies();
+
+
+        } catch (error) {
+            setDeleteError(error.response.data.message);
+        }
+
+
+    };
+
     const onChange = e => {
         const files = Array.from(e.target.files)
         setImagesPreview([]);
@@ -212,26 +449,90 @@ function Forum() {
     setShowModal(false);
   };
 
-  const showDeleteModalHandler = (answerId) => {
-    setShowDeleteModal(true);
+  const ShowDeleteAnswerModalHandler = (answerId) => {
+    setShowDeleteAnswerModal(true);
     setAnswerToDeleteId(answerId);
-};
+    };
 
     const hideDeleteModalHandler = () => {
-        setShowDeleteModal(false);
+        setShowDeleteAnswerModal(false);
         setAnswerToDeleteId(null);
     };
 
-  const toggleReplySection = (inquiryId) => {
-    setShowReplySection(!showReplySection);
-    setSelectedInquiryId(inquiryId);
-    setReplySubmitted(false);
+    const ShowDeleteInquiryModalHandler = (inquiryId) => {
 
-  };
+    setShowDeleteInquiryModal(true);
+    setInquiryToDeleteId(inquiryId);
+};
 
-  const getAnswersForInquiry = (inquiryId) => {
-    return allAnswers.filter((allAnswers) => allAnswers.inquiry === inquiryId);
-  };
+    const hideDeleteInquiryModalHandler = () => {
+        setShowDeleteInquiryModal(false);
+        setInquiryToDeleteId(null);
+    };
+
+    const ShowDeleteFollowupModalHandler = (followupId) => {
+        console.log('follow: ', followupId)
+        setShowDeleteFollowUpModal(true);
+        setFollowupToDeleteId(followupId);
+    };
+    
+    const hideDeleteFollowupModalHandler = () => {
+            setShowDeleteFollowUpModal(false);
+            setFollowupToDeleteId(null);
+    };
+
+    const ShowDeleteReplyModalHandler = (replyId) => {
+        console.log('follow: ', replyId)
+        setShowDeleteReplyModal(true);
+        setReplyToDeleteId(replyId);
+    };
+    
+    const hideDeleteReplyModalHandler = () => {
+        setShowDeleteReplyModal(false);
+        setReplyToDeleteId(null);
+    };
+
+    const toggleAnswerSection = (inquiryId) => {
+        setShowAnswerSection(!showAnswerSection);
+        setSelectedInquiryId(inquiryId);
+        setAnswerSubmitted(false);
+
+        setShowFollowUpSection(false);
+        setShowReplySection(false);
+
+    };
+
+    const toggleFollowUpSection = (answerId) => {
+        setShowFollowUpSection(!showFollowUpSection);
+        setSelectedAnswerId(answerId);
+        setFollowupSubmitted(false);
+
+        setShowAnswerSection(false);
+        setShowReplySection(false);
+
+    };
+
+    const toggleReplySection = (followupId) => {
+        setShowReplySection(!showReplySection);
+        setSelectedFollowupId(followupId);
+        setReplySubmitted(false);
+
+        setShowAnswerSection(false);
+        setShowFollowUpSection(false);
+    };
+
+    const getAnswersForInquiry = (inquiryId) => {
+        return allAnswers.filter((allAnswers) => allAnswers.inquiry === inquiryId);
+    };
+
+    const getFollowUpsForAnswer = (answerId) => {
+        // Use a Set to keep track of unique follow-up IDs
+        return allFollowups.filter((allFollowups) => allFollowups.answer === answerId);
+    }
+    
+    const getRepliesForFollowUp = (followupId) => {
+        return allReplies.filter((allReplies) => allReplies.followup === followupId);
+    };
 
   useEffect(() => {
     const fileInput = document.getElementById('customFile');
@@ -267,7 +568,7 @@ function Forum() {
                                 rows="2" 
                                 placeholder="Post something..."
                                 onClick={openModal}
-                                />
+                                readOnly/>
 
                                 {/* MODAL */}
 
@@ -372,12 +673,38 @@ function Forum() {
                                     
                                     {user && user.role === 'admin' && (
                                     <Fragment>
-                                        <div class="pad-ver">
+                                        <div class="pad-ver inq">
                                             <a class="replyShow" 
-                                            onClick={() => toggleReplySection(allInquiry._id)}>Reply</a>
+                                            onClick={() => toggleAnswerSection(allInquiry._id)}>Reply</a>
+                                            <a class="deleteShow" onClick={() => ShowDeleteInquiryModalHandler(allInquiry._id)}>Delete</a>
                                         </div>
 
-                                        {showReplySection && selectedInquiryId === allInquiry._id && (
+                                        {/* DELETE MODAL */}
+                                        {showDeleteInquiryModal && (
+                                            <div className="modal deleteM" style={{ display: 'block' }}>
+                                                <div className="modal-content">
+                                                                
+                                                    <span className="title">CONFIRM DELETION</span>                                                                <p>Are you sure you want to delete this answer?</p>
+                                                        <div class="mar-top clearfix">
+                                                            <button 
+                                                                class="btn btn-sm btn-danger pull-right" 
+                                                                    onClick={() => {
+                                                                        console.log('Clicked to delete with ID:', answerToDeleteId);
+                                                                        deleteInquiry(inquiryToDeleteId);
+                                                                        hideDeleteInquiryModalHandler();
+                                                                    }}>
+                                                                        DELETE
+                                                            </button>
+                                                            <span className="close" onClick={hideDeleteInquiryModalHandler}>
+                                                                CANCEL
+                                                            </span>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                            )}
+                                        {/* END OF DELETE MODAL */}                                
+
+                                        {showAnswerSection && selectedInquiryId === allInquiry._id && (
 
                                             <div className="answerC">
                                                 <textarea 
@@ -417,9 +744,7 @@ function Forum() {
                                                     />
                                                 <button 
                                                     class="btn btn-sm btn-primary pull-right replyA" 
-                                                    onClick={() => {
-                                                        console.log('Clicked with ID:', allInquiry._id);
-                                                        submitAnswer(allInquiry._id);
+                                                    onClick={() => {                                                        submitAnswer(allInquiry._id);
                                                     }}>
                                                     REPLY
                                                 </button>
@@ -431,10 +756,9 @@ function Forum() {
                                         )}
                                     </Fragment> 
                                     )}
-                                    
-                                    <hr />
 
-                                    {getAnswersForInquiry(allInquiry._id).map((allAnswer) => (
+
+                                    {getAnswersForInquiry(allInquiry._id).slice(0, displayedItems).map((allAnswer) => (
                                         
                                         <div key={allAnswer._id}>
                                             <div class="media-block replyD">
@@ -468,15 +792,18 @@ function Forum() {
                                                             ))}
                                                         </div>
                                                     </div>
-                                                    {user && user.role === 'admin' && (
                                                     <div class="pad-ver">
-                                                        
-                                                        <a class="btn btn-sm btn-default btn-hover-primary" onClick={() => showDeleteModalHandler(allAnswer._id)}>Delete</a>
+                                                        <a class="replyShow" 
+                                                            onClick={() => toggleFollowUpSection(allAnswer._id)}>Reply</a>
+                                                    
+                                                        {user && user.role === 'admin' && (                                                
+                                                        <a class="deleteShow" onClick={() => ShowDeleteAnswerModalHandler(allAnswer._id)}>Delete</a>
+                                                        )}
                                                     </div>
-                                                    )}
+                                                    
 
                                                     {/* DELETE MODAL */}
-                                                    {showDeleteModal && (
+                                                    {showDeleteAnswerModal && (
                                                         <div className="modal deleteM" style={{ display: 'block' }}>
                                                             <div className="modal-content">
                                                                 
@@ -484,9 +811,7 @@ function Forum() {
                                                                 <div class="mar-top clearfix">
                                                                     <button 
                                                                         class="btn btn-sm btn-danger pull-right" 
-                                                                        onClick={() => {
-                                                                            console.log('Clicked to delete with ID:', answerToDeleteId);
-                                                                            deleteAnswer(answerToDeleteId);
+                                                                        onClick={() => {                                                                            deleteAnswer(answerToDeleteId);
                                                                             hideDeleteModalHandler();
                                                                         }}>
                                                                         DELETE
@@ -499,17 +824,288 @@ function Forum() {
                                                         </div>
                                                     )}
                                                     {/* END OF DELETE MODAL */}
+
+                                                    {showFollowUpSection && selectedAnswerId === allAnswer._id && (
+
+                                                            <div className="answerC">
+                                                                <textarea 
+                                                                class="form-control" 
+                                                                id="followup"
+                                                                placeholder="Reply..."
+                                                                value={followup}
+                                                                onChange={(e) => setFollowUp(e.target.value)}   
+                                                                />
+
+                                                                <div className="gallery">
+                                                                {images.map((file, index) => (
+                                                                    <div className="galleryItemRow">
+                                                                        <div key={index} className="gallery-item">
+                                                                            <img src={file} alt={file} />                                            
+                                                                        </div>
+                                                                        <div>
+                                                                            <button type="button" onClick={() => removeFile(index)}>
+                                                                                REMOVE
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                ))}
+                                                                </div>                                  
+
+                                                                <div class="mar-top clearfix replyACR" style={{ textAlign: 'right' }}>
+                                                                <label htmlFor="customFile" className="camera-icon replyAC">
+                                                                    <i className="fa fa-camera"></i>
+                                                                </label>
+                                                                    <input
+                                                                        type="file"
+                                                                        name="images"
+                                                                        id="customFile"
+                                                                        onChange={onChange}
+                                                                        multiple
+                                                                        style={{ display: 'none' }}
+                                                                    />
+                                                                <button 
+                                                                    class="btn btn-sm btn-primary pull-right replyA" 
+                                                                    onClick={() => {
+                                                                        submitFollowup(allAnswer._id);
+                                                                    }}>
+                                                                    REPLY
+                                                                </button>
+                                                                
+
+                                                                </div>
+                                                            </div>
+
+                                                        )}
+                                                        
+                                                
                                                 <hr />
+
+                                                {getFollowUpsForAnswer(allAnswer._id).slice(0, displayedItems).map((allFollowup) => (
+                                        
+                                                    <div key={allFollowup._id}>
+                                                        <div class="media-block replyD">
+                                                        
+                                                            <div class="media-body">
+                                                                <div class="media-left">
+                                                                    <img class="img-circle img-sm" alt="Profile Picture" 
+                                                                        src="/images/avatar.png" />
+                                                                </div>
+                                                                <div class="mar-btm">
+                                                                    <h1 className="text-uppercase">ANONYMOUS</h1>
+                                                                    <p class="text-muted text-sm dateD">
+                                                                        {new Date(allFollowup.followupDate).toLocaleString('en-US', {
+                                                                            year: 'numeric',
+                                                                            month: 'short',
+                                                                            day: 'numeric',
+                                                                            hour: 'numeric',
+                                                                            minute: 'numeric',
+                                                                            hour12: true,
+                                                                        })}
+                                                                    </p>
+                                                                </div>
+
+                                                                <p>{allFollowup.followup}</p>
+                                                                <div className="col-md-12">
+                                                                    <div className="gallery">
+                                                                        {allFollowup.images.map((img, index) => (
+                                                                            <div key={index} className="gallery-item">
+                                                                                <img src={img.url} alt={`Image ${index + 1}`} className="img-responsive thumbnail" />
+                                                                            </div>
+                                                                        ))}
+                                                                    </div>
+                                                                </div>
+                                                                {user && user.role === 'admin' && ( 
+                                                                <div class="pad-ver">
+                                                                    <a class="replyShow" 
+                                                                        onClick={() => toggleReplySection(allFollowup._id)}>Reply</a>                                                            
+                                                                
+                                                                                                                   
+                                                                    <a class="deleteShow" onClick={() => ShowDeleteFollowupModalHandler(allFollowup._id)}>Delete</a>
+                                                                    
+                                                                </div>
+                                                                )}
+                                                    
+
+                                                                {/* DELETE MODAL */}
+                                                                {showDeleteFollowUpModal && (
+                                                                    <div className="modal deleteM" style={{ display: 'block' }}>
+                                                                        <div className="modal-content">
+                                                                            
+                                                                            <span className="title">CONFIRM DELETION</span>                                                                <p>Are you sure you want to delete this answer?</p>
+                                                                            <div class="mar-top clearfix">
+                                                                                <button 
+                                                                                    class="btn btn-sm btn-danger pull-right" 
+                                                                                    onClick={() => {
+                                                                                        deleteFollowUp(followupToDeleteId);
+                                                                                        hideDeleteFollowupModalHandler();
+                                                                                    }}>
+                                                                                   DELETE
+                                                                                </button>
+                                                                                <span className="close" onClick={hideDeleteFollowupModalHandler}>
+                                                                                CANCEL
+                                                                            </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                )}
+                                                                {/* END OF DELETE MODAL */}
+
+                                                                {showReplySection && selectedFollowupId === allFollowup._id && (
+
+                                                                        <div className="answerC">
+                                                                            <textarea 
+                                                                            class="form-control" 
+                                                                            id="reply"
+                                                                            placeholder="Reply..."
+                                                                            value={reply}
+                                                                            onChange={(e) => setReply(e.target.value)}   
+                                                                            />
+
+                                                                            <div className="gallery">
+                                                                            {images.map((file, index) => (
+                                                                                <div className="galleryItemRow">
+                                                                                    <div key={index} className="gallery-item">
+                                                                                        <img src={file} alt={file} />                                            
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <button type="button" onClick={() => removeFile(index)}>
+                                                                                            REMOVE
+                                                                                        </button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            ))}
+                                                                            </div>                                  
+
+                                                                            <div class="mar-top clearfix replyACR" style={{ textAlign: 'right' }}>
+                                                                            <label htmlFor="customFile" className="camera-icon replyAC">
+                                                                                <i className="fa fa-camera"></i>
+                                                                            </label>
+                                                                                <input
+                                                                                    type="file"
+                                                                                    name="images"
+                                                                                    id="customFile"
+                                                                                    onChange={onChange}
+                                                                                    multiple
+                                                                                    style={{ display: 'none' }}
+                                                                                />
+                                                                            <button 
+                                                                                class="btn btn-sm btn-primary pull-right replyA" 
+                                                                                onClick={() => {
+                                                                                    submitReply(allFollowup._id);
+                                                                                }}>
+                                                                                REPLY
+                                                                            </button>
+                                                                            
+
+                                                                            </div>
+                                                                        </div>
+
+                                                                )}
+
+                                                                
+                                                               
+                                                            
+                                                            <hr />
+
+                                                            {getRepliesForFollowUp(allFollowup._id).slice(0, displayedItems).map((allReply) => (
+
+                                                                <div key={allReply._id}>
+                                                                    <div class="media-block replyD">
+                                                                    
+                                                                        <div class="media-body">
+                                                                            <div class="media-left">
+                                                                                <img class="img-circle img-sm" alt="Profile Picture" 
+                                                                                    src="/images/avatar.png" />
+                                                                            </div>
+                                                                            <div class="mar-btm">
+                                                                                <h1 className="text-uppercase">ADMIN</h1>
+                                                                                <p class="text-muted text-sm dateD">
+                                                                                    {new Date(allReply.replyDate).toLocaleString('en-US', {
+                                                                                        year: 'numeric',
+                                                                                        month: 'short',
+                                                                                        day: 'numeric',
+                                                                                        hour: 'numeric',
+                                                                                        minute: 'numeric',
+                                                                                        hour12: true,
+                                                                                    })}
+                                                                                </p>
+                                                                            </div>
+
+                                                                            <p>{allReply.reply}</p>
+                                                                            <div className="col-md-12">
+                                                                                <div className="gallery">
+                                                                                    {allReply.images.map((img, index) => (
+                                                                                        <div key={index} className="gallery-item">
+                                                                                            <img src={img.url} alt={`Image ${index + 1}`} className="img-responsive thumbnail" />
+                                                                                        </div>
+                                                                                    ))}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="pad-ver">
+                                                                                {user && user.role === 'admin' && (                                                
+                                                                                <a class="deleteReply" onClick={() => ShowDeleteReplyModalHandler(allReply._id)}>Delete</a>
+                                                                                )}
+                                                                            </div>
+                                                                
+
+                                                                            {/* DELETE MODAL */}
+                                                                            {showDeleteReplyModal && (
+                                                                                <div className="modal deleteM" style={{ display: 'block' }}>
+                                                                                    <div className="modal-content">
+                                                                                        
+                                                                                        <span className="title">CONFIRM DELETION</span>                                                                <p>Are you sure you want to delete this answer?</p>
+                                                                                        <div class="mar-top clearfix">
+                                                                                            <button 
+                                                                                                class="btn btn-sm btn-danger pull-right" 
+                                                                                                onClick={() => {
+                                                                                                    deleteReply(replyToDeleteId);
+                                                                                                    hideDeleteReplyModalHandler();
+                                                                                                }}>
+                                                                                            DELETE
+                                                                                            </button>
+                                                                                            <span className="close" onClick={hideDeleteReplyModalHandler}>
+                                                                                            CANCEL
+                                                                                        </span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            )}
+                                                                            {/* END OF DELETE MODAL */}
+
+                                                                        
+                                                                        <hr />                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            ))}
+                                                            {getRepliesForFollowUp(allFollowup._id).length > displayedItems && (
+                                                                <div className="showMoreLessButtons">
+                                                                    <button onClick={() => setDisplayedItems(displayedItems + 2)}>Show More</button>
+                                                                        {displayedItems > 2 && <button class="showLess"onClick={() => setDisplayedItems(2)}>Show Less</button>}
+                                                                </div>
+                                                            )}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                                {getFollowUpsForAnswer(allAnswer._id).length > displayedItems && (
+                                                    <div className="showMoreLessButtons">
+                                                        <button onClick={() => setDisplayedItems(displayedItems + 2)}>Show More</button>
+                                                            {displayedItems > 2 && <button class="showLess"onClick={() => setDisplayedItems(2)}>Show Less</button>}
+                                                    </div>
+                                                )}
+                                                
                                                 </div>
                                             </div>
                                         </div>
-                                    
-                                    ))}
-                                    </div>
-                                    
+                                    ))}     
+                                    {getAnswersForInquiry(allInquiry._id).length > displayedItems && (
+                                        <div className="showMoreLessButtons">
+                                            <button onClick={() => setDisplayedItems(displayedItems + 2)}>Show More</button>
+                                                {displayedItems > 2 && <button class="showLess"onClick={() => setDisplayedItems(2)}>Show Less</button>}
+                                            </div>
+                                    )}      
+                                </div>  
                             </div>
-                    
-                            
                         </div>
                     </div>
                     ))}

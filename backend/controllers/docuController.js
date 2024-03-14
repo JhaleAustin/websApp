@@ -265,6 +265,14 @@ exports.deleteDocumentation = async (req, res, next) => {
 		})
 	}
 
+	if (documentation.images && documentation.images.length > 0) {
+		for (const images of documentation.images) {
+			if (images.public_id) {
+				await cloudinary.v2.uploader.destroy(images.public_id);
+			}
+		}
+	}
+
 	res.status(200).json({
 		success: true,
 		message: 'DATA NOT DELETED'

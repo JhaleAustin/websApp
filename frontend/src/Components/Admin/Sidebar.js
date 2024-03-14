@@ -70,7 +70,7 @@ const Sidebar = () => {
               <img class="slogo" src="/images/logo.png"></img>
             </Link>
 
-            <NavLink exact to="/admin/forum" activeClassName="activeClicked">
+            <NavLink exact to="/admin/inquiries" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="fa-regular fa-newspaper">
                 FORUM
               </CDBSidebarMenuItem>

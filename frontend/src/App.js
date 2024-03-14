@@ -38,7 +38,9 @@ import UpdateWithMulch from './Components/Admin/Documentation/UpdateWithMulch';
 
 import Inquiry from './content/inquiries/Forum';
 
-import ForumList from './Components/Admin/Forum/ForumList';
+// import AnswerList from './Components/Admin/Forum/AnswerList';
+import InquiryList from './Components/Admin/Forum/InquiryList';
+
 import AnalysisList from './Components/Admin/Analysis/AnalysisList';
 
 import Dashboard from './Components/Admin/Dashboard/AnalysisChart';
@@ -177,10 +179,17 @@ function App() {
                   </ProtectedRoute> 
               }/>
 
-            <Route path="/admin/forum"
+            {/* <Route path="/admin/answers/:id"
             element={
                   <ProtectedRoute isAdmin={true}>
-                    <ForumList /> 
+                    <AnswerList /> 
+                  </ProtectedRoute> 
+              }/> */}
+
+            <Route path="/admin/inquiries"
+            element={
+                  <ProtectedRoute isAdmin={true}>
+                    <InquiryList /> 
                   </ProtectedRoute> 
               }/>
 

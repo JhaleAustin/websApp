@@ -6,7 +6,7 @@ const inquriesSchema = new mongoose.Schema({
         required: true
        },
     inputDate: {
-        type: String,
+        type: Date,
         required: true
     },
     images: [

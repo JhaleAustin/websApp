@@ -2,6 +2,8 @@ import React, { Fragment, useState, useEffect, useRef } from "react";
 import Chart from "react-apexcharts";
 import axios from 'axios';
 import Header from '../../Components/Layout/Header';  
+import { toast } from 'react-toastify';
+
 
 function Analysis() {
 
@@ -23,6 +25,7 @@ function Analysis() {
   const [plantLeavesWithMulch, setPlantLeavesWithMulch] = useState([]);
 
   const chartContainerRef = useRef(null);
+  const [harvestLabel, setHarvestLabel] = useState('');
  
   useEffect(() => {
     const fetchMaterials = async () => {
@@ -143,6 +146,11 @@ function Analysis() {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
+    if (inputValues.height <= 0 || inputValues.numberLeaves <= 0) {
+      toast.error("INPUTS MUST BE GREATER THAN 0");
+      return;
+    }
+
     let  height = parseFloat(inputValues.height);
     let  numOfLeaves = inputValues.numberLeaves;
       
@@ -222,7 +230,8 @@ for (let i = 0; i < withoutMulch.length; i++) {
 
 }
 
-    
+
+
    setState((prevState) => ({
      ...prevState,
      series: [
@@ -237,6 +246,16 @@ for (let i = 0; i < withoutMulch.length; i++) {
      ],
    }));
 
+   const lastPredictionHeight = predictions[predictions.length - 1];
+
+   if (lastPredictionHeight >= 20 && lastPredictionHeight <= 30) {
+     setHarvestLabel("READY TO HARVEST");
+   } else if (lastPredictionHeight > 30) {
+     setHarvestLabel("YOUR PETCHAY PLANT WILL START TO DECAY");
+   } else {
+     setHarvestLabel('');
+   }
+
    if (chartContainerRef.current) {
     chartContainerRef.current.scrollIntoView({ behavior: 'smooth' });
   }
@@ -245,6 +264,8 @@ for (let i = 0; i < withoutMulch.length; i++) {
     height: 0,
     numberLeaves: 0,
   });
+
+ 
   
   };
 
@@ -305,8 +326,17 @@ useEffect(() => {
       <div class="row analysisT">
         <div class="col-md-9">          
           <p>
-            “Begin a journey of improved vegetable development with the use of peanut shells as mulch, supported by our advanced predictive analysis. Inputting essential information such as plant height and leaf count yields, a thorough 15-day growth prediction analysi, providing useful insights into the probable outcomes of your gardening methods. Witness the exciting potential of data-driven decision-making as our computers solve the complex relationship between peanut shell mulching and plant development. Our user-friendly interface enables you to make informed decisions, resulting in more resilient and healthier crops. With our innovative predictive analysis, 
-              you can take your cultivation experience to the next level.”
+            “Begin a journey of improved vegetable development with the use of peanut shells as mulch, 
+              supported by our advanced predictive growth analysis. 
+              Inputting essential information such as plant height and leaf count,
+              a thorough 15-day growth prediction analysi, providing useful insights into the 
+              probable outcomes of your petchay plant growth. Witness the exciting potential of 
+              data-driven decision-making as our system solve the complex relationship between 
+              peanut shell mulching and plant development. Our user-friendly interface 
+              enables you to make informed decisions, resulting in more resilient and healthier crops. 
+              With our innovative predictive analysis, 
+              you can take your cultivation experience to the next level. 
+              Keep in mind that your pechay plant should have already matured, exhibiting both height and leaf.”
           </p> 
         </div>
               
@@ -352,6 +382,9 @@ useEffect(() => {
                       <div className="chart-container">
                         <Chart options={state.options} series={state.series}  type="area" width="1000px" />
                       </div>
+                      {harvestLabel && (
+                          <div style={{ marginTop: '10px', color: 'white' }}>{harvestLabel}</div>
+                        )}
                     </div>
 
 

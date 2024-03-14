@@ -27,7 +27,7 @@ const answersSchema = new mongoose.Schema({
         }
     ],
     answerDate: {
-        type: String,
+        type: Date,
         required: true
     }
 })

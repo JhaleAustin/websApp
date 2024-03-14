@@ -10,8 +10,9 @@ const { newAnswer, getAllAnswers, getAdminForum, deleteAnswer}
 
 router.post('/answer/:id', isAuthenticatedUser, upload.array('images'), newAnswer);
 router.get('/answers', getAllAnswers)
-router.get('/forum', isAuthenticatedUser, authorizeRoles('admin'), getAdminForum)
-// router.get('/forum', getAdminForum)
+router.get('/admin/answers/:id', isAuthenticatedUser, authorizeRoles('admin'), getAdminForum)
+
+// router.get('/admin/answers/:id', getAdminForum)
 router.route('/answers/:id', isAuthenticatedUser, authorizeRoles('admin')).delete(deleteAnswer);
 
 module.exports = router;

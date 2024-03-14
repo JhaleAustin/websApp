@@ -33,7 +33,7 @@ import { getUser } from '../../utils/helpers';
     
             if (error)
             {
-                toast.error("CANNOT BE LOGIN")
+                toast.error("INVALID USER OR PASSWORD")
             } else {
                 toast.error("INVALID USER OR PASSWORD")
             }

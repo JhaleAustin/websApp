@@ -7,6 +7,7 @@ const documentation = require('./routes/documentation')
 const process = require('./routes/process')
 const inquiries = require('./routes/inquiries')
 const answers = require('./routes/answers')
+const communications = require('./routes/communication')
 const home = require('./routes/home')
 const user = require('./routes/auth')
 const analyze = require('./routes/analysis')
@@ -23,6 +24,7 @@ app.use('/api/v1', documentation);
 app.use('/api/v1', process);
 app.use('/api/v1', inquiries);
 app.use('/api/v1', answers);
+app.use('/api/v1', communications);
 app.use('/api/v1', home);
 app.use('/api/v1', user);
 app.use('/api/v1', analyze);
